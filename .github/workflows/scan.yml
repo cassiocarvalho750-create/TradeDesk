@@ -1,8 +1,5 @@
 name: scan
 
-# Dispara de duas formas:
-#  - workflow_dispatch: acionado pelo BOTÃO no site (ou pela aba Actions do GitHub)
-#  - schedule: rede de segurança, roda sozinho em horários fixos (UTC)
 on:
   workflow_dispatch:
     inputs:
@@ -18,16 +15,15 @@ on:
         default: false
         type: boolean
   schedule:
-    # 21:30 UTC (18:30 BRT) dias úteis — após o fechamento de B3/NYSE.
     - cron: "30 21 * * 1-5"
 
-# Permite ao job comitar os JSON gerados de volta no repositório.
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
-# Evita dois scans simultâneos (ex.: botão + cron ao mesmo tempo).
 concurrency:
-  group: scan
+  group: scan-pages
   cancel-in-progress: false
 
 jobs:
@@ -44,7 +40,7 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Instalar dependências
+      - name: Instalar dependencias
         run: pip install -r requirements.txt
 
       - name: Rodar scanner
@@ -62,13 +58,10 @@ jobs:
             python scanner_b3.py $FLAGS || echo "scanner_b3 falhou (seguindo)"
           fi
 
-      - name: Carimbar horário do scan
-        run: |
-          date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt || (mkdir -p docs && date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt)
-
-      - name: Publicar JSONs em docs/ (GitHub Pages)
+      - name: Carimbar horario e copiar resultados p/ docs/
         run: |
           mkdir -p docs
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt
           for f in painel_us.json painel_b3.json scanner_us.json scanner_b3.json \
                    scanner_us_tradedesk_USA.json scanner_b3_tradedesk_BRL.json \
                    scanner_us.html scanner_b3.html; do
@@ -76,7 +69,7 @@ jobs:
           done
           ls -la docs/
 
-      - name: Commit dos resultados
+      - name: Commit dos resultados (historico)
         run: |
           git config user.name  "tradedesk-bot"
           git config user.email "actions@github.com"
@@ -84,6 +77,25 @@ jobs:
           if git diff --staged --quiet; then
             echo "Nada novo para comitar."
           else
-            git commit -m "scan: atualização automática de dados [skip ci]"
+            git commit -m "scan: atualizacao automatica de dados [skip ci]"
             git push
           fi
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Empacotar docs/ como artefato do Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: scan
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
