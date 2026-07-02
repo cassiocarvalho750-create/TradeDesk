@@ -2,6 +2,23 @@
   "trades": [
     {
       "data": "2026-07-02",
+      "s": "EVEN3",
+      "setup": "Agulhada",
+      "q": "",
+      "pc": "5.73",
+      "pa": "",
+      "pv": "",
+      "dv": "",
+      "ps": "5.65",
+      "tgt": "5.89",
+      "clE": "",
+      "exitR": "",
+      "pe": "",
+      "img1": "",
+      "img2": ""
+    },
+    {
+      "data": "2026-07-02",
       "s": "GGPS3",
       "setup": "Agulhada",
       "q": "",
