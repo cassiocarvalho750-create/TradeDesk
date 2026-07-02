@@ -1,0 +1,89 @@
+name: scan
+
+# Dispara de duas formas:
+#  - workflow_dispatch: acionado pelo BOTÃO no site (ou pela aba Actions do GitHub)
+#  - schedule: rede de segurança, roda sozinho em horários fixos (UTC)
+on:
+  workflow_dispatch:
+    inputs:
+      mercado:
+        description: "Mercado a varrer"
+        required: false
+        default: "ambos"
+        type: choice
+        options: ["ambos", "us", "b3"]
+      quick:
+        description: "Teste rápido (~40 ativos)"
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    # 21:30 UTC (18:30 BRT) dias úteis — após o fechamento de B3/NYSE.
+    - cron: "30 21 * * 1-5"
+
+# Permite ao job comitar os JSON gerados de volta no repositório.
+permissions:
+  contents: write
+
+# Evita dois scans simultâneos (ex.: botão + cron ao mesmo tempo).
+concurrency:
+  group: scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Rodar scanner
+        env:
+          MERCADO: ${{ inputs.mercado || 'ambos' }}
+          QUICK:   ${{ inputs.quick || 'false' }}
+        run: |
+          FLAGS=""
+          if [ "$QUICK" = "true" ]; then FLAGS="--quick"; fi
+          echo "Mercado=$MERCADO Quick=$QUICK"
+          if [ "$MERCADO" = "us" ] || [ "$MERCADO" = "ambos" ]; then
+            python scanner_us.py $FLAGS || echo "scanner_us falhou (seguindo)"
+          fi
+          if [ "$MERCADO" = "b3" ] || [ "$MERCADO" = "ambos" ]; then
+            python scanner_b3.py $FLAGS || echo "scanner_b3 falhou (seguindo)"
+          fi
+
+      - name: Carimbar horário do scan
+        run: |
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt || (mkdir -p docs && date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt)
+
+      - name: Publicar JSONs em docs/ (GitHub Pages)
+        run: |
+          mkdir -p docs
+          for f in painel_us.json painel_b3.json scanner_us.json scanner_b3.json \
+                   scanner_us_tradedesk_USA.json scanner_b3_tradedesk_BRL.json \
+                   scanner_us.html scanner_b3.html; do
+            [ -f "$f" ] && cp "$f" docs/ || true
+          done
+          ls -la docs/
+
+      - name: Commit dos resultados
+        run: |
+          git config user.name  "tradedesk-bot"
+          git config user.email "actions@github.com"
+          git add docs/ || true
+          if git diff --staged --quiet; then
+            echo "Nada novo para comitar."
+          else
+            git commit -m "scan: atualização automática de dados [skip ci]"
+            git push
+          fi
