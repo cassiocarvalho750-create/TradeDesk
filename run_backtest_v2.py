@@ -35,6 +35,11 @@ import bt_engine as bt
 # Aplicado em tempo de scan (scanner.py), reusando o historico ja baixado.
 US_MIN_VOL_FIN_MI = 5.0
 
+# Piso de liquidez para a B3 (volume financeiro medio diario, em milhoes de BRL).
+# Como agora varremos todas as acoes da B3, este piso descarta os codigos
+# inexistentes/iliquidos (a maioria dos ~1200 gerados).
+B3_MIN_VOL_FIN_MI = 5.0
+
 # ── Universo (mesmas listas do scanner) ──────────────────────────────────────
 _HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
@@ -133,14 +138,22 @@ def get_us_fixed():
     return list(US_BASE)
 
 def get_us_large():
-    """Universo amplo: NYSE + NASDAQ + AMEX (limpo de warrants/units/rights).
-    A liquidez e filtrada em tempo de scan, nao aqui."""
+    """Universo US: Russell 1000 (top-1000 por market cap) uniao S&P 500.
+    Liquidez filtrada no scan."""
     try:
         import us_universe as uu
-        return uu.get_us_large()
+        return uu.get_us_indices()
     except Exception as e:
         print(f"  [aviso] us_universe indisponivel ({e}); usando lista fixa de {len(US_BASE)} acoes")
         return list(US_BASE)
+
+def get_b3_todas():
+    """Todas as acoes da B3 (ON/PN/Unit) + curada. Liquidez filtrada no scan."""
+    try:
+        import us_universe as uu
+        return uu.get_b3_todas()
+    except Exception:
+        return get_b3()
 
 def get_universe(quick=False):
     if quick:
@@ -151,10 +164,11 @@ def get_universe(quick=False):
                 "EQTL3.SA","ELET3.SA","RAIL3.SA","LREN3.SA","HAPV3.SA","TOTS3.SA",
                 "MGLU3.SA","ASAI3.SA"])
         return sorted(set(u))
-    # Universo US amplo (NYSE+NASDAQ+AMEX) + B3. Liquidez filtrada no scan.
+    # US: indices (Russell 1000 ∪ S&P 500). B3: todas as acoes. Liquidez filtrada no scan.
     us = get_us_large()
-    b3 = get_b3()
-    print(f"  [info] universo US amplo: {len(us)} acoes (filtro de liquidez >= {US_MIN_VOL_FIN_MI} Mi/dia no scan)")
+    b3 = get_b3_todas()
+    print(f"  [info] US indices: {len(us)} acoes | B3 todas: {len(b3)} codigos "
+          f"(filtro de liquidez >= {US_MIN_VOL_FIN_MI} Mi/dia no scan)")
     return sorted(set(us + b3))
 
 

@@ -123,15 +123,17 @@ def enrich_fundamentals(hits):
     return hits
 
 
-def _liquidez_ok_us(tk, d, min_vol_fin_mi):
-    """True se o ticker passa no piso de liquidez. B3 e isenta (sempre True)."""
-    if tk.endswith(".SA"):
-        return True
+def _liquidez_ok(tk, d, min_us_mi, min_b3_mi):
+    """True se o ticker passa no piso de liquidez do seu mercado.
+    US: piso em milhoes de USD. B3: piso em milhoes de BRL."""
     try:
         v20 = d["Volume"].tail(20).mean()
         p20 = d["Close"].tail(20).mean()
         vfin_mi = (v20 * p20) / 1e6
-        return bool(np.isfinite(vfin_mi) and vfin_mi >= min_vol_fin_mi)
+        if not np.isfinite(vfin_mi):
+            return False
+        piso = min_b3_mi if tk.endswith(".SA") else min_us_mi
+        return bool(vfin_mi >= piso)
     except Exception:
         return False
 
@@ -185,15 +187,20 @@ def scan(tickers, days_back=1, batch=True, chunk=100):
 
     batch=True  -> download em LOTE via yf.download (rapido; recomendado p/ universo grande).
     batch=False -> download individual via fetch_intraday_ok (lento; fallback).
-    O filtro de liquidez (US >= rb.US_MIN_VOL_FIN_MI Mi/dia) e aplicado em ambos os modos,
-    reusando o historico baixado — sem requisicao extra. B3 e isenta do filtro.
+    O filtro de liquidez e aplicado a AMBOS os mercados, reusando o historico
+    baixado (sem requisicao extra): US >= rb.US_MIN_VOL_FIN_MI (USD),
+    B3 >= rb.B3_MIN_VOL_FIN_MI (BRL).
     """
     hits=[]
     today = pd.Timestamp(datetime.date.today())
     try:
-        US_MIN_VOL_FIN_MI = float(getattr(rb, "US_MIN_VOL_FIN_MI", 5.0))
+        US_MIN = float(getattr(rb, "US_MIN_VOL_FIN_MI", 5.0))
     except Exception:
-        US_MIN_VOL_FIN_MI = 5.0
+        US_MIN = 5.0
+    try:
+        B3_MIN = float(getattr(rb, "B3_MIN_VOL_FIN_MI", 5.0))
+    except Exception:
+        B3_MIN = 5.0
 
     if batch:
         data = fetch_batch(tickers, period="1y", chunk=chunk)
@@ -202,7 +209,7 @@ def scan(tickers, days_back=1, batch=True, chunk=100):
             d = data.get(tk)
             if d is None:
                 continue
-            if not _liquidez_ok_us(tk, d, US_MIN_VOL_FIN_MI):
+            if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 continue
             hits.extend(_evaluate(tk, d, days_back, today))
     else:
@@ -211,7 +218,7 @@ def scan(tickers, days_back=1, batch=True, chunk=100):
             d = fetch_intraday_ok(tk)
             if len(d) < 60:
                 time.sleep(0.02); continue
-            if not _liquidez_ok_us(tk, d, US_MIN_VOL_FIN_MI):
+            if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 time.sleep(0.01); continue
             hits.extend(_evaluate(tk, d, days_back, today))
             time.sleep(0.03)
