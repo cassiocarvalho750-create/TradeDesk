@@ -192,6 +192,8 @@ async function loadData(){
     try{const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"});
       if(r.ok){const d=await r.json();gerado=d.gerado||gerado;(d.ativos||[]).forEach(x=>ativos.push(x));}}catch(e){}
   }
+  // ordena por qualidade (melhores primeiro), juntando US + B3
+  ativos.sort((a,b)=>((b.quality==null?-1:b.quality)-(a.quality==null?-1:a.quality)));
   render(ativos, gerado);
   return ativos.length;
 }

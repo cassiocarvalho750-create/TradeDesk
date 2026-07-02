@@ -168,6 +168,33 @@ def _evaluate(tk, d, days_back, today):
                 if pos-k>=0 and bool(s["didi_cross"].iloc[pos-k]): didi_ago=k; break
             for k in range(0,4):
                 if pos-k>=0 and bool(s["adx_event"].iloc[pos-k]): adx_ago=k; break
+
+            # ---- QUALIDADE: compressao do Didi + sincronia dos gatilhos ----
+            # Compressao: menor distancia entre a Didi curta (3/8) e longa (20/8)
+            # nos candles em torno do gatilho. Quanto menor, melhor a agulhada.
+            try:
+                c = s["Close"]
+                ma3 = c.rolling(3).mean(); ma8 = c.rolling(8).mean(); ma20 = c.rolling(20).mean()
+                didi_curta = (ma3/ma8 - 1.0)*100.0
+                didi_longa = (ma20/ma8 - 1.0)*100.0
+                j0 = max(0, pos-4)
+                dist = (didi_curta.iloc[j0:pos+1] - didi_longa.iloc[j0:pos+1]).abs()
+                min_dist = float(dist.min()) if len(dist) else np.nan
+            except Exception:
+                min_dist = np.nan
+            # nota de compressao (0-100): dist 0 -> 100 ; dist >= 2.0% -> 0
+            if np.isnan(min_dist):
+                q_comp = 0.0
+            else:
+                q_comp = max(0.0, min(100.0, (1.0 - min_dist/2.0)*100.0))
+            # nota de sincronia (0-100): gatilhos no mesmo candle -> 100 ;
+            # espalhados no limite das janelas (didi 5d, adx 3d) -> baixo.
+            da = didi_ago if didi_ago is not None else 5
+            aa = adx_ago if adx_ago is not None else 3
+            q_sinc = max(0.0, 100.0 - (da/5.0*50.0) - (aa/3.0*50.0))
+            # score final: 60% compressao + 40% sincronia
+            quality = round(0.60*q_comp + 0.40*q_sinc, 1)
+
             res.append({
                 "ticker": tk, "market": market_of(tk),
                 "date": idx.date(), "forming": is_forming,
@@ -177,6 +204,8 @@ def _evaluate(tk, d, days_back, today):
                 "didi_ago": didi_ago, "adx_ago": adx_ago,
                 "vol_fin_mi": round(float(fin_vol),1),
                 "vol_dia_mi": round(float(vol_dia_fin),1),
+                "didi_dist": round(min_dist,3) if not np.isnan(min_dist) else None,
+                "quality": quality,
                 "pe": None, "mktcap": None,
             })
     return res
@@ -256,6 +285,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
             "forming": h["forming"], "date": str(h["date"]),
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
+            "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
             "dates": dates,
             "price": tail(c),
             "didi_curta": tail(didi_curta), "didi_longa": tail(didi_longa),
@@ -263,6 +293,8 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
             "bb_sup": tail(bb_sup), "bb_mid": tail(m), "bb_inf": tail(bb_inf),
         })
         time.sleep(0.05)
+    # ordena por qualidade (melhores primeiro); em formacao/fechado nao afeta a ordem
+    ativos.sort(key=lambda a: (a.get("quality") if a.get("quality") is not None else -1), reverse=True)
     payload = {"gerado": str(datetime.date.today()), "n": len(ativos), "ativos": ativos}
     open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
     print(f"  Painel JSON: {out_path} ({len(ativos)} ativo(s))")
