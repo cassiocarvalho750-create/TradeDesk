@@ -15,7 +15,7 @@ MARKET="b3"; SETUP="Agulhada"
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--quick",action="store_true")
-    ap.add_argument("--days",type=int,default=1)
+    ap.add_argument("--days",type=int,default=None,help="candles a olhar (padrao: por timeframe)")
     ap.add_argument("--out",default="scanner_b3")
     ap.add_argument("--no-batch",dest="batch",action="store_false",help="download individual (lento)")
     ap.add_argument("--chunk",type=int,default=100,help="tamanho do lote no download")
@@ -24,10 +24,11 @@ def main():
     a=ap.parse_args()
     uni=[t for t in rb.get_universe(quick=a.quick) if t.endswith(".SA")]
     tf=a.timeframe
+    days = a.days if a.days is not None else sc.default_days_back(tf)
     sufxo = "" if tf=="1d" else f"_{tf}"
     if a.out=="scanner_b3": a.out=f"scanner_b3{sufxo}"
-    print(f"Scanner B3 (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | tf {tf} | ultimos {a.days} candle(s)\n")
-    hits=sc.scan(uni, a.days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf)
+    print(f"Scanner B3 (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | tf {tf} | ultimos {days} candle(s)\n")
+    hits=sc.scan(uni, days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf)
     if hits:
         print(f"  buscando P/E e Market Cap de {len(hits)} ativo(s) com sinal...")
         sc.enrich_fundamentals(hits)

@@ -41,6 +41,13 @@ TF_CONFIG = {
     "5m":  ("5m",  "60d",  None),
 }
 
+# quantos candles recentes olhar por timeframe (o gatilho e mais raro no intraday,
+# entao ampliamos a janela para nao perder sinais do pregao corrente).
+TF_DAYS_BACK = {"1d": 1, "2h": 2, "1h": 3, "15m": 4, "5m": 6}
+
+def default_days_back(timeframe):
+    return TF_DAYS_BACK.get(timeframe, 1)
+
 def _resample_ohlcv(d, regra):
     """Reamostra OHLCV para um timeframe maior (ex.: 1h -> 2h)."""
     if d is None or d.empty:
