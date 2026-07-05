@@ -260,6 +260,11 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
     HTML consome. Reusa fetch (individual) so para os POUCOS ativos com sinal.
     As formulas sao as mesmas do bt_engine (DIDI 3/8/20, ADX 8, BB 8,2)."""
     import json
+    # horario de captura em Brasilia (UTC-3). O Actions roda em UTC, entao
+    # convertemos explicitamente para nao sair 3h adiantado.
+    tz_br = datetime.timezone(datetime.timedelta(hours=-3))
+    captura = datetime.datetime.now(datetime.timezone.utc).astimezone(tz_br)
+    captura_str = captura.strftime("%d/%m/%Y %H:%M")
     ativos = []
     for h in hits:
         tk = h["ticker"]
@@ -279,10 +284,13 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
             return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
                     for v in s.tail(n_bars).tolist()]
         dates = [str(x.date()) for x in c.tail(n_bars).index]
+        # data do ultimo candle disponivel (o que esta em formacao, se for hoje)
+        ult_candle = str(c.index[-1].date()) if len(c) else None
         ativos.append({
             "ticker": tk.replace(".SA",""), "market": h["market"],
             "close": h["close"], "stop": h["stop"], "r_pct": h["r_pct"],
             "forming": h["forming"], "date": str(h["date"]),
+            "ult_candle": ult_candle,
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
@@ -295,7 +303,8 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
         time.sleep(0.05)
     # ordena por qualidade (melhores primeiro); em formacao/fechado nao afeta a ordem
     ativos.sort(key=lambda a: (a.get("quality") if a.get("quality") is not None else -1), reverse=True)
-    payload = {"gerado": str(datetime.date.today()), "n": len(ativos), "ativos": ativos}
+    payload = {"gerado": str(datetime.date.today()), "captura": captura_str,
+               "n": len(ativos), "ativos": ativos}
     open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
     print(f"  Painel JSON: {out_path} ({len(ativos)} ativo(s))")
     return out_path

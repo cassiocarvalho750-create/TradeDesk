@@ -168,7 +168,7 @@ function drawBB(a){const W=308,H=70,pad=8;const[lo,hi]=minmax([a.bb_sup,a.bb_inf
   <path d="${pathOf(a.price,lo,hi,W,H,pad)}" fill="none" stroke="#fff" stroke-width="1.6"/></svg>
   <div class="legend"><span><i style="background:#fff"></i>preço</span><span><i style="background:var(--accent)"></i>bandas 8,2</span></div>`;}
 
-function card(a){const badge=a.forming?`<span class="badge formando">em formação</span>`:`<span class="badge fechado">fechado</span>`;
+function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;
   const rpct=a.r_pct!=null?a.r_pct.toFixed(2)+"%":"—",da=a.didi_ago!=null?"há "+a.didi_ago+"d":"—",aa=a.adx_ago!=null?"há "+a.adx_ago+"d":"—";
   return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${badge}</div>
   <div class="stats"><div class="stat"><div class="k">Preço</div><div class="v mono">${fmt(a.close)}</div></div><div class="stat"><div class="k">Stop</div><div class="v mono down">${fmt(a.stop)}</div></div><div class="stat"><div class="k">R%</div><div class="v mono">${rpct}</div></div><div class="stat"><div class="k">Vol Mi</div><div class="v mono">${fmt(a.vol_fin_mi,0)}</div></div></div>
@@ -176,10 +176,12 @@ function card(a){const badge=a.forming?`<span class="badge formando">em formaç�
   <div class="pane"><div class="pane-title"><span>ADX / DI</span><span class="mono">ADX ${aa}</span></div>${drawAdx(a)}</div>
   <div class="pane"><div class="pane-title"><span>Bollinger + preço</span><span class="mono">8,2</span></div>${drawBB(a)}</div></div></div>`;}
 
-function render(list, gerado){
+function render(list, gerado, captura){
   const grid=$("grid");
+  window.__captura = captura || null;
   if(!list.length){$("meta").textContent="Sem ativos aprovados no último scan.";grid.innerHTML=`<div class="empty">Nenhum ativo disparou os critérios.</div>`;return;}
-  $("meta").innerHTML=`<b>${list.length}</b> ativo(s) aprovado(s) · dados de <b>${gerado||'—'}</b> · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
+  const capTxt = captura ? ` · <b>capturado às ${captura}</b> (BRT, Yahoo ~15min de atraso)` : "";
+  $("meta").innerHTML=`<b>${list.length}</b> ativo(s) aprovado(s) · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
   grid.innerHTML=list.map(card).join("");
 }
 
@@ -187,14 +189,14 @@ function render(list, gerado){
 async function loadData(){
   const sel=$("mercado").value;
   const files = sel==="us"?["painel_us.json"] : sel==="b3"?["painel_b3.json"] : ["painel_us.json","painel_b3.json"];
-  let ativos=[], gerado=null;
+  let ativos=[], gerado=null, captura=null;
   for(const f of files){
     try{const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"});
-      if(r.ok){const d=await r.json();gerado=d.gerado||gerado;(d.ativos||[]).forEach(x=>ativos.push(x));}}catch(e){}
+      if(r.ok){const d=await r.json();gerado=d.gerado||gerado;captura=d.captura||captura;(d.ativos||[]).forEach(x=>ativos.push(x));}}catch(e){}
   }
   // ordena por qualidade (melhores primeiro), juntando US + B3
   ativos.sort((a,b)=>((b.quality==null?-1:b.quality)-(a.quality==null?-1:a.quality)));
-  render(ativos, gerado);
+  render(ativos, gerado, captura);
   return ativos.length;
 }
 
