@@ -19,14 +19,19 @@ def main():
     ap.add_argument("--out",default="scanner_b3")
     ap.add_argument("--no-batch",dest="batch",action="store_false",help="download individual (lento)")
     ap.add_argument("--chunk",type=int,default=100,help="tamanho do lote no download")
+    ap.add_argument("--timeframe",default="1d",choices=["1d","2h","1h","15m","5m"],
+                    help="timeframe do grafico (1d padrao)")
     a=ap.parse_args()
     uni=[t for t in rb.get_universe(quick=a.quick) if t.endswith(".SA")]
-    print(f"Scanner B3 (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | ultimos {a.days} candle(s)\n")
-    hits=sc.scan(uni, a.days, batch=getattr(a,"batch",True), chunk=a.chunk)
+    tf=a.timeframe
+    sufxo = "" if tf=="1d" else f"_{tf}"
+    if a.out=="scanner_b3": a.out=f"scanner_b3{sufxo}"
+    print(f"Scanner B3 (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | tf {tf} | ultimos {a.days} candle(s)\n")
+    hits=sc.scan(uni, a.days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf)
     if hits:
         print(f"  buscando P/E e Market Cap de {len(hits)} ativo(s) com sinal...")
         sc.enrich_fundamentals(hits)
-        sc.build_panel_data(hits, out_path="painel_b3.json")
+        sc.build_panel_data(hits, out_path=f"painel_b3{sufxo}.json", timeframe=tf)
     hits.sort(key=lambda h:(not h["forming"], h["ticker"]))
 
     # terminal

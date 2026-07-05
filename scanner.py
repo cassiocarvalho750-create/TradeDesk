@@ -30,25 +30,47 @@ import numpy as np, pandas as pd
 import bt_engine as bt
 import run_backtest_v2 as rb
 
-def fetch_intraday_ok(ticker):
-    """Busca dados diarios incluindo o candle de hoje (em formacao se for pregao)."""
+# --- timeframes ---
+# yfinance nao tem '2h' nativo: baixamos '1h' e reamostramos para 2h.
+# Mapa: timeframe -> (interval_yf, period_yf, regra_resample_ou_None)
+TF_CONFIG = {
+    "1d":  ("1d",  "1y",   None),
+    "1h":  ("1h",  "730d", None),
+    "2h":  ("1h",  "730d", "2h"),   # baixa 1h e reamostra p/ 2h
+    "15m": ("15m", "60d",  None),
+    "5m":  ("5m",  "60d",  None),
+}
+
+def _resample_ohlcv(d, regra):
+    """Reamostra OHLCV para um timeframe maior (ex.: 1h -> 2h)."""
+    if d is None or d.empty:
+        return d
+    agg = {"Open":"first","High":"max","Low":"min","Close":"last","Volume":"sum"}
+    cols = [c for c in agg if c in d.columns]
+    r = d[cols].resample(regra, label="left", closed="left").agg({c:agg[c] for c in cols})
+    return r.dropna(how="all")
+
+def fetch_intraday_ok(ticker, timeframe="1d"):
+    """Busca dados no timeframe pedido, incluindo o candle corrente (em formacao).
+    Para 2h, baixa 1h e reamostra."""
     import yfinance as yf
+    interval, period, regra = TF_CONFIG.get(timeframe, TF_CONFIG["1d"])
     try:
-        # period 1y, interval 1d -> inclui o candle do dia corrente quando ha pregao
-        d = yf.Ticker(ticker).history(period="1y", interval="1d", auto_adjust=True)
+        d = yf.Ticker(ticker).history(period=period, interval=interval, auto_adjust=True)
         if d is None or d.empty: return pd.DataFrame()
         d.columns = [c.capitalize() for c in d.columns]
         if d.index.tz is not None: d.index = d.index.tz_localize(None)
+        if regra: d = _resample_ohlcv(d, regra)
         return d
     except Exception:
         return pd.DataFrame()
 
-def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
+def fetch_batch(tickers, timeframe="1d", chunk=100, pause=1.0, retries=2):
     """Baixa varios tickers de uma vez com yf.download (group_by='ticker').
-    Retorna dict {ticker: DataFrame} com colunas capitalizadas (Open/High/Low/Close/Volume),
-    indice sem timezone. Tickers que falharem simplesmente nao entram no dict.
-    Faz o download em lotes de `chunk` para nao montar um request gigante."""
+    Retorna dict {ticker: DataFrame} com colunas capitalizadas, indice sem tz.
+    Para 2h, baixa 1h e reamostra cada ticker."""
     import yfinance as yf
+    interval, period, regra = TF_CONFIG.get(timeframe, TF_CONFIG["1d"])
     out = {}
     n = len(tickers)
     for start in range(0, n, chunk):
@@ -57,7 +79,7 @@ def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
         df = None
         for attempt in range(retries+1):
             try:
-                df = yf.download(part, period=period, interval="1d",
+                df = yf.download(part, period=period, interval=interval,
                                  auto_adjust=True, group_by="ticker",
                                  threads=True, progress=False)
                 if df is not None and not df.empty:
@@ -73,9 +95,9 @@ def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
             d.columns = [str(c).capitalize() for c in d.columns]
             if getattr(d.index,"tz",None) is not None: d.index = d.index.tz_localize(None)
             d = d.dropna(how="all")
+            if regra and not d.empty: d = _resample_ohlcv(d, regra)
             if not d.empty: out[part[0]] = d
         else:
-            # MultiIndex (ticker, campo): fatiar por ticker
             for tk in part:
                 if tk not in df.columns.get_level_values(0):
                     continue
@@ -83,6 +105,7 @@ def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
                 d.columns = [str(c).capitalize() for c in d.columns]
                 if getattr(d.index,"tz",None) is not None: d.index = d.index.tz_localize(None)
                 d = d.dropna(how="all")
+                if regra and not d.empty: d = _resample_ohlcv(d, regra)
                 if not d.empty: out[tk] = d
         time.sleep(pause)
     return out
@@ -137,7 +160,7 @@ def _liquidez_ok(tk, d, min_us_mi, min_b3_mi):
     except Exception:
         return False
 
-def _evaluate(tk, d, days_back, today):
+def _evaluate(tk, d, days_back, today, timeframe="1d"):
     """Avalia UM ticker (DataFrame ja baixado) e retorna lista de hits.
     Logica identica para download em lote e individual."""
     res=[]
@@ -151,10 +174,14 @@ def _evaluate(tk, d, days_back, today):
         s = bt.compute_signals_windowed(d, didi_window=5, adx_window=3)
     except Exception:
         return res
+    intraday = (timeframe != "1d")
+    last_idx = s.index[-1]
     tail = s.iloc[-days_back:]
     for idx, row in tail.iterrows():
         if bool(row["signal_win"]):
-            is_forming = (idx.normalize() == today)
+            # no intraday, "em formacao" = ultimo candle (ainda nao fechou).
+            # no diario, "em formacao" = candle de hoje.
+            is_forming = (idx == last_idx) if intraday else (idx.normalize() == today)
             entry = row["Close"]; low = row["Low"]; r = entry - low
             r_pct = (r/entry*100) if entry>0 else 0
             pos = s.index.get_loc(idx)
@@ -198,6 +225,8 @@ def _evaluate(tk, d, days_back, today):
             res.append({
                 "ticker": tk, "market": market_of(tk),
                 "date": idx.date(), "forming": is_forming,
+                "timeframe": timeframe,
+                "candle_ts": str(idx),
                 "close": round(float(entry),2), "stop": round(float(low),2),
                 "r_pct": round(float(r_pct),2),
                 "adx": round(float(row.get("adx",np.nan)),1),
@@ -211,9 +240,10 @@ def _evaluate(tk, d, days_back, today):
     return res
 
 
-def scan(tickers, days_back=1, batch=True, chunk=100):
-    """Retorna lista de sinais nos ultimos `days_back` candles.
+def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d"):
+    """Retorna lista de sinais nos ultimos `days_back` candles do timeframe dado.
 
+    timeframe: '1d' (diario, padrao), '2h', '1h', '15m', '5m'.
     batch=True  -> download em LOTE via yf.download (rapido; recomendado p/ universo grande).
     batch=False -> download individual via fetch_intraday_ok (lento; fallback).
     O filtro de liquidez e aplicado a AMBOS os mercados, reusando o historico
@@ -232,7 +262,7 @@ def scan(tickers, days_back=1, batch=True, chunk=100):
         B3_MIN = 5.0
 
     if batch:
-        data = fetch_batch(tickers, period="1y", chunk=chunk)
+        data = fetch_batch(tickers, timeframe=timeframe, chunk=chunk)
         print(f"  baixados {len(data)}/{len(tickers)} (demais falharam/sem dados e foram pulados)")
         for tk in tickers:
             d = data.get(tk)
@@ -240,21 +270,21 @@ def scan(tickers, days_back=1, batch=True, chunk=100):
                 continue
             if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 continue
-            hits.extend(_evaluate(tk, d, days_back, today))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe))
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
-            d = fetch_intraday_ok(tk)
+            d = fetch_intraday_ok(tk, timeframe=timeframe)
             if len(d) < 60:
                 time.sleep(0.02); continue
             if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 time.sleep(0.01); continue
-            hits.extend(_evaluate(tk, d, days_back, today))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe))
             time.sleep(0.03)
     return hits
 
 
-def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
+def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d"):
     """Para cada ativo com sinal, recalcula as series dos 3 indicadores
     (DIDI, ADX, BB) nos ultimos n_bars candles e grava um JSON que o painel
     HTML consome. Reusa fetch (individual) so para os POUCOS ativos com sinal.
@@ -266,9 +296,10 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
     captura = datetime.datetime.now(datetime.timezone.utc).astimezone(tz_br)
     captura_str = captura.strftime("%d/%m/%Y %H:%M")
     ativos = []
+    intraday = (timeframe != "1d")
     for h in hits:
         tk = h["ticker"]
-        d = fetch_intraday_ok(tk)
+        d = fetch_intraday_ok(tk, timeframe=timeframe)
         if len(d) < 30:
             continue
         c = d["Close"]; hi = d["High"]; lo = d["Low"]
@@ -283,14 +314,18 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
         def tail(s):
             return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
                     for v in s.tail(n_bars).tolist()]
-        dates = [str(x.date()) for x in c.tail(n_bars).index]
-        # data do ultimo candle disponivel (o que esta em formacao, se for hoje)
-        ult_candle = str(c.index[-1].date()) if len(c) else None
+        # rotulo do eixo: no intraday mostra data+hora; no diario so a data
+        if intraday:
+            dates = [x.strftime("%d/%m %H:%M") for x in c.tail(n_bars).index]
+            ult_candle = c.index[-1].strftime("%d/%m %H:%M") if len(c) else None
+        else:
+            dates = [str(x.date()) for x in c.tail(n_bars).index]
+            ult_candle = str(c.index[-1].date()) if len(c) else None
         ativos.append({
             "ticker": tk.replace(".SA",""), "market": h["market"],
             "close": h["close"], "stop": h["stop"], "r_pct": h["r_pct"],
             "forming": h["forming"], "date": str(h["date"]),
-            "ult_candle": ult_candle,
+            "ult_candle": ult_candle, "timeframe": timeframe,
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
@@ -304,7 +339,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
     # ordena por qualidade (melhores primeiro); em formacao/fechado nao afeta a ordem
     ativos.sort(key=lambda a: (a.get("quality") if a.get("quality") is not None else -1), reverse=True)
     payload = {"gerado": str(datetime.date.today()), "captura": captura_str,
-               "n": len(ativos), "ativos": ativos}
+               "timeframe": timeframe, "n": len(ativos), "ativos": ativos}
     open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
     print(f"  Painel JSON: {out_path} ({len(ativos)} ativo(s))")
     return out_path
