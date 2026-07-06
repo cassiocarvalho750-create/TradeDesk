@@ -49,13 +49,25 @@ def default_days_back(timeframe):
     return TF_DAYS_BACK.get(timeframe, 1)
 
 def _resample_ohlcv(d, regra):
-    """Reamostra OHLCV para um timeframe maior (ex.: 1h -> 2h)."""
+    """Reamostra OHLCV para um timeframe maior (ex.: 1h -> 2h).
+    IMPORTANTE: o resample do pandas cria uma grade continua 24h, gerando
+    candles vazios fora do pregao (noite, fim de semana). Removemos esses
+    candles fantasma exigindo que tenham preco real (Close nao-NaN) e que
+    algum volume/negociacao tenha ocorrido — senao os indicadores sao
+    calculados sobre candles inexistentes e o setup nunca dispara."""
     if d is None or d.empty:
         return d
     agg = {"Open":"first","High":"max","Low":"min","Close":"last","Volume":"sum"}
     cols = [c for c in agg if c in d.columns]
     r = d[cols].resample(regra, label="left", closed="left").agg({c:agg[c] for c in cols})
-    return r.dropna(how="all")
+    # descarta candles sem preco real (buracos entre pregoes)
+    if "Close" in r.columns:
+        r = r[r["Close"].notna()]
+    # descarta tambem candles com OHLC todo NaN por seguranca
+    ohlc = [c for c in ("Open","High","Low","Close") if c in r.columns]
+    if ohlc:
+        r = r.dropna(subset=ohlc, how="all")
+    return r
 
 def fetch_intraday_ok(ticker, timeframe="1d"):
     """Busca dados no timeframe pedido, incluindo o candle corrente (em formacao).
