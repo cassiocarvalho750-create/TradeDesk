@@ -8,7 +8,7 @@ on:
         required: false
         default: "ambos"
         type: choice
-        options: ["ambos", "us", "b3"]
+        options: ["ambos", "us", "b3", "etf"]
       quick:
         description: "Teste rápido (~40 ativos)"
         required: false
@@ -64,12 +64,15 @@ jobs:
           if [ "$MERCADO" = "b3" ] || [ "$MERCADO" = "ambos" ]; then
             python scanner_b3.py $FLAGS || echo "scanner_b3 falhou (seguindo)"
           fi
+          if [ "$MERCADO" = "etf" ] || [ "$MERCADO" = "ambos" ]; then
+            python scanner_etf.py $FLAGS || echo "scanner_etf falhou (seguindo)"
+          fi
 
       - name: Carimbar horario e copiar resultados p/ docs/
         run: |
           mkdir -p docs
           date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt
-          for f in painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json \
+          for f in painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json \
                    scanner_us.json scanner_b3.json \
                    scanner_us_tradedesk_USA.json scanner_b3_tradedesk_BRL.json \
                    scanner_us.html scanner_b3.html \

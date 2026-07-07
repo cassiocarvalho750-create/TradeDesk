@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradeDesk · Agulhada do Didi</title>
+<title>TradeDesk Setores · ETFs</title>
 <style>
   :root{
     --bg:#0a0e14; --panel:#111823; --panel-2:#0d141d; --line:#1e2a38;
@@ -76,17 +76,18 @@
   .dlg-f{padding:12px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}
   .dlg-b a{color:var(--accent)}
   footer{padding:16px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--line);text-align:center}
+.setor-tag{padding:0 16px 8px;font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.02em}
 </style>
 </head>
 <body>
 
 <header>
   <div class="toprow">
-    <h1>TradeDesk · Agulhada</h1>
+    <h1>TradeDesk Setores</h1>
     <span class="sub">DIDI · ADX(8,8) · Bollinger(8,2)</span>
     <span class="spacer"></span>
     <div class="controls">
-      <select id="mercado" title="Mercado">
+      <select id="mercado" title="Mercado" style="display:none">
         <option value="ambos">Ambos</option>
         <option value="us">EUA</option>
         <option value="b3">B3</option>
@@ -94,7 +95,7 @@
       <button class="btn primary" id="runBtn">Rodar scanner agora</button>
       <button class="btn ghost" id="reloadBtn" title="Recarregar dados já publicados">Recarregar</button>
       <a href="TradeDesk2h.html" class="btn ghost" style="text-decoration:none">Gráfico 2h →</a>
-      <a href="TradeDeskSetores.html" class="btn ghost" style="text-decoration:none">Setores →</a>
+      <a href="TradeDesk.html" class="btn ghost" style="text-decoration:none">← Ações</a>
       <button class="btn ghost" id="cfgBtn" title="Configurar repositório e token">⚙</button>
     </div>
   </div>
@@ -172,7 +173,8 @@ function drawBB(a){const W=308,H=70,pad=8;const[lo,hi]=minmax([a.bb_sup,a.bb_inf
 
 function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;
   const rpct=a.r_pct!=null?a.r_pct.toFixed(2)+"%":"—",da=a.didi_ago!=null?"há "+a.didi_ago+"d":"—",aa=a.adx_ago!=null?"há "+a.adx_ago+"d":"—";
-  return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${badge}</div>
+  return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">ETF</span></div>${badge}</div>
+  <div class="setor-tag">${a.setor||""}</div>
   <div class="stats"><div class="stat"><div class="k">Preço</div><div class="v mono">${fmt(a.close)}</div></div><div class="stat"><div class="k">Stop</div><div class="v mono down">${fmt(a.stop)}</div></div><div class="stat"><div class="k">R%</div><div class="v mono">${rpct}</div></div><div class="stat"><div class="k">Vol Mi</div><div class="v mono">${fmt(a.vol_fin_mi,0)}</div></div></div>
   <div class="panes"><div class="pane"><div class="pane-title"><span>Didi Index</span><span class="mono">DIDI ${da}</span></div>${drawDidi(a)}</div>
   <div class="pane"><div class="pane-title"><span>ADX / DI</span><span class="mono">ADX ${aa}</span></div>${drawAdx(a)}</div>
@@ -194,7 +196,7 @@ function render(list, gerado, captura){
 // ---------- carregar JSONs publicados em docs/ ----------
 async function loadData(){
   const sel=$("mercado").value;
-  const files = sel==="us"?["painel_us.json"] : sel==="b3"?["painel_b3.json"] : ["painel_us.json","painel_b3.json"];
+  const files = ["painel_etf.json"];
   let ativos=[], gerado=null, captura=null;
   for(const f of files){
     try{const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"});
@@ -220,7 +222,7 @@ async function ghDispatch(){
     const url=`https://api.github.com/repos/${repo}/actions/workflows/${WORKFLOW_FILE}/dispatches`;
     const res=await fetch(url,{method:"POST",headers:{
       "Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"},
-      body:JSON.stringify({ref:"main",inputs:{mercado:mercado,quick:false}})});
+      body:JSON.stringify({ref:"main",inputs:{mercado:"etf",quick:false}})});
     if(res.status===204){ setStatus("Scan disparado. Rodando na nuvem — isso leva alguns minutos.","run"); pollRun(repo,token); }
     else{ const t=await res.text(); setStatus("Falha ao disparar ("+res.status+"). Verifique repo/token/branch.","err"); console.error(t); $("runBtn").disabled=false; }
   }catch(e){ setStatus("Erro de rede ao disparar: "+e.message,"err"); $("runBtn").disabled=false; }

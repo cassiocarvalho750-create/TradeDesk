@@ -342,6 +342,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             ult_candle = str(c.index[-1].date()) if len(c) else None
         ativos.append({
             "ticker": tk.replace(".SA",""), "market": h["market"],
+            "setor": h.get("setor",""),
             "close": h["close"], "stop": h["stop"], "r_pct": h["r_pct"],
             "forming": h["forming"], "date": str(h["date"]),
             "ult_candle": ult_candle, "timeframe": timeframe,
