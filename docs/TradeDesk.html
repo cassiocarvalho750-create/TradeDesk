@@ -180,8 +180,12 @@ function card(a){const badge=a.forming?`<span class="badge formando">em formaç�
 function render(list, gerado, captura){
   const grid=$("grid");
   window.__captura = captura || null;
-  if(!list.length){$("meta").textContent="Sem ativos aprovados no último scan.";grid.innerHTML=`<div class="empty">Nenhum ativo disparou os critérios.</div>`;return;}
-  const capTxt = captura ? ` · <b>capturado às ${captura}</b> (BRT, Yahoo ~15min de atraso)` : "";
+  const capTxt = captura ? ` · capturado às <b>${captura}</b> (BRT, Yahoo ~15min de atraso)` : "";
+  if(!list.length){
+    $("meta").innerHTML=`Nenhum ativo aprovado · dados de <b>${gerado||'—'}</b>${capTxt}`;
+    grid.innerHTML=`<div class="empty">Nenhum ativo disparou os critérios neste scan.<br>O scan rodou normalmente — só não houve sinal.</div>`;
+    return;
+  }
   $("meta").innerHTML=`<b>${list.length}</b> ativo(s) aprovado(s) · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
   grid.innerHTML=list.map(card).join("");
 }
@@ -193,7 +197,10 @@ async function loadData(){
   let ativos=[], gerado=null, captura=null;
   for(const f of files){
     try{const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"});
-      if(r.ok){const d=await r.json();gerado=d.gerado||gerado;captura=d.captura||captura;(d.ativos||[]).forEach(x=>ativos.push(x));}}catch(e){}
+      if(r.ok){const d=await r.json();
+        if(d.gerado && (!gerado || d.gerado>gerado)) gerado=d.gerado;
+        if(d.captura && (!captura || d.captura>captura)) captura=d.captura;
+        (d.ativos||[]).forEach(x=>ativos.push(x));}}catch(e){}
   }
   // ordena por qualidade (melhores primeiro), juntando US + B3
   ativos.sort((a,b)=>((b.quality==null?-1:b.quality)-(a.quality==null?-1:a.quality)));

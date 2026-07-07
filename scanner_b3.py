@@ -32,7 +32,9 @@ def main():
     if hits:
         print(f"  buscando P/E e Market Cap de {len(hits)} ativo(s) com sinal...")
         sc.enrich_fundamentals(hits)
-        sc.build_panel_data(hits, out_path=f"painel_b3{sufxo}.json", timeframe=tf)
+    # SEMPRE gera o painel (mesmo com 0 sinais), para o arquivo refletir o scan
+    # mais recente e nao ficar com dados antigos de um scan anterior.
+    sc.build_panel_data(hits, out_path=f"painel_b3{sufxo}.json", timeframe=tf)
     hits.sort(key=lambda h:(not h["forming"], h["ticker"]))
 
     # terminal
