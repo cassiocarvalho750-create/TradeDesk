@@ -1,6 +1,6 @@
 {
   "gerado": "2026-07-08",
-  "captura": "07/07/2026 22:55",
+  "captura": "08/07/2026 03:41",
   "timeframe": "1d",
   "n": 11,
   "ativos": [
@@ -17,7 +17,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 53.6,
+      "vol_fin_mi": 54.0,
       "tv": "https://www.tradingview.com/chart/?symbol=PAG",
       "quality": 91.6,
       "didi_dist": 0.281,
@@ -893,7 +893,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 294.2,
+      "vol_fin_mi": 294.8,
       "tv": "https://www.tradingview.com/chart/?symbol=GTLS",
       "quality": 88.3,
       "didi_dist": 0.389,
@@ -1105,7 +1105,7 @@
         26.0122,
         25.4697,
         24.995,
-        26.4169
+        26.4681
       ],
       "dip": [
         6.8044,
@@ -1147,7 +1147,7 @@
         23.6624,
         21.8007,
         20.3757,
-        24.4584
+        24.6335
       ],
       "dim": [
         25.868,
@@ -1189,7 +1189,7 @@
         15.233,
         14.0345,
         13.1172,
-        11.4122
+        11.3857
       ],
       "bb_sup": [
         208.1164,
@@ -1331,7 +1331,7 @@
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 90.2,
+      "vol_fin_mi": 91.4,
       "tv": "https://www.tradingview.com/chart/?symbol=HR",
       "quality": 80.5,
       "didi_dist": 0.515,
@@ -1543,7 +1543,7 @@
         17.0517,
         16.3028,
         15.5163,
-        16.9473
+        16.9871
       ],
       "dip": [
         40.5268,
@@ -1585,7 +1585,7 @@
         14.689,
         21.8025,
         20.0737,
-        24.4504
+        24.5777
       ],
       "dim": [
         5.4458,
@@ -1627,7 +1627,7 @@
         19.7946,
         17.4599,
         16.4203,
-        14.0651
+        14.0414
       ],
       "bb_sup": [
         20.6327,
@@ -1769,7 +1769,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 489.4,
+      "vol_fin_mi": 489.5,
       "tv": "https://www.tradingview.com/chart/?symbol=D",
       "quality": 71.9,
       "didi_dist": 0.937,
@@ -2199,8 +2199,8 @@
       "market": "EUA",
       "setor": "",
       "close": 94.59,
-      "stop": 93.46,
-      "r_pct": 1.2,
+      "stop": 93.41,
+      "r_pct": 1.25,
       "forming": false,
       "date": "2026-07-07",
       "ult_candle": "2026-07-07",
@@ -2419,7 +2419,7 @@
         19.1321,
         16.8118,
         15.1045,
-        17.8534
+        17.866
       ],
       "dip": [
         16.9301,
@@ -2461,7 +2461,7 @@
         21.3623,
         19.1344,
         18.363,
-        30.6797
+        30.7296
       ],
       "dim": [
         34.5055,
@@ -2503,7 +2503,7 @@
         21.8825,
         18.9178,
         17.2402,
-        14.0769
+        14.0668
       ],
       "bb_sup": [
         95.6285,
@@ -2637,15 +2637,15 @@
       "market": "EUA",
       "setor": "",
       "close": 48.39,
-      "stop": 48.05,
-      "r_pct": 0.7,
+      "stop": 48.04,
+      "r_pct": 0.72,
       "forming": false,
       "date": "2026-07-07",
       "ult_candle": "2026-07-07",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 2,
-      "vol_fin_mi": 199.3,
+      "vol_fin_mi": 201.5,
       "tv": "https://www.tradingview.com/chart/?symbol=FE",
       "quality": 48.5,
       "didi_dist": 1.271,
@@ -2857,7 +2857,7 @@
         21.1334,
         21.2794,
         21.4071,
-        23.3249
+        23.3369
       ],
       "dip": [
         4.2961,
@@ -2899,7 +2899,7 @@
         21.8785,
         30.9633,
         27.0075,
-        30.1479
+        30.1944
       ],
       "dim": [
         39.2731,
@@ -2941,7 +2941,7 @@
         25.3236,
         19.6713,
         17.1581,
-        13.944
+        13.9348
       ],
       "bb_sup": [
         48.642,
@@ -3076,14 +3076,14 @@
       "setor": "",
       "close": 49.04,
       "stop": 48.74,
-      "r_pct": 0.62,
+      "r_pct": 0.61,
       "forming": false,
       "date": "2026-07-07",
       "ult_candle": "2026-07-07",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 2,
-      "vol_fin_mi": 66.9,
+      "vol_fin_mi": 67.5,
       "tv": "https://www.tradingview.com/chart/?symbol=OGE",
       "quality": 45.3,
       "didi_dist": 1.38,
@@ -3274,7 +3274,7 @@
         22.2751,
         26.1786,
         26.1173,
-        26.5137,
+        26.5138,
         23.7998,
         22.5646,
         21.4838,
@@ -3303,7 +3303,7 @@
         14.0647,
         12.4857,
         15.5752,
-        12.3937,
+        12.3936,
         10.3804,
         20.383,
         22.4797,
@@ -3312,7 +3312,7 @@
         24.2687,
         21.7356,
         18.0709,
-        16.4546,
+        16.4545,
         12.4987,
         10.5384,
         17.7399,
@@ -3521,7 +3521,7 @@
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 2,
-      "vol_fin_mi": 229.5,
+      "vol_fin_mi": 230.5,
       "tv": "https://www.tradingview.com/chart/?symbol=ENSG",
       "quality": 41.5,
       "didi_dist": 1.24,
@@ -3959,7 +3959,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 1,
-      "vol_fin_mi": 171.0,
+      "vol_fin_mi": 175.9,
       "tv": "https://www.tradingview.com/chart/?symbol=EIX",
       "quality": 33.3,
       "didi_dist": 2.034,
@@ -4139,7 +4139,7 @@
         28.4189,
         27.5408,
         30.9725,
-        32.3845,
+        32.3846,
         32.4229,
         33.113,
         31.8919,
@@ -4397,7 +4397,7 @@
       "timeframe": "1d",
       "didi_ago": 5,
       "adx_ago": 1,
-      "vol_fin_mi": 16275.5,
+      "vol_fin_mi": 16283.7,
       "tv": "https://www.tradingview.com/chart/?symbol=AMD",
       "quality": 29.3,
       "didi_dist": 1.468,
