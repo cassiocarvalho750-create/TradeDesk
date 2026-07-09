@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-07-08",
-  "captura": "08/07/2026 17:27",
+  "gerado": "2026-07-09",
+  "captura": "08/07/2026 21:28",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -9,15 +9,15 @@
       "market": "EUA",
       "setor": "",
       "close": 431.97,
-      "stop": 414.0,
-      "r_pct": 4.16,
-      "forming": true,
+      "stop": 414.2,
+      "r_pct": 4.11,
+      "forming": false,
       "date": "2026-07-08",
       "ult_candle": "2026-07-08",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 3393.9,
+      "vol_fin_mi": 3383.7,
       "tv": "https://www.tradingview.com/chart/?symbol=DELL",
       "quality": 96.5,
       "didi_dist": 0.116,
@@ -271,7 +271,7 @@
         20.4743,
         20.3658,
         17.933,
-        24.2767
+        24.2953
       ],
       "dim": [
         5.125,
@@ -313,7 +313,7 @@
         23.3213,
         20.0352,
         17.6419,
-        15.2422
+        15.2539
       ],
       "bb_sup": [
         266.6701,
@@ -449,7 +449,7 @@
       "close": 141.51,
       "stop": 135.97,
       "r_pct": 3.91,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-08",
       "ult_candle": "2026-07-08",
       "timeframe": "1d",
@@ -887,13 +887,13 @@
       "close": 181.05,
       "stop": 166.04,
       "r_pct": 8.29,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-08",
       "ult_candle": "2026-07-08",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 2,
-      "vol_fin_mi": 1393.4,
+      "vol_fin_mi": 1393.6,
       "tv": "https://www.tradingview.com/chart/?symbol=ANET",
       "quality": 19.4,
       "didi_dist": 1.709,
