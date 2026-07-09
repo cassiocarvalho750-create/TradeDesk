@@ -1,6 +1,6 @@
 {
   "gerado": "2026-07-09",
-  "captura": "08/07/2026 21:28",
+  "captura": "09/07/2026 07:32",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -9,15 +9,15 @@
       "market": "EUA",
       "setor": "",
       "close": 431.97,
-      "stop": 414.2,
-      "r_pct": 4.11,
+      "stop": 414.0,
+      "r_pct": 4.16,
       "forming": false,
       "date": "2026-07-08",
       "ult_candle": "2026-07-08",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 3383.7,
+      "vol_fin_mi": 3399.1,
       "tv": "https://www.tradingview.com/chart/?symbol=DELL",
       "quality": 96.5,
       "didi_dist": 0.116,
@@ -271,7 +271,7 @@
         20.4743,
         20.3658,
         17.933,
-        24.2953
+        24.2767
       ],
       "dim": [
         5.125,
@@ -313,7 +313,7 @@
         23.3213,
         20.0352,
         17.6419,
-        15.2539
+        15.2422
       ],
       "bb_sup": [
         266.6701,
@@ -455,7 +455,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 92.0,
+      "vol_fin_mi": 93.0,
       "tv": "https://www.tradingview.com/chart/?symbol=KEX",
       "quality": 52.4,
       "didi_dist": 1.585,
@@ -667,7 +667,7 @@
         22.7567,
         24.5437,
         24.5084,
-        25.6908
+        26.6758
       ],
       "dip": [
         21.8107,
@@ -709,7 +709,7 @@
         13.7161,
         14.0638,
         16.7213,
-        39.4692
+        43.9452
       ],
       "dim": [
         17.9416,
@@ -751,7 +751,7 @@
         34.5612,
         30.6202,
         27.434,
-        19.4544
+        18.0158
       ],
       "bb_sup": [
         150.7367,
@@ -885,15 +885,15 @@
       "market": "EUA",
       "setor": "",
       "close": 181.05,
-      "stop": 166.04,
-      "r_pct": 8.29,
+      "stop": 165.99,
+      "r_pct": 8.32,
       "forming": false,
       "date": "2026-07-08",
       "ult_candle": "2026-07-08",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 2,
-      "vol_fin_mi": 1393.6,
+      "vol_fin_mi": 1393.7,
       "tv": "https://www.tradingview.com/chart/?symbol=ANET",
       "quality": 19.4,
       "didi_dist": 1.709,
@@ -1147,7 +1147,7 @@
         21.6755,
         28.4433,
         24.8591,
-        34.0857
+        34.0667
       ],
       "dim": [
         42.7066,
@@ -1189,7 +1189,7 @@
         19.2977,
         15.3782,
         13.4403,
-        11.1521
+        11.1459
       ],
       "bb_sup": [
         189.844,
