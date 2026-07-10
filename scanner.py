@@ -35,6 +35,7 @@ import run_backtest_v2 as rb
 # Mapa: timeframe -> (interval_yf, period_yf, regra_resample_ou_None)
 TF_CONFIG = {
     "1d":  ("1d",  "1y",   None),
+    "1wk": ("1wk", "5y",   None),   # semanal nativo, 5 anos de historico
     "1h":  ("1h",  "730d", None),
     "2h":  ("1h",  "730d", "2h"),   # baixa 1h e reamostra p/ 2h
     "15m": ("15m", "60d",  None),
@@ -43,7 +44,13 @@ TF_CONFIG = {
 
 # quantos candles recentes olhar por timeframe (o gatilho e mais raro no intraday,
 # entao ampliamos a janela para nao perder sinais do pregao corrente).
-TF_DAYS_BACK = {"1d": 1, "2h": 2, "1h": 3, "15m": 4, "5m": 6}
+TF_DAYS_BACK = {"1d": 1, "1wk": 1, "2h": 2, "1h": 3, "15m": 4, "5m": 6}
+
+# janelas de tolerancia (DIDI, ADX) em candles, por timeframe.
+# Semanal usa 3/2 (mais justo); os demais herdam o padrao do diario (5/3).
+TF_WINDOWS = {"1wk": (3, 2)}
+def tf_windows(timeframe):
+    return TF_WINDOWS.get(timeframe, (5, 3))
 
 def default_days_back(timeframe):
     return TF_DAYS_BACK.get(timeframe, 1)
@@ -189,18 +196,25 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
     for col in ("Open","High","Low","Close","Volume"):
         if col not in d.columns:
             return res
+    didi_win, adx_win = tf_windows(timeframe)
     try:
-        s = bt.compute_signals_windowed(d, didi_window=5, adx_window=3)
+        s = bt.compute_signals_windowed(d, didi_window=didi_win, adx_window=adx_win)
     except Exception:
         return res
-    intraday = (timeframe != "1d")
+    # intraday = timeframes menores que o diario (usam hora). Semanal e diario nao.
+    intraday = timeframe in ("2h","1h","15m","5m")
     last_idx = s.index[-1]
     tail = s.iloc[-days_back:]
     for idx, row in tail.iterrows():
         if bool(row["signal_win"]):
-            # no intraday, "em formacao" = ultimo candle (ainda nao fechou).
-            # no diario, "em formacao" = candle de hoje.
-            is_forming = (idx == last_idx) if intraday else (idx.normalize() == today)
+            # intraday: "em formacao" = ultimo candle. Diario/semanal: candle corrente.
+            if intraday:
+                is_forming = (idx == last_idx)
+            elif timeframe == "1wk":
+                # semana corrente: o ultimo candle semanal (ainda em formacao ate sexta)
+                is_forming = (idx == last_idx)
+            else:
+                is_forming = (idx.normalize() == today)
             entry = row["Close"]; low = row["Low"]; r = entry - low
             r_pct = (r/entry*100) if entry>0 else 0
             pos = s.index.get_loc(idx)
@@ -210,9 +224,9 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
             vol_dia_qtd = float(s["Volume"].iloc[pos])
             vol_dia_fin = (vol_dia_qtd * float(entry)) / 1e6 if not np.isnan(vol_dia_qtd) else 0.0
             didi_ago = adx_ago = None
-            for k in range(0,6):
+            for k in range(0, didi_win+1):
                 if pos-k>=0 and bool(s["didi_cross"].iloc[pos-k]): didi_ago=k; break
-            for k in range(0,4):
+            for k in range(0, adx_win+1):
                 if pos-k>=0 and bool(s["adx_event"].iloc[pos-k]): adx_ago=k; break
 
             # ---- QUALIDADE: compressao do Didi + sincronia dos gatilhos ----
@@ -315,7 +329,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
     captura = datetime.datetime.now(datetime.timezone.utc).astimezone(tz_br)
     captura_str = captura.strftime("%d/%m/%Y %H:%M")
     ativos = []
-    intraday = (timeframe != "1d")
+    intraday = timeframe in ("2h","1h","15m","5m")  # semanal/diario usam data, nao hora
     for h in hits:
         tk = h["ticker"]
         d = fetch_intraday_ok(tk, timeframe=timeframe)

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeDesk Semanal · Agulhada</title>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#111823; --panel-2:#0d141d; --line:#1e2a38;
+    --ink:#e6edf3; --muted:#6b7d92; --up:#3fb950; --down:#f0603a;
+    --accent:#4aa8ff; --compress:#243447; --gold:#e3b341;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"SFMono-Regular",Consolas,"Courier New",monospace}
+
+  header{padding:16px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0c121b,transparent)}
+  .toprow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  header h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  header .sub{font-size:12px;color:var(--muted)}
+  .spacer{flex:1}
+
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  select,.btn{
+    font-size:12px;font-family:inherit;border:1px solid var(--line);background:var(--panel);
+    color:var(--ink);padding:8px 12px;border-radius:6px;cursor:pointer;
+  }
+  select:hover,.btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);color:#06121f;border-color:var(--accent);font-weight:700}
+  .btn.primary:disabled{opacity:.5;cursor:not-allowed}
+  .btn.ghost{color:var(--muted)}
+
+  .statusbar{
+    margin-top:12px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);
+    min-height:20px;
+  }
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+  .dot.run{background:var(--gold);animation:blink 1s infinite}
+  .dot.ok{background:var(--up)} .dot.err{background:var(--down)}
+  @keyframes blink{50%{opacity:.3}}
+
+  .meta{padding:10px 24px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line)}
+  .meta b{color:var(--ink)}
+
+  .grid{display:grid;gap:16px;padding:20px 24px;max-width:1500px;margin:0 auto;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .card.alert{border-color:var(--up);box-shadow:0 0 0 1px rgba(63,185,80,.25),0 8px 30px -12px rgba(63,185,80,.3)}
+  .card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px}
+  .tk{display:flex;align-items:baseline;gap:8px}
+  .tk a{color:#fff;text-decoration:none;font-size:22px;font-weight:800}
+  .tk a:hover{color:var(--accent)}
+  .tk .mkt{font-size:10px;color:var(--muted);border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+  .badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:4px 8px;border-radius:5px}
+  .badge.fechado{background:rgba(63,185,80,.15);color:var(--up)}
+  .badge.formando{background:rgba(227,179,65,.15);color:var(--gold)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin:0 16px;border-radius:6px;overflow:hidden}
+  .stat{background:var(--panel-2);padding:7px 8px;text-align:center}
+  .stat .k{font-size:9px;color:var(--muted);text-transform:uppercase}
+  .stat .v{font-size:13px;font-weight:600;margin-top:2px}
+  .stat .v.down{color:var(--down)}
+  .panes{padding:12px 16px 16px}
+  .pane{margin-top:12px}.pane:first-child{margin-top:6px}
+  .pane-title{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+  svg{display:block;width:100%;background:var(--panel-2);border-radius:6px;border:1px solid var(--line)}
+  .legend{display:flex;gap:12px;font-size:10px;color:var(--muted);margin-top:4px}
+  .legend i{display:inline-block;width:9px;height:2px;vertical-align:middle;margin-right:4px}
+
+  .empty{text-align:center;color:var(--muted);padding:50px 20px;font-size:13px;line-height:1.7;grid-column:1/-1}
+  .empty code{color:var(--accent);background:var(--panel);padding:2px 6px;border-radius:4px}
+
+  dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:0;max-width:460px;width:92%}
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  .dlg-h{padding:16px 18px;border-bottom:1px solid var(--line);font-weight:700}
+  .dlg-b{padding:16px 18px;font-size:13px;line-height:1.6;color:var(--muted)}
+  .dlg-b input{width:100%;margin-top:10px;padding:9px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:6px;font-family:monospace}
+  .dlg-f{padding:12px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}
+  .dlg-b a{color:var(--accent)}
+  footer{padding:16px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--line);text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="toprow">
+    <h1>TradeDesk Semanal</h1>
+    <span class="sub">DIDI · ADX(8,8) · Bollinger(8,2)</span>
+    <span class="spacer"></span>
+    <div class="controls">
+      <select id="mercado" title="Mercado">
+        <option value="ambos">Ambos</option>
+        <option value="us">EUA</option>
+        <option value="b3">B3</option>
+      </select>
+      <button class="btn primary" id="runBtn">Rodar scanner agora</button>
+      <button class="btn ghost" id="reloadBtn" title="Recarregar dados já publicados">Recarregar</button>
+      <a href="TradeDesk2h.html" class="btn ghost" style="text-decoration:none">Gráfico 2h →</a>
+      <a href="TradeDeskSetores.html" class="btn ghost" style="text-decoration:none">Setores →</a>
+      <a href="TradeDesk.html" class="btn ghost" style="text-decoration:none">← Diário</a>
+      <button class="btn ghost" id="cfgBtn" title="Configurar repositório e token">⚙</button>
+    </div>
+  </div>
+  <div class="statusbar"><span class="dot" id="dot"></span><span id="status">Pronto.</span></div>
+</header>
+
+<div class="meta" id="meta">Carregando dados publicados…</div>
+
+<div class="grid" id="grid">
+  <div class="empty" id="empty">
+    Clique em <b>Rodar scanner agora</b> para disparar um novo scan na nuvem,
+    ou <b>Recarregar</b> para ver o último resultado publicado.<br>
+    Cada ativo aprovado aparece com Didi (faixa de compressão destacada), ADX e Bollinger.
+  </div>
+</div>
+
+<footer>Leitura técnica para análise própria. O scanner é ferramenta de garimpo, não sinal de compra automática.</footer>
+
+<!-- Config: repo + token (guardados só no navegador) -->
+<dialog id="cfg">
+  <div class="dlg-h">Configuração</div>
+  <div class="dlg-b">
+    Para o botão disparar o scan, informe seu repositório e um token do GitHub.
+    <b>Nada disso é enviado para lugar nenhum além da API do GitHub</b> — fica salvo apenas
+    neste navegador (localStorage).
+    <input id="repo" placeholder="usuario/repositorio (ex.: cassio/tradedesk)">
+    <input id="token" type="password" placeholder="token fine-grained (github_pat_...)">
+    <div style="margin-top:10px;font-size:12px">
+      O token precisa só de <b>Actions: Read and write</b> neste repositório.
+      Veja o passo a passo no <a href="README_DEPLOY.md" target="_blank">README_DEPLOY</a>.
+    </div>
+  </div>
+  <div class="dlg-f">
+    <button class="btn ghost" id="cfgCancel">Cancelar</button>
+    <button class="btn primary" id="cfgSave">Salvar</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+const LS_REPO="td_repo", LS_TOK="td_token";
+const WORKFLOW_FILE="scan.yml";   // nome do arquivo do workflow
+const $=id=>document.getElementById(id);
+
+function setStatus(msg, kind){ $("status").textContent=msg; const d=$("dot"); d.className="dot"+(kind?(" "+kind):""); }
+
+// ---------- desenho dos indicadores (idêntico ao Painel_Agulhada) ----------
+function minmax(arrs){let lo=Infinity,hi=-Infinity;arrs.forEach(a=>a.forEach(v=>{if(v==null||isNaN(v))return;if(v<lo)lo=v;if(v>hi)hi=v;}));if(lo===Infinity){lo=0;hi=1;}if(lo===hi){lo-=1;hi+=1;}return[lo,hi];}
+function pathOf(s,lo,hi,W,H,pad){const n=s.length;if(!n)return"";const uH=H-2*pad,uW=W-2*pad;let d="",st=false;s.forEach((v,i)=>{if(v==null||isNaN(v)){st=false;return;}const x=pad+(n===1?0:(i/(n-1))*uW);const y=pad+uH-((v-lo)/(hi-lo))*uH;d+=(st?" L ":"M ")+x.toFixed(1)+","+y.toFixed(1);st=true;});return d;}
+function yOf(v,lo,hi,H,pad){const uH=H-2*pad;return pad+uH-((v-lo)/(hi-lo))*uH;}
+function last(a){for(let i=a.length-1;i>=0;i--)if(a[i]!=null&&!isNaN(a[i]))return a[i];return null;}
+function fmt(v,d){return v==null?"—":Number(v).toFixed(d==null?2:d);}
+
+function drawDidi(a){const W=308,H=70,pad=8;const c=a.didi_curta,l=a.didi_longa;const[lo,hi]=minmax([c,l,[0]]);
+  const zeroY=yOf(0,lo,hi,H,pad),band=0.15,yTop=yOf(Math.min(band,hi),lo,hi,H,pad),yBot=yOf(Math.max(-band,lo),lo,hi,H,pad);
+  return `<svg viewBox="0 0 ${W} ${H}"><rect x="${pad}" y="${Math.min(yTop,yBot)}" width="${W-2*pad}" height="${Math.abs(yBot-yTop)}" fill="var(--compress)" opacity=".55"/>
+  <line x1="${pad}" y1="${zeroY}" x2="${W-pad}" y2="${zeroY}" stroke="#2a3a4d" stroke-dasharray="3 3"/>
+  <path d="${pathOf(l,lo,hi,W,H,pad)}" fill="none" stroke="var(--down)" stroke-width="1.6"/>
+  <path d="${pathOf(c,lo,hi,W,H,pad)}" fill="none" stroke="var(--up)" stroke-width="1.6"/></svg>
+  <div class="legend"><span><i style="background:var(--up)"></i>curta ${fmt(last(c))}</span><span><i style="background:var(--down)"></i>longa ${fmt(last(l))}</span><span style="color:var(--muted)">faixa = compressão</span></div>`;}
+function drawAdx(a){const W=308,H=70,pad=8;const[lo,hi]=minmax([a.adx,a.dip,a.dim]);
+  return `<svg viewBox="0 0 ${W} ${H}"><path d="${pathOf(a.dim,lo,hi,W,H,pad)}" fill="none" stroke="var(--down)" stroke-width="1.3"/>
+  <path d="${pathOf(a.dip,lo,hi,W,H,pad)}" fill="none" stroke="var(--up)" stroke-width="1.3"/>
+  <path d="${pathOf(a.adx,lo,hi,W,H,pad)}" fill="none" stroke="var(--ink)" stroke-width="1.8"/></svg>
+  <div class="legend"><span><i style="background:var(--ink)"></i>ADX ${fmt(last(a.adx),1)}</span><span><i style="background:var(--up)"></i>DI+ ${fmt(last(a.dip),1)}</span><span><i style="background:var(--down)"></i>DI− ${fmt(last(a.dim),1)}</span></div>`;}
+function drawBB(a){const W=308,H=70,pad=8;const[lo,hi]=minmax([a.bb_sup,a.bb_inf,a.price]);const n=a.bb_sup.length;let area="";
+  a.bb_sup.forEach((v,i)=>{if(v!=null){const x=pad+(i/(n-1))*(W-2*pad);area+=(area?" L ":"M ")+x.toFixed(1)+","+yOf(v,lo,hi,H,pad).toFixed(1);}});
+  for(let i=a.bb_inf.length-1;i>=0;i--){const v=a.bb_inf[i];if(v!=null){const x=pad+(i/(n-1))*(W-2*pad);area+=" L "+x.toFixed(1)+","+yOf(v,lo,hi,H,pad).toFixed(1);}}area+=" Z";
+  return `<svg viewBox="0 0 ${W} ${H}"><path d="${area}" fill="var(--accent)" opacity=".06"/>
+  <path d="${pathOf(a.bb_sup,lo,hi,W,H,pad)}" fill="none" stroke="var(--accent)" stroke-width="1" opacity=".6"/>
+  <path d="${pathOf(a.bb_inf,lo,hi,W,H,pad)}" fill="none" stroke="var(--accent)" stroke-width="1" opacity=".6"/>
+  <path d="${pathOf(a.bb_mid,lo,hi,W,H,pad)}" fill="none" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 2"/>
+  <path d="${pathOf(a.price,lo,hi,W,H,pad)}" fill="none" stroke="#fff" stroke-width="1.6"/></svg>
+  <div class="legend"><span><i style="background:#fff"></i>preço</span><span><i style="background:var(--accent)"></i>bandas 8,2</span></div>`;}
+
+function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;
+  const rpct=a.r_pct!=null?a.r_pct.toFixed(2)+"%":"—",da=a.didi_ago!=null?"há "+a.didi_ago+"d":"—",aa=a.adx_ago!=null?"há "+a.adx_ago+"d":"—";
+  return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${badge}</div>
+  <div class="stats"><div class="stat"><div class="k">Preço</div><div class="v mono">${fmt(a.close)}</div></div><div class="stat"><div class="k">Stop</div><div class="v mono down">${fmt(a.stop)}</div></div><div class="stat"><div class="k">R%</div><div class="v mono">${rpct}</div></div><div class="stat"><div class="k">Vol Mi</div><div class="v mono">${fmt(a.vol_fin_mi,0)}</div></div></div>
+  <div class="panes"><div class="pane"><div class="pane-title"><span>Didi Index</span><span class="mono">DIDI ${da}</span></div>${drawDidi(a)}</div>
+  <div class="pane"><div class="pane-title"><span>ADX / DI</span><span class="mono">ADX ${aa}</span></div>${drawAdx(a)}</div>
+  <div class="pane"><div class="pane-title"><span>Bollinger + preço</span><span class="mono">8,2</span></div>${drawBB(a)}</div></div></div>`;}
+
+function render(list, gerado, captura){
+  const grid=$("grid");
+  window.__captura = captura || null;
+  const capTxt = captura ? ` · capturado às <b>${captura}</b> (BRT, Yahoo ~15min de atraso)` : "";
+  if(!list.length){
+    $("meta").innerHTML=`Nenhum ativo aprovado · dados de <b>${gerado||'—'}</b>${capTxt}`;
+    grid.innerHTML=`<div class="empty">Nenhum ativo disparou os critérios neste scan.<br>O scan rodou normalmente — só não houve sinal.</div>`;
+    return;
+  }
+  $("meta").innerHTML=`<b>${list.length}</b> ativo(s) aprovado(s) · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
+  grid.innerHTML=list.map(card).join("");
+}
+
+// ---------- carregar JSONs publicados em docs/ ----------
+async function loadData(){
+  const sel=$("mercado").value;
+  const files = sel==="us"?["painel_us_1wk.json"] : sel==="b3"?["painel_b3_1wk.json"] : ["painel_us_1wk.json","painel_b3_1wk.json"];
+  let ativos=[], gerado=null, captura=null;
+  for(const f of files){
+    try{const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"});
+      if(r.ok){const d=await r.json();
+        if(d.gerado && (!gerado || d.gerado>gerado)) gerado=d.gerado;
+        if(d.captura && (!captura || d.captura>captura)) captura=d.captura;
+        (d.ativos||[]).forEach(x=>ativos.push(x));}}catch(e){}
+  }
+  // ordena por qualidade (melhores primeiro), juntando US + B3
+  ativos.sort((a,b)=>((b.quality==null?-1:b.quality)-(a.quality==null?-1:a.quality)));
+  render(ativos, gerado, captura);
+  return ativos.length;
+}
+
+// ---------- disparar workflow_dispatch ----------
+function cfg(){return {repo:localStorage.getItem(LS_REPO)||"", token:localStorage.getItem(LS_TOK)||""};}
+async function ghDispatch(){
+  const {repo,token}=cfg();
+  if(!repo||!token){ openCfg(); setStatus("Configure repositório e token primeiro.","err"); return; }
+  const mercado=$("mercado").value;
+  setStatus("Disparando scan na nuvem…","run"); $("runBtn").disabled=true;
+  try{
+    const url=`https://api.github.com/repos/${repo}/actions/workflows/${WORKFLOW_FILE}/dispatches`;
+    const res=await fetch(url,{method:"POST",headers:{
+      "Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"},
+      body:JSON.stringify({ref:"main",inputs:{mercado:mercado,quick:false,timeframe:"1wk"}})});
+    if(res.status===204){ setStatus("Scan disparado. Rodando na nuvem — isso leva alguns minutos.","run"); pollRun(repo,token); }
+    else{ const t=await res.text(); setStatus("Falha ao disparar ("+res.status+"). Verifique repo/token/branch.","err"); console.error(t); $("runBtn").disabled=false; }
+  }catch(e){ setStatus("Erro de rede ao disparar: "+e.message,"err"); $("runBtn").disabled=false; }
+}
+// acompanha o run mais recente até concluir, depois recarrega os dados
+async function pollRun(repo,token){
+  const headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"};
+  let tries=0;
+  const timer=setInterval(async()=>{
+    tries++;
+    try{
+      const r=await fetch(`https://api.github.com/repos/${repo}/actions/runs?per_page=1`,{headers,cache:"no-store"});
+      const d=await r.json(); const run=(d.workflow_runs||[])[0];
+      if(run){
+        if(run.status==="completed"){
+          clearInterval(timer); $("runBtn").disabled=false;
+          if(run.conclusion==="success"){ setStatus("Scan concluído. Atualizando painel…","ok"); setTimeout(loadData,4000); }
+          else setStatus("Scan terminou com status: "+run.conclusion,"err");
+        }else setStatus("Rodando na nuvem… ("+run.status+", "+tries+")","run");
+      }
+    }catch(e){}
+    if(tries>60){ clearInterval(timer); $("runBtn").disabled=false; setStatus("Tempo excedido acompanhando o scan. Use Recarregar em alguns minutos.","err"); }
+  },10000);
+}
+
+// ---------- config dialog ----------
+function openCfg(){const c=cfg();$("repo").value=c.repo;$("token").value=c.token;$("cfg").showModal();}
+$("cfgBtn").onclick=openCfg;
+$("cfgCancel").onclick=()=>$("cfg").close();
+$("cfgSave").onclick=()=>{localStorage.setItem(LS_REPO,$("repo").value.trim());localStorage.setItem(LS_TOK,$("token").value.trim());$("cfg").close();setStatus("Configuração salva.","ok");};
+$("runBtn").onclick=ghDispatch;
+$("reloadBtn").onclick=()=>{setStatus("Recarregando…","run");loadData().then(n=>setStatus(n?"Atualizado.":"Sem dados publicados ainda.","ok"));};
+$("mercado").onchange=loadData;
+
+// carga inicial
+loadData().then(n=>setStatus(n?"Dados carregados.":"Sem dados ainda — rode o scanner.","ok"));
+</script>
+</body>
+</html>
