@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-07-10",
-  "captura": "10/07/2026 18:53",
+  "gerado": "2026-07-11",
+  "captura": "11/07/2026 03:04",
   "timeframe": "1d",
   "n": 6,
   "ativos": [
@@ -9,9 +9,9 @@
       "market": "EUA",
       "setor": "",
       "close": 53.49,
-      "stop": 51.38,
-      "r_pct": 3.94,
-      "forming": true,
+      "stop": 51.39,
+      "r_pct": 3.93,
+      "forming": false,
       "date": "2026-07-10",
       "ult_candle": "2026-07-10",
       "timeframe": "1d",
@@ -447,15 +447,15 @@
       "market": "EUA",
       "setor": "",
       "close": 118.92,
-      "stop": 116.43,
-      "r_pct": 2.09,
-      "forming": true,
+      "stop": 116.35,
+      "r_pct": 2.16,
+      "forming": false,
       "date": "2026-07-10",
       "ult_candle": "2026-07-10",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 337.8,
+      "vol_fin_mi": 338.6,
       "tv": "https://www.tradingview.com/chart/?symbol=DG",
       "quality": 82.6,
       "didi_dist": 0.581,
@@ -667,7 +667,7 @@
         23.0384,
         20.6381,
         18.5378,
-        19.1075
+        19.1236
       ],
       "dip": [
         5.3249,
@@ -709,7 +709,7 @@
         24.6156,
         21.4786,
         19.1993,
-        25.2421
+        25.2935
       ],
       "dim": [
         43.7942,
@@ -751,7 +751,7 @@
         15.38,
         19.8916,
         17.7807,
-        15.7703
+        15.7595
       ],
       "bb_sup": [
         123.392,
@@ -887,13 +887,13 @@
       "close": 73.09,
       "stop": 71.74,
       "r_pct": 1.84,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-10",
       "ult_candle": "2026-07-10",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": 3,
-      "vol_fin_mi": 269.0,
+      "vol_fin_mi": 273.4,
       "tv": "https://www.tradingview.com/chart/?symbol=OTIS",
       "quality": 66.9,
       "didi_dist": 0.036,
@@ -1105,7 +1105,7 @@
         28.4694,
         26.9671,
         24.1219,
-        23.4199
+        23.4291
       ],
       "dip": [
         13.73,
@@ -1147,7 +1147,7 @@
         25.8624,
         22.8108,
         20.7483,
-        24.5867
+        24.6156
       ],
       "dim": [
         33.9958,
@@ -1189,7 +1189,7 @@
         11.4823,
         16.3658,
         19.0735,
-        16.9077
+        16.9018
       ],
       "bb_sup": [
         77.6578,
@@ -1325,7 +1325,7 @@
       "close": 199.05,
       "stop": 195.05,
       "r_pct": 2.01,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-10",
       "ult_candle": "2026-07-10",
       "timeframe": "1d",
@@ -1763,7 +1763,7 @@
       "close": 81.05,
       "stop": 77.43,
       "r_pct": 4.46,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-10",
       "ult_candle": "2026-07-10",
       "timeframe": "1d",
@@ -2199,15 +2199,15 @@
       "market": "EUA",
       "setor": "",
       "close": 329.78,
-      "stop": 327.04,
-      "r_pct": 0.83,
-      "forming": true,
+      "stop": 327.0,
+      "r_pct": 0.84,
+      "forming": false,
       "date": "2026-07-10",
       "ult_candle": "2026-07-10",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 3,
-      "vol_fin_mi": 836.6,
+      "vol_fin_mi": 858.2,
       "tv": "https://www.tradingview.com/chart/?symbol=SYK",
       "quality": 4.0,
       "didi_dist": 2.83,
@@ -2419,7 +2419,7 @@
         21.212,
         21.9086,
         20.8038,
-        20.227
+        20.3069
       ],
       "dip": [
         24.4315,
@@ -2461,7 +2461,7 @@
         28.5587,
         26.7631,
         23.9803,
-        24.099
+        24.3268
       ],
       "dim": [
         29.7967,
@@ -2503,7 +2503,7 @@
         16.492,
         15.4551,
         18.4365,
-        17.3833
+        17.3184
       ],
       "bb_sup": [
         303.442,
