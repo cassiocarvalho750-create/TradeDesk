@@ -76,6 +76,10 @@
   .dlg-f{padding:12px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}
   .dlg-b a{color:var(--accent)}
   footer{padding:16px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--line);text-align:center}
+.nota{font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;font-weight:700;padding:2px 7px;border-radius:5px;margin-left:8px;letter-spacing:.02em}
+.nota.alta{background:rgba(63,185,80,.18);color:var(--up);border:1px solid rgba(63,185,80,.35)}
+.nota.media{background:rgba(227,179,65,.16);color:var(--gold);border:1px solid rgba(227,179,65,.32)}
+.nota.baixa{background:rgba(107,125,146,.14);color:var(--muted);border:1px solid rgba(107,125,146,.3)}
 </style>
 </head>
 <body>
@@ -169,9 +173,15 @@ function drawBB(a){const W=308,H=70,pad=8;const[lo,hi]=minmax([a.bb_sup,a.bb_inf
   <path d="${pathOf(a.price,lo,hi,W,H,pad)}" fill="none" stroke="#fff" stroke-width="1.6"/></svg>
   <div class="legend"><span><i style="background:#fff"></i>preço</span><span><i style="background:var(--accent)"></i>bandas 8,2</span></div>`;}
 
+function notaTag(q){
+  if(q==null||isNaN(q)) return "";
+  const cls = q>=75 ? "alta" : (q>=50 ? "media" : "baixa");
+  return `<span class="nota ${cls}" title="Qualidade do sinal (compressão do Didi 60% + sincronia 40%)">${Math.round(q)}</span>`;
+}
+
 function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;
   const rpct=a.r_pct!=null?a.r_pct.toFixed(2)+"%":"—",da=a.didi_ago!=null?"há "+a.didi_ago+"d":"—",aa=a.adx_ago!=null?"há "+a.adx_ago+"d":"—";
-  return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${badge}</div>
+  return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${notaTag(a.quality)}${badge}</div>
   <div class="stats"><div class="stat"><div class="k">Preço</div><div class="v mono">${fmt(a.close)}</div></div><div class="stat"><div class="k">Stop</div><div class="v mono down">${fmt(a.stop)}</div></div><div class="stat"><div class="k">R%</div><div class="v mono">${rpct}</div></div><div class="stat"><div class="k">Vol Mi</div><div class="v mono">${fmt(a.vol_fin_mi,0)}</div></div></div>
   <div class="panes"><div class="pane"><div class="pane-title"><span>Didi Index</span><span class="mono">DIDI ${da}</span></div>${drawDidi(a)}</div>
   <div class="pane"><div class="pane-title"><span>ADX / DI</span><span class="mono">ADX ${aa}</span></div>${drawAdx(a)}</div>
