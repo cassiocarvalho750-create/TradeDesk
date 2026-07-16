@@ -19,7 +19,7 @@ def main():
     ap.add_argument("--out",default="scanner_b3")
     ap.add_argument("--no-batch",dest="batch",action="store_false",help="download individual (lento)")
     ap.add_argument("--chunk",type=int,default=100,help="tamanho do lote no download")
-    ap.add_argument("--timeframe",default="1d",choices=["1d","1wk","2h","1h","15m","5m"],
+    ap.add_argument("--timeframe",default="1d",choices=["1d","1wk","4h","2h","1h","15m","5m"],
                     help="timeframe do grafico (1d padrao)")
     a=ap.parse_args()
     uni=[t for t in rb.get_universe(quick=a.quick) if t.endswith(".SA")]
