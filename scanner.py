@@ -38,17 +38,18 @@ TF_CONFIG = {
     "1wk": ("1wk", "5y",   None),   # semanal nativo, 5 anos de historico
     "1h":  ("1h",  "730d", None),
     "2h":  ("1h",  "730d", "2h"),   # baixa 1h e reamostra p/ 2h
+    "4h":  ("1h",  "730d", "4h"),   # baixa 1h e reamostra p/ 4h
     "15m": ("15m", "60d",  None),
     "5m":  ("5m",  "60d",  None),
 }
 
 # quantos candles recentes olhar por timeframe (o gatilho e mais raro no intraday,
 # entao ampliamos a janela para nao perder sinais do pregao corrente).
-TF_DAYS_BACK = {"1d": 1, "1wk": 1, "2h": 2, "1h": 3, "15m": 4, "5m": 6}
+TF_DAYS_BACK = {"1d": 1, "1wk": 1, "4h": 2, "2h": 2, "1h": 3, "15m": 4, "5m": 6}
 
 # janelas de tolerancia (DIDI, ADX) em candles, por timeframe.
-# Semanal usa 3/2 (mais justo); os demais herdam o padrao do diario (5/3).
-TF_WINDOWS = {"1wk": (3, 2)}
+# Semanal usa 3/2, 4h usa 4/2; os demais herdam o padrao do diario (5/3).
+TF_WINDOWS = {"1wk": (3, 2), "4h": (4, 2)}
 def tf_windows(timeframe):
     return TF_WINDOWS.get(timeframe, (5, 3))
 
@@ -202,7 +203,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
     except Exception:
         return res
     # intraday = timeframes menores que o diario (usam hora). Semanal e diario nao.
-    intraday = timeframe in ("2h","1h","15m","5m")
+    intraday = timeframe in ("4h","2h","1h","15m","5m")
     last_idx = s.index[-1]
     tail = s.iloc[-days_back:]
     for idx, row in tail.iterrows():
@@ -329,7 +330,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
     captura = datetime.datetime.now(datetime.timezone.utc).astimezone(tz_br)
     captura_str = captura.strftime("%d/%m/%Y %H:%M")
     ativos = []
-    intraday = timeframe in ("2h","1h","15m","5m")  # semanal/diario usam data, nao hora
+    intraday = timeframe in ("4h","2h","1h","15m","5m")  # semanal/diario usam data, nao hora
     for h in hits:
         tk = h["ticker"]
         d = fetch_intraday_ok(tk, timeframe=timeframe)

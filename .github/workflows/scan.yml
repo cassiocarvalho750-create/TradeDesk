@@ -19,7 +19,7 @@ on:
         required: false
         default: "1d"
         type: choice
-        options: ["1d", "2h", "1wk"]
+        options: ["1d", "2h", "4h", "1wk"]
   schedule:
     - cron: "30 21 * * 1-5"
 
@@ -72,7 +72,7 @@ jobs:
         run: |
           mkdir -p docs
           date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt
-          for f in painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json painel_us_1wk.json painel_b3_1wk.json \
+          for f in painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json painel_us_1wk.json painel_b3_1wk.json painel_us_4h.json painel_b3_4h.json \
                    scanner_us.json scanner_b3.json \
                    scanner_us_tradedesk_USA.json scanner_b3_tradedesk_BRL.json \
                    scanner_us.html scanner_b3.html \
