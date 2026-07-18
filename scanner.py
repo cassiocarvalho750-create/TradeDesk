@@ -267,8 +267,26 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 dist_max_pct = ((c_hi - c_cl)/c_hi*100.0) if c_hi > 0 else 0.0
             except Exception:
                 q_fech = 0.0; pos_range = np.nan; dist_max_pct = np.nan
-            # score final: 40% compressao + 30% sincronia + 30% fechamento
-            quality = round(0.40*q_comp + 0.30*q_sinc + 0.30*q_fech, 1)
+            # nota de INCLINACAO DO ADX (0-100): variacao percentual do ADX desde
+            # a virada para cima ate o candio do gatilho. Mede a ACELERACAO da
+            # forca da tendencia. Lookback minimo de 3 candles (quando a virada
+            # cai no mesmo candle do gatilho, nao haveria intervalo p/ medir).
+            # Regua calibrada sobre a distribuicao real: +15% -> 100 ; 0% -> 50 ; -15% -> 0.
+            try:
+                lb = max(adx_ago if adx_ago is not None else 0, 3)
+                if pos-lb >= 0:
+                    a_ini = float(s["adx"].iloc[pos-lb]); a_fim = float(s["adx"].iloc[pos])
+                    if a_ini > 0 and np.isfinite(a_ini) and np.isfinite(a_fim):
+                        adx_var_pct = (a_fim - a_ini)/a_ini*100.0
+                    else:
+                        adx_var_pct = 0.0
+                else:
+                    adx_var_pct = 0.0
+                q_incl = max(0.0, min(100.0, 50.0 + (adx_var_pct/15.0)*50.0))
+            except Exception:
+                adx_var_pct = np.nan; q_incl = 50.0
+            # score final: 30% compressao + 20% sincronia + 25% fechamento + 25% inclinacao ADX
+            quality = round(0.30*q_comp + 0.20*q_sinc + 0.25*q_fech + 0.25*q_incl, 1)
 
             res.append({
                 "ticker": tk, "market": market_of(tk),
@@ -285,6 +303,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 "didi_dist": round(min_dist,3) if not np.isnan(min_dist) else None,
                 "pos_range": round(float(pos_range),3) if not (isinstance(pos_range,float) and np.isnan(pos_range)) else None,
                 "dist_max_pct": round(float(dist_max_pct),2) if not (isinstance(dist_max_pct,float) and np.isnan(dist_max_pct)) else None,
+                "adx_var_pct": round(float(adx_var_pct),1) if not (isinstance(adx_var_pct,float) and np.isnan(adx_var_pct)) else None,
                 "quality": quality,
                 "pe": None, "mktcap": None,
             })
@@ -382,6 +401,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
             "pos_range": h.get("pos_range"), "dist_max_pct": h.get("dist_max_pct"),
+            "adx_var_pct": h.get("adx_var_pct"),
             "high": h.get("high"),
             "dates": dates,
             "price": tail(c),
