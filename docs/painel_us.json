@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-07-17",
-  "captura": "17/07/2026 19:00",
+  "gerado": "2026-07-18",
+  "captura": "18/07/2026 02:52",
   "timeframe": "1d",
   "n": 9,
   "ativos": [
@@ -11,13 +11,13 @@
       "close": 396.87,
       "stop": 385.82,
       "r_pct": 2.79,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 101.1,
+      "vol_fin_mi": 101.6,
       "tv": "https://www.tradingview.com/chart/?symbol=MSGS",
       "quality": 96.2,
       "didi_dist": 0.127,
@@ -229,7 +229,7 @@
         22.4527,
         24.1907,
         23.656,
-        24.4399
+        24.4613
       ],
       "dip": [
         21.9677,
@@ -271,7 +271,7 @@
         16.2837,
         31.4105,
         29.0504,
-        31.5559
+        31.6372
       ],
       "dim": [
         18.7349,
@@ -313,7 +313,7 @@
         19.2846,
         14.6606,
         19.4019,
-        17.0189
+        16.9987
       ],
       "bb_sup": [
         360.063,
@@ -449,7 +449,7 @@
       "close": 233.07,
       "stop": 229.95,
       "r_pct": 1.34,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
@@ -885,15 +885,15 @@
       "market": "EUA",
       "setor": "",
       "close": 368.98,
-      "stop": 346.21,
-      "r_pct": 6.17,
-      "forming": true,
+      "stop": 341.52,
+      "r_pct": 7.44,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 747.8,
+      "vol_fin_mi": 748.3,
       "tv": "https://www.tradingview.com/chart/?symbol=TRV",
       "quality": 54.3,
       "didi_dist": 1.522,
@@ -1105,7 +1105,7 @@
         46.0894,
         41.4373,
         37.7009,
-        40.3391
+        40.3393
       ],
       "dip": [
         23.0934,
@@ -1147,7 +1147,7 @@
         26.8148,
         21.9004,
         28.3322,
-        54.6158
+        54.6169
       ],
       "dim": [
         14.7255,
@@ -1189,7 +1189,7 @@
         11.362,
         26.1649,
         22.4669,
-        14.167
+        14.1666
       ],
       "bb_sup": [
         308.7666,
@@ -1324,14 +1324,14 @@
       "setor": "",
       "close": 90.4,
       "stop": 90.1,
-      "r_pct": 0.34,
-      "forming": true,
+      "r_pct": 0.33,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": 1,
-      "vol_fin_mi": 72.8,
+      "vol_fin_mi": 73.2,
       "tv": "https://www.tradingview.com/chart/?symbol=DCI",
       "quality": 40.3,
       "didi_dist": 1.368,
@@ -1585,7 +1585,7 @@
         28.2599,
         25.2014,
         34.5905,
-        30.7641
+        30.7733
       ],
       "dim": [
         31.8124,
@@ -1627,7 +1627,7 @@
         16.2339,
         21.4531,
         17.0761,
-        15.1871
+        15.1917
       ],
       "bb_sup": [
         85.8991,
@@ -1763,13 +1763,13 @@
       "close": 38.32,
       "stop": 36.76,
       "r_pct": 4.07,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 197.6,
+      "vol_fin_mi": 197.7,
       "tv": "https://www.tradingview.com/chart/?symbol=IOT",
       "quality": 36.0,
       "didi_dist": 7.516,
@@ -1981,7 +1981,7 @@
         28.8859,
         27.1989,
         24.9003,
-        25.2769
+        25.2775
       ],
       "dip": [
         31.3599,
@@ -2023,7 +2023,7 @@
         26.2627,
         24.6982,
         21.669,
-        27.425
+        27.427
       ],
       "dim": [
         28.4589,
@@ -2065,7 +2065,7 @@
         20.528,
         18.11,
         18.1601,
-        15.4556
+        15.4552
       ],
       "bb_sup": [
         31.9185,
@@ -2201,7 +2201,7 @@
       "close": 553.48,
       "stop": 536.01,
       "r_pct": 3.16,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
@@ -2419,7 +2419,7 @@
         25.4158,
         25.6021,
         25.765,
-        26.838
+        26.8639
       ],
       "dip": [
         21.1853,
@@ -2461,7 +2461,7 @@
         19.852,
         26.0817,
         22.9911,
-        23.4688
+        23.5535
       ],
       "dim": [
         25.0801,
@@ -2503,7 +2503,7 @@
         17.604,
         15.0224,
         13.2422,
-        11.4683
+        11.4556
       ],
       "bb_sup": [
         542.033,
@@ -2639,13 +2639,13 @@
       "close": 358.68,
       "stop": 345.04,
       "r_pct": 3.8,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 2,
-      "vol_fin_mi": 2495.0,
+      "vol_fin_mi": 2497.2,
       "tv": "https://www.tradingview.com/chart/?symbol=PANW",
       "quality": 18.7,
       "didi_dist": 5.513,
@@ -2899,7 +2899,7 @@
         35.8628,
         39.851,
         35.8733,
-        35.7578
+        35.7575
       ],
       "dim": [
         7.9641,
@@ -2941,7 +2941,7 @@
         14.7529,
         13.7039,
         16.8575,
-        14.0215
+        14.0214
       ],
       "bb_sup": [
         260.9712,
@@ -3077,13 +3077,13 @@
       "close": 149.35,
       "stop": 142.58,
       "r_pct": 4.53,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 3,
-      "vol_fin_mi": 476.1,
+      "vol_fin_mi": 476.7,
       "tv": "https://www.tradingview.com/chart/?symbol=OKTA",
       "quality": 12.0,
       "didi_dist": 8.476,
@@ -3515,13 +3515,13 @@
       "close": 149.94,
       "stop": 145.39,
       "r_pct": 3.03,
-      "forming": true,
+      "forming": false,
       "date": "2026-07-17",
       "ult_candle": "2026-07-17",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 3,
-      "vol_fin_mi": 489.5,
+      "vol_fin_mi": 489.6,
       "tv": "https://www.tradingview.com/chart/?symbol=ZS",
       "quality": 12.0,
       "didi_dist": 4.824,
@@ -3733,7 +3733,7 @@
         30.4868,
         32.8393,
         33.3111,
-        34.2063
+        34.209
       ],
       "dip": [
         43.2844,
@@ -3775,7 +3775,7 @@
         35.6991,
         33.1263,
         29.7746,
-        28.8063
+        28.8168
       ],
       "dim": [
         14.8925,
@@ -3817,7 +3817,7 @@
         13.0615,
         11.2471,
         13.815,
-        12.207
+        12.2052
       ],
       "bb_sup": [
         185.4948,
