@@ -249,12 +249,26 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
             else:
                 q_comp = max(0.0, min(100.0, (1.0 - min_dist/2.0)*100.0))
             # nota de sincronia (0-100): gatilhos no mesmo candle -> 100 ;
-            # espalhados no limite das janelas (didi 5d, adx 3d) -> baixo.
-            da = didi_ago if didi_ago is not None else 5
-            aa = adx_ago if adx_ago is not None else 3
-            q_sinc = max(0.0, 100.0 - (da/5.0*50.0) - (aa/3.0*50.0))
-            # score final: 60% compressao + 40% sincronia
-            quality = round(0.60*q_comp + 0.40*q_sinc, 1)
+            # espalhados no limite das janelas do timeframe -> baixo.
+            da = didi_ago if didi_ago is not None else didi_win
+            aa = adx_ago  if adx_ago  is not None else adx_win
+            q_sinc = max(0.0, 100.0 - (da/max(didi_win,1)*50.0) - (aa/max(adx_win,1)*50.0))
+            # nota de FECHAMENTO (0-100): onde o fechamento esta dentro do range
+            # do candle do sinal. Fechou na maxima -> 100 (compradores dominaram
+            # ate o fim); no meio -> 50; na minima -> 0 (rejeicao/devolucao).
+            try:
+                c_hi = float(row["High"]); c_lo = float(row["Low"]); c_cl = float(entry)
+                rng = c_hi - c_lo
+                if rng > 0:
+                    pos_range = (c_cl - c_lo) / rng
+                    q_fech = max(0.0, min(100.0, pos_range*100.0))
+                else:
+                    q_fech = 100.0   # candle sem range (doji perfeito): neutro-alto
+                dist_max_pct = ((c_hi - c_cl)/c_hi*100.0) if c_hi > 0 else 0.0
+            except Exception:
+                q_fech = 0.0; pos_range = np.nan; dist_max_pct = np.nan
+            # score final: 40% compressao + 30% sincronia + 30% fechamento
+            quality = round(0.40*q_comp + 0.30*q_sinc + 0.30*q_fech, 1)
 
             res.append({
                 "ticker": tk, "market": market_of(tk),
@@ -262,12 +276,15 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 "timeframe": timeframe,
                 "candle_ts": str(idx),
                 "close": round(float(entry),2), "stop": round(float(low),2),
+                "high": round(float(row["High"]),2),
                 "r_pct": round(float(r_pct),2),
                 "adx": round(float(row.get("adx",np.nan)),1),
                 "didi_ago": didi_ago, "adx_ago": adx_ago,
                 "vol_fin_mi": round(float(fin_vol),1),
                 "vol_dia_mi": round(float(vol_dia_fin),1),
                 "didi_dist": round(min_dist,3) if not np.isnan(min_dist) else None,
+                "pos_range": round(float(pos_range),3) if not (isinstance(pos_range,float) and np.isnan(pos_range)) else None,
+                "dist_max_pct": round(float(dist_max_pct),2) if not (isinstance(dist_max_pct,float) and np.isnan(dist_max_pct)) else None,
                 "quality": quality,
                 "pe": None, "mktcap": None,
             })
@@ -364,6 +381,8 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
+            "pos_range": h.get("pos_range"), "dist_max_pct": h.get("dist_max_pct"),
+            "high": h.get("high"),
             "dates": dates,
             "price": tail(c),
             "didi_curta": tail(didi_curta), "didi_longa": tail(didi_longa),
