@@ -176,7 +176,7 @@ function drawBB(a){const W=308,H=70,pad=8;const[lo,hi]=minmax([a.bb_sup,a.bb_inf
 function notaTag(q){
   if(q==null||isNaN(q)) return "";
   const cls = q>=75 ? "alta" : (q>=50 ? "media" : "baixa");
-  return `<span class="nota ${cls}" title="Qualidade: compressão do Didi 30% + sincronia 20% + fechamento no topo 25% + inclinação do ADX 25%">${Math.round(q)}</span>`;
+  return `<span class="nota ${cls}" title="Qualidade: sincronia DIDI+ADX no gatilho 30% + compressão 25% + fechamento no topo 25% + inclinação do ADX 20%">${Math.round(q)}</span>`;
 }
 
 function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;

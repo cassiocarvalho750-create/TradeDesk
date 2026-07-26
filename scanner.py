@@ -248,11 +248,15 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 q_comp = 0.0
             else:
                 q_comp = max(0.0, min(100.0, (1.0 - min_dist/2.0)*100.0))
-            # nota de sincronia (0-100): gatilhos no mesmo candle -> 100 ;
-            # espalhados no limite das janelas do timeframe -> baixo.
+            # nota de sincronia (0-100): premia FORTEMENTE o gatilho coincidindo
+            # com DIDI e ADX no mesmo candle (dia 0/0). Curva quadratica suave
+            # (expoente 1.5): perto do zero cai devagar (1 dia ainda e bom),
+            # afastamentos maiores caem mais rapido. Zera no limite das janelas.
             da = didi_ago if didi_ago is not None else didi_win
             aa = adx_ago  if adx_ago  is not None else adx_win
-            q_sinc = max(0.0, 100.0 - (da/max(didi_win,1)*50.0) - (aa/max(adx_win,1)*50.0))
+            fd = (da/max(didi_win,1))**1.5
+            fa = (aa/max(adx_win,1))**1.5
+            q_sinc = max(0.0, 100.0 - 50.0*fd - 50.0*fa)
             # nota de FECHAMENTO (0-100): onde o fechamento esta dentro do range
             # do candle do sinal. Fechou na maxima -> 100 (compradores dominaram
             # ate o fim); no meio -> 50; na minima -> 0 (rejeicao/devolucao).
@@ -285,8 +289,10 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 q_incl = max(0.0, min(100.0, 50.0 + (adx_var_pct/15.0)*50.0))
             except Exception:
                 adx_var_pct = np.nan; q_incl = 50.0
-            # score final: 30% compressao + 20% sincronia + 25% fechamento + 25% inclinacao ADX
-            quality = round(0.30*q_comp + 0.20*q_sinc + 0.25*q_fech + 0.25*q_incl, 1)
+            # score final: 25% compressao + 30% sincronia + 25% fechamento + 20% inclinacao ADX
+            # sincronia recebe o maior peso: a confluencia perfeita (DIDI 0 / ADX 0
+            # no candle do gatilho) e o melhor indicador de qualidade na pratica.
+            quality = round(0.25*q_comp + 0.30*q_sinc + 0.25*q_fech + 0.20*q_incl, 1)
 
             res.append({
                 "ticker": tk, "market": market_of(tk),
