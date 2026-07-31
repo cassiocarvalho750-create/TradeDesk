@@ -1,6 +1,6 @@
 {
   "gerado": "2026-07-31",
-  "captura": "31/07/2026 17:49",
+  "captura": "31/07/2026 19:34",
   "timeframe": "1d",
   "n": 11,
   "ativos": [
@@ -1343,7 +1343,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 293.6,
+      "vol_fin_mi": 298.2,
       "tv": "https://www.tradingview.com/chart/?symbol=LYB",
       "quality": 54.0,
       "didi_dist": 2.132,
@@ -4618,7 +4618,7 @@
         25.9171,
         24.7131,
         23.8028,
-        21.3606,
+        21.3605,
         23.1211,
         24.6615,
         23.314,
