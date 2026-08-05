@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-05",
-  "captura": "05/08/2026 17:33",
+  "captura": "05/08/2026 19:34",
   "timeframe": "1d",
   "n": 6,
   "ativos": [
@@ -459,7 +459,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 139.4,
+      "vol_fin_mi": 140.4,
       "tv": "https://www.tradingview.com/chart/?symbol=EQH",
       "quality": 81.4,
       "didi_dist": 0.102,
@@ -901,7 +901,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 240.5,
+      "vol_fin_mi": 242.6,
       "tv": "https://www.tradingview.com/chart/?symbol=PHM",
       "quality": 72.3,
       "didi_dist": 0.906,
