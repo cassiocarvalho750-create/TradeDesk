@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-08",
-  "captura": "08/08/2026 10:34",
+  "captura": "08/08/2026 14:02",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -8,6 +8,9 @@
       "ticker": "XHB",
       "market": "EUA",
       "setor": "Construção Civil",
+      "par": "",
+      "classe": "",
+      "lado": "compra",
       "close": 110.8,
       "stop": 109.04,
       "r_pct": 1.59,

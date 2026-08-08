@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-08",
-  "captura": "08/08/2026 10:33",
+  "captura": "08/08/2026 14:02",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -8,6 +8,9 @@
       "ticker": "DXCO3",
       "market": "B3",
       "setor": "",
+      "par": "",
+      "classe": "",
+      "lado": "compra",
       "close": 5.22,
       "stop": 5.09,
       "r_pct": 2.49,
