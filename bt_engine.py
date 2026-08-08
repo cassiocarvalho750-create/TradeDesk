@@ -610,6 +610,13 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     for k in range(0, adx_window + 1):
         adx_recent = adx_recent | adx_event.shift(k).fillna(False)
 
+    # EXIGENCIA ADICIONAL: no candle do gatilho (hoje), o ADX tem que estar
+    # SUBINDO (hoje > ontem). Nao basta o evento ter ocorrido na janela: se
+    # hoje o ADX ja esta caindo, a forca da tendencia esta se esvaindo no
+    # momento da entrada. Isso reprova casos como BIIB (evento ha 3 candles,
+    # mas ADX caindo hoje).
+    adx_rising_today = (adx > adx.shift(1)).fillna(False)
+
     df = df.copy()
     df["didi3"] = didi3
     df["adx"], df["dip"], df["dim"] = adx, dip, dim
@@ -619,7 +626,9 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     df["candle_verde"] = candle_verde.fillna(False)
     df["didi_recent"] = didi_recent
     df["adx_recent"]  = adx_recent
-    # sinal: BB dispara HOJE (em candle verde) e DIDI/ADX ja ocorreram nas janelas
+    df["adx_rising_today"] = adx_rising_today
+    # sinal: BB dispara HOJE (candle verde), DIDI/ADX ocorreram nas janelas,
+    # E o ADX esta subindo HOJE (forca crescente no momento do gatilho).
     df["signal_win"] = (bb_trigger.fillna(False) & candle_verde.fillna(False)
-                        & didi_recent & adx_recent)
+                        & didi_recent & adx_recent & adx_rising_today)
     return df

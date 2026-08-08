@@ -100,6 +100,9 @@ def main():
         print(f"      {sim(True)} evento ADX (a+b+c) ocorreu ha {adx_ago} candle(s) (dentro da janela {adx_win})")
     else:
         print(f"      {sim(False)} o evento completo (a+b+c juntos) NAO ocorreu nos ultimos {adx_win} candles")
+    # exigencia adicional: ADX subindo HOJE (no candle do gatilho)
+    adx_sobe_hoje = adx_now > adx_ant
+    print(f"      {sim(adx_sobe_hoje)} ADX SUBINDO HOJE (no gatilho): {adx_now:.1f} {'>' if adx_sobe_hoje else '<='} {adx_ant:.1f}")
     print()
 
     # --- veredito ---
@@ -112,6 +115,7 @@ def main():
         if not verde: faltou.append("candle verde")
         if didi_ago is None: faltou.append(f"cruzamento do DIDI (na janela de {didi_win})")
         if adx_ago  is None: faltou.append(f"evento do ADX (na janela de {adx_win})")
+        if not (adx_now > adx_ant): faltou.append("ADX subindo hoje (esta caindo no gatilho)")
         print(f"  Reprovado em: {', '.join(faltou)}")
     print(f"  {'='*62}\n")
 
