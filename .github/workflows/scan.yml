@@ -8,7 +8,7 @@ on:
         required: false
         default: "ambos"
         type: choice
-        options: ["ambos", "us", "b3", "etf"]
+        options: ["ambos", "us", "b3", "etf", "forex"]
       quick:
         description: "Teste rápido (~40 ativos)"
         required: false
@@ -67,12 +67,15 @@ jobs:
           if [ "$MERCADO" = "etf" ] || [ "$MERCADO" = "ambos" ]; then
             python scanner_etf.py $FLAGS || echo "scanner_etf falhou (seguindo)"
           fi
+          if [ "$MERCADO" = "forex" ] || [ "$MERCADO" = "ambos" ]; then
+            python scanner_forex.py $FLAGS || echo "scanner_forex falhou (seguindo)"
+          fi
 
       - name: Carimbar horario e copiar resultados p/ docs/
         run: |
           mkdir -p docs
           date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt
-          for f in painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json painel_us_1wk.json painel_b3_1wk.json painel_us_4h.json painel_b3_4h.json \
+          for f in painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json painel_us_1wk.json painel_b3_1wk.json painel_us_4h.json painel_b3_4h.json painel_forex.json painel_forex_venda.json \
                    scanner_us.json scanner_b3.json \
                    scanner_us_tradedesk_USA.json scanner_b3_tradedesk_BRL.json \
                    scanner_us.html scanner_b3.html \

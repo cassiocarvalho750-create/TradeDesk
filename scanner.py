@@ -187,8 +187,9 @@ def _liquidez_ok(tk, d, min_us_mi, min_b3_mi):
     except Exception:
         return False
 
-def _evaluate(tk, d, days_back, today, timeframe="1d"):
+def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
     """Avalia UM ticker (DataFrame ja baixado) e retorna lista de hits.
+    lado: 'compra' (padrao) usa signal_win; 'venda' usa signal_venda (espelho).
     Logica identica para download em lote e individual."""
     res=[]
     if d is None or len(d) < 60:
@@ -202,12 +203,16 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
         s = bt.compute_signals_windowed(d, didi_window=didi_win, adx_window=adx_win)
     except Exception:
         return res
+    venda = (lado == "venda")
+    sig_col   = "signal_venda" if venda else "signal_win"
+    didi_col  = "didi_recent_venda" if venda else "didi_recent"  # (nao usado direto abaixo)
+    didi_evt  = "didi_cross" if not venda else "didi_cross"       # evento base p/ contar dias
     # intraday = timeframes menores que o diario (usam hora). Semanal e diario nao.
     intraday = timeframe in ("4h","2h","1h","15m","5m")
     last_idx = s.index[-1]
     tail = s.iloc[-days_back:]
     for idx, row in tail.iterrows():
-        if bool(row["signal_win"]):
+        if bool(row[sig_col]):
             # intraday: "em formacao" = ultimo candle. Diario/semanal: candle corrente.
             if intraday:
                 is_forming = (idx == last_idx)
@@ -216,7 +221,13 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 is_forming = (idx == last_idx)
             else:
                 is_forming = (idx.normalize() == today)
-            entry = row["Close"]; low = row["Low"]; r = entry - low
+            # COMPRA: stop na minima, risco = entry-low. VENDA: stop na maxima,
+            # risco = high-entry (o ativo sobe contra a posicao vendida).
+            entry = row["Close"]
+            if venda:
+                high = row["High"]; r = high - entry; stop_level = high
+            else:
+                low = row["Low"];  r = entry - low;  stop_level = low
             r_pct = (r/entry*100) if entry>0 else 0
             pos = s.index.get_loc(idx)
             vol20 = s["Volume"].iloc[max(0,pos-19):pos+1].mean()
@@ -226,9 +237,26 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
             vol_dia_fin = (vol_dia_qtd * float(entry)) / 1e6 if not np.isnan(vol_dia_qtd) else 0.0
             didi_ago = adx_ago = None
             for k in range(0, didi_win+1):
-                if pos-k>=0 and bool(s["didi_cross"].iloc[pos-k]): didi_ago=k; break
+                if pos-k < 0: break
+                if venda:
+                    # cruzamento de baixa: didi3 cruzou de >=0 para <0
+                    evt = (s["didi3"].iloc[pos-k] < 0) and (pos-k-1>=0) and (s["didi3"].iloc[pos-k-1] >= 0)
+                else:
+                    evt = bool(s["didi_cross"].iloc[pos-k])
+                if evt: didi_ago=k; break
+            adx_evt_col = "adx_event"  # compra
             for k in range(0, adx_win+1):
-                if pos-k>=0 and bool(s["adx_event"].iloc[pos-k]): adx_ago=k; break
+                if pos-k < 0: break
+                if venda:
+                    # evento ADX de venda: 1a inclinacao + DI->DI+ + ADX>=105%DI+
+                    ai = (s["adx"].iloc[pos-k] > s["adx"].iloc[pos-k-1]) if pos-k-1>=0 else False
+                    prev_flat = (s["adx"].iloc[pos-k-1] <= s["adx"].iloc[pos-k-2]) if pos-k-2>=0 else False
+                    bear = s["dim"].iloc[pos-k] > s["dip"].iloc[pos-k]
+                    above = s["adx"].iloc[pos-k] >= (bt.ADX_DIM_RATIO * s["dip"].iloc[pos-k])
+                    evt = ai and prev_flat and bear and above
+                else:
+                    evt = bool(s["adx_event"].iloc[pos-k])
+                if evt: adx_ago=k; break
 
             # ---- QUALIDADE: compressao do Didi + sincronia dos gatilhos ----
             # Compressao: menor distancia entre a Didi curta (3/8) e longa (20/8)
@@ -257,18 +285,22 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
             fd = (da/max(didi_win,1))**1.5
             fa = (aa/max(adx_win,1))**1.5
             q_sinc = max(0.0, 100.0 - 50.0*fd - 50.0*fa)
-            # nota de FECHAMENTO (0-100): onde o fechamento esta dentro do range
-            # do candle do sinal. Fechou na maxima -> 100 (compradores dominaram
-            # ate o fim); no meio -> 50; na minima -> 0 (rejeicao/devolucao).
+            # nota de FECHAMENTO (0-100): COMPRA premia fechar perto da MAXIMA
+            # (forca compradora ate o fim); VENDA premia fechar perto da MINIMA
+            # (forca vendedora). pos_range e a posicao do fechamento no range.
             try:
                 c_hi = float(row["High"]); c_lo = float(row["Low"]); c_cl = float(entry)
                 rng = c_hi - c_lo
                 if rng > 0:
-                    pos_range = (c_cl - c_lo) / rng
-                    q_fech = max(0.0, min(100.0, pos_range*100.0))
+                    pos_range = (c_cl - c_lo) / rng   # 1=fechou na maxima, 0=na minima
+                    if venda:
+                        q_fech = max(0.0, min(100.0, (1.0 - pos_range)*100.0))
+                        dist_max_pct = ((c_cl - c_lo)/c_cl*100.0) if c_cl > 0 else 0.0  # dist da MINIMA
+                    else:
+                        q_fech = max(0.0, min(100.0, pos_range*100.0))
+                        dist_max_pct = ((c_hi - c_cl)/c_hi*100.0) if c_hi > 0 else 0.0  # dist da MAXIMA
                 else:
-                    q_fech = 100.0   # candle sem range (doji perfeito): neutro-alto
-                dist_max_pct = ((c_hi - c_cl)/c_hi*100.0) if c_hi > 0 else 0.0
+                    q_fech = 100.0; dist_max_pct = 0.0
             except Exception:
                 q_fech = 0.0; pos_range = np.nan; dist_max_pct = np.nan
             # nota de INCLINACAO DO ADX (0-100): variacao percentual do ADX desde
@@ -307,7 +339,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 "date": idx.date(), "forming": is_forming,
                 "timeframe": timeframe,
                 "candle_ts": str(idx),
-                "close": round(float(entry),2), "stop": round(float(low),2),
+                "close": round(float(entry),2), "stop": round(float(stop_level),2),
                 "high": round(float(row["High"]),2),
                 "r_pct": round(float(r_pct),2),
                 "adx": round(float(row.get("adx",np.nan)),1),
@@ -320,13 +352,14 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 "adx_var_pct": round(float(adx_var_pct),1) if not (isinstance(adx_var_pct,float) and np.isnan(adx_var_pct)) else None,
                 "confluencia": bool(confluencia_perfeita),
                 "bb_primeira": bool(row.get("bb_primeira_abertura", False)),
+                "lado": lado,
                 "quality": quality,
                 "pe": None, "mktcap": None,
             })
     return res
 
 
-def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d"):
+def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra"):
     """Retorna lista de sinais nos ultimos `days_back` candles do timeframe dado.
 
     timeframe: '1d' (diario, padrao), '2h', '1h', '15m', '5m'.
@@ -335,6 +368,8 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d"):
     O filtro de liquidez e aplicado a AMBOS os mercados, reusando o historico
     baixado (sem requisicao extra): US >= rb.US_MIN_VOL_FIN_MI (USD),
     B3 >= rb.B3_MIN_VOL_FIN_MI (BRL).
+    skip_liquidez=True -> ignora o piso de liquidez (usado no Forex, que nao tem
+    volume real confiavel e e liquido por natureza).
     """
     hits=[]
     today = pd.Timestamp(datetime.date.today())
@@ -354,18 +389,18 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d"):
             d = data.get(tk)
             if d is None:
                 continue
-            if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
+            if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 continue
-            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado))
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
             d = fetch_intraday_ok(tk, timeframe=timeframe)
             if len(d) < 60:
                 time.sleep(0.02); continue
-            if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
+            if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 time.sleep(0.01); continue
-            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado))
             time.sleep(0.03)
     return hits
 
@@ -410,6 +445,9 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
         ativos.append({
             "ticker": tk.replace(".SA",""), "market": h["market"],
             "setor": h.get("setor",""),
+            "par": h.get("par",""),
+            "classe": h.get("classe",""),
+            "lado": h.get("lado","compra"),
             "close": h["close"], "stop": h["stop"], "r_pct": h["r_pct"],
             "forming": h["forming"], "date": str(h["date"]),
             "ult_candle": ult_candle, "timeframe": timeframe,

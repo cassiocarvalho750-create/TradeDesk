@@ -587,13 +587,18 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
 
     # evento DIDI: cruzamento consumado neste candle
     didi_cross = (didi3 > 0) & (didi3.shift(1) <= 0)
+    # VENDA: cruzamento de BAIXA (MA3 cruza abaixo da MA8)
+    didi_cross_venda = (didi3 < 0) & (didi3.shift(1) >= 0)
 
     # evento ADX: 1a inclinacao + DI+>DI- + ADX>=105% DI-
     adx, dip, dim = calc_adx(h, l, c, period=8)
     adx_first = (adx > adx.shift(1)) & (adx.shift(1) <= adx.shift(2))
     di_bull   = dip > dim
+    di_bear   = dim > dip                          # VENDA: DI- domina
     adx_above = adx >= (ADX_DIM_RATIO * dim)
+    adx_above_v = adx >= (ADX_DIM_RATIO * dip)      # VENDA: ADX>=105% do DI+
     adx_event = adx_first & di_bull & adx_above
+    adx_event_venda = adx_first & di_bear & adx_above_v
 
     # gatilho BB: primeira expansao neste candle
     w = bollinger_width(c)
@@ -612,14 +617,19 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     # candle do gatilho da BB deve ser POSITIVO (verde): fechamento > abertura
     o = df["Open"]
     candle_verde = c > o
+    candle_vermelho = c < o          # VENDA: candle negativo
 
     # janelas: DIDI ocorreu em [hoje .. hoje-didi_window]; idem ADX
     didi_recent = pd.Series(False, index=df.index)
+    didi_recent_venda = pd.Series(False, index=df.index)
     for k in range(0, didi_window + 1):
         didi_recent = didi_recent | didi_cross.shift(k).fillna(False)
+        didi_recent_venda = didi_recent_venda | didi_cross_venda.shift(k).fillna(False)
     adx_recent = pd.Series(False, index=df.index)
+    adx_recent_venda = pd.Series(False, index=df.index)
     for k in range(0, adx_window + 1):
         adx_recent = adx_recent | adx_event.shift(k).fillna(False)
+        adx_recent_venda = adx_recent_venda | adx_event_venda.shift(k).fillna(False)
 
     # ADX "comprado" tem DUAS formas de valer (o que ocorrer):
     #  (i) a 1a virada do ADX ocorreu dentro da janela (adx_recent), OU
@@ -628,6 +638,9 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     # subindo hoje, mas a virada inicial foi ha mais de `adx_window` candles.
     adx_ok_hoje = (adx > adx.shift(1)) & di_bull & adx_above
     adx_comprado = (adx_recent | adx_ok_hoje.fillna(False))
+    # VENDA: mesma logica, mas com DI- dominando e ADX>=105% do DI+
+    adx_ok_hoje_v = (adx > adx.shift(1)) & di_bear & adx_above_v
+    adx_vendido = (adx_recent_venda | adx_ok_hoje_v.fillna(False))
 
     # EXIGENCIA ADICIONAL: no candle do gatilho (hoje), o ADX tem que estar
     # SUBINDO (hoje > ontem). Nao basta estar comprado: se hoje ja esta caindo,
@@ -642,12 +655,21 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     df["bb_trigger"] = bb_trigger.fillna(False)
     df["bb_primeira_abertura"] = bb_primeira_abertura.fillna(False)
     df["candle_verde"] = candle_verde.fillna(False)
+    df["candle_vermelho"] = candle_vermelho.fillna(False)
     df["didi_recent"] = didi_recent
     df["adx_recent"]  = adx_recent
     df["adx_comprado"] = adx_comprado
     df["adx_rising_today"] = adx_rising_today
-    # sinal: BB abrindo HOJE (candle verde), DIDI na janela, ADX comprado
+    df["didi_recent_venda"] = didi_recent_venda
+    df["adx_vendido"] = adx_vendido
+    # sinal de COMPRA: BB abrindo HOJE (candle verde), DIDI na janela, ADX comprado
     # (virada na janela OU 3 condicoes hoje), E ADX subindo HOJE.
     df["signal_win"] = (bb_trigger.fillna(False) & candle_verde.fillna(False)
                         & didi_recent & adx_comprado & adx_rising_today)
+    # sinal de VENDA: espelho — BB abrindo (candle vermelho), DIDI de baixa na
+    # janela, ADX vendido (DI- dominando), E ADX subindo HOJE (forca crescente,
+    # da tendencia de BAIXA). A banda abrindo e o ADX subindo sao iguais aos da
+    # compra (volatilidade e forca nao tem direcao; a direcao vem do DIDI e DI).
+    df["signal_venda"] = (bb_trigger.fillna(False) & candle_vermelho.fillna(False)
+                          & didi_recent_venda & adx_vendido & adx_rising_today)
     return df
