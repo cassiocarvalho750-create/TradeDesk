@@ -427,11 +427,21 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "bb_sup": tail(bb_sup), "bb_mid": tail(m), "bb_inf": tail(bb_inf),
         })
         time.sleep(0.05)
-    # ordena por qualidade (melhores primeiro); em formacao/fechado nao afeta a ordem
-    # ordenacao em 2 grupos: (1) BB iniciando a abertura HOJE sempre no topo,
-    # (2) BB que ja vinha abrindo abaixo. Dentro de cada grupo, ordena por nota.
+    # FILTRO: so entram sinais "bons" — os que tem abertura hoje OU 3 juntos.
+    # Os demais (BB ja vinha abrindo E sem confluencia dos 3) sao entradas
+    # atrasadas e nao aparecem.
+    def _rank(a):
+        prim = bool(a.get("bb_primeira"))
+        conf = bool(a.get("confluencia"))
+        # prioridade: 1) 3 juntos + abertura  2) 3 juntos  3) abertura hoje
+        if conf and prim: return 0
+        if conf:          return 1
+        if prim:          return 2
+        return 9  # atrasado (sera removido)
+    ativos = [a for a in ativos if _rank(a) < 9]
+    # ordena por grupo de prioridade e, dentro do grupo, por nota (desc)
     ativos.sort(key=lambda a: (
-        0 if a.get("bb_primeira") else 1,
+        _rank(a),
         -(a.get("quality") if a.get("quality") is not None else -1)
     ))
     payload = {"gerado": str(datetime.date.today()), "captura": captura_str,
