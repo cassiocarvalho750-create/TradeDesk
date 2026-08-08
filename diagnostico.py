@@ -52,12 +52,16 @@ def main():
 
     # --- 1) Gatilho da Bollinger ---
     bbt = bool(last["bb_trigger"])
-    print(f"  [1] GATILHO BOLLINGER (primeira expansao da banda hoje)")
-    print(f"      {sim(bbt)} bb_trigger = {bbt}")
+    # largura da banda de Bollinger nos ultimos candles
+    w = bt.bollinger_width(s["Close"])
+    w0 = float(w.iloc[-1]); w1 = float(w.iloc[-2]); w2 = float(w.iloc[-3])
+    print(f"  [1] GATILHO BOLLINGER (a banda esta ABRINDO hoje)")
+    print(f"      largura da banda: anteontem {w2:.3f} -> ontem {w1:.3f} -> hoje {w0:.3f}")
+    print(f"      {sim(bbt)} banda abrindo hoje: {w0:.3f} {'>' if bbt else '<='} {w1:.3f}")
     if not bbt:
-        print(f"      -> a banda NAO esta abrindo neste candle (largura nao aumentou)\n")
-    else:
-        print()
+        print(f"      -> a largura da banda NAO cresceu hoje (banda estavel ou contraindo).")
+        print(f"         o gatilho exige a banda em expansao no dia da confluencia.")
+    print()
 
     # --- 2) Candle verde ---
     verde = bool(last["candle_verde"])

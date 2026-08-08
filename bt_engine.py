@@ -67,9 +67,10 @@ def compute_signals(df):
     adx_above_dim  = adx >= (ADX_DIM_RATIO * dim)                           # ADX >= 105% do DI-
     adx_ok = adx_first_turn & di_bull & adx_above_dim
 
-    # C: Bollinger(8,2) — primeira abertura das bandas (expansao)
+    # C: Bollinger(8,2) — banda abrindo hoje (largura crescendo). A confluencia
+    # das 3 condicoes no mesmo dia e o gatilho (nao se exige 1o dia de abertura).
     w = bollinger_width(c)
-    bb_ok = (w > w.shift(1)) & (w.shift(1) <= w.shift(2))
+    bb_ok = (w > w.shift(1))
 
     df = df.copy()
     df["didi3"] = didi3
@@ -596,7 +597,12 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
 
     # gatilho BB: primeira expansao neste candle
     w = bollinger_width(c)
-    bb_trigger = (w > w.shift(1)) & (w.shift(1) <= w.shift(2))
+    # gatilho da BB: a banda esta ABRINDO hoje (largura estritamente maior que
+    # ontem). NAO se exige mais que seja o "primeiro" dia de abertura: pela regra
+    # do usuario, o que importa e a CONFLUENCIA das 3 condicoes no mesmo dia
+    # (BB abrindo + DIDI comprado + ADX comprado/subindo). O dia em que a ultima
+    # condicao se completa e o gatilho, seja ela a BB ou o ADX.
+    bb_trigger = (w > w.shift(1))
 
     # candle do gatilho da BB deve ser POSITIVO (verde): fechamento > abertura
     o = df["Open"]
