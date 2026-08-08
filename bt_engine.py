@@ -603,6 +603,11 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     # (BB abrindo + DIDI comprado + ADX comprado/subindo). O dia em que a ultima
     # condicao se completa e o gatilho, seja ela a BB ou o ADX.
     bb_trigger = (w > w.shift(1))
+    # marca (nao filtro): a BB esta iniciando a abertura HOJE (estava comprimida
+    # ou estavel ontem e abre hoje). E o gatilho "puro" da agulhada — o melhor
+    # momento de entrada. Usado para priorizar no ranking (grupo do topo), sem
+    # descartar os sinais em que a BB ja vinha abrindo.
+    bb_primeira_abertura = (w > w.shift(1)) & (w.shift(1) <= w.shift(2))
 
     # candle do gatilho da BB deve ser POSITIVO (verde): fechamento > abertura
     o = df["Open"]
@@ -629,6 +634,7 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     df["didi_cross"] = didi_cross.fillna(False)
     df["adx_event"]  = adx_event.fillna(False)
     df["bb_trigger"] = bb_trigger.fillna(False)
+    df["bb_primeira_abertura"] = bb_primeira_abertura.fillna(False)
     df["candle_verde"] = candle_verde.fillna(False)
     df["didi_recent"] = didi_recent
     df["adx_recent"]  = adx_recent

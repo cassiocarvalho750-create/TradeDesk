@@ -292,7 +292,15 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
             # score final: 25% compressao + 30% sincronia + 25% fechamento + 20% inclinacao ADX
             # sincronia recebe o maior peso: a confluencia perfeita (DIDI 0 / ADX 0
             # no candle do gatilho) e o melhor indicador de qualidade na pratica.
-            quality = round(0.25*q_comp + 0.30*q_sinc + 0.25*q_fech + 0.20*q_incl, 1)
+            quality = 0.25*q_comp + 0.30*q_sinc + 0.25*q_fech + 0.20*q_incl
+            # BONUS DE CONFLUENCIA PERFEITA: quando os TRES sinais coincidem no
+            # mesmo candle (DIDI 0d + ADX 0d + BB, que e sempre 0d), o ativo ganha
+            # +12 pontos e se destaca no topo do ranking. E o melhor setup na
+            # pratica (todos os pilares disparando juntos).
+            confluencia_perfeita = (didi_ago == 0 and adx_ago == 0)
+            if confluencia_perfeita:
+                quality += 12.0
+            quality = round(min(100.0, quality), 1)
 
             res.append({
                 "ticker": tk, "market": market_of(tk),
@@ -310,6 +318,8 @@ def _evaluate(tk, d, days_back, today, timeframe="1d"):
                 "pos_range": round(float(pos_range),3) if not (isinstance(pos_range,float) and np.isnan(pos_range)) else None,
                 "dist_max_pct": round(float(dist_max_pct),2) if not (isinstance(dist_max_pct,float) and np.isnan(dist_max_pct)) else None,
                 "adx_var_pct": round(float(adx_var_pct),1) if not (isinstance(adx_var_pct,float) and np.isnan(adx_var_pct)) else None,
+                "confluencia": bool(confluencia_perfeita),
+                "bb_primeira": bool(row.get("bb_primeira_abertura", False)),
                 "quality": quality,
                 "pe": None, "mktcap": None,
             })
@@ -407,7 +417,8 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
             "pos_range": h.get("pos_range"), "dist_max_pct": h.get("dist_max_pct"),
-            "adx_var_pct": h.get("adx_var_pct"),
+            "adx_var_pct": h.get("adx_var_pct"), "confluencia": h.get("confluencia", False),
+            "bb_primeira": h.get("bb_primeira", False),
             "high": h.get("high"),
             "dates": dates,
             "price": tail(c),
@@ -417,7 +428,12 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
         })
         time.sleep(0.05)
     # ordena por qualidade (melhores primeiro); em formacao/fechado nao afeta a ordem
-    ativos.sort(key=lambda a: (a.get("quality") if a.get("quality") is not None else -1), reverse=True)
+    # ordenacao em 2 grupos: (1) BB iniciando a abertura HOJE sempre no topo,
+    # (2) BB que ja vinha abrindo abaixo. Dentro de cada grupo, ordena por nota.
+    ativos.sort(key=lambda a: (
+        0 if a.get("bb_primeira") else 1,
+        -(a.get("quality") if a.get("quality") is not None else -1)
+    ))
     payload = {"gerado": str(datetime.date.today()), "captura": captura_str,
                "timeframe": timeframe, "n": len(ativos), "ativos": ativos}
     open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
