@@ -90,21 +90,27 @@ def main():
     adx_ago = None
     for k in range(0, adx_win+1):
         if pos-k>=0 and bool(s["adx_event"].iloc[pos-k]): adx_ago=k; break
-    print(f"  [4] ADX (evento de forca em ate {adx_win} candles) — exige 3 coisas juntas:")
+    print(f"  [4] ADX comprado — vale de DUAS formas (o que ocorrer):")
     print(f"      ADX hoje {adx_now:.1f}  |  ontem {adx_ant:.1f}  ({'subiu' if adx_now>adx_ant else 'nao subiu'})")
     print(f"      DI+ {dip_now:.1f}  DI- {dim_now:.1f}")
-    # decompor as 3 condicoes NO candle de hoje (so p/ leitura; o evento pode ter sido em candle anterior)
+    # decompor as 3 condicoes NO candle de hoje
     cond_incl  = adx_now > adx_ant
     cond_dibull= dip_now > dim_now
     cond_above = adx_now >= (bt.ADX_DIM_RATIO * dim_now)
+    ok_hoje = cond_incl and cond_dibull and cond_above
+    print(f"      forma (i) — as 3 condicoes valem HOJE:")
     print(f"        (a) ADX inclinando p/ cima : {sim(cond_incl)} ({adx_now:.1f} {'>' if cond_incl else '<='} {adx_ant:.1f})")
     print(f"        (b) DI+ > DI-              : {sim(cond_dibull)} ({dip_now:.1f} {'>' if cond_dibull else '<='} {dim_now:.1f})")
     print(f"        (c) ADX >= 105% do DI-     : {sim(cond_above)} ({adx_now:.1f} {'>=' if cond_above else '<'} {bt.ADX_DIM_RATIO*dim_now:.1f})")
+    print(f"        => forma (i): {sim(ok_hoje)}")
+    print(f"      forma (ii) — 1a virada do ADX dentro da janela ({adx_win} candles):")
     if adx_ago is not None:
-        print(f"      {sim(True)} evento ADX (a+b+c) ocorreu ha {adx_ago} candle(s) (dentro da janela {adx_win})")
+        print(f"        => forma (ii): {sim(True)} (virada ha {adx_ago} candle(s))")
     else:
-        print(f"      {sim(False)} o evento completo (a+b+c juntos) NAO ocorreu nos ultimos {adx_win} candles")
-    # exigencia adicional: ADX subindo HOJE (no candle do gatilho)
+        print(f"        => forma (ii): {sim(False)} (virada foi ha mais de {adx_win} candles)")
+    adx_comprado = ok_hoje or (adx_ago is not None)
+    print(f"      {sim(adx_comprado)} ADX COMPRADO (forma i OU forma ii)")
+    # exigencia adicional: ADX subindo HOJE
     adx_sobe_hoje = adx_now > adx_ant
     print(f"      {sim(adx_sobe_hoje)} ADX SUBINDO HOJE (no gatilho): {adx_now:.1f} {'>' if adx_sobe_hoje else '<='} {adx_ant:.1f}")
     print()
@@ -118,7 +124,7 @@ def main():
         if not bbt:   faltou.append("gatilho da Bollinger")
         if not verde: faltou.append("candle verde")
         if didi_ago is None: faltou.append(f"cruzamento do DIDI (na janela de {didi_win})")
-        if adx_ago  is None: faltou.append(f"evento do ADX (na janela de {adx_win})")
+        if not adx_comprado: faltou.append("ADX comprado (nem 3 condicoes hoje, nem virada na janela)")
         if not (adx_now > adx_ant): faltou.append("ADX subindo hoje (esta caindo no gatilho)")
         print(f"  Reprovado em: {', '.join(faltou)}")
     print(f"  {'='*62}\n")

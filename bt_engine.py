@@ -621,11 +621,17 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     for k in range(0, adx_window + 1):
         adx_recent = adx_recent | adx_event.shift(k).fillna(False)
 
+    # ADX "comprado" tem DUAS formas de valer (o que ocorrer):
+    #  (i) a 1a virada do ADX ocorreu dentro da janela (adx_recent), OU
+    #  (ii) as 3 condicoes valem HOJE: subindo + DI+>DI- + ADX>=105% do DI-.
+    # A forma (ii) captura casos como a "A", em que o ADX esta saudavel e
+    # subindo hoje, mas a virada inicial foi ha mais de `adx_window` candles.
+    adx_ok_hoje = (adx > adx.shift(1)) & di_bull & adx_above
+    adx_comprado = (adx_recent | adx_ok_hoje.fillna(False))
+
     # EXIGENCIA ADICIONAL: no candle do gatilho (hoje), o ADX tem que estar
-    # SUBINDO (hoje > ontem). Nao basta o evento ter ocorrido na janela: se
-    # hoje o ADX ja esta caindo, a forca da tendencia esta se esvaindo no
-    # momento da entrada. Isso reprova casos como BIIB (evento ha 3 candles,
-    # mas ADX caindo hoje).
+    # SUBINDO (hoje > ontem). Nao basta estar comprado: se hoje ja esta caindo,
+    # a forca da tendencia esta se esvaindo no momento da entrada (caso BIIB).
     adx_rising_today = (adx > adx.shift(1)).fillna(False)
 
     df = df.copy()
@@ -638,9 +644,10 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     df["candle_verde"] = candle_verde.fillna(False)
     df["didi_recent"] = didi_recent
     df["adx_recent"]  = adx_recent
+    df["adx_comprado"] = adx_comprado
     df["adx_rising_today"] = adx_rising_today
-    # sinal: BB dispara HOJE (candle verde), DIDI/ADX ocorreram nas janelas,
-    # E o ADX esta subindo HOJE (forca crescente no momento do gatilho).
+    # sinal: BB abrindo HOJE (candle verde), DIDI na janela, ADX comprado
+    # (virada na janela OU 3 condicoes hoje), E ADX subindo HOJE.
     df["signal_win"] = (bb_trigger.fillna(False) & candle_verde.fillna(False)
-                        & didi_recent & adx_recent & adx_rising_today)
+                        & didi_recent & adx_comprado & adx_rising_today)
     return df
