@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-10",
-  "captura": "10/08/2026 14:11",
+  "captura": "10/08/2026 14:35",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -20,7 +20,7 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 21.6,
+      "vol_fin_mi": 21.7,
       "tv": "https://www.tradingview.com/chart/?symbol=DBA",
       "quality": 84.1,
       "didi_dist": 0.411,
