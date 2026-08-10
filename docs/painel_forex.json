@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-10",
-  "captura": "10/08/2026 15:31",
+  "captura": "10/08/2026 16:22",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,21 +11,21 @@
       "par": "Cesta Agricola (Invesco DB Agri)",
       "classe": "Commodity",
       "lado": "compra",
-      "close": 27.81,
+      "close": 27.82,
       "stop": 27.67,
-      "r_pct": 0.47,
+      "r_pct": 0.5,
       "forming": true,
       "date": "2026-08-10",
       "ult_candle": "2026-08-10",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 21.7,
+      "vol_fin_mi": 21.8,
       "tv": "https://www.tradingview.com/chart/?symbol=DBA",
-      "quality": 80.2,
+      "quality": 81.4,
       "didi_dist": 0.411,
-      "pos_range": 0.716,
-      "dist_max_pct": 0.19,
+      "pos_range": 0.764,
+      "dist_max_pct": 0.16,
       "adx_var_pct": -14.4,
       "confluencia": true,
       "bb_primeira": true,
@@ -112,7 +112,7 @@
         27.63,
         27.43,
         27.62,
-        27.8063
+        27.815
       ],
       "didi_curta": [
         -0.525,
@@ -154,7 +154,7 @@
         0.2383,
         -0.1102,
         -0.0589,
-        0.0108
+        0.0174
       ],
       "didi_longa": [
         2.7309,
@@ -196,7 +196,7 @@
         0.6497,
         0.6856,
         0.7588,
-        0.6302
+        0.6278
       ],
       "adx": [
         55.8135,
@@ -364,7 +364,7 @@
         27.8971,
         27.9076,
         27.8153,
-        27.8914
+        27.896
       ],
       "bb_mid": [
         26.4288,
@@ -406,7 +406,7 @@
         27.6275,
         27.6037,
         27.5763,
-        27.6158
+        27.6169
       ],
       "bb_inf": [
         25.9822,
@@ -448,7 +448,7 @@
         27.3579,
         27.2999,
         27.3372,
-        27.3401
+        27.3377
       ]
     }
   ]
