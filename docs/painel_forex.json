@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-08-10",
-  "captura": "10/08/2026 19:07",
+  "gerado": "2026-08-11",
+  "captura": "11/08/2026 10:17",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -12,9 +12,9 @@
       "classe": "Commodity",
       "lado": "compra",
       "close": 27.82,
-      "stop": 27.67,
-      "r_pct": 0.52,
-      "forming": true,
+      "stop": 27.68,
+      "r_pct": 0.5,
+      "forming": false,
       "date": "2026-08-10",
       "ult_candle": "2026-08-10",
       "timeframe": "1d",
@@ -22,11 +22,11 @@
       "adx_ago": 0,
       "vol_fin_mi": 21.9,
       "tv": "https://www.tradingview.com/chart/?symbol=DBA",
-      "quality": 82.1,
+      "quality": 81.8,
       "didi_dist": 0.411,
-      "pos_range": 0.791,
+      "pos_range": 0.778,
       "dist_max_pct": 0.14,
-      "adx_var_pct": -14.4,
+      "adx_var_pct": -14.3,
       "confluencia": true,
       "bb_primeira": true,
       "high": 27.86,
@@ -238,7 +238,7 @@
         21.6204,
         19.1074,
         17.7488,
-        18.5142
+        18.5306
       ],
       "dip": [
         6.593,
@@ -280,7 +280,7 @@
         23.5484,
         20.8669,
         22.4501,
-        27.6355
+        27.6911
       ],
       "dim": [
         43.519,
@@ -322,7 +322,7 @@
         16.8597,
         21.5094,
         19.0325,
-        16.9839
+        16.9709
       ],
       "bb_sup": [
         26.8753,
