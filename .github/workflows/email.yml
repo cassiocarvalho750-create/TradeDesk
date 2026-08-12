@@ -1,0 +1,34 @@
+name: email-diario
+
+on:
+  schedule:
+    # 14h de Brasilia (BRT = UTC-3) => 17h UTC. Seg-Sex.
+    - cron: "0 17 * * 1-5"
+  workflow_dispatch:   # permite disparar manualmente pra testar
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install pandas numpy yfinance matplotlib
+
+      - name: Rodar scanner (US + B3)
+        run: |
+          python scanner_us.py --timeframe 1d || echo "scanner_us falhou (seguindo)"
+          python scanner_b3.py --timeframe 1d || echo "scanner_b3 falhou (seguindo)"
+
+      - name: Enviar e-mail com os sinais
+        env:
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python enviar_email.py
