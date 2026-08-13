@@ -590,6 +590,15 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     # VENDA: cruzamento de BAIXA (MA3 cruza abaixo da MA8)
     didi_cross_venda = (didi3 < 0) & (didi3.shift(1) >= 0)
 
+    # DIDI ainda VALIDO HOJE (nao basta ter cruzado no passado): a curta tem
+    # que estar acima da longa (didi3>0) E nao estar caindo (didi3 hoje >=
+    # ontem, curta ainda subindo). Reprova casos onde a curta cruzou p/ cima
+    # dias atras mas ja voltou a cruzar p/ baixo hoje (didi3 colado em zero e
+    # caindo, ex.: DXCO3).
+    didi_ok_hoje = (didi3 > 0) & (didi3 >= didi3.shift(1))
+    # VENDA: espelho — curta abaixo da longa (didi3<0) e nao subindo
+    didi_ok_hoje_venda = (didi3 < 0) & (didi3 <= didi3.shift(1))
+
     # evento ADX: 1a inclinacao + DI+>DI- + ADX>=105% DI-
     adx, dip, dim = calc_adx(h, l, c, period=8)
     adx_first = (adx > adx.shift(1)) & (adx.shift(1) <= adx.shift(2))
@@ -657,6 +666,7 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     df["candle_verde"] = candle_verde.fillna(False)
     df["candle_vermelho"] = candle_vermelho.fillna(False)
     df["didi_recent"] = didi_recent
+    df["didi_ok_hoje"] = didi_ok_hoje.fillna(False)
     df["adx_recent"]  = adx_recent
     df["adx_comprado"] = adx_comprado
     df["adx_rising_today"] = adx_rising_today
@@ -665,11 +675,13 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     # sinal de COMPRA: BB abrindo HOJE (candle verde), DIDI na janela, ADX comprado
     # (virada na janela OU 3 condicoes hoje), E ADX subindo HOJE.
     df["signal_win"] = (bb_trigger.fillna(False) & candle_verde.fillna(False)
-                        & didi_recent & adx_comprado & adx_rising_today)
+                        & didi_recent & didi_ok_hoje.fillna(False)
+                        & adx_comprado & adx_rising_today)
     # sinal de VENDA: espelho — BB abrindo (candle vermelho), DIDI de baixa na
     # janela, ADX vendido (DI- dominando), E ADX subindo HOJE (forca crescente,
     # da tendencia de BAIXA). A banda abrindo e o ADX subindo sao iguais aos da
     # compra (volatilidade e forca nao tem direcao; a direcao vem do DIDI e DI).
     df["signal_venda"] = (bb_trigger.fillna(False) & candle_vermelho.fillna(False)
-                          & didi_recent_venda & adx_vendido & adx_rising_today)
+                          & didi_recent_venda & didi_ok_hoje_venda.fillna(False)
+                          & adx_vendido & adx_rising_today)
     return df

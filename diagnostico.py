@@ -75,12 +75,21 @@ def main():
     didi_ago = None
     for k in range(0, didi_win+1):
         if pos-k>=0 and bool(s["didi_cross"].iloc[pos-k]): didi_ago=k; break
-    print(f"  [3] DIDI (cruzamento MA3>MA8 em ate {didi_win} candles)")
+    print(f"  [3] DIDI — cruzou na janela E ainda comprado hoje")
     print(f"      didi3 hoje = {didi_now:+.3f}  (>0 = curta acima da longa)")
     if didi_ago is not None:
-        print(f"      {sim(True)} cruzamento ocorreu ha {didi_ago} candle(s) (dentro da janela {didi_win})")
+        print(f"      {sim(True)} cruzamento MA3>MA8 ocorreu ha {didi_ago} candle(s) (janela {didi_win})")
     else:
-        print(f"      {sim(False)} nenhum cruzamento nos ultimos {didi_win} candles")
+        print(f"      {sim(False)} nenhum cruzamento de alta nos ultimos {didi_win} candles")
+    # DIDI ainda valido hoje: didi3>0 E nao caindo
+    didi_ant = float(s["didi3"].iloc[-2])
+    cond_comprado = didi_now > 0
+    cond_nao_caindo = didi_now >= didi_ant
+    print(f"      {sim(cond_comprado)} curta AINDA acima da longa hoje: didi3 {didi_now:+.3f} {'>' if cond_comprado else '<='} 0")
+    print(f"      {sim(cond_nao_caindo)} curta NAO caindo hoje: {didi_now:+.3f} {'>=' if cond_nao_caindo else '<'} {didi_ant:+.3f} (ontem)")
+    if cond_comprado and not cond_nao_caindo:
+        print(f"      -> ALERTA: a curta cruzou p/ cima antes, mas esta VOLTANDO p/ baixo hoje.")
+    didi_ok = (didi_ago is not None) and cond_comprado and cond_nao_caindo
     print()
 
     # --- 4) ADX: evento na janela (3 sub-condicoes) ---
@@ -123,7 +132,11 @@ def main():
         faltou=[]
         if not bbt:   faltou.append("gatilho da Bollinger")
         if not verde: faltou.append("candle verde")
-        if didi_ago is None: faltou.append(f"cruzamento do DIDI (na janela de {didi_win})")
+        if not didi_ok:
+            if didi_ago is None:
+                faltou.append(f"cruzamento do DIDI (na janela de {didi_win})")
+            else:
+                faltou.append("DIDI ainda comprado hoje (curta voltou p/ baixo)")
         if not adx_comprado: faltou.append("ADX comprado (nem 3 condicoes hoje, nem virada na janela)")
         if not (adx_now > adx_ant): faltou.append("ADX subindo hoje (esta caindo no gatilho)")
         print(f"  Reprovado em: {', '.join(faltou)}")
