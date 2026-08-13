@@ -229,6 +229,10 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
             else:
                 low = row["Low"];  r = entry - low;  stop_level = low
             r_pct = (r/entry*100) if entry>0 else 0
+            # variacao do candle de hoje (Close/Open - 1): quanto o ativo
+            # valorizou no dia. Ex.: +14.69%.
+            c_open = float(row["Open"])
+            var_dia_pct = ((float(entry)/c_open - 1.0)*100.0) if c_open>0 else 0.0
             pos = s.index.get_loc(idx)
             vol20 = s["Volume"].iloc[max(0,pos-19):pos+1].mean()
             px20  = s["Close"].iloc[max(0,pos-19):pos+1].mean()
@@ -346,6 +350,8 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
                 "didi_ago": didi_ago, "adx_ago": adx_ago,
                 "vol_fin_mi": round(float(fin_vol),1),
                 "vol_dia_mi": round(float(vol_dia_fin),1),
+                "vol_qtd": float(vol_dia_qtd) if not np.isnan(vol_dia_qtd) else 0.0,
+                "var_dia_pct": round(float(var_dia_pct),2),
                 "didi_dist": round(min_dist,3) if not np.isnan(min_dist) else None,
                 "pos_range": round(float(pos_range),3) if not (isinstance(pos_range,float) and np.isnan(pos_range)) else None,
                 "dist_max_pct": round(float(dist_max_pct),2) if not (isinstance(dist_max_pct,float) and np.isnan(dist_max_pct)) else None,
@@ -453,6 +459,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "ult_candle": ult_candle, "timeframe": timeframe,
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
+            "vol_qtd": h.get("vol_qtd",0), "var_dia_pct": h.get("var_dia_pct"),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
             "pos_range": h.get("pos_range"), "dist_max_pct": h.get("dist_max_pct"),
             "adx_var_pct": h.get("adx_var_pct"), "confluencia": h.get("confluencia", False),
