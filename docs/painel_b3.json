@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-14",
-  "captura": "14/08/2026 17:23",
+  "captura": "14/08/2026 18:49",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -22,7 +22,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 5.2,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:QUAL3",
-      "vol_qtd": 3103100.0,
+      "vol_qtd": 3102400.0,
       "var_dia_pct": 5.03,
       "quality": 94.9,
       "didi_dist": 0.021,
