@@ -472,16 +472,25 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "bb_sup": tail(bb_sup), "bb_mid": tail(m), "bb_inf": tail(bb_inf),
         })
         time.sleep(0.05)
-    # FILTRO: so entram sinais "bons" — os que tem abertura hoje OU 3 juntos.
-    # Os demais (BB ja vinha abrindo E sem confluencia dos 3) sao entradas
-    # atrasadas e nao aparecem.
+    # FILTRO: so entram sinais "bons". Um sinal vale a pena quando tem algum
+    # GATILHO FRESCO hoje. Tres formas de ser fresco:
+    #   - abertura hoje (a BB comecou a abrir hoje), OU
+    #   - 3 juntos (DIDI, ADX e BB no mesmo candle), OU
+    #   - ADX virou HOJE (adx_ago==0), mesmo que a BB tenha aberto ontem/anteontem.
+    # A ultima captura casos como a KEY: a BB ja vinha aberta, mas o ADX deu o
+    # gatilho hoje — a forca acabou de chegar, entao vale analisar.
+    # Fica de fora so o REALMENTE atrasado: BB abriu antes E ADX ja tinha virado
+    # antes (nenhum gatilho fresco hoje).
     def _rank(a):
         prim = bool(a.get("bb_primeira"))
         conf = bool(a.get("confluencia"))
+        adx_hoje = (a.get("adx_ago") == 0)
         # prioridade: 1) 3 juntos + abertura  2) 3 juntos  3) abertura hoje
+        #             4) ADX virou hoje (BB ja aberta) — gatilho fresco do ADX
         if conf and prim: return 0
         if conf:          return 1
         if prim:          return 2
+        if adx_hoje:      return 3
         return 9  # atrasado (sera removido)
     ativos = [a for a in ativos if _rank(a) < 9]
     # ordena por grupo de prioridade e, dentro do grupo, por nota (desc)

@@ -82,6 +82,7 @@
 .nota.baixa{background:rgba(107,125,146,.14);color:var(--muted);border:1px solid rgba(107,125,146,.3)}
 .confluencia{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;padding:2px 6px;border-radius:5px;margin-left:6px;background:linear-gradient(135deg,#3fb950,#2ea043);color:#fff;vertical-align:middle;box-shadow:0 0 8px rgba(63,185,80,.4)}
 .abertura{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;padding:2px 6px;border-radius:5px;margin-left:6px;background:linear-gradient(135deg,#e3b341,#d29922);color:#1a1200;vertical-align:middle;box-shadow:0 0 8px rgba(227,179,65,.35)}
+.adxhoje{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;padding:2px 6px;border-radius:5px;margin-left:6px;background:linear-gradient(135deg,#58a6ff,#1f6feb);color:#fff;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -193,7 +194,7 @@ function fmtVol(v){
 
 function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;
   const rpct=a.r_pct!=null?a.r_pct.toFixed(2)+"%":"—",da=a.didi_ago!=null?"há "+a.didi_ago+"d":"—",aa=a.adx_ago!=null?"há "+a.adx_ago+"d":"—";
-  return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${notaTag(a.quality)}${a.bb_primeira?`<span class="abertura" title="A Bollinger esta INICIANDO a abertura hoje (estava comprimida/estavel) — o melhor gatilho">ABERTURA HOJE</span>`:``}${a.confluencia?'<span class="confluencia" title="DIDI, ADX e Bollinger dispararam no mesmo candle — confluência perfeita">3 JUNTOS</span>':''}${badge}</div>
+  return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${notaTag(a.quality)}${a.bb_primeira?`<span class="abertura" title="A Bollinger esta INICIANDO a abertura hoje (estava comprimida/estavel) — o melhor gatilho">ABERTURA HOJE</span>`:``}${a.confluencia?'<span class="confluencia" title="DIDI, ADX e Bollinger dispararam no mesmo candle — confluência perfeita">3 JUNTOS</span>':''}${(a.adx_ago===0 && !a.bb_primeira && !a.confluencia)?`<span class="adxhoje" title="O ADX virou HOJE (a Bollinger ja vinha aberta) — gatilho fresco do ADX">ADX HOJE</span>`:``}${badge}</div>
   <div class="stats"><div class="stat"><div class="k">Preço</div><div class="v mono">${fmt(a.close)}</div></div><div class="stat"><div class="k">Valorização hoje</div><div class="v mono">${a.var_dia_pct==null?"—":(a.var_dia_pct>0?"+":"")+a.var_dia_pct.toFixed(2)+"%"}</div></div><div class="stat"><div class="k">Volume</div><div class="v mono">${fmtVol(a.vol_qtd)}</div></div></div>
   <div class="panes"><div class="pane"><div class="pane-title"><span>Didi Index</span><span class="mono">DIDI ${da}</span></div>${drawDidi(a)}</div>
   <div class="pane"><div class="pane-title"><span>ADX / DI</span><span class="mono">ADX ${aa}</span></div>${drawAdx(a)}</div>
@@ -228,9 +229,11 @@ async function loadData(){
   // os demais (atrasados) sao filtrados fora.
   const rank=(a)=>{
     const prim=!!a.bb_primeira, conf=!!a.confluencia;
+    const adxHoje=(a.adx_ago===0);
     if(conf&&prim) return 0;
     if(conf) return 1;
     if(prim) return 2;
+    if(adxHoje) return 3;   // ADX virou hoje (BB ja aberta) — gatilho fresco
     return 9;
   };
   ativos = ativos.filter(a=>rank(a)<9);
