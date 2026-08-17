@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-17",
-  "captura": "17/08/2026 14:42",
+  "captura": "17/08/2026 14:54",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 1.91,
       "stop": 1.91,
-      "r_pct": 0.28,
+      "r_pct": 0.29,
       "forming": true,
       "date": "2026-08-17",
       "ult_candle": "2026-08-17",
@@ -23,11 +23,11 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPAUD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.2,
-      "quality": 76.8,
+      "var_dia_pct": -0.22,
+      "quality": 77.5,
       "didi_dist": 0.042,
-      "pos_range": 0.494,
-      "dist_max_pct": 0.27,
+      "pos_range": 0.468,
+      "dist_max_pct": 0.26,
       "adx_var_pct": 1.5,
       "confluencia": false,
       "bb_primeira": true,
@@ -114,7 +114,7 @@
         1.9123,
         1.9106,
         1.9097,
-        1.9066
+        1.9064
       ],
       "didi_curta": [
         -0.393,
@@ -156,7 +156,7 @@
         -0.0129,
         0.0289,
         -0.0022,
-        -0.0876
+        -0.09
       ],
       "didi_longa": [
         -0.294,
@@ -198,7 +198,7 @@
         0.0991,
         0.071,
         0.0897,
-        0.052
+        0.0529
       ],
       "adx": [
         25.5045,
@@ -366,7 +366,7 @@
         1.9196,
         1.919,
         1.9154,
-        1.9159
+        1.916
       ],
       "bb_mid": [
         1.8947,
@@ -450,7 +450,7 @@
         1.9055,
         1.9051,
         1.9064,
-        1.9054
+        1.9053
       ]
     }
   ]
