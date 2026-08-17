@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-17",
-  "captura": "17/08/2026 13:37",
+  "captura": "17/08/2026 14:32",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -11,23 +11,23 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 2.27,
+      "close": 2.26,
       "stop": 2.13,
-      "r_pct": 6.17,
+      "r_pct": 5.75,
       "forming": true,
       "date": "2026-08-17",
       "ult_candle": "2026-08-17",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 25.8,
+      "vol_fin_mi": 25.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:ANIM3",
-      "vol_qtd": 6285000.0,
-      "var_dia_pct": 5.09,
-      "quality": 90.1,
-      "didi_dist": 0.385,
-      "pos_range": 0.778,
-      "dist_max_pct": 1.73,
+      "vol_qtd": 7241600.0,
+      "var_dia_pct": 4.63,
+      "quality": 90.4,
+      "didi_dist": 0.252,
+      "pos_range": 0.722,
+      "dist_max_pct": 2.16,
       "adx_var_pct": -2.2,
       "confluencia": true,
       "bb_primeira": true,
@@ -114,7 +114,7 @@
         2.02,
         2.04,
         2.16,
-        2.28
+        2.26
       ],
       "didi_curta": [
         -5.4781,
@@ -156,7 +156,7 @@
         -3.1439,
         -4.5929,
         -1.7959,
-        1.7668
+        1.5723
       ],
       "didi_longa": [
         5.2302,
@@ -198,7 +198,7 @@
         1.7223,
         0.7215,
         1.3854,
-        1.2485
+        1.3208
       ],
       "adx": [
         35.1866,
@@ -366,7 +366,7 @@
         2.2976,
         2.2797,
         2.2732,
-        2.3184
+        2.307
       ],
       "bb_mid": [
         2.9588,
@@ -408,7 +408,7 @@
         2.1338,
         2.1138,
         2.1113,
-        2.1225
+        2.12
       ],
       "bb_inf": [
         2.6415,
@@ -450,7 +450,7 @@
         1.9699,
         1.9478,
         1.9493,
-        1.9266
+        1.933
       ]
     },
     {
@@ -460,24 +460,24 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 33.84,
+      "close": 34.01,
       "stop": 32.09,
-      "r_pct": 5.17,
+      "r_pct": 5.65,
       "forming": true,
       "date": "2026-08-17",
       "ult_candle": "2026-08-17",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 272.3,
+      "vol_fin_mi": 267.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:UGPA3",
-      "vol_qtd": 9742200.0,
-      "var_dia_pct": 4.93,
-      "quality": 74.3,
-      "didi_dist": 1.205,
-      "pos_range": 0.893,
-      "dist_max_pct": 0.62,
-      "adx_var_pct": -16.3,
+      "vol_qtd": 11394600.0,
+      "var_dia_pct": 5.46,
+      "quality": 73.3,
+      "didi_dist": 1.455,
+      "pos_range": 0.98,
+      "dist_max_pct": 0.12,
+      "adx_var_pct": -15.2,
       "confluencia": true,
       "bb_primeira": true,
       "high": 34.05,
@@ -563,7 +563,7 @@
         30.49,
         32.04,
         32.27,
-        33.84
+        34.03
       ],
       "didi_curta": [
         0.3979,
@@ -605,7 +605,7 @@
         -3.5784,
         -2.4538,
         -0.7966,
-        2.2116
+        2.3336
       ],
       "didi_longa": [
         4.2515,
@@ -647,7 +647,7 @@
         -0.0858,
         0.5601,
         1.0713,
-        0.8709
+        0.8257
       ],
       "adx": [
         63.2279,
@@ -815,7 +815,7 @@
         34.0574,
         33.8255,
         33.5121,
-        34.148
+        34.2668
       ],
       "bb_mid": [
         24.6087,
@@ -857,7 +857,7 @@
         32.0675,
         31.9575,
         31.8537,
-        32.0088
+        32.0325
       ],
       "bb_inf": [
         23.66,
@@ -899,7 +899,7 @@
         30.0776,
         30.0895,
         30.1954,
-        29.8695
+        29.7982
       ]
     }
   ]
