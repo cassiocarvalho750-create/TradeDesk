@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-17",
-  "captura": "17/08/2026 14:32",
+  "captura": "17/08/2026 14:36",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.16,
       "stop": 1.16,
-      "r_pct": 0.17,
+      "r_pct": 0.15,
       "forming": true,
       "date": "2026-08-17",
       "ult_candle": "2026-08-17",
@@ -23,11 +23,11 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURUSD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.16,
-      "quality": 65.4,
+      "var_dia_pct": 0.14,
+      "quality": 64.1,
       "didi_dist": 0.507,
-      "pos_range": 0.404,
-      "dist_max_pct": 0.25,
+      "pos_range": 0.35,
+      "dist_max_pct": 0.28,
       "adx_var_pct": -0.7,
       "confluencia": false,
       "bb_primeira": true,
@@ -114,7 +114,7 @@
         1.1544,
         1.153,
         1.1535,
-        1.1587
+        1.1585
       ],
       "didi_curta": [
         -0.6972,
@@ -156,7 +156,7 @@
         0.085,
         0.0239,
         -0.0384,
-        0.0283
+        0.0235
       ],
       "didi_longa": [
         0.3468,
@@ -198,7 +198,7 @@
         -0.5953,
         -0.5543,
         -0.5452,
-        -0.5353
+        -0.5336
       ],
       "adx": [
         40.5637,
@@ -366,7 +366,7 @@
         1.1573,
         1.1571,
         1.1565,
-        1.1587
+        1.1586
       ],
       "bb_mid": [
         1.153,
@@ -408,7 +408,7 @@
         1.1539,
         1.1537,
         1.1541,
-        1.1548
+        1.1547
       ],
       "bb_inf": [
         1.1381,
@@ -450,7 +450,7 @@
         1.1505,
         1.1503,
         1.1517,
-        1.1508
+        1.1509
       ]
     },
     {
@@ -471,7 +471,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 19.5,
       "tv": "https://www.tradingview.com/chart/?symbol=DBA",
-      "vol_qtd": 471808.0,
+      "vol_qtd": 479892.0,
       "var_dia_pct": 0.92,
       "quality": 79.9,
       "didi_dist": 0.114,
