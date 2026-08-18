@@ -17,7 +17,10 @@ def main():
     ap.add_argument("--quick",action="store_true")
     ap.add_argument("--days",type=int,default=None,help="candles a olhar (padrao: por timeframe)")
     ap.add_argument("--out",default="scanner_b3")
-    ap.add_argument("--no-batch",dest="batch",action="store_false",help="download individual (lento)")
+    ap.add_argument("--batch",dest="batch",action="store_true",
+                    help="download em lote (rapido, mas menos confiavel p/ B3)")
+    ap.set_defaults(batch=False)   # B3: individual por padrao (mais confiavel
+                                   # no candle do dia; o lote perde sinais como SLCE3)
     ap.add_argument("--chunk",type=int,default=100,help="tamanho do lote no download")
     ap.add_argument("--timeframe",default="1d",choices=["1d","1wk","4h","2h","1h","15m","5m"],
                     help="timeframe do grafico (1d padrao)")
@@ -28,7 +31,7 @@ def main():
     sufxo = "" if tf=="1d" else f"_{tf}"
     if a.out=="scanner_b3": a.out=f"scanner_b3{sufxo}"
     print(f"Scanner B3 (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | tf {tf} | ultimos {days} candle(s)\n")
-    hits=sc.scan(uni, days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf)
+    hits=sc.scan(uni, days, batch=a.batch, chunk=a.chunk, timeframe=tf)
     if hits:
         print(f"  buscando P/E e Market Cap de {len(hits)} ativo(s) com sinal...")
         sc.enrich_fundamentals(hits)
