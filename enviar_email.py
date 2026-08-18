@@ -22,9 +22,11 @@ import matplotlib.pyplot as plt
 # ---------- filtro/ordenacao (igual ao painel) ----------
 def _rank(a):
     prim = bool(a.get("bb_primeira")); conf = bool(a.get("confluencia"))
+    adx_hoje = (a.get("adx_ago") == 0)
     if conf and prim: return 0
     if conf: return 1
     if prim: return 2
+    if adx_hoje: return 3   # ADX virou hoje (BB ja aberta) — gatilho fresco
     return 9
 
 def carregar_sinais():
@@ -119,6 +121,8 @@ def montar_html(ativos, captura, imgs):
         selos=[]
         if a.get("bb_primeira"): selos.append("<span style='background:#e3b341;color:#1a1200;font-size:11px;font-weight:bold;padding:2px 7px;border-radius:5px'>ABERTURA HOJE</span>")
         if a.get("confluencia"): selos.append("<span style='background:#3fb950;color:#fff;font-size:11px;font-weight:bold;padding:2px 7px;border-radius:5px'>3 JUNTOS</span>")
+        if (a.get("adx_ago")==0 and not a.get("bb_primeira") and not a.get("confluencia")):
+            selos.append("<span style='background:#1f6feb;color:#fff;font-size:11px;font-weight:bold;padding:2px 7px;border-radius:5px'>ADX HOJE</span>")
         img_html = f"<img src='cid:graf{i}' style='width:100%;max-width:720px;border:1px solid #30363d;border-radius:8px'/>" if imgs.get(i) else ""
         partes.append(
             f"<div style='border:1px solid #ddd;border-radius:10px;padding:16px;margin:16px 0'>"
