@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-19",
-  "captura": "19/08/2026 17:52",
+  "captura": "19/08/2026 18:50",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 0.86,
       "stop": 0.85,
-      "r_pct": 0.39,
+      "r_pct": 0.38,
       "forming": true,
       "date": "2026-08-19",
       "ult_candle": "2026-08-19",
@@ -23,12 +23,12 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURGBP=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.39,
-      "quality": 92.9,
-      "didi_dist": 0.013,
-      "pos_range": 0.941,
-      "dist_max_pct": 0.02,
-      "adx_var_pct": -11.2,
+      "var_dia_pct": 0.37,
+      "quality": 90.2,
+      "didi_dist": 0.024,
+      "pos_range": 0.902,
+      "dist_max_pct": 0.04,
+      "adx_var_pct": -13.6,
       "confluencia": true,
       "bb_primeira": true,
       "high": 0.86,
@@ -114,7 +114,7 @@
         0.8539,
         0.8544,
         0.8548,
-        0.8582
+        0.8581
       ],
       "didi_curta": [
         -0.0518,
@@ -156,7 +156,7 @@
         -0.2029,
         -0.172,
         -0.1219,
-        0.0433
+        0.0401
       ],
       "didi_longa": [
         -0.0139,
@@ -198,7 +198,7 @@
         -0.1654,
         -0.0973,
         -0.031,
-        0.0148
+        0.0159
       ],
       "adx": [
         20.1236,
