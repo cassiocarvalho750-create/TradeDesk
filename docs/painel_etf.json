@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-20",
-  "captura": "20/08/2026 17:16",
+  "captura": "20/08/2026 18:53",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -20,9 +20,9 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 232.2,
+      "vol_fin_mi": 232.4,
       "tv": "https://www.tradingview.com/chart/?symbol=COPX",
-      "vol_qtd": 2361303.0,
+      "vol_qtd": 2426164.0,
       "var_dia_pct": 3.08,
       "quality": 71.0,
       "didi_dist": 3.685,

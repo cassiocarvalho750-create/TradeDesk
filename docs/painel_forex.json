@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-20",
-  "captura": "20/08/2026 17:16",
+  "captura": "20/08/2026 18:53",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -24,9 +24,9 @@
       "tv": "https://www.tradingview.com/chart/?symbol=EURAUD=X",
       "vol_qtd": 0.0,
       "var_dia_pct": 0.17,
-      "quality": 95.8,
-      "didi_dist": 0.03,
-      "pos_range": 0.592,
+      "quality": 95.9,
+      "didi_dist": 0.029,
+      "pos_range": 0.595,
       "dist_max_pct": 0.17,
       "adx_var_pct": 6.6,
       "confluencia": true,
@@ -156,7 +156,7 @@
         -0.1468,
         -0.1884,
         -0.1092,
-        0.0339
+        0.0343
       ],
       "didi_longa": [
         -0.243,
@@ -198,7 +198,7 @@
         -0.0161,
         0.0134,
         0.0484,
-        0.0635
+        0.0634
       ],
       "adx": [
         24.6834,
@@ -366,7 +366,7 @@
         1.64,
         1.6408,
         1.6399,
-        1.6419
+        1.642
       ],
       "bb_mid": [
         1.6396,
@@ -462,7 +462,7 @@
       "lado": "compra",
       "close": 0.59,
       "stop": 0.59,
-      "r_pct": 0.24,
+      "r_pct": 0.22,
       "forming": true,
       "date": "2026-08-20",
       "ult_candle": "2026-08-20",
@@ -472,11 +472,11 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=NZDUSD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.18,
-      "quality": 64.1,
+      "var_dia_pct": 0.17,
+      "quality": 63.4,
       "didi_dist": 0.339,
-      "pos_range": 0.391,
-      "dist_max_pct": 0.37,
+      "pos_range": 0.361,
+      "dist_max_pct": 0.39,
       "adx_var_pct": -3.9,
       "confluencia": false,
       "bb_primeira": true,
@@ -563,7 +563,7 @@
         0.5891,
         0.5906,
         0.5873,
-        0.5944
+        0.5943
       ],
       "didi_curta": [
         -1.2082,
@@ -605,7 +605,7 @@
         -0.1442,
         0.0706,
         0.1652,
-        0.3463
+        0.3426
       ],
       "didi_longa": [
         1.4505,
@@ -647,7 +647,7 @@
         -0.5015,
         -0.4954,
         -0.4654,
-        -0.4734
+        -0.4721
       ],
       "adx": [
         46.596,
@@ -815,7 +815,7 @@
         0.5906,
         0.5914,
         0.5914,
-        0.5944
+        0.5943
       ],
       "bb_mid": [
         0.572,
@@ -918,9 +918,9 @@
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 872.3,
+      "vol_fin_mi": 874.0,
       "tv": "https://www.tradingview.com/chart/?symbol=SLV",
-      "vol_qtd": 23437428.0,
+      "vol_qtd": 24023889.0,
       "var_dia_pct": 2.32,
       "quality": 54.2,
       "didi_dist": 5.358,
