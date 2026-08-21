@@ -234,6 +234,27 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
             c_open = float(row["Open"])
             var_dia_pct = ((float(entry)/c_open - 1.0)*100.0) if c_open>0 else 0.0
             pos = s.index.get_loc(idx)
+            # MME de 70 periodos (EMA) no timeframe do scan: contexto de tendencia.
+            # Calculada sobre o Close ate o candle do sinal (inclusive). Se nao ha
+            # candles suficientes (< 70), fica indefinida (None).
+            ema70_val = None; acima_ema70 = None
+            ema70_incl = None  # "sobe" | "desce" | "lado" | None (poucos candles)
+            if pos >= 69:
+                ema70_ser = s["Close"].iloc[:pos+1].ewm(span=70, adjust=False).mean()
+                ema70_val = float(ema70_ser.iloc[-1])
+                if not np.isnan(ema70_val):
+                    acima_ema70 = bool(float(entry) >= ema70_val)
+                # inclinacao: variacao % da MME70 em 5 candles. Limiar +-0.15%
+                # separa "horizontal" (media lenta; abaixo disso e ruido/lado)
+                # de "sobe"/"desce".
+                if pos >= 74:
+                    ema70_ant = float(ema70_ser.iloc[-6])  # 5 candles atras
+                    if ema70_ant > 0:
+                        var_ema = (ema70_val/ema70_ant - 1.0)*100.0
+                        LIM = 0.15
+                        if var_ema > LIM:   ema70_incl = "sobe"
+                        elif var_ema < -LIM: ema70_incl = "desce"
+                        else:                ema70_incl = "lado"
             vol20 = s["Volume"].iloc[max(0,pos-19):pos+1].mean()
             px20  = s["Close"].iloc[max(0,pos-19):pos+1].mean()
             fin_vol = (vol20 * px20) / 1e6 if not np.isnan(vol20) else 0.0
@@ -352,6 +373,9 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
                 "vol_dia_mi": round(float(vol_dia_fin),1),
                 "vol_qtd": float(vol_dia_qtd) if not np.isnan(vol_dia_qtd) else 0.0,
                 "var_dia_pct": round(float(var_dia_pct),2),
+                "acima_ema70": acima_ema70,
+                "ema70_incl": ema70_incl,
+                "ema70": round(ema70_val,4) if ema70_val is not None else None,
                 "didi_dist": round(min_dist,3) if not np.isnan(min_dist) else None,
                 "pos_range": round(float(pos_range),3) if not (isinstance(pos_range,float) and np.isnan(pos_range)) else None,
                 "dist_max_pct": round(float(dist_max_pct),2) if not (isinstance(dist_max_pct,float) and np.isnan(dist_max_pct)) else None,
@@ -460,6 +484,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
             "vol_qtd": h.get("vol_qtd",0), "var_dia_pct": h.get("var_dia_pct"),
+            "acima_ema70": h.get("acima_ema70"), "ema70": h.get("ema70"), "ema70_incl": h.get("ema70_incl"),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
             "pos_range": h.get("pos_range"), "dist_max_pct": h.get("dist_max_pct"),
             "adx_var_pct": h.get("adx_var_pct"), "confluencia": h.get("confluencia", False),
