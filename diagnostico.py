@@ -124,6 +124,31 @@ def main():
     print(f"      {sim(adx_sobe_hoje)} ADX SUBINDO HOJE (no gatilho): {adx_now:.1f} {'>' if adx_sobe_hoje else '<='} {adx_ant:.1f}")
     print()
 
+    # --- MME70 (para conferir contra o TradingView) ---
+    close_ser = s["Close"]
+    npos = len(close_ser)-1
+    print(f"  [MME70] media movel exponencial de 70 periodos (confira no TradingView):")
+    print(f"      candles disponiveis: {len(close_ser)}")
+    if npos >= 69:
+        ema_ser = close_ser.ewm(span=70, adjust=False).mean()
+        ema_val = float(ema_ser.iloc[-1])
+        preco = float(close_ser.iloc[-1])
+        acima = preco >= ema_val
+        print(f"      preco (Close hoje): {preco:.2f}")
+        print(f"      MME70 hoje:         {ema_val:.2f}")
+        print(f"      => preco esta {'ACIMA' if acima else 'ABAIXO'} da MME70")
+        if npos >= 74:
+            ema_ant = float(ema_ser.iloc[-6])
+            var = (ema_val/ema_ant-1)*100 if ema_ant>0 else 0
+            inc = "SUBINDO" if var>0.15 else "DESCENDO" if var<-0.15 else "HORIZONTAL"
+            print(f"      MME70 ha 5 candles: {ema_ant:.2f}  (variacao {var:+.3f}%)")
+            print(f"      => MME70 esta {inc}")
+        print(f"      OBS: se divergir do TradingView, veja se la o ajuste de")
+        print(f"           dividendos esta LIGADO e quantos candles o grafico carrega.")
+    else:
+        print(f"      poucos candles (<70) — MME70 nao calculada.")
+    print()
+
     # --- veredito ---
     sinal = bool(last["signal_win"])
     print(f"  {'='*62}")
