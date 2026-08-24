@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-24",
-  "captura": "24/08/2026 16:30",
+  "captura": "24/08/2026 18:53",
   "timeframe": "1d",
   "n": 5,
   "ativos": [
@@ -11,26 +11,26 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 21.51,
+      "close": 21.49,
       "stop": 20.78,
-      "r_pct": 3.39,
+      "r_pct": 3.3,
       "forming": true,
       "date": "2026-08-24",
       "ult_candle": "2026-08-24",
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 37.1,
+      "vol_fin_mi": 37.5,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BRAP4",
-      "vol_qtd": 1139000.0,
-      "var_dia_pct": 3.51,
+      "vol_qtd": 1508000.0,
+      "var_dia_pct": 3.42,
       "acima_ema70": false,
-      "ema70": 21.7513,
+      "ema70": 21.7508,
       "ema70_incl": "desce",
-      "quality": 61.0,
-      "didi_dist": 0.946,
-      "pos_range": 0.73,
-      "dist_max_pct": 1.24,
+      "quality": 60.2,
+      "didi_dist": 0.974,
+      "pos_range": 0.71,
+      "dist_max_pct": 1.33,
       "adx_var_pct": -13.6,
       "confluencia": false,
       "bb_primeira": true,
@@ -117,7 +117,7 @@
         20.21,
         20.42,
         21.03,
-        21.51
+        21.49
       ],
       "didi_curta": [
         -0.8715,
@@ -159,7 +159,7 @@
         -2.057,
         -0.9477,
         0.3336,
-        2.1933
+        2.1733
       ],
       "didi_longa": [
         0.1229,
@@ -201,7 +201,7 @@
         3.1575,
         3.5827,
         3.4562,
-        3.1396
+        3.1473
       ],
       "adx": [
         18.9437,
@@ -369,7 +369,7 @@
         21.745,
         21.2337,
         21.2226,
-        21.4935
+        21.4794
       ],
       "bb_mid": [
         22.375,
@@ -411,7 +411,7 @@
         20.6412,
         20.4875,
         20.485,
-        20.5363
+        20.5338
       ],
       "bb_inf": [
         21.8455,
@@ -453,7 +453,7 @@
         19.5375,
         19.7413,
         19.7474,
-        19.579
+        19.5881
       ]
     },
     {
@@ -463,26 +463,26 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 77.27,
+      "close": 77.13,
       "stop": 74.71,
-      "r_pct": 3.31,
+      "r_pct": 3.14,
       "forming": true,
       "date": "2026-08-24",
       "ult_candle": "2026-08-24",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 0,
-      "vol_fin_mi": 1426.8,
+      "vol_fin_mi": 1444.6,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:VALE3",
-      "vol_qtd": 23878400.0,
-      "var_dia_pct": 3.43,
+      "vol_qtd": 28756000.0,
+      "var_dia_pct": 3.24,
       "acima_ema70": true,
-      "ema70": 74.9159,
+      "ema70": 74.912,
       "ema70_incl": "desce",
-      "quality": 69.6,
+      "quality": 68.6,
       "didi_dist": 0.67,
-      "pos_range": 0.703,
-      "dist_max_pct": 1.38,
+      "pos_range": 0.665,
+      "dist_max_pct": 1.56,
       "adx_var_pct": -1.2,
       "confluencia": false,
       "bb_primeira": false,
@@ -569,7 +569,7 @@
         72.13,
         74.02,
         75.03,
-        77.27
+        77.13
       ],
       "didi_curta": [
         -1.1342,
@@ -611,7 +611,7 @@
         -0.7138,
         0.4627,
         1.6009,
-        3.2346
+        3.1955
       ],
       "didi_longa": [
         0.8021,
@@ -653,7 +653,7 @@
         1.1334,
         1.1331,
         0.7966,
-        0.3409
+        0.3553
       ],
       "adx": [
         18.7271,
@@ -821,7 +821,7 @@
         74.0148,
         74.1214,
         75.308,
-        77.4079
+        77.3134
       ],
       "bb_mid": [
         76.7939,
@@ -863,7 +863,7 @@
         72.2121,
         72.2324,
         72.565,
-        73.0763
+        73.0588
       ],
       "bb_inf": [
         74.3225,
@@ -905,7 +905,7 @@
         70.4094,
         70.3434,
         69.822,
-        68.7446
+        68.8041
       ]
     },
     {
@@ -915,26 +915,26 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 26.19,
+      "close": 26.1,
       "stop": 25.0,
-      "r_pct": 4.54,
+      "r_pct": 4.21,
       "forming": true,
       "date": "2026-08-24",
       "ult_candle": "2026-08-24",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": 0,
-      "vol_fin_mi": 254.8,
+      "vol_fin_mi": 259.5,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:ENEV3",
-      "vol_qtd": 5327100.0,
-      "var_dia_pct": 4.76,
+      "vol_qtd": 9025400.0,
+      "var_dia_pct": 4.4,
       "acima_ema70": true,
-      "ema70": 25.4045,
+      "ema70": 25.402,
       "ema70_incl": "lado",
-      "quality": 66.0,
-      "didi_dist": 0.315,
-      "pos_range": 0.875,
-      "dist_max_pct": 0.64,
+      "quality": 63.0,
+      "didi_dist": 0.417,
+      "pos_range": 0.809,
+      "dist_max_pct": 0.99,
       "adx_var_pct": -18.1,
       "confluencia": false,
       "bb_primeira": false,
@@ -1021,7 +1021,7 @@
         25.1,
         24.92,
         25.36,
-        26.22
+        26.1
       ],
       "didi_curta": [
         3.5589,
@@ -1063,7 +1063,7 @@
         0.5227,
         1.256,
         1.7995,
-        2.2198
+        2.1208
       ],
       "didi_longa": [
         -3.353,
@@ -1105,7 +1105,7 @@
         3.7239,
         3.7763,
         3.4437,
-        2.5004
+        2.538
       ],
       "adx": [
         33.956,
@@ -1273,7 +1273,7 @@
         25.4243,
         25.209,
         25.5151,
-        26.1867
+        26.1023
       ],
       "bb_mid": [
         25.8275,
@@ -1315,7 +1315,7 @@
         24.6313,
         24.5813,
         24.6825,
-        24.9463
+        24.9313
       ],
       "bb_inf": [
         23.9368,
@@ -1357,7 +1357,7 @@
         23.8382,
         23.9535,
         23.8499,
-        23.7058
+        23.7602
       ]
     },
     {
@@ -1367,30 +1367,30 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 8.9,
+      "close": 8.88,
       "stop": 8.45,
-      "r_pct": 5.06,
+      "r_pct": 4.84,
       "forming": true,
       "date": "2026-08-24",
       "ult_candle": "2026-08-24",
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 32.8,
+      "vol_fin_mi": 33.4,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:YDUQ3",
-      "vol_qtd": 8093100.0,
-      "var_dia_pct": 5.33,
+      "vol_qtd": 9637600.0,
+      "var_dia_pct": 5.09,
       "acima_ema70": true,
-      "ema70": 8.6687,
+      "ema70": 8.6682,
       "ema70_incl": "desce",
-      "quality": 60.5,
-      "didi_dist": 2.303,
-      "pos_range": 0.978,
-      "dist_max_pct": 0.11,
-      "adx_var_pct": -3.9,
+      "quality": 58.6,
+      "didi_dist": 2.23,
+      "pos_range": 0.896,
+      "dist_max_pct": 0.56,
+      "adx_var_pct": -3.7,
       "confluencia": false,
       "bb_primeira": false,
-      "high": 8.91,
+      "high": 8.93,
       "dates": [
         "2026-06-30",
         "2026-07-01",
@@ -1473,7 +1473,7 @@
         7.41,
         7.44,
         7.87,
-        8.9
+        8.88
       ],
       "didi_curta": [
         2.6886,
@@ -1515,7 +1515,7 @@
         -1.2975,
         -0.5938,
         1.2309,
-        5.3009
+        5.2483
       ],
       "didi_longa": [
         0.769,
@@ -1557,7 +1557,7 @@
         5.3221,
         5.4252,
         4.8688,
-        2.9979
+        3.0184
       ],
       "adx": [
         23.5015,
@@ -1599,7 +1599,7 @@
         34.4705,
         35.5131,
         31.1539,
-        33.1281
+        33.1896
       ],
       "dip": [
         22.5221,
@@ -1641,7 +1641,7 @@
         12.0027,
         10.8195,
         22.3793,
-        44.338
+        44.6507
       ],
       "dim": [
         23.8245,
@@ -1683,7 +1683,7 @@
         27.1376,
         27.0181,
         22.6676,
-        16.0075
+        15.9175
       ],
       "bb_sup": [
         9.2452,
@@ -1725,7 +1725,7 @@
         7.7286,
         7.7064,
         7.8894,
-        8.7424
+        8.7268
       ],
       "bb_mid": [
         8.6475,
@@ -1767,7 +1767,7 @@
         7.45,
         7.4375,
         7.4812,
-        7.6637
+        7.6612
       ],
       "bb_inf": [
         8.0498,
@@ -1809,7 +1809,7 @@
         7.1714,
         7.1686,
         7.0731,
-        6.5851
+        6.5957
       ]
     },
     {
@@ -1819,26 +1819,26 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 5.17,
+      "close": 5.16,
       "stop": 4.73,
-      "r_pct": 8.51,
+      "r_pct": 8.33,
       "forming": true,
       "date": "2026-08-24",
       "ult_candle": "2026-08-24",
       "timeframe": "1d",
       "didi_ago": 5,
       "adx_ago": 0,
-      "vol_fin_mi": 77.8,
+      "vol_fin_mi": 78.3,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CSNA3",
-      "vol_qtd": 19807300.0,
-      "var_dia_pct": 9.07,
+      "vol_qtd": 22125600.0,
+      "var_dia_pct": 8.86,
       "acima_ema70": false,
-      "ema70": 5.3224,
+      "ema70": 5.3221,
       "ema70_incl": "desce",
-      "quality": 42.8,
-      "didi_dist": 2.029,
-      "pos_range": 0.772,
-      "dist_max_pct": 2.45,
+      "quality": 42.7,
+      "didi_dist": 1.968,
+      "pos_range": 0.754,
+      "dist_max_pct": 2.64,
       "adx_var_pct": -2.3,
       "confluencia": false,
       "bb_primeira": false,
