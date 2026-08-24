@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-24",
-  "captura": "24/08/2026 12:47",
+  "captura": "24/08/2026 15:26",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,9 +11,9 @@
       "par": "EUR/CAD — Euro / Dólar Canadense",
       "classe": "Forex",
       "lado": "compra",
-      "close": 1.61,
+      "close": 1.62,
       "stop": 1.61,
-      "r_pct": 0.45,
+      "r_pct": 0.53,
       "forming": true,
       "date": "2026-08-24",
       "ult_candle": "2026-08-24",
@@ -23,14 +23,14 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURCAD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.46,
+      "var_dia_pct": 0.53,
       "acima_ema70": true,
       "ema70": 1.6107,
       "ema70_incl": "lado",
-      "quality": 78.3,
+      "quality": 81.9,
       "didi_dist": 0.02,
-      "pos_range": 0.841,
-      "dist_max_pct": 0.09,
+      "pos_range": 0.986,
+      "dist_max_pct": 0.01,
       "adx_var_pct": -5.6,
       "confluencia": false,
       "bb_primeira": false,
@@ -117,7 +117,7 @@
         1.6088,
         1.6119,
         1.6102,
-        1.6143
+        1.6156
       ],
       "didi_curta": [
         -0.0734,
@@ -159,7 +159,7 @@
         -0.0479,
         0.089,
         0.1561,
-        0.211
+        0.2273
       ],
       "didi_longa": [
         -0.1373,
@@ -201,7 +201,7 @@
         0.1469,
         0.1631,
         0.1757,
-        0.1465
+        0.1407
       ],
       "adx": [
         18.3854,
@@ -369,7 +369,7 @@
         1.6119,
         1.6118,
         1.6124,
-        1.6151
+        1.6159
       ],
       "bb_mid": [
         1.6184,
@@ -411,7 +411,7 @@
         1.6077,
         1.6076,
         1.6078,
-        1.6088
+        1.6089
       ],
       "bb_inf": [
         1.6107,
@@ -453,7 +453,7 @@
         1.6034,
         1.6034,
         1.6033,
-        1.6024
+        1.6019
       ]
     }
   ]
