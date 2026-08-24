@@ -19,7 +19,7 @@ DIDI_CROSS_BARS = 2      # aceita sinal so no candle do cruzamento ou no seguint
 R_MIN_PCT       = 0.5
 R_MAX_PCT       = None
 LOOKBACK_DAYS   = 365
-ADX_DIM_RATIO   = 1.05   # ADX deve estar >= 105% do DI- (5% acima da pressao vendedora)
+ADX_DIM_RATIO   = 1.00   # ADX deve estar >= 100% do DI- (>= a pressao oposta)
 WEEKLY_EMA      = 70     # EMA da media semanal para o filtro de tendencia
 
 
@@ -60,11 +60,11 @@ def compute_signals(df):
         crossed = (didi3.shift(i) > 0) & (didi3.shift(i + 1) <= 0)
         didi_ok = didi_ok | crossed
 
-    # B: ADX/DMI(8,8) — primeira inclinacao p/ cima, DI+ > DI-, e ADX >= 105% do DI-
+    # B: ADX/DMI(8,8) — primeira inclinacao p/ cima, DI+ > DI-, e ADX >= 100% do DI-
     adx, dip, dim = calc_adx(h, l, c)
     adx_first_turn = (adx > adx.shift(1)) & (adx.shift(1) <= adx.shift(2))  # 1a inclinacao
     di_bull        = dip > dim                                              # DI+ acima do DI-
-    adx_above_dim  = adx >= (ADX_DIM_RATIO * dim)                           # ADX >= 105% do DI-
+    adx_above_dim  = adx >= (ADX_DIM_RATIO * dim)                           # ADX >= 100% do DI-
     adx_ok = adx_first_turn & di_bull & adx_above_dim
 
     # C: Bollinger(8,2) — banda abrindo hoje (largura crescendo). A confluencia
@@ -577,7 +577,7 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     Gatilho = BB abrindo (primeira expansao) NO candle atual. Nesse candle:
       - DIDI: cruzamento da MA3 sobre a MA8 ocorreu HOJE ou em ate `didi_window`
               candles anteriores.
-      - ADX : sinal do ADX (1a inclinacao + DI+>DI- + ADX>=105% DI-) ocorreu
+      - ADX : sinal do ADX (1a inclinacao + DI+>DI- + ADX>=100% DI-) ocorreu
               HOJE ou em ate `adx_window` candles anteriores.
     Adiciona coluna 'signal_win' (bool) e colunas auxiliares de diagnostico.
     """
@@ -599,13 +599,13 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     # VENDA: espelho — curta abaixo da longa (didi3<0) e nao subindo
     didi_ok_hoje_venda = (didi3 < 0) & (didi3 <= didi3.shift(1))
 
-    # evento ADX: 1a inclinacao + DI+>DI- + ADX>=105% DI-
+    # evento ADX: 1a inclinacao + DI+>DI- + ADX>=100% DI-
     adx, dip, dim = calc_adx(h, l, c, period=8)
     adx_first = (adx > adx.shift(1)) & (adx.shift(1) <= adx.shift(2))
     di_bull   = dip > dim
     di_bear   = dim > dip                          # VENDA: DI- domina
     adx_above = adx >= (ADX_DIM_RATIO * dim)
-    adx_above_v = adx >= (ADX_DIM_RATIO * dip)      # VENDA: ADX>=105% do DI+
+    adx_above_v = adx >= (ADX_DIM_RATIO * dip)      # VENDA: ADX>=100% do DI+
     adx_event = adx_first & di_bull & adx_above
     adx_event_venda = adx_first & di_bear & adx_above_v
 
@@ -642,12 +642,12 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
 
     # ADX "comprado" tem DUAS formas de valer (o que ocorrer):
     #  (i) a 1a virada do ADX ocorreu dentro da janela (adx_recent), OU
-    #  (ii) as 3 condicoes valem HOJE: subindo + DI+>DI- + ADX>=105% do DI-.
+    #  (ii) as 3 condicoes valem HOJE: subindo + DI+>DI- + ADX>=100% do DI-.
     # A forma (ii) captura casos como a "A", em que o ADX esta saudavel e
     # subindo hoje, mas a virada inicial foi ha mais de `adx_window` candles.
     adx_ok_hoje = (adx > adx.shift(1)) & di_bull & adx_above
     adx_comprado = (adx_recent | adx_ok_hoje.fillna(False))
-    # VENDA: mesma logica, mas com DI- dominando e ADX>=105% do DI+
+    # VENDA: mesma logica, mas com DI- dominando e ADX>=100% do DI+
     adx_ok_hoje_v = (adx > adx.shift(1)) & di_bear & adx_above_v
     adx_vendido = (adx_recent_venda | adx_ok_hoje_v.fillna(False))
 

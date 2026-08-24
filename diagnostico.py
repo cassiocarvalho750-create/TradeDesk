@@ -110,7 +110,8 @@ def main():
     print(f"      forma (i) — as 3 condicoes valem HOJE:")
     print(f"        (a) ADX inclinando p/ cima : {sim(cond_incl)} ({adx_now:.1f} {'>' if cond_incl else '<='} {adx_ant:.1f})")
     print(f"        (b) DI+ > DI-              : {sim(cond_dibull)} ({dip_now:.1f} {'>' if cond_dibull else '<='} {dim_now:.1f})")
-    print(f"        (c) ADX >= 105% do DI-     : {sim(cond_above)} ({adx_now:.1f} {'>=' if cond_above else '<'} {bt.ADX_DIM_RATIO*dim_now:.1f})")
+    _pct_adx = int(round(bt.ADX_DIM_RATIO*100))
+    print(f"        (c) ADX >= {_pct_adx}% do DI-     : {sim(cond_above)} ({adx_now:.1f} {'>=' if cond_above else '<'} {bt.ADX_DIM_RATIO*dim_now:.1f})")
     print(f"        => forma (i): {sim(ok_hoje)}")
     print(f"      forma (ii) — 1a virada do ADX dentro da janela ({adx_win} candles):")
     if adx_ago is not None:
