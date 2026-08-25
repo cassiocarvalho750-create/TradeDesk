@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-25",
-  "captura": "25/08/2026 15:31",
+  "captura": "25/08/2026 16:43",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,26 +11,26 @@
       "par": "Cobre (US Copper)",
       "classe": "Commodity",
       "lado": "compra",
-      "close": 40.69,
+      "close": 40.72,
       "stop": 40.14,
-      "r_pct": 1.34,
+      "r_pct": 1.42,
       "forming": true,
       "date": "2026-08-25",
       "ult_candle": "2026-08-25",
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 21.2,
+      "vol_fin_mi": 21.3,
       "tv": "https://www.tradingview.com/chart/?symbol=CPER",
-      "vol_qtd": 409842.0,
-      "var_dia_pct": 1.28,
+      "vol_qtd": 459026.0,
+      "var_dia_pct": 1.37,
       "acima_ema70": true,
-      "ema70": 38.7105,
+      "ema70": 38.7114,
       "ema70_incl": "sobe",
-      "quality": 74.1,
+      "quality": 75.4,
       "didi_dist": 0.015,
-      "pos_range": 0.79,
-      "dist_max_pct": 0.36,
+      "pos_range": 0.84,
+      "dist_max_pct": 0.27,
       "adx_var_pct": -13.7,
       "confluencia": false,
       "bb_primeira": false,
@@ -117,7 +117,7 @@
         39.35,
         39.99,
         40.07,
-        40.685
+        40.72
       ],
       "didi_curta": [
         -0.376,
@@ -159,7 +159,7 @@
         -1.1619,
         -0.411,
         0.1436,
-        0.998
+        1.0162
       ],
       "didi_longa": [
         2.4187,
@@ -201,7 +201,7 @@
         -0.3841,
         -0.1057,
         0.0421,
-        0.0756
+        0.069
       ],
       "adx": [
         24.6717,
@@ -369,7 +369,7 @@
         40.5714,
         40.483,
         40.5008,
-        40.8591
+        40.8802
       ],
       "bb_mid": [
         37.5713,
@@ -411,7 +411,7 @@
         39.7687,
         39.74,
         39.7462,
-        39.8506
+        39.855
       ],
       "bb_inf": [
         35.8148,
@@ -453,7 +453,7 @@
         38.9661,
         38.997,
         38.9917,
-        38.8422
+        38.8298
       ]
     }
   ]

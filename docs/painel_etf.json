@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-25",
-  "captura": "25/08/2026 15:31",
+  "captura": "25/08/2026 16:43",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,26 +11,26 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 48.37,
+      "close": 48.12,
       "stop": 46.34,
-      "r_pct": 4.19,
+      "r_pct": 3.71,
       "forming": true,
       "date": "2026-08-25",
       "ult_candle": "2026-08-25",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 0,
-      "vol_fin_mi": 137.6,
+      "vol_fin_mi": 139.0,
       "tv": "https://www.tradingview.com/chart/?symbol=URA",
-      "vol_qtd": 2987355.0,
-      "var_dia_pct": 3.77,
+      "vol_qtd": 3672265.0,
+      "var_dia_pct": 3.25,
       "acima_ema70": true,
-      "ema70": 44.9867,
+      "ema70": 44.9799,
       "ema70_incl": "sobe",
-      "quality": 62.9,
+      "quality": 60.1,
       "didi_dist": 3.429,
-      "pos_range": 0.946,
-      "dist_max_pct": 0.24,
+      "pos_range": 0.834,
+      "dist_max_pct": 0.73,
       "adx_var_pct": 4.5,
       "confluencia": false,
       "bb_primeira": false,
@@ -117,7 +117,7 @@
         43.84,
         46.07,
         45.69,
-        48.365
+        48.125
       ],
       "didi_curta": [
         -2.8054,
@@ -159,7 +159,7 @@
         -1.4002,
         0.1717,
         0.5394,
-        3.0023
+        2.894
       ],
       "didi_longa": [
         2.7932,
@@ -201,7 +201,7 @@
         -4.8293,
         -4.3795,
         -3.9126,
-        -3.6995
+        -3.6623
       ],
       "adx": [
         29.7685,
@@ -369,7 +369,7 @@
         46.1093,
         46.496,
         46.6455,
-        48.3036
+        48.1353
       ],
       "bb_mid": [
         45.0025,
@@ -411,7 +411,7 @@
         44.7837,
         44.8962,
         44.9575,
-        45.3469
+        45.3169
       ],
       "bb_inf": [
         41.8518,
@@ -453,7 +453,7 @@
         43.4582,
         43.2965,
         43.2695,
-        42.3901
+        42.4985
       ]
     }
   ]
