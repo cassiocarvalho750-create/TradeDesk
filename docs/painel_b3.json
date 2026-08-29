@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-08-28",
-  "captura": "28/08/2026 17:52",
+  "gerado": "2026-08-29",
+  "captura": "28/08/2026 22:14",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 43.55,
       "stop": 42.62,
       "r_pct": 2.14,
-      "forming": true,
+      "forming": false,
       "date": "2026-08-28",
       "ult_candle": "2026-08-28",
       "timeframe": "1d",
@@ -466,7 +466,7 @@
       "close": 30.01,
       "stop": 29.55,
       "r_pct": 1.53,
-      "forming": true,
+      "forming": false,
       "date": "2026-08-28",
       "ult_candle": "2026-08-28",
       "timeframe": "1d",
