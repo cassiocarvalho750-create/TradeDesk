@@ -1,6 +1,6 @@
 {
   "gerado": "2026-08-31",
-  "captura": "31/08/2026 14:58",
+  "captura": "31/08/2026 19:07",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,26 +11,26 @@
       "par": "Cesta de Commodities (Invesco DB)",
       "classe": "Commodity",
       "lado": "compra",
-      "close": 31.21,
+      "close": 31.3,
       "stop": 31.04,
-      "r_pct": 0.55,
+      "r_pct": 0.83,
       "forming": true,
       "date": "2026-08-31",
       "ult_candle": "2026-08-31",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 23.4,
+      "vol_fin_mi": 23.9,
       "tv": "https://www.tradingview.com/chart/?symbol=DBC",
-      "vol_qtd": 260278.0,
-      "var_dia_pct": 0.19,
+      "vol_qtd": 579602.0,
+      "var_dia_pct": 0.48,
       "acima_ema70": true,
-      "ema70": 29.3287,
+      "ema70": 29.3312,
       "ema70_incl": "sobe",
-      "quality": 59.3,
+      "quality": 67.3,
       "didi_dist": 2.006,
-      "pos_range": 0.608,
-      "dist_max_pct": 0.35,
+      "pos_range": 0.929,
+      "dist_max_pct": 0.06,
       "adx_var_pct": -11.9,
       "confluencia": true,
       "bb_primeira": true,
@@ -117,7 +117,7 @@
         30.5,
         30.86,
         30.79,
-        31.2101
+        31.3
       ],
       "didi_curta": [
         0.7925,
@@ -159,7 +159,7 @@
         -0.4281,
         -0.636,
         -0.3716,
-        0.2132
+        0.2737
       ],
       "didi_longa": [
         3.0669,
@@ -201,7 +201,7 @@
         -2.7735,
         -2.6419,
         -2.5469,
-        -2.3473
+        -2.3682
       ],
       "adx": [
         38.4283,
@@ -369,7 +369,7 @@
         31.3873,
         31.4072,
         31.3927,
-        31.5039
+        31.5446
       ],
       "bb_mid": [
         26.7613,
@@ -411,7 +411,7 @@
         30.755,
         30.7925,
         30.8313,
-        30.8875
+        30.8988
       ],
       "bb_inf": [
         26.1504,
@@ -453,7 +453,7 @@
         30.1227,
         30.1778,
         30.2698,
-        30.2712
+        30.2529
       ]
     }
   ]
