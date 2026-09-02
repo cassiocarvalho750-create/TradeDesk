@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-02",
-  "captura": "02/09/2026 15:29",
+  "captura": "02/09/2026 16:12",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 0.94,
       "stop": 0.94,
-      "r_pct": 0.19,
+      "r_pct": 0.21,
       "forming": true,
       "date": "2026-09-02",
       "ult_candle": "2026-09-02",
@@ -23,14 +23,14 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURCHF=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.12,
+      "var_dia_pct": 0.14,
       "acima_ema70": true,
       "ema70": 0.9291,
       "ema70_incl": "sobe",
-      "quality": 72.5,
+      "quality": 74.1,
       "didi_dist": 0.131,
-      "pos_range": 0.512,
-      "dist_max_pct": 0.18,
+      "pos_range": 0.576,
+      "dist_max_pct": 0.15,
       "adx_var_pct": 19.0,
       "confluencia": false,
       "bb_primeira": true,
@@ -117,7 +117,7 @@
         0.9366,
         0.9374,
         0.939,
-        0.9423
+        0.9421
       ],
       "didi_curta": [
         0.0888,
@@ -159,7 +159,7 @@
         0.1004,
         0.1878,
         0.1114,
-        0.2073
+        0.2031
       ],
       "didi_longa": [
         0.0412,
@@ -201,7 +201,7 @@
         -0.031,
         0.0384,
         -0.0311,
-        -0.0854
+        -0.0839
       ],
       "adx": [
         15.6002,
@@ -369,7 +369,7 @@
         0.9413,
         0.9399,
         0.9397,
-        0.9421
+        0.942
       ],
       "bb_mid": [
         0.9213,
@@ -453,7 +453,7 @@
         0.9307,
         0.9314,
         0.9336,
-        0.9331
+        0.9332
       ]
     },
     {
@@ -479,10 +479,10 @@
       "acima_ema70": true,
       "ema70": 0.8582,
       "ema70_incl": "lado",
-      "quality": 72.2,
+      "quality": 71.8,
       "didi_dist": 0.014,
-      "pos_range": 0.873,
-      "dist_max_pct": 0.04,
+      "pos_range": 0.854,
+      "dist_max_pct": 0.05,
       "adx_var_pct": -11.1,
       "confluencia": false,
       "bb_primeira": true,
@@ -569,7 +569,7 @@
         0.8571,
         0.8558,
         0.8574,
-        0.8591
+        0.859
       ],
       "didi_curta": [
         -0.3452,
@@ -611,7 +611,7 @@
         0.023,
         0.0317,
         0.0545,
-        0.0962
+        0.0952
       ],
       "didi_longa": [
         0.5087,
@@ -653,7 +653,7 @@
         -0.0474,
         -0.0561,
         -0.041,
-        -0.0664
+        -0.066
       ],
       "adx": [
         40.1223,
@@ -917,7 +917,7 @@
       "lado": "compra",
       "close": 0.81,
       "stop": 0.81,
-      "r_pct": 0.34,
+      "r_pct": 0.33,
       "forming": true,
       "date": "2026-09-02",
       "ult_candle": "2026-09-02",
@@ -931,9 +931,9 @@
       "acima_ema70": true,
       "ema70": 0.8042,
       "ema70_incl": "lado",
-      "quality": 65.8,
+      "quality": 65.5,
       "didi_dist": 0.053,
-      "pos_range": 0.54,
+      "pos_range": 0.529,
       "dist_max_pct": 0.29,
       "adx_var_pct": -7.6,
       "confluencia": false,
@@ -1063,7 +1063,7 @@
         0.0828,
         0.4316,
         0.3993,
-        0.5813
+        0.5798
       ],
       "didi_longa": [
         -0.2663,
@@ -1105,7 +1105,7 @@
         0.5648,
         0.6295,
         0.4528,
-        0.2647
+        0.2653
       ],
       "adx": [
         27.0982,
@@ -1273,7 +1273,7 @@
         0.8117,
         0.8093,
         0.8106,
-        0.8142
+        0.8141
       ],
       "bb_mid": [
         0.807,
