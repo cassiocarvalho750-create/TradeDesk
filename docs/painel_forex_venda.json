@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-03",
-  "captura": "03/09/2026 12:51",
+  "captura": "03/09/2026 15:10",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -11,9 +11,9 @@
       "par": "AUD/JPY — Dólar Australiano / Iene",
       "classe": "Forex",
       "lado": "venda",
-      "close": 111.86,
+      "close": 112.0,
       "stop": 113.9,
-      "r_pct": 1.83,
+      "r_pct": 1.7,
       "forming": true,
       "date": "2026-09-03",
       "ult_candle": "2026-09-03",
@@ -23,14 +23,14 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=AUDJPY=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -1.57,
+      "var_dia_pct": -1.45,
       "acima_ema70": false,
-      "ema70": 112.9125,
-      "ema70_incl": "lado",
-      "quality": 95.5,
-      "didi_dist": 0.375,
-      "pos_range": 0.077,
-      "dist_max_pct": 0.15,
+      "ema70": 112.9165,
+      "ema70_incl": "sobe",
+      "quality": 93.5,
+      "didi_dist": 0.41,
+      "pos_range": 0.141,
+      "dist_max_pct": 0.28,
       "adx_var_pct": 0.2,
       "confluencia": true,
       "bb_primeira": true,
@@ -117,7 +117,7 @@
         114.637,
         114.543,
         114.489,
-        111.877
+        112.002
       ],
       "didi_curta": [
         0.2582,
@@ -159,7 +159,7 @@
         0.549,
         0.4036,
         0.2124,
-        -0.3664
+        -0.3435
       ],
       "didi_longa": [
         0.0773,
@@ -201,7 +201,7 @@
         -0.9885,
         -0.9962,
         -0.9988,
-        -0.745
+        -0.7531
       ],
       "adx": [
         19.0101,
@@ -369,7 +369,7 @@
         115.2886,
         115.1796,
         114.9449,
-        115.9005
+        115.8321
       ],
       "bb_mid": [
         112.3216,
@@ -411,7 +411,7 @@
         113.9136,
         114.1404,
         114.3135,
-        114.0542
+        114.0699
       ],
       "bb_inf": [
         111.5049,
@@ -453,7 +453,7 @@
         112.5386,
         113.1011,
         113.6821,
-        112.208
+        112.3076
       ]
     },
     {
@@ -463,9 +463,9 @@
       "par": "EUR/JPY — Euro / Iene",
       "classe": "Forex",
       "lado": "venda",
-      "close": 180.67,
+      "close": 180.8,
       "stop": 184.18,
-      "r_pct": 1.94,
+      "r_pct": 1.87,
       "forming": true,
       "date": "2026-09-03",
       "ult_candle": "2026-09-03",
@@ -475,14 +475,14 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURJPY=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -1.73,
+      "var_dia_pct": -1.66,
       "acima_ema70": false,
-      "ema70": 184.7266,
+      "ema70": 184.7305,
       "ema70_incl": "lado",
-      "quality": 88.7,
-      "didi_dist": 0.285,
-      "pos_range": 0.04,
-      "dist_max_pct": 0.08,
+      "quality": 88.1,
+      "didi_dist": 0.264,
+      "pos_range": 0.078,
+      "dist_max_pct": 0.16,
       "adx_var_pct": 46.8,
       "confluencia": false,
       "bb_primeira": true,
@@ -569,7 +569,7 @@
         185.557,
         185.582,
         185.68,
-        180.682
+        180.806
       ],
       "didi_curta": [
         0.1533,
@@ -611,7 +611,7 @@
         0.0247,
         -0.0338,
         -0.0268,
-        -0.5712
+        -0.5572
       ],
       "didi_longa": [
         -0.1298,
@@ -653,7 +653,7 @@
         -0.747,
         -0.6858,
         -0.5813,
-        -0.2887
+        -0.2937
       ],
       "adx": [
         17.7753,
@@ -821,7 +821,7 @@
         186.2266,
         185.862,
         185.8567,
-        188.5642
+        188.4922
       ],
       "bb_mid": [
         185.1757,
@@ -863,7 +863,7 @@
         185.5567,
         185.6591,
         185.6561,
-        185.0382
+        185.0537
       ],
       "bb_inf": [
         184.2124,
@@ -905,7 +905,7 @@
         184.8869,
         185.4563,
         185.4556,
-        181.5123
+        181.6153
       ]
     }
   ]

@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-03",
-  "captura": "03/09/2026 12:50",
+  "captura": "03/09/2026 15:10",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,26 +11,26 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 30.24,
+      "close": 30.34,
       "stop": 29.85,
-      "r_pct": 1.29,
+      "r_pct": 1.62,
       "forming": true,
       "date": "2026-09-03",
       "ult_candle": "2026-09-03",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 139.3,
+      "vol_fin_mi": 140.4,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SANB11",
-      "vol_qtd": 1971300.0,
-      "var_dia_pct": 0.8,
+      "vol_qtd": 2733600.0,
+      "var_dia_pct": 1.13,
       "acima_ema70": true,
-      "ema70": 28.3429,
+      "ema70": 28.3457,
       "ema70_incl": "sobe",
-      "quality": 87.8,
+      "quality": 92.4,
       "didi_dist": 0.338,
-      "pos_range": 0.722,
-      "dist_max_pct": 0.49,
+      "pos_range": 0.907,
+      "dist_max_pct": 0.16,
       "adx_var_pct": -4.6,
       "confluencia": true,
       "bb_primeira": false,
@@ -117,7 +117,7 @@
         29.56,
         29.34,
         29.92,
-        30.24
+        30.34
       ],
       "didi_curta": [
         -0.3058,
@@ -159,7 +159,7 @@
         0.3423,
         0.0394,
         -0.2177,
-        0.297
+        0.3669
       ],
       "didi_longa": [
         0.4243,
@@ -201,7 +201,7 @@
         -0.3592,
         -0.4743,
         -0.5553,
-        -0.6388
+        -0.6637
       ],
       "adx": [
         22.3672,
@@ -369,7 +369,7 @@
         30.1691,
         30.0244,
         30.1143,
-        30.3417
+        30.4037
       ],
       "bb_mid": [
         26.0491,
@@ -411,7 +411,7 @@
         29.5787,
         29.625,
         29.6712,
-        29.745
+        29.7575
       ],
       "bb_inf": [
         24.8378,
@@ -453,7 +453,7 @@
         28.9884,
         29.2256,
         29.2282,
-        29.1483
+        29.1113
       ]
     }
   ]
