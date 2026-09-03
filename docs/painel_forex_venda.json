@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-03",
-  "captura": "03/09/2026 11:35",
+  "captura": "03/09/2026 12:51",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -11,9 +11,9 @@
       "par": "AUD/JPY — Dólar Australiano / Iene",
       "classe": "Forex",
       "lado": "venda",
-      "close": 111.87,
+      "close": 111.86,
       "stop": 113.9,
-      "r_pct": 1.82,
+      "r_pct": 1.83,
       "forming": true,
       "date": "2026-09-03",
       "ult_candle": "2026-09-03",
@@ -23,14 +23,14 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=AUDJPY=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -1.56,
+      "var_dia_pct": -1.57,
       "acima_ema70": false,
-      "ema70": 112.9127,
+      "ema70": 112.9125,
       "ema70_incl": "lado",
-      "quality": 95.4,
-      "didi_dist": 0.376,
-      "pos_range": 0.08,
-      "dist_max_pct": 0.16,
+      "quality": 95.5,
+      "didi_dist": 0.375,
+      "pos_range": 0.077,
+      "dist_max_pct": 0.15,
       "adx_var_pct": 0.2,
       "confluencia": true,
       "bb_primeira": true,
@@ -463,9 +463,9 @@
       "par": "EUR/JPY — Euro / Iene",
       "classe": "Forex",
       "lado": "venda",
-      "close": 180.81,
+      "close": 180.67,
       "stop": 184.18,
-      "r_pct": 1.86,
+      "r_pct": 1.94,
       "forming": true,
       "date": "2026-09-03",
       "ult_candle": "2026-09-03",
@@ -475,15 +475,15 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURJPY=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -1.65,
+      "var_dia_pct": -1.73,
       "acima_ema70": false,
-      "ema70": 184.7306,
+      "ema70": 184.7266,
       "ema70_incl": "lado",
-      "quality": 88.3,
-      "didi_dist": 0.263,
-      "pos_range": 0.068,
-      "dist_max_pct": 0.14,
-      "adx_var_pct": 46.6,
+      "quality": 88.7,
+      "didi_dist": 0.285,
+      "pos_range": 0.04,
+      "dist_max_pct": 0.08,
+      "adx_var_pct": 46.8,
       "confluencia": false,
       "bb_primeira": true,
       "high": 184.18,
@@ -569,7 +569,7 @@
         185.557,
         185.582,
         185.68,
-        180.811
+        180.682
       ],
       "didi_curta": [
         0.1533,
@@ -611,7 +611,7 @@
         0.0247,
         -0.0338,
         -0.0268,
-        -0.5566
+        -0.5712
       ],
       "didi_longa": [
         -0.1298,
@@ -653,7 +653,7 @@
         -0.747,
         -0.6858,
         -0.5813,
-        -0.2939
+        -0.2887
       ],
       "adx": [
         17.7753,
@@ -695,7 +695,7 @@
         17.5155,
         15.5416,
         19.1338,
-        25.6818
+        25.7063
       ],
       "dip": [
         19.8113,
@@ -737,7 +737,7 @@
         20.7684,
         21.2452,
         15.2824,
-        8.2882
+        8.255
       ],
       "dim": [
         25.2742,
@@ -779,7 +779,7 @@
         23.2865,
         21.9908,
         39.5708,
-        49.9115
+        50.1123
       ],
       "bb_sup": [
         186.1391,
@@ -821,7 +821,7 @@
         186.2266,
         185.862,
         185.8567,
-        188.4893
+        188.5642
       ],
       "bb_mid": [
         185.1757,
@@ -863,7 +863,7 @@
         185.5567,
         185.6591,
         185.6561,
-        185.0544
+        185.0382
       ],
       "bb_inf": [
         184.2124,
@@ -905,7 +905,7 @@
         184.8869,
         185.4563,
         185.4556,
-        181.6194
+        181.5123
       ]
     }
   ]
