@@ -40,7 +40,7 @@
 <body>
 <header>
   <h1>TradeDesk Insidebar</h1>
-  <span class="sub">MME70 &middot; ADX(8) &middot; inside bar + pullback</span>
+  <span class="sub">MME70 &middot; EMA8 &middot; MACD(144/244/12) &middot; inside bar</span>
   <span class="spacer"></span>
   <div class="controls">
     <select id="mercado" onchange="loadData()">
@@ -102,7 +102,7 @@ function card(a){
     <div class="card-head">
       <span class="tk">${a.ticker}</span><span class="mkt">${a.market||""}</span>
       <span class="ibtag">INSIDE BAR</span>
-      <span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">MME70 \u2197</span>
+      <span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">MME70 \u2197</span>${a.ema8_up?`<span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">EMA8 \u2197</span>`:``}${a.macd_ok?`<span class="ibtag" style="background:linear-gradient(135deg,#8957e5,#6e40c9)">MACD</span>`:``}
     </div>
     <div class="stats">
       <div class="stat"><div class="k">Entrada</div><div class="v mono up">${fmt(a.entry)}</div></div>

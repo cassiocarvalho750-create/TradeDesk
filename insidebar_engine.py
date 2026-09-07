@@ -3,29 +3,31 @@
 TradeDesk Insidebar — motor de sinais.
 
 Estrategia (compra, grafico diario): entrada num inside bar dentro de uma
-tendencia de alta, apos um pequeno pullback.
+tendencia de alta (com EMA8 e MACD confirmando forca).
 
 Regra de sinal (o candle mais recente e o inside bar, "aguardando rompimento"):
   1. TENDENCIA: MME70 (EMA de 70) inclinada p/ CIMA e preco fechando ACIMA dela.
-  2. FORCA: ADX > DI- (forca de tendencia com direcao compradora).
-  3. PULLBACK: 2 a 3 candles de recuo (maximas descendo) imediatamente antes
-     do inside bar; pode furar a MME70 de leve, mas o inside bar fecha acima.
-  4. GATILHO: o ultimo candle e um INSIDE BAR classico — maxima < maxima da
+  2. FORCA: EMA8 inclinada p/ cima (vs 3 candles atras) E MACD (144/244/12)
+     acima da linha de sinal (comprado).
+  3. GATILHO: o ultimo candle e um INSIDE BAR classico — maxima < maxima da
      mae E minima > minima da mae (candle contido no range do anterior).
-  Nivel de entrada sugerido: a MAXIMA do inside bar (rompimento).
+  4. COMPRESSAO: range do inside bar <= 60% do range da mae.
+  Nivel de entrada sugerido: a MAXIMA do inside bar; stop na MINIMA do inside bar.
 
-Reaproveita calc_adx do bt_engine. NAO mexe na logica da Agulhada.
+Reaproveita utilitarios do bt_engine. NAO mexe na logica da Agulhada.
 """
 import numpy as np
 import pandas as pd
 import bt_engine as bt
 
-EMA_LEN      = 70      # media movel exponencial de tendencia
+EMA_LEN      = 70      # media movel exponencial de tendencia (longa)
 EMA_SLOPE_LB = 5       # candles para medir a inclinacao da MME70
 EMA_SLOPE_MIN= 0.0     # inclinacao minima (>0 = subindo). Mantemos >0 estrito.
-ADX_PERIOD   = 8       # mesmo periodo do resto do projeto
-PULLBACK_MIN = 2       # minimo de candles recuando antes do inside bar
-PULLBACK_MAX = 3       # maximo de candles recuando antes do inside bar
+EMA8_LEN     = 8       # media movel exponencial curta (gatilho de forca)
+EMA8_SLOPE_LB= 3       # inclinacao da EMA8 medida contra 3 candles atras
+MACD_FAST    = 144     # MACD customizado: media curta 144
+MACD_SLOW    = 244     # media longa 244 (~1 ano de pregao no diario)
+MACD_SIGNAL  = 12      # linha de sinal 12
 COMPRESS_MAX = 0.60    # range do inside bar <= 60% do range da mae (compressao real)
 
 def compute_insidebar(df):
@@ -40,9 +42,18 @@ def compute_insidebar(df):
     ema_up = ema_slope > EMA_SLOPE_MIN                 # inclinada p/ cima
     preco_acima = c >= ema                             # fecha acima da media
 
-    # --- 2) Forca: ADX > DI- ---
-    adx, dip, dim = bt.calc_adx(h, l, c, period=ADX_PERIOD)
-    forca_ok = adx > dim                               # ADX acima da pressao vendedora
+    # --- 2) FORCA: EMA8 inclinada p/ cima E MACD acima da linha de sinal ---
+    # EMA8 curta subindo (contra 3 candles atras) = momentum de curto prazo.
+    ema8 = c.ewm(span=EMA8_LEN, adjust=False).mean()
+    ema8_slope = ema8 - ema8.shift(EMA8_SLOPE_LB)
+    ema8_up = ema8_slope > 0
+    # MACD classico (12,26,9): linha MACD acima da linha de sinal = comprado.
+    macd_fast = c.ewm(span=MACD_FAST, adjust=False).mean()
+    macd_slow = c.ewm(span=MACD_SLOW, adjust=False).mean()
+    macd_line = macd_fast - macd_slow
+    macd_sig  = macd_line.ewm(span=MACD_SIGNAL, adjust=False).mean()
+    macd_ok = macd_line > macd_sig
+    forca_ok = ema8_up & macd_ok
 
     # --- 4) Inside bar (gatilho no ultimo candle) ---
     # candle atual contido no range do candle anterior (mae)
@@ -58,34 +69,20 @@ def compute_insidebar(df):
     compress_ok = compress_ratio <= COMPRESS_MAX
 
     # --- 3) Pullback: 2-3 candles de maximas recuando ANTES do inside bar ---
-    # olhamos as maximas dos candles que antecedem o inside bar (a mae e antes).
-    # "recuo" = maxima menor que a do candle anterior. Contamos quantos candles
-    # seguidos, terminando na MAE (shift 1), tiveram maxima descendente.
-    desc = (h < h.shift(1))                            # maxima recuando neste candle
-    # nº de candles descendentes consecutivos terminando na MAE (posicao shift(1))
-    # run[k]=1 se a mae desceu; soma a mae e os anteriores enquanto descerem.
-    run = pd.Series(0, index=d.index, dtype=float)
-    # constroi o comprimento da sequencia de "desc" terminando em cada candle
-    streak = pd.Series(0, index=d.index, dtype=float)
-    cnt = 0
-    for i in range(len(d)):
-        cnt = cnt + 1 if bool(desc.iloc[i]) else 0
-        streak.iloc[i] = cnt
-    # o pullback e avaliado na MAE (candle anterior ao inside bar) => shift(1)
-    pull_len = streak.shift(1)
-    pullback_ok = (pull_len >= PULLBACK_MIN) & (pull_len <= PULLBACK_MAX)
-
     # inside bar fecha acima da MME70 (ja coberto por preco_acima no candle atual)
-    # combina tudo no candle ATUAL (o inside bar):
+    # combina tudo no candle ATUAL (o inside bar). Sem pullback: o inside bar
+    # pode aparecer em qualquer ponto da tendencia de alta.
     signal_ib = (inside & compress_ok & ema_up & preco_acima
-                 & forca_ok & pullback_ok).fillna(False)
+                 & forca_ok).fillna(False)
 
     d["ema70"] = ema
     d["ema70_slope"] = ema_slope
-    d["adx"], d["dip"], d["dim"] = adx, dip, dim
+    d["ema8"] = ema8
+    d["ema8_slope"] = ema8_slope
+    d["macd"] = macd_line
+    d["macd_sig"] = macd_sig
     d["inside"] = inside.fillna(False)
     d["compress_ratio"] = compress_ratio
-    d["pull_len"] = pull_len
     d["entry_level"] = h            # maxima do candle (no inside bar = nivel de rompimento)
     d["stop_level"] = l             # minima do candle (no inside bar = stop, risco menor)
     d["mae_high"] = h.shift(1)

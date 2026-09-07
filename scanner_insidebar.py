@@ -9,16 +9,55 @@ USO: python scanner_insidebar.py
 import argparse, datetime, json, time
 import numpy as np
 import pandas as pd
-import scanner as sc                 # reusa fetch_batch, fetch_intraday_ok, _liquidez_ok, tv_url
+import scanner as sc                 # reusa _liquidez_ok, tv_url
 import insidebar_engine as ib
 import run_backtest_v2 as rb
 import us_universe as uni
+
+# O MACD 144/244 precisa de MUITO mais historico que 1 ano p/ estabilizar.
+# O Insidebar baixa seu proprio historico de 2 anos, sem mexer no fetch da
+# Agulhada (que continua 1 ano no TF_CONFIG).
+IB_PERIOD = "2y"
+
+def _fetch_one(tk):
+    """Baixa 2 anos de 1 ativo (diario)."""
+    import yfinance as yf
+    try:
+        d = yf.Ticker(tk).history(period=IB_PERIOD, interval="1d", auto_adjust=True)
+        if d is None or d.empty: return None
+        d.columns = [c.capitalize() for c in d.columns]
+        if d.index.tz is not None: d.index = d.index.tz_localize(None)
+        return d
+    except Exception:
+        return None
+
+def _fetch_batch(tickers, chunk=100):
+    """Baixa 2 anos de varios ativos via yf.download."""
+    import yfinance as yf
+    out={}
+    for i in range(0, len(tickers), chunk):
+        part = tickers[i:i+chunk]
+        try:
+            raw = yf.download(part, period=IB_PERIOD, interval="1d", auto_adjust=True,
+                              group_by="ticker", threads=True, progress=False)
+        except Exception:
+            continue
+        for tk in part:
+            try:
+                d = raw[tk].copy() if len(part) > 1 else raw.copy()
+                d.columns = [c.capitalize() for c in d.columns]
+                d = d.dropna(how="all")
+                if d.index.tz is not None: d.index = d.index.tz_localize(None)
+                if len(d) >= 50: out[tk] = d
+            except Exception:
+                continue
+    return out
 
 def _mkt(tk): return "B3" if tk.endswith(".SA") else "EUA"
 
 def evaluate(tk, d, today):
     """Avalia UM ticker e retorna hit se o ultimo candle for sinal de inside bar."""
-    if d is None or len(d) < 90:
+    if d is None or len(d) < 280:
         return None
     for col in ("Open","High","Low","Close","Volume"):
         if col not in d.columns: return None
@@ -42,10 +81,9 @@ def evaluate(tk, d, today):
         "r_pct": round(float(r_pct),2),
         "ema70": round(float(last["ema70"]),2),
         "ema70_up": bool(last["ema70_slope"]>0),
-        "adx": round(float(last["adx"]),1),
-        "dim": round(float(last["dim"]),1),
+        "ema8_up": bool(last["ema8_slope"]>0),
+        "macd_ok": bool(last["macd"]>last["macd_sig"]),
         "compress": round(float(last["compress_ratio"]),2),
-        "pull_len": int(last["pull_len"]) if not np.isnan(last["pull_len"]) else None,
         "mae_high": round(float(last["mae_high"]),2),
         "mae_low": round(float(last["mae_low"]),2),
         "var_dia_pct": round(var_dia,2),
@@ -59,7 +97,7 @@ def build_panel(hits, n_bars=40, out_path="painel_insidebar.json"):
     ativos=[]
     for h in hits:
         tk=h["ticker"]
-        d=sc.fetch_intraday_ok(tk, timeframe="1d")
+        d=_fetch_one(tk)
         if len(d)<30: continue
         c=d["Close"]; hi=d["High"]; lo=d["Low"]; op=d["Open"]
         ema=c.ewm(span=ib.EMA_LEN, adjust=False).mean()
@@ -71,8 +109,8 @@ def build_panel(hits, n_bars=40, out_path="painel_insidebar.json"):
             "ticker": tk.replace(".SA",""), "market": h["market"],
             "close": h["close"], "entry": h["entry"], "stop": h["stop"],
             "r_pct": h["r_pct"], "ema70": h["ema70"], "ema70_up": h["ema70_up"],
-            "adx": h["adx"], "dim": h["dim"], "compress": h["compress"],
-            "pull_len": h["pull_len"], "mae_high": h["mae_high"], "mae_low": h["mae_low"],
+            "ema8_up": h["ema8_up"], "macd_ok": h["macd_ok"], "compress": h["compress"],
+            "mae_high": h["mae_high"], "mae_low": h["mae_low"],
             "var_dia_pct": h["var_dia_pct"], "vol_qtd": h["vol_qtd"],
             "date": h["date"], "tv": sc.tv_url(tk),
             "dates": dates,
@@ -92,7 +130,7 @@ def scan(tickers, batch=True, chunk=100):
     try: B3_MIN=float(getattr(rb,"B3_MIN_VOL_FIN_MI",5.0))
     except: B3_MIN=5.0
     if batch:
-        data=sc.fetch_batch(tickers, timeframe="1d", chunk=chunk)
+        data=_fetch_batch(tickers, chunk=chunk)
         print(f"  baixados {len(data)}/{len(tickers)}")
         for tk in tickers:
             d=data.get(tk)
@@ -103,8 +141,8 @@ def scan(tickers, batch=True, chunk=100):
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
-            d=sc.fetch_intraday_ok(tk, timeframe="1d")
-            if len(d)<90: time.sleep(0.02); continue
+            d=_fetch_one(tk)
+            if d is None or len(d)<280: time.sleep(0.02); continue
             if not sc._liquidez_ok(tk, d, US_MIN, B3_MIN): time.sleep(0.01); continue
             r=evaluate(tk, d, today)
             if r: hits.append(r)
