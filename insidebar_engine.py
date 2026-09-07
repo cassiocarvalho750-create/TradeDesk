@@ -6,13 +6,14 @@ Estrategia (compra, grafico diario): entrada num inside bar dentro de uma
 tendencia de alta (com EMA8 e MACD confirmando forca).
 
 Regra de sinal (o candle mais recente e o inside bar, "aguardando rompimento"):
-  1. TENDENCIA: MME70 (EMA de 70) inclinada p/ CIMA e preco fechando ACIMA dela.
-  2. FORCA: EMA8 inclinada p/ cima (vs 3 candles atras) E MACD (144/244/12)
-     acima da linha de sinal (comprado).
-  3. GATILHO: o ultimo candle e um INSIDE BAR classico — maxima < maxima da
-     mae E minima > minima da mae (candle contido no range do anterior).
-  4. COMPRESSAO: range do inside bar <= 60% do range da mae.
-  Nivel de entrada sugerido: a MAXIMA do inside bar; stop na MINIMA do inside bar.
+  1. ALINHAMENTO: MME9 > MME21 > MMS50 e as tres inclinadas p/ cima
+     (tendencia de alta saudavel em curto, medio e medio-longo prazo).
+  2. PERTO DA MME9: o fechamento esta encostado/logo acima da MME9 (ate 3%)
+     — entra no momentum, nao esticado.
+  3. NAO ESTICADO: o preco esta no maximo 8% acima da MME21 (evita topo).
+  4. GATILHO: inside bar classico — maxima < maxima da mae E minima > minima.
+  5. COMPRESSAO: range do inside bar <= 60% do range da mae.
+  Nivel de entrada: a MAXIMA do inside bar; stop na MINIMA do inside bar.
 
 Reaproveita utilitarios do bt_engine. NAO mexe na logica da Agulhada.
 """
@@ -20,14 +21,12 @@ import numpy as np
 import pandas as pd
 import bt_engine as bt
 
-EMA_LEN      = 70      # media movel exponencial de tendencia (longa)
-EMA_SLOPE_LB = 5       # candles para medir a inclinacao da MME70
-EMA_SLOPE_MIN= 0.0     # inclinacao minima (>0 = subindo). Mantemos >0 estrito.
-EMA8_LEN     = 8       # media movel exponencial curta (gatilho de forca)
-EMA8_SLOPE_LB= 3       # inclinacao da EMA8 medida contra 3 candles atras
-MACD_FAST    = 144     # MACD customizado: media curta 144
-MACD_SLOW    = 244     # media longa 244 (~1 ano de pregao no diario)
-MACD_SIGNAL  = 12      # linha de sinal 12
+EMA9_LEN     = 9       # MME rapida (rastreador de momentum)
+EMA21_LEN    = 21      # MME intermediaria
+SMA50_LEN    = 50      # MMS de tendencia (simples, por escolha)
+SLOPE_LB     = 3       # candles para medir a inclinacao das medias
+PERTO_MME9   = 0.03    # inside bar ate 3% acima da MME9 (encostado, nao descolado)
+ESTICADO_MAX = 0.08    # preco no maximo 8% acima da MME21 (evita ativo esticado)
 COMPRESS_MAX = 0.60    # range do inside bar <= 60% do range da mae (compressao real)
 
 def compute_insidebar(df):
@@ -36,24 +35,25 @@ def compute_insidebar(df):
     d = df.copy()
     o, h, l, c = d["Open"], d["High"], d["Low"], d["Close"]
 
-    # --- 1) Tendencia: MME70 subindo e preco acima ---
-    ema = c.ewm(span=EMA_LEN, adjust=False).mean()
-    ema_slope = ema - ema.shift(EMA_SLOPE_LB)          # variacao absoluta em N candles
-    ema_up = ema_slope > EMA_SLOPE_MIN                 # inclinada p/ cima
-    preco_acima = c >= ema                             # fecha acima da media
+    # --- 1) ALINHAMENTO DE MEDIAS: MME9 > MME21 > MMS50, todas subindo ---
+    ema9  = c.ewm(span=EMA9_LEN,  adjust=False).mean()
+    ema21 = c.ewm(span=EMA21_LEN, adjust=False).mean()
+    sma50 = c.rolling(SMA50_LEN).mean()                 # simples, por escolha
+    ordenadas = (ema9 > ema21) & (ema21 > sma50)        # empilhadas na ordem de alta
+    m9_up  = ema9  > ema9.shift(SLOPE_LB)
+    m21_up = ema21 > ema21.shift(SLOPE_LB)
+    m50_up = sma50 > sma50.shift(SLOPE_LB)
+    todas_subindo = m9_up & m21_up & m50_up
+    alinhamento_ok = ordenadas & todas_subindo
 
-    # --- 2) FORCA: EMA8 inclinada p/ cima E MACD acima da linha de sinal ---
-    # EMA8 curta subindo (contra 3 candles atras) = momentum de curto prazo.
-    ema8 = c.ewm(span=EMA8_LEN, adjust=False).mean()
-    ema8_slope = ema8 - ema8.shift(EMA8_SLOPE_LB)
-    ema8_up = ema8_slope > 0
-    # MACD classico (12,26,9): linha MACD acima da linha de sinal = comprado.
-    macd_fast = c.ewm(span=MACD_FAST, adjust=False).mean()
-    macd_slow = c.ewm(span=MACD_SLOW, adjust=False).mean()
-    macd_line = macd_fast - macd_slow
-    macd_sig  = macd_line.ewm(span=MACD_SIGNAL, adjust=False).mean()
-    macd_ok = macd_line > macd_sig
-    forca_ok = ema8_up & macd_ok
+    # --- 2) PERTO DA MME9: inside bar encostado/logo acima (nao descolado) ---
+    # fechamento entre a MME9 e ate PERTO_MME9 acima dela (ex.: 0 a 3% acima).
+    dist_mme9 = (c - ema9) / ema9.replace(0, np.nan)
+    perto_mme9_ok = (dist_mme9 >= 0) & (dist_mme9 <= PERTO_MME9)
+
+    # --- 3) NAO ESTICADO: preco nao muito acima da MME21 ---
+    dist_mme21 = (c - ema21) / ema21.replace(0, np.nan)
+    nao_esticado_ok = dist_mme21 <= ESTICADO_MAX
 
     # --- 4) Inside bar (gatilho no ultimo candle) ---
     # candle atual contido no range do candle anterior (mae)
@@ -68,19 +68,18 @@ def compute_insidebar(df):
     compress_ratio = rng_ib / rng_mae.replace(0, np.nan)
     compress_ok = compress_ratio <= COMPRESS_MAX
 
-    # --- 3) Pullback: 2-3 candles de maximas recuando ANTES do inside bar ---
-    # inside bar fecha acima da MME70 (ja coberto por preco_acima no candle atual)
-    # combina tudo no candle ATUAL (o inside bar). Sem pullback: o inside bar
-    # pode aparecer em qualquer ponto da tendencia de alta.
-    signal_ib = (inside & compress_ok & ema_up & preco_acima
-                 & forca_ok).fillna(False)
+    # combina tudo no candle ATUAL (o inside bar):
+    # alinhamento 9>21>50 subindo + inside encostado na MME9 + nao esticado +
+    # inside bar classico + compressao real.
+    signal_ib = (inside & compress_ok & alinhamento_ok
+                 & perto_mme9_ok & nao_esticado_ok).fillna(False)
 
-    d["ema70"] = ema
-    d["ema70_slope"] = ema_slope
-    d["ema8"] = ema8
-    d["ema8_slope"] = ema8_slope
-    d["macd"] = macd_line
-    d["macd_sig"] = macd_sig
+    d["ema9"] = ema9
+    d["ema21"] = ema21
+    d["sma50"] = sma50
+    d["alinhamento_ok"] = alinhamento_ok.fillna(False)
+    d["dist_mme9"] = dist_mme9
+    d["dist_mme21"] = dist_mme21
     d["inside"] = inside.fillna(False)
     d["compress_ratio"] = compress_ratio
     d["entry_level"] = h            # maxima do candle (no inside bar = nivel de rompimento)

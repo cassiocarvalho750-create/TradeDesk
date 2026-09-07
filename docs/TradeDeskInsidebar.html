@@ -40,7 +40,7 @@
 <body>
 <header>
   <h1>TradeDesk Insidebar</h1>
-  <span class="sub">MME70 &middot; EMA8 &middot; MACD(144/244/12) &middot; inside bar</span>
+  <span class="sub">MME9 &gt; MME21 &gt; MMS50 &middot; inside bar &middot; não esticado</span>
   <span class="spacer"></span>
   <div class="controls">
     <select id="mercado" onchange="loadData()">
@@ -65,17 +65,17 @@ function fmtVol(v){if(v==null||isNaN(v))return"\u2014";if(v>=1e9)return(v/1e9).t
 
 // desenha candles + linha da MME70 + destaque do inside bar (ultimo candle)
 function chart(a){
-  const o=a.o,h=a.h,l=a.l,c=a.price,ema=a.ema;
+  const o=a.o,h=a.h,l=a.l,c=a.price,e9=a.ema9s,e21=a.ema21s,e50=a.sma50s;
   const n=c.length; if(!n) return "";
   const W=300,H=150,pad=6;
   let lo=Infinity,hi=-Infinity;
-  for(let i=0;i<n;i++){ if(l[i]!=null)lo=Math.min(lo,l[i]); if(h[i]!=null)hi=Math.max(hi,h[i]); if(ema[i]!=null){lo=Math.min(lo,ema[i]);hi=Math.max(hi,ema[i]);} }
+  for(let i=0;i<n;i++){ if(l[i]!=null)lo=Math.min(lo,l[i]); if(h[i]!=null)hi=Math.max(hi,h[i]); [e9,e21,e50].forEach(a=>{if(a&&a[i]!=null){lo=Math.min(lo,a[i]);hi=Math.max(hi,a[i]);}}); }
   const yr=hi-lo||1; const X=i=>pad+(i/(n-1))*(W-2*pad); const Y=v=>H-pad-((v-lo)/yr)*(H-2*pad);
   const cw=Math.max(1.5,(W-2*pad)/n*0.6);
   let s="";
-  // MME70
-  let dstr=""; for(let i=0;i<n;i++){ if(ema[i]==null)continue; dstr+=(dstr?"L":"M")+X(i).toFixed(1)+","+Y(ema[i]).toFixed(1); }
-  s+=`<path d="${dstr}" fill="none" stroke="#e3b341" stroke-width="1.4"/>`;
+  // 3 medias: MME9 (verde), MME21 (amarelo), MMS50 (laranja)
+  function linha(arr,cor,w){ let ds=""; for(let i=0;i<n;i++){ if(!arr||arr[i]==null)continue; ds+=(ds?"L":"M")+X(i).toFixed(1)+","+Y(arr[i]).toFixed(1);} return ds?`<path d="${ds}" fill="none" stroke="${cor}" stroke-width="${w}"/>`:""; }
+  s+=linha(e50,"#d29922",1.0)+linha(e21,"#e3b341",1.2)+linha(e9,"#3fb950",1.4);
   // candles
   for(let i=0;i<n;i++){
     if(c[i]==null)continue;
@@ -102,7 +102,7 @@ function card(a){
     <div class="card-head">
       <span class="tk">${a.ticker}</span><span class="mkt">${a.market||""}</span>
       <span class="ibtag">INSIDE BAR</span>
-      <span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">MME70 \u2197</span>${a.ema8_up?`<span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">EMA8 \u2197</span>`:``}${a.macd_ok?`<span class="ibtag" style="background:linear-gradient(135deg,#8957e5,#6e40c9)">MACD</span>`:``}
+      <span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">9&gt;21&gt;50 \u2197</span>
     </div>
     <div class="stats">
       <div class="stat"><div class="k">Entrada</div><div class="v mono up">${fmt(a.entry)}</div></div>
@@ -115,7 +115,7 @@ function card(a){
       <div class="stat"><div class="k">Volume</div><div class="v mono">${fmtVol(a.vol_qtd)}</div></div>
     </div>
     <div class="chart-wrap">
-      <div class="chart-lbl"><span>PRE\u00c7O + MME70</span><span>entrada \u2500\u2500 verde / stop \u2500\u2500 vermelho</span></div>
+      <div class="chart-lbl"><span>PRE\u00c7O + MME9/21/50</span><span>entrada \u2500\u2500 verde / stop \u2500\u2500 vermelho</span></div>
       ${chart(a)}
     </div>
     <div style="padding:0 16px 14px"><a href="${tv}" target="_blank" rel="noopener" class="btn ghost" style="display:block;text-align:center;text-decoration:none">\ud83d\udcc8 Ver no TradingView</a></div>

@@ -17,7 +17,7 @@ import us_universe as uni
 # O MACD 144/244 precisa de MUITO mais historico que 1 ano p/ estabilizar.
 # O Insidebar baixa seu proprio historico de 2 anos, sem mexer no fetch da
 # Agulhada (que continua 1 ano no TF_CONFIG).
-IB_PERIOD = "2y"
+IB_PERIOD = "1y"   # 50 e a maior media; 1 ano basta
 
 def _fetch_one(tk):
     """Baixa 2 anos de 1 ativo (diario)."""
@@ -57,7 +57,7 @@ def _mkt(tk): return "B3" if tk.endswith(".SA") else "EUA"
 
 def evaluate(tk, d, today):
     """Avalia UM ticker e retorna hit se o ultimo candle for sinal de inside bar."""
-    if d is None or len(d) < 280:
+    if d is None or len(d) < 90:
         return None
     for col in ("Open","High","Low","Close","Volume"):
         if col not in d.columns: return None
@@ -79,10 +79,11 @@ def evaluate(tk, d, today):
         "close": round(float(last["Close"]),2),
         "entry": round(entry,2), "stop": round(stop,2),
         "r_pct": round(float(r_pct),2),
-        "ema70": round(float(last["ema70"]),2),
-        "ema70_up": bool(last["ema70_slope"]>0),
-        "ema8_up": bool(last["ema8_slope"]>0),
-        "macd_ok": bool(last["macd"]>last["macd_sig"]),
+        "ema9": round(float(last["ema9"]),2),
+        "ema21": round(float(last["ema21"]),2),
+        "sma50": round(float(last["sma50"]),2),
+        "dist_mme9": round(float(last["dist_mme9"])*100,2),
+        "dist_mme21": round(float(last["dist_mme21"])*100,2),
         "compress": round(float(last["compress_ratio"]),2),
         "mae_high": round(float(last["mae_high"]),2),
         "mae_low": round(float(last["mae_low"]),2),
@@ -100,7 +101,9 @@ def build_panel(hits, n_bars=40, out_path="painel_insidebar.json"):
         d=_fetch_one(tk)
         if len(d)<30: continue
         c=d["Close"]; hi=d["High"]; lo=d["Low"]; op=d["Open"]
-        ema=c.ewm(span=ib.EMA_LEN, adjust=False).mean()
+        ema9=c.ewm(span=ib.EMA9_LEN,adjust=False).mean()
+        ema21=c.ewm(span=ib.EMA21_LEN,adjust=False).mean()
+        sma50=c.rolling(ib.SMA50_LEN).mean()
         def tail(s):
             return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
                     for v in s.tail(n_bars).tolist()]
@@ -108,14 +111,14 @@ def build_panel(hits, n_bars=40, out_path="painel_insidebar.json"):
         ativos.append({
             "ticker": tk.replace(".SA",""), "market": h["market"],
             "close": h["close"], "entry": h["entry"], "stop": h["stop"],
-            "r_pct": h["r_pct"], "ema70": h["ema70"], "ema70_up": h["ema70_up"],
-            "ema8_up": h["ema8_up"], "macd_ok": h["macd_ok"], "compress": h["compress"],
+            "r_pct": h["r_pct"], "ema9": h["ema9"], "ema21": h["ema21"], "sma50": h["sma50"],
+            "dist_mme9": h["dist_mme9"], "dist_mme21": h["dist_mme21"], "compress": h["compress"],
             "mae_high": h["mae_high"], "mae_low": h["mae_low"],
             "var_dia_pct": h["var_dia_pct"], "vol_qtd": h["vol_qtd"],
             "date": h["date"], "tv": sc.tv_url(tk),
             "dates": dates,
             "o": tail(op), "h": tail(hi), "l": tail(lo), "price": tail(c),
-            "ema": tail(ema),
+            "ema9s": tail(ema9), "ema21s": tail(ema21), "sma50s": tail(sma50),
         })
     payload={"gerado":str(datetime.date.today()),"captura":captura,"timeframe":"1d",
              "n":len(ativos),"ativos":ativos}
@@ -142,7 +145,7 @@ def scan(tickers, batch=True, chunk=100):
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
             d=_fetch_one(tk)
-            if d is None or len(d)<280: time.sleep(0.02); continue
+            if d is None or len(d)<90: time.sleep(0.02); continue
             if not sc._liquidez_ok(tk, d, US_MIN, B3_MIN): time.sleep(0.01); continue
             r=evaluate(tk, d, today)
             if r: hits.append(r)
