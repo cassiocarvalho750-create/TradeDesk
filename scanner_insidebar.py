@@ -176,7 +176,8 @@ def main():
     print("\n"+"="*60)
     if not hits: print("  Nenhum inside bar hoje.")
     else:
-        hits.sort(key=lambda h:-(h.get("r_pct") or 0))
+        # ordena por MAIOR compressao: menor razao (inside/mae) = mais espremido
+        hits.sort(key=lambda h:(h.get("compress") if h.get("compress") is not None else 9))
         print(f"  {len(hits)} sinal(is):\n")
         for h in hits:
             print(f"  {h['ticker']:<10}{h['market']:<5} entrada {h['entry']:>9} "

@@ -130,7 +130,8 @@ async function loadData(){
     if(!r.ok){setStatus("Sem dados publicados ainda.","err");$("grid").innerHTML="";return 0;}
     const d=await r.json();
     let ativos=(d.ativos||[]).filter(a=> sel==="ambos" || (sel==="us"&&a.market==="EUA") || (sel==="b3"&&a.market==="B3"));
-    ativos.sort((a,b)=>(b.r_pct==null?-1:0)-(a.r_pct==null?-1:0) || (a.r_pct-b.r_pct));
+    // ordena por MAIOR compressao: menor razao (inside/mae) = mais espremido no topo
+    ativos.sort((a,b)=>(a.compress==null?9:a.compress)-(b.compress==null?9:b.compress));
     $("infobar").innerHTML=`${ativos.length} inside bar(s) &middot; dados de <b>${d.gerado||""}</b> &middot; capturado ${d.captura||""} (BRT, Yahoo ~15min de atraso) &middot; entrada no rompimento da m&aacute;xima`;
     if(!ativos.length){$("grid").innerHTML=`<div style="grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)">Nenhum inside bar com os filtros hoje.</div>`;setStatus("Sem sinais hoje.","ok");return 0;}
     $("grid").innerHTML=ativos.map(card).join("");
