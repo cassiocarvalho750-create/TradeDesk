@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeDesk Insidebar</title>
+<style>
+  :root{--bg:#0d1117;--card:#0d1117;--line:#30363d;--muted:#6b7d92;--accent:#58a6ff;--txt:#e6edf3;--up:#3fb950;--dn:#f85149}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  header{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  h1{font-size:18px;margin:0;letter-spacing:.02em}
+  .sub{color:var(--muted);font-size:13px}
+  .spacer{flex:1}
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  select,.btn{background:#161b22;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px;cursor:pointer}
+  .btn.ghost{background:transparent}
+  .status{padding:10px 20px;color:var(--muted);font-size:13px}
+  .bar{padding:8px 20px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;padding:16px 20px}
+  .card{border:1px solid var(--up);border-radius:12px;overflow:hidden;background:#0e141b}
+  .card-head{display:flex;align-items:center;flex-wrap:wrap;gap:5px;padding:14px 16px 8px}
+  .tk{font-size:18px;font-weight:800}
+  .mkt{font-size:10px;color:var(--muted);border:1px solid var(--line);padding:1px 5px;border-radius:4px;margin-left:6px}
+  .ibtag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;padding:2px 6px;border-radius:5px;margin-left:6px;background:linear-gradient(135deg,#58a6ff,#1f6feb);color:#fff}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin:0 16px;border-radius:6px;overflow:hidden}
+  .stat{background:#0e141b;padding:8px 6px;text-align:center}
+  .k{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .v{font-size:14px;font-weight:700;margin-top:2px}
+  .mono{font-variant-numeric:tabular-nums}
+  .down{color:var(--dn)}
+  .up{color:var(--up)}
+  .chart-wrap{padding:10px 16px 14px}
+  .chart-lbl{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-bottom:4px}
+  svg{width:100%;height:150px;display:block}
+  footer{padding:16px 20px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <h1>TradeDesk Insidebar</h1>
+  <span class="sub">MME70 &middot; ADX(8) &middot; inside bar + pullback</span>
+  <span class="spacer"></span>
+  <div class="controls">
+    <select id="mercado" onchange="loadData()">
+      <option value="ambos">Ambos (EUA + B3)</option>
+      <option value="us">EUA</option>
+      <option value="b3">B3</option>
+    </select>
+    <button class="btn ghost" id="reloadBtn">Recarregar</button>
+    <a href="TradeDesk.html" class="btn ghost" style="text-decoration:none">&larr; Agulhada</a>
+  </div>
+</header>
+<div class="status"><span id="dot" style="color:var(--up)">&#9679;</span> <span id="status">Carregando&hellip;</span></div>
+<div class="bar" id="infobar"></div>
+<div class="grid" id="grid"></div>
+<footer>Leitura tecnica para analise propria. Sinal aparece quando o inside bar SE FORMA — a entrada e no rompimento da maxima. Nao e recomendacao de compra.</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+function setStatus(t,c){$("status").textContent=t;$("dot").style.color=c==="run"?"#e3b341":c==="err"?"#f85149":"#3fb950";}
+function fmt(v,d=2){return v==null||isNaN(v)?"\u2014":Number(v).toFixed(d);}
+function fmtVol(v){if(v==null||isNaN(v))return"\u2014";if(v>=1e9)return(v/1e9).toFixed(1)+" bi";if(v>=1e6)return(v/1e6).toFixed(1)+" Mi";if(v>=1e3)return(v/1e3).toFixed(0)+" mil";return String(Math.round(v));}
+
+// desenha candles + linha da MME70 + destaque do inside bar (ultimo candle)
+function chart(a){
+  const o=a.o,h=a.h,l=a.l,c=a.price,ema=a.ema;
+  const n=c.length; if(!n) return "";
+  const W=300,H=150,pad=6;
+  let lo=Infinity,hi=-Infinity;
+  for(let i=0;i<n;i++){ if(l[i]!=null)lo=Math.min(lo,l[i]); if(h[i]!=null)hi=Math.max(hi,h[i]); if(ema[i]!=null){lo=Math.min(lo,ema[i]);hi=Math.max(hi,ema[i]);} }
+  const yr=hi-lo||1; const X=i=>pad+(i/(n-1))*(W-2*pad); const Y=v=>H-pad-((v-lo)/yr)*(H-2*pad);
+  const cw=Math.max(1.5,(W-2*pad)/n*0.6);
+  let s="";
+  // MME70
+  let dstr=""; for(let i=0;i<n;i++){ if(ema[i]==null)continue; dstr+=(dstr?"L":"M")+X(i).toFixed(1)+","+Y(ema[i]).toFixed(1); }
+  s+=`<path d="${dstr}" fill="none" stroke="#e3b341" stroke-width="1.4"/>`;
+  // candles
+  for(let i=0;i<n;i++){
+    if(c[i]==null)continue;
+    const up=c[i]>=o[i]; const col=up?"#3fb950":"#f85149";
+    const x=X(i);
+    // pavio
+    s+=`<line x1="${x.toFixed(1)}" y1="${Y(h[i]).toFixed(1)}" x2="${x.toFixed(1)}" y2="${Y(l[i]).toFixed(1)}" stroke="${col}" stroke-width="1"/>`;
+    // corpo
+    const yo=Y(o[i]),yc=Y(c[i]); const top=Math.min(yo,yc),bh=Math.max(1,Math.abs(yc-yo));
+    s+=`<rect x="${(x-cw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${cw.toFixed(1)}" height="${bh.toFixed(1)}" fill="${col}"/>`;
+  }
+  // destaque do inside bar (ultimo candle) e da mae
+  const xi=X(n-1);
+  s+=`<rect x="${(xi-cw).toFixed(1)}" y="${pad}" width="${(cw*2).toFixed(1)}" height="${H-2*pad}" fill="#58a6ff" opacity="0.10"/>`;
+  // linha de entrada (maxima do inside bar) e stop (minima)
+  s+=`<line x1="${pad}" y1="${Y(a.entry).toFixed(1)}" x2="${W-pad}" y2="${Y(a.entry).toFixed(1)}" stroke="#3fb950" stroke-width="0.8" stroke-dasharray="4 3"/>`;
+  s+=`<line x1="${pad}" y1="${Y(a.stop).toFixed(1)}" x2="${W-pad}" y2="${Y(a.stop).toFixed(1)}" stroke="#f85149" stroke-width="0.8" stroke-dasharray="4 3"/>`;
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${s}</svg>`;
+}
+
+function card(a){
+  const tv=a.tv||("https://www.tradingview.com/chart/?symbol="+encodeURIComponent(a.market==="B3"?("BMFBOVESPA:"+a.ticker):a.ticker));
+  return `<div class="card">
+    <div class="card-head">
+      <span class="tk">${a.ticker}</span><span class="mkt">${a.market||""}</span>
+      <span class="ibtag">INSIDE BAR</span>
+      <span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">MME70 \u2197</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="k">Entrada</div><div class="v mono up">${fmt(a.entry)}</div></div>
+      <div class="stat"><div class="k">Stop</div><div class="v mono down">${fmt(a.stop)}</div></div>
+      <div class="stat"><div class="k">R%</div><div class="v mono">${fmt(a.r_pct)}%</div></div>
+    </div>
+    <div class="stats" style="margin-top:1px">
+      <div class="stat"><div class="k">Pre\u00e7o</div><div class="v mono">${fmt(a.close)}</div></div>
+      <div class="stat"><div class="k">Compress\u00e3o</div><div class="v mono">${fmt(a.compress*100,0)}%</div></div>
+      <div class="stat"><div class="k">Volume</div><div class="v mono">${fmtVol(a.vol_qtd)}</div></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-lbl"><span>PRE\u00c7O + MME70</span><span>entrada \u2500\u2500 verde / stop \u2500\u2500 vermelho</span></div>
+      ${chart(a)}
+    </div>
+    <div style="padding:0 16px 14px"><a href="${tv}" target="_blank" rel="noopener" class="btn ghost" style="display:block;text-align:center;text-decoration:none">\ud83d\udcc8 Ver no TradingView</a></div>
+  </div>`;
+}
+
+async function loadData(){
+  setStatus("Carregando\u2026","run");
+  const sel=$("mercado").value;
+  try{
+    const r=await fetch("painel_insidebar.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok){setStatus("Sem dados publicados ainda.","err");$("grid").innerHTML="";return 0;}
+    const d=await r.json();
+    let ativos=(d.ativos||[]).filter(a=> sel==="ambos" || (sel==="us"&&a.market==="EUA") || (sel==="b3"&&a.market==="B3"));
+    ativos.sort((a,b)=>(b.r_pct==null?-1:0)-(a.r_pct==null?-1:0) || (a.r_pct-b.r_pct));
+    $("infobar").innerHTML=`${ativos.length} inside bar(s) &middot; dados de <b>${d.gerado||""}</b> &middot; capturado ${d.captura||""} (BRT, Yahoo ~15min de atraso) &middot; entrada no rompimento da m&aacute;xima`;
+    if(!ativos.length){$("grid").innerHTML=`<div style="grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)">Nenhum inside bar com os filtros hoje.</div>`;setStatus("Sem sinais hoje.","ok");return 0;}
+    $("grid").innerHTML=ativos.map(card).join("");
+    setStatus("Dados carregados.","ok");
+    return ativos.length;
+  }catch(e){setStatus("Erro ao carregar: "+e.message,"err");return 0;}
+}
+$("reloadBtn").onclick=()=>loadData();
+loadData();
+</script>
+</body>
+</html>
