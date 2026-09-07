@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-07",
-  "captura": "07/09/2026 18:40",
+  "captura": "07/09/2026 19:19",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 0.72,
       "stop": 0.72,
-      "r_pct": 0.32,
+      "r_pct": 0.05,
       "forming": true,
       "date": "2026-09-07",
       "ult_candle": "2026-09-07",
@@ -23,15 +23,15 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=AUDUSD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.24,
+      "var_dia_pct": 0.05,
       "acima_ema70": true,
       "ema70": 0.7071,
       "ema70_incl": "sobe",
-      "quality": 89.0,
+      "quality": 92.0,
       "didi_dist": 0.591,
-      "pos_range": 0.849,
-      "dist_max_pct": 0.06,
-      "adx_var_pct": -2.8,
+      "pos_range": 1.0,
+      "dist_max_pct": 0.0,
+      "adx_var_pct": -4.0,
       "confluencia": true,
       "bb_primeira": false,
       "high": 0.72,
@@ -243,7 +243,7 @@
         26.0839,
         24.9448,
         24.7337,
-        25.3586
+        25.0528
       ],
       "dip": [
         25.7545,
@@ -285,7 +285,7 @@
         15.8547,
         21.5111,
         21.1313,
-        22.4263
+        21.6596
       ],
       "dim": [
         15.9338,
@@ -327,7 +327,7 @@
         18.1416,
         15.2692,
         13.1571,
-        12.1468
+        12.3732
       ],
       "bb_sup": [
         0.6962,
