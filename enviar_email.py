@@ -45,13 +45,13 @@ def carregar_sinais():
 
 # ---------- desenhar o grafico de um ativo ----------
 def grafico_png(a):
-    """Gera PNG (base64) com 3 paineis: Didi, ADX/DI, Bollinger+preco."""
+    """Gera PNG (base64) com 3 paineis: Candles+medias+BB, Didi, ADX/DI."""
     dates = a.get("dates") or list(range(len(a.get("price",[]))))
     price = a.get("price",[])
     if not price: return None
     n=len(price); x=list(range(n))
-    fig,(ax1,ax2,ax3)=plt.subplots(3,1,figsize=(7,7),sharex=True,
-                                   gridspec_kw={"height_ratios":[1,1,1.4]})
+    fig,(ax1,ax2,ax3)=plt.subplots(3,1,figsize=(7,7.5),sharex=True,
+                                   gridspec_kw={"height_ratios":[1.6,1,1]})
     fig.patch.set_facecolor("#0d1117")
     for ax in (ax1,ax2,ax3):
         ax.set_facecolor("#0d1117")
@@ -59,32 +59,53 @@ def grafico_png(a):
         ax.tick_params(colors="#6b7d92", labelsize=7)
         ax.grid(True, color="#161b22", linewidth=.6)
 
-    # Didi Index
-    dc=a.get("didi_curta",[]); dl=a.get("didi_longa",[])
-    if dc: ax1.plot(x[:len(dc)],dc,color="#3fb950",lw=1.3,label="curta")
-    if dl: ax1.plot(x[:len(dl)],dl,color="#f85149",lw=1.3,label="longa")
-    ax1.axhline(0,color="#6b7d92",lw=.6,ls="--")
-    ax1.set_ylabel("DIDI",color="#adbac7",fontsize=8)
-    ax1.legend(loc="upper left",fontsize=6,facecolor="#161b22",edgecolor="#30363d",labelcolor="#adbac7")
-
-    # ADX / DI
-    adx=a.get("adx",[]); dip=a.get("dip",[]); dim=a.get("dim",[])
-    if adx: ax2.plot(x[:len(adx)],adx,color="#e6edf3",lw=1.4,label="ADX")
-    if dip: ax2.plot(x[:len(dip)],dip,color="#3fb950",lw=1.0,label="DI+")
-    if dim: ax2.plot(x[:len(dim)],dim,color="#f85149",lw=1.0,label="DI-")
-    ax2.set_ylabel("ADX/DI",color="#adbac7",fontsize=8)
-    ax2.legend(loc="upper left",fontsize=6,facecolor="#161b22",edgecolor="#30363d",labelcolor="#adbac7")
-
-    # Bollinger + preco
-    bs=a.get("bb_sup",[]); bm=a.get("bb_mid",[]); bi=a.get("bb_inf",[])
-    ax3.plot(x,price,color="#58a6ff",lw=1.5,label="Preço")
-    if bs: ax3.plot(x[:len(bs)],bs,color="#8b949e",lw=.9)
-    if bm: ax3.plot(x[:len(bm)],bm,color="#6e7681",lw=.7,ls="--")
-    if bi: ax3.plot(x[:len(bi)],bi,color="#8b949e",lw=.9)
+    # --- 1) CANDLES + medias 3/8/20 + Bollinger (topo) ---
+    import numpy as _np
+    def _f(s):  # converte None -> NaN para o matplotlib ignorar
+        return [(_np.nan if v is None else v) for v in (s or [])]
+    o=a.get("o",[]); hi=a.get("h",[]); lo=a.get("l",[]); c=price
+    bs=_f(a.get("bb_sup",[])); bm=_f(a.get("bb_mid",[])); bi=_f(a.get("bb_inf",[]))
+    # bandas de Bollinger (area + linhas)
     if bs and bi:
         m=min(len(bs),len(bi))
-        ax3.fill_between(x[:m],bi[:m],bs[:m],color="#1f6feb",alpha=.06)
-    ax3.set_ylabel("Bollinger",color="#adbac7",fontsize=8)
+        ax1.fill_between(x[:m],bi[:m],bs[:m],color="#1f6feb",alpha=.05)
+        ax1.plot(x[:len(bs)],bs,color="#58a6ff",lw=.7,alpha=.5)
+        ax1.plot(x[:len(bi)],bi,color="#58a6ff",lw=.7,alpha=.5)
+    # medias (curta verde, media amarela, longa laranja)
+    ma3=_f(a.get("ma3",[])); ma8=_f(a.get("ma8",[])); ma20=_f(a.get("ma20",[]))
+    if ma20: ax1.plot(x[:len(ma20)],ma20,color="#d29922",lw=1.0,label="MM20")
+    if ma8:  ax1.plot(x[:len(ma8)], ma8, color="#e3b341",lw=1.0,label="MM8")
+    if ma3:  ax1.plot(x[:len(ma3)], ma3, color="#3fb950",lw=1.2,label="MM3")
+    # candles (se houver OHLC; senao cai para linha de preco)
+    if o and hi and lo and len(o)==n:
+        cw=0.6
+        for i in range(n):
+            if c[i] is None or o[i] is None: continue
+            up = c[i] >= o[i]; col = "#3fb950" if up else "#f85149"
+            ax1.plot([i,i],[lo[i],hi[i]],color=col,lw=.7,zorder=3)       # pavio
+            y0,y1=min(o[i],c[i]),max(o[i],c[i])
+            ax1.add_patch(plt.Rectangle((i-cw/2,y0),cw,max(y1-y0,1e-6),
+                          facecolor=col,edgecolor=col,lw=.5,zorder=4))    # corpo
+    else:
+        ax1.plot(x,c,color="#58a6ff",lw=1.5)
+    ax1.set_ylabel("Candles + médias",color="#adbac7",fontsize=8)
+    ax1.legend(loc="upper left",fontsize=6,facecolor="#161b22",edgecolor="#30363d",labelcolor="#adbac7",ncol=3)
+
+    # --- 2) Didi Index (meio) ---
+    dc=a.get("didi_curta",[]); dl=a.get("didi_longa",[])
+    if dc: ax2.plot(x[:len(dc)],dc,color="#3fb950",lw=1.3,label="curta")
+    if dl: ax2.plot(x[:len(dl)],dl,color="#f85149",lw=1.3,label="longa")
+    ax2.axhline(0,color="#6b7d92",lw=.6,ls="--")
+    ax2.set_ylabel("DIDI",color="#adbac7",fontsize=8)
+    ax2.legend(loc="upper left",fontsize=6,facecolor="#161b22",edgecolor="#30363d",labelcolor="#adbac7")
+
+    # --- 3) ADX / DI (base) ---
+    adx=a.get("adx",[]); dip=a.get("dip",[]); dim=a.get("dim",[])
+    if adx: ax3.plot(x[:len(adx)],adx,color="#e6edf3",lw=1.4,label="ADX")
+    if dip: ax3.plot(x[:len(dip)],dip,color="#3fb950",lw=1.0,label="DI+")
+    if dim: ax3.plot(x[:len(dim)],dim,color="#f85149",lw=1.0,label="DI-")
+    ax3.set_ylabel("ADX/DI",color="#adbac7",fontsize=8)
+    ax3.legend(loc="upper left",fontsize=6,facecolor="#161b22",edgecolor="#30363d",labelcolor="#adbac7")
 
     # eixo X com poucas datas
     step=max(1,n//6)
@@ -94,8 +115,8 @@ def grafico_png(a):
 
     tk=(a.get("ticker") or "").replace("=X","")
     fig.suptitle(f"{tk}  ·  {a.get('market','')}  ·  nota {round(a.get('quality',0))}",
-                 color="#e6edf3",fontsize=11,y=.98)
-    fig.tight_layout(rect=[0,0,1,.96])
+                 color="#e6edf3",fontsize=11,y=.99)
+    fig.tight_layout(rect=[0,0,1,.97])
     buf=io.BytesIO(); fig.savefig(buf,format="png",dpi=110,facecolor="#0d1117")
     plt.close(fig); buf.seek(0)
     return base64.b64encode(buf.read()).decode()
