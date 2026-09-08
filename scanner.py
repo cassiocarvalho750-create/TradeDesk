@@ -453,7 +453,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
         d = fetch_intraday_ok(tk, timeframe=timeframe)
         if len(d) < 30:
             continue
-        c = d["Close"]; hi = d["High"]; lo = d["Low"]
+        c = d["Close"]; hi = d["High"]; lo = d["Low"]; op = d["Open"]
         ma3, ma8, ma20 = bt.sma(c,3), bt.sma(c,8), bt.sma(c,20)
         # Didi Index: curta (MA3/MA8) e longa (MA20/MA8), centradas em 0, em %
         didi_curta = (ma3/ma8 - 1.0)*100.0
@@ -492,6 +492,8 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "high": h.get("high"),
             "dates": dates,
             "price": tail(c),
+            "o": tail(op), "h": tail(hi), "l": tail(lo),
+            "ma3": tail(ma3), "ma8": tail(ma8), "ma20": tail(ma20),
             "didi_curta": tail(didi_curta), "didi_longa": tail(didi_longa),
             "adx": tail(adx), "dip": tail(dip), "dim": tail(dim),
             "bb_sup": tail(bb_sup), "bb_mid": tail(m), "bb_inf": tail(bb_inf),
