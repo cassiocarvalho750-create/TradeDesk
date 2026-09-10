@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-10",
-  "captura": "10/09/2026 16:20",
+  "captura": "10/09/2026 16:48",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 0.81,
       "stop": 0.81,
-      "r_pct": 0.56,
+      "r_pct": 0.55,
       "forming": true,
       "date": "2026-09-10",
       "ult_candle": "2026-09-10",
@@ -25,12 +25,12 @@
       "vol_qtd": 0.0,
       "var_dia_pct": 0.45,
       "acima_ema70": true,
-      "ema70": 0.8052,
+      "ema70": 0.8051,
       "ema70_incl": "lado",
-      "quality": 85.4,
+      "quality": 85.3,
       "didi_dist": 0.148,
-      "pos_range": 0.715,
-      "dist_max_pct": 0.22,
+      "pos_range": 0.71,
+      "dist_max_pct": 0.23,
       "adx_var_pct": -11.4,
       "confluencia": true,
       "bb_primeira": true,
@@ -411,7 +411,7 @@
         0.2033,
         -0.0221,
         -0.0388,
-        0.0218
+        0.0208
       ],
       "didi_longa": [
         -0.0366,
@@ -453,7 +453,7 @@
         -0.1046,
         -0.1706,
         -0.2648,
-        -0.3276
+        -0.3273
       ],
       "adx": [
         25.5024,
