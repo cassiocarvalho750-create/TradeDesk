@@ -54,6 +54,12 @@
 </header>
 <div class="status"><span id="dot" style="color:var(--up)">&#9679;</span> <span id="status">Carregando&hellip;</span></div>
 <div class="bar" id="infobar"></div>
+<div id="entrar-sec" style="display:none">
+  <div style="padding:12px 20px 4px;font-size:15px;font-weight:800;color:var(--up)">🎯 Entrar hoje <span style="font-weight:400;color:var(--muted);font-size:12px">— romperam a máxima do inside bar de ontem (fechamento acima)</span></div>
+  <div class="grid" id="grid-entrar"></div>
+  <div style="border-bottom:1px solid var(--line);margin:8px 0"></div>
+</div>
+<div style="padding:12px 20px 4px;font-size:15px;font-weight:800;color:var(--accent)">📡 Radar <span style="font-weight:400;color:var(--muted);font-size:12px">— inside bar formado hoje (aguardando rompimento)</span></div>
 <div class="grid" id="grid"></div>
 <footer>Leitura tecnica para analise propria. Sinal aparece quando o inside bar SE FORMA — a entrada e no rompimento da maxima. Nao e recomendacao de compra.</footer>
 
@@ -96,13 +102,17 @@ function chart(a){
   return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${s}</svg>`;
 }
 
-function card(a){
+function card(a, entrar){
   const tv=a.tv||("https://www.tradingview.com/chart/?symbol="+encodeURIComponent(a.market==="B3"?("BMFBOVESPA:"+a.ticker):a.ticker));
-  return `<div class="card">
+  const selo = entrar
+    ? `<span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">ENTRAR HOJE</span>`
+    : `<span class="ibtag">INSIDE BAR</span>`;
+  const borda = entrar ? ' style="border-color:#3fb950;border-width:2px"' : '';
+  return `<div class="card"${borda}>
     <div class="card-head">
       <span class="tk">${a.ticker}</span><span class="mkt">${a.market||""}</span>
-      <span class="ibtag">INSIDE BAR</span>
-      <span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">TEND\u00caNCIA HH+HL</span>${a.cons_len?`<span class="ibtag" style="background:linear-gradient(135deg,#58a6ff,#1f6feb)">CONSOL. ${a.cons_len}</span>`:``}
+      ${selo}
+      ${a.cons_len?`<span class="ibtag" style="background:linear-gradient(135deg,#58a6ff,#1f6feb)">CONSOL. ${a.cons_len}</span>`:``}
     </div>
     <div class="stats">
       <div class="stat"><div class="k">Entrada</div><div class="v mono up">${fmt(a.entry)}</div></div>
@@ -125,18 +135,25 @@ function card(a){
 async function loadData(){
   setStatus("Carregando\u2026","run");
   const sel=$("mercado").value;
+  const filtro=a=> sel==="ambos" || (sel==="us"&&a.market==="EUA") || (sel==="b3"&&a.market==="B3");
+  const ordena=arr=>arr.sort((a,b)=>(a.compress==null?9:a.compress)-(b.compress==null?9:b.compress));
   try{
     const r=await fetch("painel_insidebar.json?t="+Date.now(),{cache:"no-store"});
     if(!r.ok){setStatus("Sem dados publicados ainda.","err");$("grid").innerHTML="";return 0;}
     const d=await r.json();
-    let ativos=(d.ativos||[]).filter(a=> sel==="ambos" || (sel==="us"&&a.market==="EUA") || (sel==="b3"&&a.market==="B3"));
-    // ordena por MAIOR compressao: menor razao (inside/mae) = mais espremido no topo
-    ativos.sort((a,b)=>(a.compress==null?9:a.compress)-(b.compress==null?9:b.compress));
-    $("infobar").innerHTML=`${ativos.length} inside bar(s) &middot; dados de <b>${d.gerado||""}</b> &middot; capturado ${d.captura||""} (BRT, Yahoo ~15min de atraso) &middot; entrada no rompimento da m&aacute;xima`;
-    if(!ativos.length){$("grid").innerHTML=`<div style="grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)">Nenhum inside bar com os filtros hoje.</div>`;setStatus("Sem sinais hoje.","ok");return 0;}
-    $("grid").innerHTML=ativos.map(card).join("");
+    let radar=ordena((d.ativos||[]).filter(filtro));
+    let entrar=ordena((d.entrar||[]).filter(filtro));
+    $("infobar").innerHTML=`<b>${entrar.length}</b> p/ entrar hoje &middot; <b>${radar.length}</b> no radar &middot; dados de <b>${d.gerado||""}</b> &middot; capturado ${d.captura||""} (BRT, Yahoo ~15min de atraso)`;
+    // quadro de cima: entrar hoje
+    if(entrar.length){
+      $("entrar-sec").style.display="block";
+      $("grid-entrar").innerHTML=entrar.map(a=>card(a,true)).join("");
+    } else { $("entrar-sec").style.display="none"; }
+    // quadro de baixo: radar
+    if(!radar.length){$("grid").innerHTML=`<div style="grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)">Nenhum inside bar novo hoje.</div>`;}
+    else { $("grid").innerHTML=radar.map(a=>card(a,false)).join(""); }
     setStatus("Dados carregados.","ok");
-    return ativos.length;
+    return radar.length+entrar.length;
   }catch(e){setStatus("Erro ao carregar: "+e.message,"err");return 0;}
 }
 $("reloadBtn").onclick=()=>loadData();

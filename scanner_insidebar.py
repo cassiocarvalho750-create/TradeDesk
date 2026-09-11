@@ -56,83 +56,100 @@ def _fetch_batch(tickers, chunk=100):
 def _mkt(tk): return "B3" if tk.endswith(".SA") else "EUA"
 
 def evaluate(tk, d, today):
-    """Avalia UM ticker e retorna hit se o ultimo candle for sinal de inside bar."""
-    if d is None or len(d) < 90:
-        return None
+    """Avalia UM ticker. Retorna dict {'hoje': hit|None, 'romp': hit|None}:
+    - 'hoje': inside bar formado hoje (aguardando rompimento);
+    - 'romp': ontem foi setup completo e hoje o Close rompeu a maxima do IB
+      de ontem (entrar hoje, item 12)."""
+    if d is None or len(d) < 90: return None
     for col in ("Open","High","Low","Close","Volume"):
         if col not in d.columns: return None
     try:
         r = ib.compute_insidebar(d)
     except Exception:
         return None
+    out={"hoje":None,"romp":None}
     last = r.iloc[-1]
-    if not bool(last["signal_ib"]):
-        return None
-    entry = float(last["entry_level"])   # maxima do inside bar
-    # stop no ultimo pivo de baixa 3x3 (com fallback p/ minima do IB)
-    sp = last.get("stop_pivo")
-    stop = float(sp) if (sp is not None and not np.isnan(sp)) else float(last["stop_level"])
-    r_abs = entry - stop
-    r_pct = (r_abs/entry*100) if entry>0 else 0
-    alvo2r = entry + 2*r_abs             # saida integral em 2R (item 14)
     vol_qtd = float(last["Volume"]) if not np.isnan(last["Volume"]) else 0.0
     var_dia = ((float(last["Close"])/float(last["Open"])-1)*100) if float(last["Open"])>0 else 0.0
-    return {
-        "ticker": tk, "market": _mkt(tk),
-        "close": round(float(last["Close"]),2),
-        "entry": round(entry,2), "stop": round(stop,2),
-        "alvo2r": round(alvo2r,2),
-        "r_pct": round(float(r_pct),2),
-        "ema20": round(float(last["ema20"]),2),
-        "dist_ema": round(float(last["dist_ema"])*100,2),
-        "compress": round(float(last["ib_ratio"]),2),
-        "cons_len": int(last["cons_len"]) if not np.isnan(last["cons_len"]) else None,
-        "contr_vol": round(float(last["contr_vol_ratio"]),2),
-        "mae_high": round(float(last["mae_high"]),2),
-        "mae_low": round(float(last["mae_low"]),2),
-        "var_dia_pct": round(var_dia,2),
-        "vol_qtd": vol_qtd,
-        "date": str(d.index[-1].date()),
-    }
 
-def build_panel(hits, n_bars=40, out_path="painel_insidebar.json"):
-    tz_br = datetime.timezone(datetime.timedelta(hours=-3))
-    captura = datetime.datetime.now(datetime.timezone.utc).astimezone(tz_br).strftime("%d/%m/%Y %H:%M")
-    ativos=[]
+    # (A) inside bar formado HOJE
+    if bool(last["signal_ib"]):
+        entry=float(last["entry_level"])
+        sp=last.get("stop_pivo")
+        stop=float(sp) if (sp is not None and not np.isnan(sp)) else float(last["stop_level"])
+        r_abs=entry-stop; r_pct=(r_abs/entry*100) if entry>0 else 0
+        out["hoje"]={
+            "ticker":tk,"market":_mkt(tk),"close":round(float(last["Close"]),2),
+            "entry":round(entry,2),"stop":round(stop,2),"alvo2r":round(entry+2*r_abs,2),
+            "r_pct":round(float(r_pct),2),"ema20":round(float(last["ema20"]),2),
+            "dist_ema":round(float(last["dist_ema"])*100,2),"compress":round(float(last["ib_ratio"]),2),
+            "cons_len":int(last["cons_len"]) if not np.isnan(last["cons_len"]) else None,
+            "contr_vol":round(float(last["contr_vol_ratio"]),2),
+            "mae_high":round(float(last["mae_high"]),2),"mae_low":round(float(last["mae_low"]),2),
+            "var_dia_pct":round(var_dia,2),"vol_qtd":vol_qtd,"date":str(d.index[-1].date()),
+        }
+
+    # (B) ROMPIMENTO HOJE (entrar hoje)
+    if r.attrs.get("rompeu_hoje"):
+        entry=float(r.attrs["romp_entry"]); stop=float(r.attrs["romp_stop"])
+        r_abs=entry-stop; r_pct=(r_abs/entry*100) if entry>0 else 0
+        out["romp"]={
+            "ticker":tk,"market":_mkt(tk),"close":round(float(last["Close"]),2),
+            "entry":round(entry,2),"stop":round(stop,2),"alvo2r":round(entry+2*r_abs,2),
+            "r_pct":round(float(r_pct),2),"ema20":round(float(last["ema20"]),2),
+            "compress":round(float(r.iloc[-2]["ib_ratio"]),2) if len(r)>=2 else None,
+            "cons_len":int(r.attrs["romp_cons"]) if not (r.attrs.get("romp_cons") is None or np.isnan(r.attrs["romp_cons"])) else None,
+            "var_dia_pct":round(var_dia,2),"vol_qtd":vol_qtd,"date":str(d.index[-1].date()),
+            "rompeu": float(last["Close"]) > entry,   # ja fechou acima (provisorio se pregao aberto)
+        }
+    return out if (out["hoje"] or out["romp"]) else None
+
+def _com_grafico(hits, n_bars=40):
+    """Anexa as series de grafico (candles + EMA20) a cada hit."""
+    saida=[]
     for h in hits:
-        tk=h["ticker"]
-        d=_fetch_one(tk)
-        if len(d)<30: continue
+        tk = h["ticker"] if h["ticker"].endswith(".SA") or h["market"]=="EUA" else h["ticker"]
+        tkf = h["ticker"] if not h["ticker"].endswith(".SA") else h["ticker"]
+        # o ticker no hit ja veio limpo em alguns casos; re-baixa pelo original
+        raw = h.get("_tk", h["ticker"])
+        d=_fetch_one(raw if raw.endswith(".SA") or h["market"]=="EUA" else raw)
+        if d is None or len(d)<30:
+            saida.append(h); continue
         c=d["Close"]; hi=d["High"]; lo=d["Low"]; op=d["Open"]
         ema20=c.ewm(span=ib.EMA_LEN,adjust=False).mean()
         def tail(s):
             return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
                     for v in s.tail(n_bars).tolist()]
-        dates=[str(x.date()) for x in c.tail(n_bars).index]
-        ativos.append({
-            "ticker": tk.replace(".SA",""), "market": h["market"],
-            "close": h["close"], "entry": h["entry"], "stop": h["stop"], "alvo2r": h["alvo2r"],
-            "r_pct": h["r_pct"], "ema20": h["ema20"], "dist_ema": h["dist_ema"],
-            "compress": h["compress"], "cons_len": h["cons_len"], "contr_vol": h["contr_vol"],
-            "mae_high": h["mae_high"], "mae_low": h["mae_low"],
-            "var_dia_pct": h["var_dia_pct"], "vol_qtd": h["vol_qtd"],
-            "date": h["date"], "tv": sc.tv_url(tk),
-            "dates": dates,
-            "o": tail(op), "h": tail(hi), "l": tail(lo), "price": tail(c),
-            "ema20s": tail(ema20),
-        })
+        h=dict(h)
+        h["ticker"]=h["ticker"].replace(".SA","")
+        h["tv"]=sc.tv_url(raw)
+        h["dates"]=[str(x.date()) for x in c.tail(n_bars).index]
+        h["o"]=tail(op); h["h"]=tail(hi); h["l"]=tail(lo); h["price"]=tail(c); h["ema20s"]=tail(ema20)
+        saida.append(h)
+    return saida
+
+def build_panel(grupos, n_bars=40, out_path="painel_insidebar.json"):
+    tz_br = datetime.timezone(datetime.timedelta(hours=-3))
+    captura = datetime.datetime.now(datetime.timezone.utc).astimezone(tz_br).strftime("%d/%m/%Y %H:%M")
+    entrar = _com_grafico(grupos["romp"], n_bars)   # quadro de cima: entrar hoje
+    radar  = _com_grafico(grupos["hoje"], n_bars)   # quadro de baixo: inside bar hoje
     payload={"gerado":str(datetime.date.today()),"captura":captura,"timeframe":"1d",
-             "n":len(ativos),"ativos":ativos}
+             "n_entrar":len(entrar),"n_radar":len(radar),
+             "entrar":entrar,"ativos":radar}
     open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
-    print(f"  Painel JSON: {out_path} ({len(ativos)} ativo(s))")
+    print(f"  Painel JSON: {out_path} (entrar hoje: {len(entrar)} | radar IB: {len(radar)})")
     return out_path
 
 def scan(tickers, batch=True, chunk=100):
-    hits=[]; today=pd.Timestamp(datetime.date.today())
+    hoje=[]; romp=[]; today=pd.Timestamp(datetime.date.today())
     try: US_MIN=float(getattr(rb,"US_MIN_VOL_FIN_MI",5.0))
     except: US_MIN=5.0
     try: B3_MIN=float(getattr(rb,"B3_MIN_VOL_FIN_MI",5.0))
     except: B3_MIN=5.0
+    def _push(tk,r):
+        if not r: return
+        if r.get("hoje"): r["hoje"]["_tk"]=tk; hoje.append(r["hoje"])
+        if r.get("romp"): r["romp"]["_tk"]=tk; romp.append(r["romp"])
     if batch:
         data=_fetch_batch(tickers, chunk=chunk)
         print(f"  baixados {len(data)}/{len(tickers)}")
@@ -140,18 +157,16 @@ def scan(tickers, batch=True, chunk=100):
             d=data.get(tk)
             if d is None: continue
             if not sc._liquidez_ok(tk, d, US_MIN, B3_MIN): continue
-            r=evaluate(tk, d, today)
-            if r: hits.append(r)
+            _push(tk, evaluate(tk, d, today))
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
             d=_fetch_one(tk)
             if d is None or len(d)<90: time.sleep(0.02); continue
             if not sc._liquidez_ok(tk, d, US_MIN, B3_MIN): time.sleep(0.01); continue
-            r=evaluate(tk, d, today)
-            if r: hits.append(r)
+            _push(tk, evaluate(tk, d, today))
             time.sleep(0.03)
-    return hits
+    return {"hoje":hoje,"romp":romp}
 
 def main():
     ap=argparse.ArgumentParser()
@@ -167,25 +182,28 @@ def main():
     else:                 universo=list(us)+list(b3)
     # B3 sempre individual (mais confiavel no candle do dia)
     print(f"Scanner Insidebar | {len(universo)} ativos | diario\n")
-    hits=[]
+    grupos={"hoje":[],"romp":[]}
     if a.mercado in ("us","ambos"):
         print("  [US]")
-        hits += scan(list(us), batch=a.batch, chunk=a.chunk)
+        g=scan(list(us), batch=a.batch, chunk=a.chunk)
+        grupos["hoje"]+=g["hoje"]; grupos["romp"]+=g["romp"]
     if a.mercado in ("b3","ambos"):
         print("  [B3] (individual)")
-        hits += scan(list(b3), batch=False, chunk=a.chunk)
+        g=scan(list(b3), batch=False, chunk=a.chunk)
+        grupos["hoje"]+=g["hoje"]; grupos["romp"]+=g["romp"]
 
-    build_panel(hits, out_path="painel_insidebar.json")
+    # ordena cada grupo por maior compressao
+    for k in grupos:
+        grupos[k].sort(key=lambda h:(h.get("compress") if h.get("compress") is not None else 9))
+    build_panel(grupos, out_path="painel_insidebar.json")
 
     print("\n"+"="*60)
-    if not hits: print("  Nenhum inside bar hoje.")
-    else:
-        # ordena por MAIOR compressao: menor razao (inside/mae) = mais espremido
-        hits.sort(key=lambda h:(h.get("compress") if h.get("compress") is not None else 9))
-        print(f"  {len(hits)} sinal(is):\n")
-        for h in hits:
-            print(f"  {h['ticker']:<10}{h['market']:<5} entrada {h['entry']:>9} "
-                  f"stop {h['stop']:>9} R%{h['r_pct']:>5} compress {h['compress']}")
+    print(f"  ENTRAR HOJE (rompimento): {len(grupos['romp'])}")
+    for h in grupos["romp"]:
+        print(f"    {h['ticker']:<10}{h['market']:<5} entrada {h['entry']:>9} stop {h['stop']:>9} alvo2R {h.get('alvo2r','—')}")
+    print(f"  RADAR (inside bar hoje): {len(grupos['hoje'])}")
+    for h in grupos["hoje"]:
+        print(f"    {h['ticker']:<10}{h['market']:<5} entrada {h['entry']:>9} stop {h['stop']:>9} compress {h['compress']}")
     print("="*60)
 
 if __name__=="__main__":

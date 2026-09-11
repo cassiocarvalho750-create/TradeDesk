@@ -88,31 +88,45 @@ def compute_insidebar(df):
     cons_ok  = pd.Series(False, index=d.index)
     cons_len = pd.Series(np.nan, index=d.index)
 
-    pos = n - 1
-    if (pos >= max(EMA_LEN, ATR_SLOW, CONS_MAX) + 2*SWING_K + 2
-        and bool(inside.iloc[pos])):
-        ema_now = float(ema.iloc[pos]); atr20 = float(atr_slow.iloc[pos])
+    def _avaliar(pos):
+        """Retorna (ok, cons_len, estrutura_ok) para o candle em `pos`."""
+        if pos < max(EMA_LEN, ATR_SLOW, CONS_MAX) + 2*SWING_K + 2: return (False,np.nan,False)
+        if not bool(inside.iloc[pos]): return (False,np.nan,False)
+        ema_now=float(ema.iloc[pos]); atr20=float(atr_slow.iloc[pos])
         achou=False; usado=np.nan
         for L in range(CONS_MIN, CONS_MAX+1):
-            ini = pos - L
-            if ini < 0: break
-            jh = h.iloc[ini:pos]; jl = l.iloc[ini:pos]
-            if len(jh) < L: break
-            ampl = (jh.max() - jl.min())
-            c1 = (atr20 > 0) and (ampl/atr20 < CONS_AMPL_ATR)
-            c2 = jl.min() > ema_now * CONS_PEN_EMA
+            ini=pos-L
+            if ini<0: break
+            jh=h.iloc[ini:pos]; jl=l.iloc[ini:pos]
+            if len(jh)<L: break
+            ampl=(jh.max()-jl.min())
+            c1=(atr20>0) and (ampl/atr20 < CONS_AMPL_ATR)
+            c2=jl.min() > ema_now*CONS_PEN_EMA
             if c1 and c2: achou=True; usado=L; break
-        cons_ok.iloc[pos]=achou; cons_len.iloc[pos]=usado
-        # estrutura HH+HL avaliada ATE O INICIO DA CONSOLIDACAO (nao ate hoje),
-        # para a lateralizacao nao sujar a leitura dos swings. Se nao houve
-        # consolidacao, cai para avaliar ate a mae (pos-1).
-        ate = (pos - int(usado)) if achou and not np.isnan(usado) else (pos-1)
-        est = _estrutura_alta(h, l, ate, SWING_K); estrut.iloc[pos]=est
-        ok = (bool(t1.iloc[pos]) and bool(t2.iloc[pos]) and est
-              and bool(nao_esticado.iloc[pos]) and achou
-              and bool(contr_vol.iloc[pos]) and bool(compress_ok.iloc[pos])
-              and bool(perto_ema.iloc[pos]))
-        signal.iloc[pos]=ok
+        ate=(pos-int(usado)) if achou and not np.isnan(usado) else (pos-1)
+        est=_estrutura_alta(h,l,ate,SWING_K)
+        ok=(bool(t1.iloc[pos]) and bool(t2.iloc[pos]) and est
+            and bool(nao_esticado.iloc[pos]) and achou
+            and bool(contr_vol.iloc[pos]) and bool(compress_ok.iloc[pos])
+            and bool(perto_ema.iloc[pos]))
+        return (ok, usado, est)
+
+    # HOJE (candle mais recente): inside bar formado, aguardando rompimento.
+    pos = n - 1
+    ok, usado, est = _avaliar(pos)
+    signal.iloc[pos]=ok; cons_ok.iloc[pos]=ok; cons_len.iloc[pos]=usado; estrut.iloc[pos]=est
+
+    # ROMPIMENTO HOJE: ONTEM foi setup completo E hoje o Close rompeu a maxima
+    # do inside bar de ontem (item 12 — fechamento acima). Marca "entrar hoje".
+    rompeu = False; entry_r=np.nan; stop_r=np.nan; consR=np.nan
+    if n>=2:
+        ok_ont, usado_ont, _ = _avaliar(n-2)
+        if ok_ont and float(c.iloc[n-1]) > float(h.iloc[n-2]):
+            rompeu=True
+            entry_r=float(h.iloc[n-2])          # maxima do IB de ontem (gatilho)
+            consR=usado_ont
+            _, ll = _swings(h.iloc[:n-1], l.iloc[:n-1], SWING_K)  # pivo ate ontem
+            stop_r=float(l.iloc[ll[-1]]) if ll else float(l.iloc[n-2])
 
     # STOP no ultimo pivo de baixa 3x3 (swing low confirmado), so no candle do
     # sinal. Sem pivo, cai para a minima do inside bar.
@@ -130,4 +144,9 @@ def compute_insidebar(df):
     d["entry_level"]=h; d["stop_level"]=l; d["stop_pivo"]=stop_pivo
     d["mae_high"]=h.shift(1); d["mae_low"]=l.shift(1)
     d["signal_ib"]=signal
+    # atributos do rompimento de hoje (item 12) — lidos pelo scanner
+    d.attrs["rompeu_hoje"]=rompeu
+    d.attrs["romp_entry"]=entry_r
+    d.attrs["romp_stop"]=stop_r
+    d.attrs["romp_cons"]=consR
     return d
