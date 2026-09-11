@@ -80,7 +80,9 @@ def compute_insidebar(df):
     nao_esticado = dist_ema < ESTICADO_MAX
     t1 = c > ema
     t2 = ema > ema.shift(EMA_SLOPE_LB)
-    perto_ema = (l - ema).abs() / ema.replace(0, np.nan) < IB_PERTO_EMA
+    # posicao do IB: Low do IB <= EMA20*1.05 (so teto, sem piso — a consolidacao
+    # ja garante proximidade; a minima pode estar abaixo da EMA20)
+    perto_ema = l <= ema * (1 + IB_PERTO_EMA)
     contr_vol = (atr_fast / atr_slow.replace(0, np.nan)) < ATR_CONTR_MAX
 
     signal   = pd.Series(False, index=d.index)
@@ -92,19 +94,22 @@ def compute_insidebar(df):
         """Retorna (ok, cons_len, estrutura_ok) para o candle em `pos`."""
         if pos < max(EMA_LEN, ATR_SLOW, CONS_MAX) + 2*SWING_K + 2: return (False,np.nan,False)
         if not bool(inside.iloc[pos]): return (False,np.nan,False)
-        ema_now=float(ema.iloc[pos]); atr20=float(atr_slow.iloc[pos])
+        atr20=float(atr_slow.iloc[pos])
         achou=False; usado=np.nan
         for L in range(CONS_MIN, CONS_MAX+1):
             ini=pos-L
             if ini<0: break
             jh=h.iloc[ini:pos]; jl=l.iloc[ini:pos]
+            jema=ema.iloc[ini:pos]           # EMA20 de CADA candle da janela
             if len(jh)<L: break
             ampl=(jh.max()-jl.min())
             c1=(atr20>0) and (ampl/atr20 < CONS_AMPL_ATR)
-            c2=jl.min() > ema_now*CONS_PEN_EMA
+            # penetracao candle a candle: cada Low >= EMA20 daquele candle * 0.98
+            c2=bool((jl.values >= (jema.values * CONS_PEN_EMA)).all())
             if c1 and c2: achou=True; usado=L; break
-        ate=(pos-int(usado)) if achou and not np.isnan(usado) else (pos-1)
-        est=_estrutura_alta(h,l,ate,SWING_K)
+        # estrutura HH+HL com os ultimos pivos disponiveis NO MOMENTO (ate `pos`),
+        # para refletir a estrutura de alta valida na entrada.
+        est=_estrutura_alta(h,l,pos,SWING_K)
         ok=(bool(t1.iloc[pos]) and bool(t2.iloc[pos]) and est
             and bool(nao_esticado.iloc[pos]) and achou
             and bool(contr_vol.iloc[pos]) and bool(compress_ok.iloc[pos])
@@ -117,15 +122,16 @@ def compute_insidebar(df):
     signal.iloc[pos]=ok; cons_ok.iloc[pos]=ok; cons_len.iloc[pos]=usado; estrut.iloc[pos]=est
 
     # ROMPIMENTO HOJE: ONTEM foi setup completo E hoje o Close rompeu a maxima
-    # do inside bar de ontem (item 12 — fechamento acima). Marca "entrar hoje".
+    # do inside bar de ontem. Entrada = CLOSE de hoje (o candle que confirmou o
+    # rompimento); stop = ultimo pivo 3x3 disponivel no fechamento da entrada.
     rompeu = False; entry_r=np.nan; stop_r=np.nan; consR=np.nan
     if n>=2:
         ok_ont, usado_ont, _ = _avaliar(n-2)
         if ok_ont and float(c.iloc[n-1]) > float(h.iloc[n-2]):
             rompeu=True
-            entry_r=float(h.iloc[n-2])          # maxima do IB de ontem (gatilho)
+            entry_r=float(c.iloc[n-1])           # CLOSE do candle de rompimento (hoje)
             consR=usado_ont
-            _, ll = _swings(h.iloc[:n-1], l.iloc[:n-1], SWING_K)  # pivo ate ontem
+            _, ll = _swings(h.iloc[:n], l.iloc[:n], SWING_K)  # pivo disponivel ate HOJE
             stop_r=float(l.iloc[ll[-1]]) if ll else float(l.iloc[n-2])
 
     # STOP no ultimo pivo de baixa 3x3 (swing low confirmado), so no candle do
