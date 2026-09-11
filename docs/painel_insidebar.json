@@ -1,25 +1,26 @@
 {
   "gerado": "2026-09-11",
-  "captura": "11/09/2026 14:53",
+  "captura": "11/09/2026 15:03",
   "timeframe": "1d",
   "n": 6,
   "ativos": [
     {
       "ticker": "NTRA",
       "market": "EUA",
-      "close": 328.05,
+      "close": 327.51,
       "entry": 330.18,
-      "stop": 324.45,
-      "r_pct": 1.74,
-      "ema20": 321.31,
-      "dist_ema": 2.1,
+      "stop": 316.0,
+      "alvo2r": 358.54,
+      "r_pct": 4.29,
+      "ema20": 321.25,
+      "dist_ema": 1.95,
       "compress": 0.54,
       "cons_len": 3,
       "contr_vol": 0.85,
       "mae_high": 331.18,
       "mae_low": 320.65,
-      "var_dia_pct": -0.65,
-      "vol_qtd": 414509.0,
+      "var_dia_pct": -0.81,
+      "vol_qtd": 426235.0,
       "date": "2026-09-11",
       "tv": "https://www.tradingview.com/chart/?symbol=NTRA",
       "dates": [
@@ -230,7 +231,7 @@
         324.14,
         330.31,
         326.14,
-        328.045
+        327.3775
       ],
       "ema20s": [
         263.6504,
@@ -272,25 +273,26 @@
         318.9289,
         320.0128,
         320.5964,
-        321.3058
+        321.2422
       ]
     },
     {
       "ticker": "RRC",
       "market": "EUA",
-      "close": 41.34,
+      "close": 41.28,
       "entry": 41.85,
-      "stop": 41.18,
-      "r_pct": 1.61,
-      "ema20": 41.26,
-      "dist_ema": 0.2,
+      "stop": 40.27,
+      "alvo2r": 45.02,
+      "r_pct": 3.79,
+      "ema20": 41.25,
+      "dist_ema": 0.07,
       "compress": 0.48,
       "cons_len": 3,
       "contr_vol": 0.9,
       "mae_high": 42.31,
       "mae_low": 40.9,
-      "var_dia_pct": -0.41,
-      "vol_qtd": 631992.0,
+      "var_dia_pct": -0.55,
+      "vol_qtd": 646811.0,
       "date": "2026-09-11",
       "tv": "https://www.tradingview.com/chart/?symbol=RRC",
       "dates": [
@@ -501,7 +503,7 @@
         41.89,
         41.74,
         41.88,
-        41.33
+        41.27
       ],
       "ema20s": [
         36.9699,
@@ -543,25 +545,26 @@
         41.122,
         41.1809,
         41.2474,
-        41.2553
+        41.2496
       ]
     },
     {
       "ticker": "SOLS",
       "market": "EUA",
-      "close": 62.47,
+      "close": 62.29,
       "entry": 63.11,
-      "stop": 61.8,
-      "r_pct": 2.08,
-      "ema20": 61.33,
-      "dist_ema": 1.86,
+      "stop": 60.3,
+      "alvo2r": 68.73,
+      "r_pct": 4.45,
+      "ema20": 61.31,
+      "dist_ema": 1.6,
       "compress": 0.64,
       "cons_len": 3,
       "contr_vol": 0.9,
       "mae_high": 63.27,
       "mae_low": 61.23,
-      "var_dia_pct": 0.5,
-      "vol_qtd": 885266.0,
+      "var_dia_pct": 0.21,
+      "vol_qtd": 917582.0,
       "date": "2026-09-11",
       "tv": "https://www.tradingview.com/chart/?symbol=SOLS",
       "dates": [
@@ -772,7 +775,7 @@
         64.53,
         63.26,
         61.56,
-        62.47
+        62.28
       ],
       "ema20s": [
         69.4464,
@@ -814,25 +817,26 @@
         60.9522,
         61.172,
         61.209,
-        61.3291
+        61.311
       ]
     },
     {
       "ticker": "TTEK",
       "market": "EUA",
-      "close": 36.04,
+      "close": 36.07,
       "entry": 36.11,
-      "stop": 35.63,
-      "r_pct": 1.33,
+      "stop": 35.38,
+      "alvo2r": 37.57,
+      "r_pct": 2.02,
       "ema20": 35.75,
-      "dist_ema": 0.82,
+      "dist_ema": 0.89,
       "compress": 0.49,
       "cons_len": 3,
       "contr_vol": 0.83,
       "mae_high": 36.39,
       "mae_low": 35.42,
-      "var_dia_pct": 0.43,
-      "vol_qtd": 568070.0,
+      "var_dia_pct": 0.52,
+      "vol_qtd": 585904.0,
       "date": "2026-09-11",
       "tv": "https://www.tradingview.com/chart/?symbol=TTEK",
       "dates": [
@@ -1093,8 +1097,9 @@
       "market": "EUA",
       "close": 262.89,
       "entry": 263.69,
-      "stop": 259.54,
-      "r_pct": 1.57,
+      "stop": 238.93,
+      "alvo2r": 313.21,
+      "r_pct": 9.39,
       "ema20": 258.9,
       "dist_ema": 1.54,
       "compress": 0.65,
@@ -1103,7 +1108,7 @@
       "mae_high": 264.58,
       "mae_low": 258.19,
       "var_dia_pct": 0.41,
-      "vol_qtd": 369859.0,
+      "vol_qtd": 381612.0,
       "date": "2026-09-11",
       "tv": "https://www.tradingview.com/chart/?symbol=VEEV",
       "dates": [
@@ -1314,7 +1319,7 @@
         264.84,
         260.8,
         260.98,
-        262.935
+        262.86
       ],
       "ema20s": [
         184.7392,
@@ -1356,25 +1361,26 @@
         257.9501,
         258.2215,
         258.4842,
-        258.9081
+        258.9009
       ]
     },
     {
       "ticker": "RAIL3",
       "market": "B3",
-      "close": 14.79,
+      "close": 14.72,
       "entry": 15.01,
-      "stop": 14.77,
-      "r_pct": 1.6,
-      "ema20": 14.49,
-      "dist_ema": 2.08,
-      "compress": 0.34,
+      "stop": 14.3,
+      "alvo2r": 16.43,
+      "r_pct": 4.73,
+      "ema20": 14.48,
+      "dist_ema": 1.65,
+      "compress": 0.41,
       "cons_len": 3,
-      "contr_vol": 0.86,
+      "contr_vol": 0.87,
       "mae_high": 15.09,
       "mae_low": 14.39,
-      "var_dia_pct": -1.0,
-      "vol_qtd": 3533600.0,
+      "var_dia_pct": -1.47,
+      "vol_qtd": 3663500.0,
       "date": "2026-09-11",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:RAIL3",
       "dates": [
@@ -1543,7 +1549,7 @@
         14.53,
         14.32,
         14.39,
-        14.77
+        14.72
       ],
       "price": [
         13.7,
@@ -1585,7 +1591,7 @@
         14.55,
         14.5,
         14.95,
-        14.79
+        14.72
       ],
       "ema20s": [
         13.705,
@@ -1627,7 +1633,7 @@
         14.3944,
         14.4045,
         14.4564,
-        14.4882
+        14.4815
       ]
     }
   ]
