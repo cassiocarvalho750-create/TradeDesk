@@ -61,6 +61,49 @@ def _estrutura_alta(h, l, pos, k):
     return bool(sh1 > sh2 and sl1 > sl2)
 
 
+def _series_base(df):
+    """Calcula as series base (ema, atr, inside, ratios) usadas na avaliacao."""
+    o, h, l, c = df["Open"], df["High"], df["Low"], df["Close"]
+    ema = c.ewm(span=EMA_LEN, adjust=False).mean()
+    atr_fast = _atr(h, l, c, ATR_FAST)
+    atr_slow = _atr(h, l, c, ATR_SLOW)
+    inside = (h < h.shift(1)) & (l > l.shift(1))
+    ib_ratio = (h - l) / (h.shift(1) - l.shift(1)).replace(0, np.nan)
+    return o,h,l,c,ema,atr_fast,atr_slow,inside,ib_ratio
+
+
+def avaliar_em(df, pos, base=None):
+    """Avalia o setup completo do inside bar no candle `pos` (0-based).
+    Retorna dict com ok e os componentes. Usada pelo scanner (pos=n-1) e pelo
+    backtest (qualquer pos). E a MESMA logica — fonte unica de verdade."""
+    if base is None: base=_series_base(df)
+    o,h,l,c,ema,atr_fast,atr_slow,inside,ib_ratio = base
+    if pos < max(EMA_LEN, ATR_SLOW, CONS_MAX) + 2*SWING_K + 2:
+        return {"ok":False}
+    if not bool(inside.iloc[pos]): return {"ok":False}
+    atr20=float(atr_slow.iloc[pos])
+    achou=False; usado=np.nan
+    for L in range(CONS_MIN, CONS_MAX+1):
+        ini=pos-L
+        if ini<0: break
+        jh=h.iloc[ini:pos]; jl=l.iloc[ini:pos]; jema=ema.iloc[ini:pos]
+        if len(jh)<L: break
+        ampl=(jh.max()-jl.min())
+        c1=(atr20>0) and (ampl/atr20 < CONS_AMPL_ATR)
+        c2=bool((jl.values >= (jema.values * CONS_PEN_EMA)).all())
+        if c1 and c2: achou=True; usado=L; break
+    est=_estrutura_alta(h,l,pos,SWING_K)
+    t1 = bool(c.iloc[pos] > ema.iloc[pos])
+    t2 = bool(ema.iloc[pos] > ema.iloc[pos-EMA_SLOPE_LB])
+    nao_esticado = bool((c.iloc[pos]-ema.iloc[pos])/ema.iloc[pos] < ESTICADO_MAX) if ema.iloc[pos]>0 else False
+    perto = bool(l.iloc[pos] <= ema.iloc[pos]*(1+IB_PERTO_EMA))
+    contr = bool((atr_fast.iloc[pos]/atr_slow.iloc[pos]) < ATR_CONTR_MAX) if atr_slow.iloc[pos]>0 else False
+    comp  = bool(ib_ratio.iloc[pos] < IB_COMPRESS)
+    ok = t1 and t2 and est and nao_esticado and achou and contr and comp and perto
+    return {"ok":ok,"cons_len":usado,"estrutura":est,"ib_high":float(h.iloc[pos]),
+            "ib_low":float(l.iloc[pos])}
+
+
 def compute_insidebar(df):
     d = df.copy()
     o, h, l, c = d["Open"], d["High"], d["Low"], d["Close"]
@@ -90,31 +133,10 @@ def compute_insidebar(df):
     cons_ok  = pd.Series(False, index=d.index)
     cons_len = pd.Series(np.nan, index=d.index)
 
+    base=(o,h,l,c,ema,atr_fast,atr_slow,inside,ib_ratio)
     def _avaliar(pos):
-        """Retorna (ok, cons_len, estrutura_ok) para o candle em `pos`."""
-        if pos < max(EMA_LEN, ATR_SLOW, CONS_MAX) + 2*SWING_K + 2: return (False,np.nan,False)
-        if not bool(inside.iloc[pos]): return (False,np.nan,False)
-        atr20=float(atr_slow.iloc[pos])
-        achou=False; usado=np.nan
-        for L in range(CONS_MIN, CONS_MAX+1):
-            ini=pos-L
-            if ini<0: break
-            jh=h.iloc[ini:pos]; jl=l.iloc[ini:pos]
-            jema=ema.iloc[ini:pos]           # EMA20 de CADA candle da janela
-            if len(jh)<L: break
-            ampl=(jh.max()-jl.min())
-            c1=(atr20>0) and (ampl/atr20 < CONS_AMPL_ATR)
-            # penetracao candle a candle: cada Low >= EMA20 daquele candle * 0.98
-            c2=bool((jl.values >= (jema.values * CONS_PEN_EMA)).all())
-            if c1 and c2: achou=True; usado=L; break
-        # estrutura HH+HL com os ultimos pivos disponiveis NO MOMENTO (ate `pos`),
-        # para refletir a estrutura de alta valida na entrada.
-        est=_estrutura_alta(h,l,pos,SWING_K)
-        ok=(bool(t1.iloc[pos]) and bool(t2.iloc[pos]) and est
-            and bool(nao_esticado.iloc[pos]) and achou
-            and bool(contr_vol.iloc[pos]) and bool(compress_ok.iloc[pos])
-            and bool(perto_ema.iloc[pos]))
-        return (ok, usado, est)
+        r=avaliar_em(d, pos, base=base)
+        return (r["ok"], r.get("cons_len",np.nan), r.get("estrutura",False))
 
     # HOJE (candle mais recente): inside bar formado, aguardando rompimento.
     pos = n - 1

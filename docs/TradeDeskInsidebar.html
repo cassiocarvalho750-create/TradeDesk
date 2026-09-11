@@ -61,7 +61,7 @@
 </div>
 <div style="padding:12px 20px 4px;font-size:15px;font-weight:800;color:var(--accent)">📡 Radar <span style="font-weight:400;color:var(--muted);font-size:12px">— inside bar formado hoje (aguardando rompimento)</span></div>
 <div class="grid" id="grid"></div>
-<footer>Leitura tecnica para analise propria. Sinal aparece quando o inside bar SE FORMA — a entrada e no rompimento da maxima. Nao e recomendacao de compra.</footer>
+<footer>Leitura tecnica para analise propria. Estrategia: entrada no rompimento da maxima do inside bar; stop no ultimo pivo 3x3; alvo em 3R (saida integral). Nao e recomendacao de compra.</footer>
 
 <script>
 const $=id=>document.getElementById(id);
@@ -117,7 +117,7 @@ function card(a, entrar){
     <div class="stats">
       <div class="stat"><div class="k">Entrada</div><div class="v mono up">${fmt(a.entry)}</div></div>
       <div class="stat"><div class="k">Stop (pivô)</div><div class="v mono down">${fmt(a.stop)}</div></div>
-      <div class="stat"><div class="k">Alvo 2R</div><div class="v mono up">${fmt(a.alvo2r)}</div></div>
+      <div class="stat"><div class="k">Alvo 3R</div><div class="v mono up">${fmt(a.alvo2r)}</div></div>
     </div>
     <div class="stats" style="margin-top:1px">
       <div class="stat"><div class="k">R%</div><div class="v mono">${fmt(a.r_pct)}%</div></div>
