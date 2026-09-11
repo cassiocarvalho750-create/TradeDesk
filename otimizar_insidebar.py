@@ -29,11 +29,11 @@ def prep(d):
                 hi=hi,lo=lo,n=len(d))
 
 def estrutura_ok(P, pos, k):
-    # pivos disponiveis ate `pos`: um pivo em i so conta se i+k <= pos
-    hh=[i for i in P["hi"] if i+k<=pos]
-    ll=[i for i in P["lo"] if i+k<=pos]
-    if len(hh)<2 or len(ll)<2: return False
-    return (P["h"].iloc[hh[-1]]>P["h"].iloc[hh[-2]]) and (P["l"].iloc[ll[-1]]>P["l"].iloc[ll[-2]])
+    # estrutura de alta (nova): HighestHigh(recentes) > HighestHigh(anteriores)
+    LB=ib.ESTRUT_LB
+    if pos < 2*LB: return False
+    h=P["h"]
+    return bool(h.iloc[pos-LB:pos].max() > h.iloc[pos-2*LB:pos-LB].max())
 
 def stop_pivo(P, pos, k):
     ll=[i for i in P["lo"] if i+k<=pos]

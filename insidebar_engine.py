@@ -25,7 +25,8 @@ import pandas as pd
 EMA_LEN        = 20
 EMA_SLOPE_LB   = 5
 ESTICADO_MAX   = 0.08
-SWING_K        = 3       # 3 candles de cada lado (ignora micro-oscilacao)
+SWING_K        = 3       # 3 candles de cada lado (usado no stop por pivo 3x3)
+ESTRUT_LB      = 20      # estrutura de alta: HighestHigh(20 recentes) > HighestHigh(20 anteriores)
 CONS_MIN       = 3
 CONS_MAX       = 10
 CONS_AMPL_ATR  = 2.5
@@ -53,12 +54,15 @@ def _swings(h, l, k):
     return hi_idx, lo_idx
 
 
-def _estrutura_alta(h, l, pos, k):
-    hh, ll = _swings(h.iloc[:pos+1], l.iloc[:pos+1], k)
-    if len(hh) < 2 or len(ll) < 2: return False
-    sh1, sh2 = h.iloc[hh[-1]], h.iloc[hh[-2]]
-    sl1, sl2 = l.iloc[ll[-1]], l.iloc[ll[-2]]
-    return bool(sh1 > sh2 and sl1 > sl2)
+def _estrutura_alta(h, l, pos, k=None):
+    """Estrutura de alta (robusta): a maxima dos ultimos ESTRUT_LB candles supera
+    a maxima dos ESTRUT_LB candles anteriores (novo topo mais alto). Substitui a
+    leitura de pivos HH+HL (que era fragil e restritiva). O param k e ignorado,
+    mantido por compatibilidade de chamada."""
+    if pos < 2*ESTRUT_LB: return False
+    recente  = h.iloc[pos-ESTRUT_LB:pos].max()
+    anterior = h.iloc[pos-2*ESTRUT_LB:pos-ESTRUT_LB].max()
+    return bool(recente > anterior)
 
 
 def _series_base(df):
