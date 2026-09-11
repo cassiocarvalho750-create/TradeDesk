@@ -40,7 +40,7 @@
 <body>
 <header>
   <h1>TradeDesk Insidebar</h1>
-  <span class="sub">MME9 &gt; MME21 &gt; MMS50 &middot; inside bar &middot; não esticado</span>
+  <span class="sub">EMA20 &middot; estrutura HH+HL &middot; consolida&ccedil;&atilde;o &middot; inside bar</span>
   <span class="spacer"></span>
   <div class="controls">
     <select id="mercado" onchange="loadData()">
@@ -65,17 +65,17 @@ function fmtVol(v){if(v==null||isNaN(v))return"\u2014";if(v>=1e9)return(v/1e9).t
 
 // desenha candles + linha da MME70 + destaque do inside bar (ultimo candle)
 function chart(a){
-  const o=a.o,h=a.h,l=a.l,c=a.price,e9=a.ema9s,e21=a.ema21s,e50=a.sma50s;
+  const o=a.o,h=a.h,l=a.l,c=a.price,e20=a.ema20s;
   const n=c.length; if(!n) return "";
   const W=300,H=150,pad=6;
   let lo=Infinity,hi=-Infinity;
-  for(let i=0;i<n;i++){ if(l[i]!=null)lo=Math.min(lo,l[i]); if(h[i]!=null)hi=Math.max(hi,h[i]); [e9,e21,e50].forEach(a=>{if(a&&a[i]!=null){lo=Math.min(lo,a[i]);hi=Math.max(hi,a[i]);}}); }
+  for(let i=0;i<n;i++){ if(l[i]!=null)lo=Math.min(lo,l[i]); if(h[i]!=null)hi=Math.max(hi,h[i]); if(e20&&e20[i]!=null){lo=Math.min(lo,e20[i]);hi=Math.max(hi,e20[i]);} }
   const yr=hi-lo||1; const X=i=>pad+(i/(n-1))*(W-2*pad); const Y=v=>H-pad-((v-lo)/yr)*(H-2*pad);
   const cw=Math.max(1.5,(W-2*pad)/n*0.6);
   let s="";
-  // 3 medias: MME9 (verde), MME21 (amarelo), MMS50 (laranja)
+  // EMA20 (media principal)
   function linha(arr,cor,w){ let ds=""; for(let i=0;i<n;i++){ if(!arr||arr[i]==null)continue; ds+=(ds?"L":"M")+X(i).toFixed(1)+","+Y(arr[i]).toFixed(1);} return ds?`<path d="${ds}" fill="none" stroke="${cor}" stroke-width="${w}"/>`:""; }
-  s+=linha(e50,"#d29922",1.0)+linha(e21,"#e3b341",1.2)+linha(e9,"#3fb950",1.4);
+  s+=linha(e20,"#e3b341",1.4);
   // candles
   for(let i=0;i<n;i++){
     if(c[i]==null)continue;
@@ -102,7 +102,7 @@ function card(a){
     <div class="card-head">
       <span class="tk">${a.ticker}</span><span class="mkt">${a.market||""}</span>
       <span class="ibtag">INSIDE BAR</span>
-      <span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">9&gt;21&gt;50 \u2197</span>
+      <span class="ibtag" style="background:linear-gradient(135deg,#3fb950,#2ea043)">TEND\u00caNCIA HH+HL</span>${a.cons_len?`<span class="ibtag" style="background:linear-gradient(135deg,#58a6ff,#1f6feb)">CONSOL. ${a.cons_len}</span>`:``}
     </div>
     <div class="stats">
       <div class="stat"><div class="k">Entrada</div><div class="v mono up">${fmt(a.entry)}</div></div>
@@ -115,7 +115,7 @@ function card(a){
       <div class="stat"><div class="k">Volume</div><div class="v mono">${fmtVol(a.vol_qtd)}</div></div>
     </div>
     <div class="chart-wrap">
-      <div class="chart-lbl"><span>PRE\u00c7O + MME9/21/50</span><span>entrada \u2500\u2500 verde / stop \u2500\u2500 vermelho</span></div>
+      <div class="chart-lbl"><span>PRE\u00c7O + EMA20</span><span>entrada \u2500\u2500 verde / stop \u2500\u2500 vermelho</span></div>
       ${chart(a)}
     </div>
     <div style="padding:0 16px 14px"><a href="${tv}" target="_blank" rel="noopener" class="btn ghost" style="display:block;text-align:center;text-decoration:none">\ud83d\udcc8 Ver no TradingView</a></div>

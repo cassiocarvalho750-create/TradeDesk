@@ -79,12 +79,11 @@ def evaluate(tk, d, today):
         "close": round(float(last["Close"]),2),
         "entry": round(entry,2), "stop": round(stop,2),
         "r_pct": round(float(r_pct),2),
-        "ema9": round(float(last["ema9"]),2),
-        "ema21": round(float(last["ema21"]),2),
-        "sma50": round(float(last["sma50"]),2),
-        "dist_mme9": round(float(last["dist_mme9"])*100,2),
-        "dist_mme21": round(float(last["dist_mme21"])*100,2),
-        "compress": round(float(last["compress_ratio"]),2),
+        "ema20": round(float(last["ema20"]),2),
+        "dist_ema": round(float(last["dist_ema"])*100,2),
+        "compress": round(float(last["ib_ratio"]),2),
+        "cons_len": int(last["cons_len"]) if not np.isnan(last["cons_len"]) else None,
+        "contr_vol": round(float(last["contr_vol_ratio"]),2),
         "mae_high": round(float(last["mae_high"]),2),
         "mae_low": round(float(last["mae_low"]),2),
         "var_dia_pct": round(var_dia,2),
@@ -101,9 +100,7 @@ def build_panel(hits, n_bars=40, out_path="painel_insidebar.json"):
         d=_fetch_one(tk)
         if len(d)<30: continue
         c=d["Close"]; hi=d["High"]; lo=d["Low"]; op=d["Open"]
-        ema9=c.ewm(span=ib.EMA9_LEN,adjust=False).mean()
-        ema21=c.ewm(span=ib.EMA21_LEN,adjust=False).mean()
-        sma50=c.rolling(ib.SMA50_LEN).mean()
+        ema20=c.ewm(span=ib.EMA_LEN,adjust=False).mean()
         def tail(s):
             return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
                     for v in s.tail(n_bars).tolist()]
@@ -111,14 +108,14 @@ def build_panel(hits, n_bars=40, out_path="painel_insidebar.json"):
         ativos.append({
             "ticker": tk.replace(".SA",""), "market": h["market"],
             "close": h["close"], "entry": h["entry"], "stop": h["stop"],
-            "r_pct": h["r_pct"], "ema9": h["ema9"], "ema21": h["ema21"], "sma50": h["sma50"],
-            "dist_mme9": h["dist_mme9"], "dist_mme21": h["dist_mme21"], "compress": h["compress"],
+            "r_pct": h["r_pct"], "ema20": h["ema20"], "dist_ema": h["dist_ema"],
+            "compress": h["compress"], "cons_len": h["cons_len"], "contr_vol": h["contr_vol"],
             "mae_high": h["mae_high"], "mae_low": h["mae_low"],
             "var_dia_pct": h["var_dia_pct"], "vol_qtd": h["vol_qtd"],
             "date": h["date"], "tv": sc.tv_url(tk),
             "dates": dates,
             "o": tail(op), "h": tail(hi), "l": tail(lo), "price": tail(c),
-            "ema9s": tail(ema9), "ema21s": tail(ema21), "sma50s": tail(sma50),
+            "ema20s": tail(ema20),
         })
     payload={"gerado":str(datetime.date.today()),"captura":captura,"timeframe":"1d",
              "n":len(ativos),"ativos":ativos}
