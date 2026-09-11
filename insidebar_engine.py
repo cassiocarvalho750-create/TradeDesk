@@ -30,11 +30,11 @@ CONS_MIN       = 3
 CONS_MAX       = 10
 CONS_AMPL_ATR  = 2.5
 CONS_PEN_EMA   = 0.98
-ATR_CONTR_MAX  = 0.80
+ATR_CONTR_MAX  = 0.90    # afrouxado de 0.80 (menos exigente na contracao)
 ATR_FAST       = 5
 ATR_SLOW       = 20
 IB_COMPRESS    = 0.70
-IB_PERTO_EMA   = 0.03
+IB_PERTO_EMA   = 0.05    # afrouxado de 0.03 (IB ate 5% da EMA20)
 
 
 def _atr(h, l, c, period):
