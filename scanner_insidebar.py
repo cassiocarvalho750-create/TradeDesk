@@ -69,15 +69,19 @@ def evaluate(tk, d, today):
     if not bool(last["signal_ib"]):
         return None
     entry = float(last["entry_level"])   # maxima do inside bar
-    stop  = float(last["stop_level"])    # minima do inside bar
+    # stop no ultimo pivo de baixa 3x3 (com fallback p/ minima do IB)
+    sp = last.get("stop_pivo")
+    stop = float(sp) if (sp is not None and not np.isnan(sp)) else float(last["stop_level"])
     r_abs = entry - stop
     r_pct = (r_abs/entry*100) if entry>0 else 0
+    alvo2r = entry + 2*r_abs             # saida integral em 2R (item 14)
     vol_qtd = float(last["Volume"]) if not np.isnan(last["Volume"]) else 0.0
     var_dia = ((float(last["Close"])/float(last["Open"])-1)*100) if float(last["Open"])>0 else 0.0
     return {
         "ticker": tk, "market": _mkt(tk),
         "close": round(float(last["Close"]),2),
         "entry": round(entry,2), "stop": round(stop,2),
+        "alvo2r": round(alvo2r,2),
         "r_pct": round(float(r_pct),2),
         "ema20": round(float(last["ema20"]),2),
         "dist_ema": round(float(last["dist_ema"])*100,2),
@@ -107,7 +111,7 @@ def build_panel(hits, n_bars=40, out_path="painel_insidebar.json"):
         dates=[str(x.date()) for x in c.tail(n_bars).index]
         ativos.append({
             "ticker": tk.replace(".SA",""), "market": h["market"],
-            "close": h["close"], "entry": h["entry"], "stop": h["stop"],
+            "close": h["close"], "entry": h["entry"], "stop": h["stop"], "alvo2r": h["alvo2r"],
             "r_pct": h["r_pct"], "ema20": h["ema20"], "dist_ema": h["dist_ema"],
             "compress": h["compress"], "cons_len": h["cons_len"], "contr_vol": h["contr_vol"],
             "mae_high": h["mae_high"], "mae_low": h["mae_low"],

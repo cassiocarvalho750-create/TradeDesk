@@ -114,12 +114,20 @@ def compute_insidebar(df):
               and bool(perto_ema.iloc[pos]))
         signal.iloc[pos]=ok
 
+    # STOP no ultimo pivo de baixa 3x3 (swing low confirmado), so no candle do
+    # sinal. Sem pivo, cai para a minima do inside bar.
+    stop_pivo = pd.Series(np.nan, index=d.index)
+    if n>0 and bool(signal.iloc[-1]):
+        p=n-1
+        _, ll = _swings(h.iloc[:p+1], l.iloc[:p+1], SWING_K)
+        stop_pivo.iloc[p] = float(l.iloc[ll[-1]]) if ll else float(l.iloc[p])
+
     d["ema20"]=ema; d["atr5"]=atr_fast; d["atr20"]=atr_slow
     d["inside"]=inside.fillna(False); d["ib_ratio"]=ib_ratio
     d["dist_ema"]=dist_ema; d["estrutura_ok"]=estrut
     d["cons_ok"]=cons_ok; d["cons_len"]=cons_len
     d["contr_vol_ratio"]=atr_fast/atr_slow.replace(0,np.nan)
-    d["entry_level"]=h; d["stop_level"]=l
+    d["entry_level"]=h; d["stop_level"]=l; d["stop_pivo"]=stop_pivo
     d["mae_high"]=h.shift(1); d["mae_low"]=l.shift(1)
     d["signal_ib"]=signal
     return d
