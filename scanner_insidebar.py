@@ -56,6 +56,27 @@ def _fetch_batch(tickers, chunk=100):
 
 def _mkt(tk): return "B3" if tk.endswith(".SA") else "EUA"
 
+# ---- Filtro de REGIME de mercado (so afeta acoes US) ----
+# Nao operar US quando VTI < SMA200 E SMA200 caindo (vs 5 dias). Validado em
+# backtest (cesta ampla, 1129 trades): melhora expectancia e evita comprar
+# em mercado de baixa.
+REGIME_SMA=200; REGIME_SLOPE_LB=5
+def mercado_us_ruim():
+    """True se o mercado US esta em regime ruim (nao operar compras)."""
+    try:
+        import yfinance as yf
+        d = yf.Ticker("VTI").history(period="2y", interval="1d", auto_adjust=True)
+        if d is None or d.empty: return False
+        d.columns=[x.capitalize() for x in d.columns]
+        c=d["Close"]
+        if len(c) < REGIME_SMA+REGIME_SLOPE_LB+2: return False  # fail-safe
+        sma=c.rolling(REGIME_SMA).mean()
+        abaixo = float(c.iloc[-1]) < float(sma.iloc[-1])
+        caindo = float(sma.iloc[-1]) < float(sma.iloc[-1-REGIME_SLOPE_LB])
+        return bool(abaixo and caindo)
+    except Exception:
+        return False   # em duvida, nao bloqueia
+
 def evaluate(tk, d, today):
     """Avalia UM ticker. Retorna dict {'hoje': hit|None, 'romp': hit|None}:
     - 'hoje': inside bar formado hoje (aguardando rompimento);
@@ -81,7 +102,7 @@ def evaluate(tk, d, today):
         r_abs=entry-stop; r_pct=(r_abs/entry*100) if entry>0 else 0
         out["hoje"]={
             "ticker":tk,"market":_mkt(tk),"close":round(float(last["Close"]),2),
-            "entry":round(entry,2),"stop":round(stop,2),"parcial1r":round(entry+1*r_abs,2),"breakeven":round(entry,2),"alvo_final":round(entry+ALVO_R*r_abs,2),
+            "entry":round(entry,2),"stop":round(stop,2),"parcial2r":round(entry+2*r_abs,2),"breakeven":round(entry,2),"alvo_final":round(entry+ALVO_R*r_abs,2),
             "r_pct":round(float(r_pct),2),"ema20":round(float(last["ema20"]),2),
             "dist_ema":round(float(last["dist_ema"])*100,2),"compress":round(float(last["ib_ratio"]),2),
             "cons_len":int(last["cons_len"]) if not np.isnan(last["cons_len"]) else None,
@@ -96,7 +117,7 @@ def evaluate(tk, d, today):
         r_abs=entry-stop; r_pct=(r_abs/entry*100) if entry>0 else 0
         out["romp"]={
             "ticker":tk,"market":_mkt(tk),"close":round(float(last["Close"]),2),
-            "entry":round(entry,2),"stop":round(stop,2),"parcial1r":round(entry+1*r_abs,2),"breakeven":round(entry,2),"alvo_final":round(entry+ALVO_R*r_abs,2),
+            "entry":round(entry,2),"stop":round(stop,2),"parcial2r":round(entry+2*r_abs,2),"breakeven":round(entry,2),"alvo_final":round(entry+ALVO_R*r_abs,2),
             "r_pct":round(float(r_pct),2),"ema20":round(float(last["ema20"]),2),
             "compress":round(float(r.iloc[-2]["ib_ratio"]),2) if len(r)>=2 else None,
             "cons_len":int(r.attrs["romp_cons"]) if not (r.attrs.get("romp_cons") is None or np.isnan(r.attrs["romp_cons"])) else None,
@@ -185,9 +206,12 @@ def main():
     print(f"Scanner Insidebar | {len(universo)} ativos | diario\n")
     grupos={"hoje":[],"romp":[]}
     if a.mercado in ("us","ambos"):
-        print("  [US]")
-        g=scan(list(us), batch=a.batch, chunk=a.chunk)
-        grupos["hoje"]+=g["hoje"]; grupos["romp"]+=g["romp"]
+        if mercado_us_ruim():
+            print("  [US] PULADO — mercado em regime ruim (VTI<SMA200 e SMA200 caindo)")
+        else:
+            print("  [US]")
+            g=scan(list(us), batch=a.batch, chunk=a.chunk)
+            grupos["hoje"]+=g["hoje"]; grupos["romp"]+=g["romp"]
     if a.mercado in ("b3","ambos"):
         print("  [B3] (individual)")
         g=scan(list(b3), batch=False, chunk=a.chunk)
@@ -201,7 +225,7 @@ def main():
     print("\n"+"="*60)
     print(f"  ENTRAR HOJE (rompimento): {len(grupos['romp'])}")
     for h in grupos["romp"]:
-        print(f"    {h['ticker']:<10}{h['market']:<5} ent {h['entry']:>8} stop {h['stop']:>8} parc1R {h.get('parcial1r','—')} final3R {h.get('alvo_final','—')}")
+        print(f"    {h['ticker']:<10}{h['market']:<5} ent {h['entry']:>8} stop {h['stop']:>8} parc2R {h.get('parcial2r','—')} final3R {h.get('alvo_final','—')}")
     print(f"  RADAR (inside bar hoje): {len(grupos['hoje'])}")
     for h in grupos["hoje"]:
         print(f"    {h['ticker']:<10}{h['market']:<5} entrada {h['entry']:>9} stop {h['stop']:>9} compress {h['compress']}")

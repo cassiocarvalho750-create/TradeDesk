@@ -4,8 +4,10 @@ Backtest do TradeDesk Insidebar sobre dados historicos reais.
 Regras (iguais ao scanner):
   - setup completo no dia D (inside bar) via avaliar_em();
   - entrada no dia D+1 SE Close[D+1] > High[IB] (rompimento por fechamento);
-    entrada = Close[D+1]; stop = ultimo pivo 3x3 ate D+1; alvo = 2R.
-  - acompanha D+2..fim: se Low<=stop -> -1R; se High>=alvo -> +2R; o 1o que
+    entrada = Close[D+1]; stop = ultimo pivo 3x3 ate D+1.
+  - Estrategia de saida DEFINITIVA: 50% em 2R (e move o stop p/ breakeven) +
+    50% restante ate 3R. R do trade = media ponderada das duas metades.
+  - (antes: acompanha se Low<=stop / High>=alvo, o 1o que
     ocorrer. Se o candle toca AMBOS no mesmo dia, assume o pior (stop) —
     conservador.
 Saida: estatisticas por ativo e agregadas (trades, win rate, expectancia em R).
@@ -40,25 +42,29 @@ def backtest_ativo(d, tk, max_hold=60, alvo_R=3.0):
                 risk = entry-stop
                 if risk<=0:
                     D=nx+1; continue
-                alvo = entry + alvo_R*risk
-                # acompanha a partir de nx+1
-                res=None; saida=None
+                # ESTRATEGIA DEFINITIVA: 50% em 2R (move stop p/ breakeven) +
+                # 50% restante ate alvo_R (3R). R do trade = media das 2 metades.
+                alvo1 = entry + 2*risk          # parcial: 50% em 2R
+                alvo2 = entry + alvo_R*risk     # restante: ate 3R (alvo_R)
+                p1=None; p2=None; st=stop; saida=None
                 for j in range(nx+1, min(nx+1+max_hold, n)):
                     lo=float(l.iloc[j]); hi=float(h.iloc[j])
-                    bateu_stop = lo<=stop
-                    bateu_alvo = hi>=alvo
-                    if bateu_stop and bateu_alvo:
-                        res=-1.0; saida=d.index[j]; break   # conservador: pior caso
-                    if bateu_stop:
-                        res=-1.0; saida=d.index[j]; break
-                    if bateu_alvo:
-                        res=alvo_R; saida=d.index[j]; break
-                if res is None:
-                    # nao bateu nem stop nem alvo dentro de max_hold: fecha no ultimo close
+                    if p1 is None:
+                        if lo<=st: p1=-1.0; p2=-1.0; saida=d.index[j]; break  # stop antes de 2R
+                        if hi>=alvo1: p1=2.0; st=entry                        # realizou 2R, stop->BE
+                    if p1 is not None and p2 is None:
+                        if lo<=st: p2=0.0 if st==entry else -1.0; saida=d.index[j]; break  # BE=0
+                        if hi>=alvo2: p2=alvo_R; saida=d.index[j]; break
+                if p1 is None:      # nada aconteceu no horizonte
                     lastc=float(c.iloc[min(nx+max_hold, n-1)])
-                    res=(lastc-entry)/risk; saida=d.index[min(nx+max_hold, n-1)]
+                    fim=(lastc-entry)/risk; p1=fim; p2=fim; saida=d.index[min(nx+max_hold, n-1)]
+                elif p2 is None:    # 1a metade saiu em 2R, 2a nao resolveu
+                    lastc=float(c.iloc[min(nx+max_hold, n-1)])
+                    p2=(lastc-entry)/risk; saida=d.index[min(nx+max_hold, n-1)]
+                res = 0.5*p1 + 0.5*p2   # R ponderado das duas metades
                 trades.append({"ticker":tk,"entrada_data":str(d.index[nx].date()),
-                    "entry":round(entry,2),"stop":round(stop,2),"alvo":round(alvo,2),
+                    "entry":round(entry,2),"stop":round(stop,2),
+                    "parcial2r":round(alvo1,2),"alvo3r":round(alvo2,2),
                     "saida_data":str(saida.date()),"R":round(res,2)})
                 D=nx+1; continue
         D+=1

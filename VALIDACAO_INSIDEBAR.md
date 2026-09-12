@@ -78,6 +78,25 @@ Execucao:
    - Saida parcial (50% em 1R + 50% em 3R): testada, da win 54% mas expectancia
      menor. Optou-se por 3R integral (maior retorno, perfil aguenta win menor).
 
+
+══════════════════════════════════════════════════════════## 3b. ESTRATEGIA DE SAIDA (DEFINITIVA)
+═══════════════════════════════════════════════════════════════
+
+Operacional:
+  1. Entrada no rompimento da maxima do inside bar (Close acima).
+  2. Stop inicial = ultimo pivo 3x3.
+  3. Ao atingir 2R: realizar 50% da posicao E mover o stop da metade
+     restante para o BREAKEVEN (preco de entrada).
+  4. Metade restante corre ate 3R.
+
+Racional: segura a posicao inteira ate 2R (captura mais dos movimentos
+medios antes de realizar), e so entao protege com breakeven. Escolhida
+apos testes proprios comparando com parcial 1R e saidas integrais.
+
+(Historico dos testes anteriores — parcial 1R+3R, alvos integrais 1R/2R/3R
+— permanece registrado nas versoes anteriores deste doc / nas ferramentas
+teste_parcial2.py e teste_be.py para reproducao.)
+
 ═══════════════════════════════════════════════════════════════
 ## 4. RESSALVAS HONESTAS (ler sempre)
 ═══════════════════════════════════════════════════════════════
