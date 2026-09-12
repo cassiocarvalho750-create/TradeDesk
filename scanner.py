@@ -221,19 +221,28 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
                 is_forming = (idx == last_idx)
             else:
                 is_forming = (idx.normalize() == today)
-            # COMPRA: stop na minima, risco = entry-low. VENDA: stop na maxima,
-            # risco = high-entry (o ativo sobe contra a posicao vendida).
+            # COMPRA: stop no ultimo pivo 3x3 (validado em backtest); VENDA: stop
+            # na maxima. Objetivo 1: 2R (primeiro alvo).
             entry = row["Close"]
+            pos = s.index.get_loc(idx)
             if venda:
                 high = row["High"]; r = high - entry; stop_level = high
             else:
-                low = row["Low"];  r = entry - low;  stop_level = low
+                # ultimo swing low 3x3 disponivel ate `pos`; fallback = minima do candle
+                _lo = s["Low"]
+                _sl = None
+                for k in range(pos-3, 2, -1):
+                    jl = _lo.iloc[k-3:k+4]
+                    if len(jl)==7 and _lo.iloc[k]==jl.min():
+                        _sl = float(_lo.iloc[k]); break
+                low = _sl if _sl is not None else float(row["Low"])
+                r = entry - low; stop_level = low
             r_pct = (r/entry*100) if entry>0 else 0
+            alvo_2r = (entry + 2*r) if not venda else (entry - 2*r)   # primeiro objetivo 2R
             # variacao do candle de hoje (Close/Open - 1): quanto o ativo
             # valorizou no dia. Ex.: +14.69%.
             c_open = float(row["Open"])
             var_dia_pct = ((float(entry)/c_open - 1.0)*100.0) if c_open>0 else 0.0
-            pos = s.index.get_loc(idx)
             # MME de 70 periodos (EMA) no timeframe do scan: contexto de tendencia.
             # Calculada sobre o Close ate o candle do sinal (inclusive). Se nao ha
             # candles suficientes (< 70), fica indefinida (None).
@@ -373,6 +382,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
                 "vol_dia_mi": round(float(vol_dia_fin),1),
                 "vol_qtd": float(vol_dia_qtd) if not np.isnan(vol_dia_qtd) else 0.0,
                 "var_dia_pct": round(float(var_dia_pct),2),
+                "alvo_2r": round(float(alvo_2r),2),
                 "acima_ema70": acima_ema70,
                 "ema70_incl": ema70_incl,
                 "ema70": round(ema70_val,4) if ema70_val is not None else None,
@@ -484,6 +494,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
             "vol_qtd": h.get("vol_qtd",0), "var_dia_pct": h.get("var_dia_pct"),
+            "alvo_2r": h.get("alvo_2r"),
             "acima_ema70": h.get("acima_ema70"), "ema70": h.get("ema70"), "ema70_incl": h.get("ema70_incl"),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
             "pos_range": h.get("pos_range"), "dist_max_pct": h.get("dist_max_pct"),
