@@ -19,7 +19,7 @@ def carrega(path):
     d=d.rename(columns={"open":"Open","high":"High","low":"Low","close":"Close","volume":"Volume"})
     return d[["Open","High","Low","Close","Volume"]].dropna()
 
-def backtest_ativo(d, tk, max_hold=60):
+def backtest_ativo(d, tk, max_hold=60, alvo_R=3.0):
     """Retorna lista de trades. max_hold: dias maximos segurando (safety)."""
     o,h,l,c = d["Open"],d["High"],d["Low"],d["Close"]
     base=ib._series_base(d)
@@ -40,7 +40,7 @@ def backtest_ativo(d, tk, max_hold=60):
                 risk = entry-stop
                 if risk<=0:
                     D=nx+1; continue
-                alvo = entry + 2*risk
+                alvo = entry + alvo_R*risk
                 # acompanha a partir de nx+1
                 res=None; saida=None
                 for j in range(nx+1, min(nx+1+max_hold, n)):
@@ -52,7 +52,7 @@ def backtest_ativo(d, tk, max_hold=60):
                     if bateu_stop:
                         res=-1.0; saida=d.index[j]; break
                     if bateu_alvo:
-                        res=2.0; saida=d.index[j]; break
+                        res=alvo_R; saida=d.index[j]; break
                 if res is None:
                     # nao bateu nem stop nem alvo dentro de max_hold: fecha no ultimo close
                     lastc=float(c.iloc[min(nx+max_hold, n-1)])
@@ -66,15 +66,16 @@ def backtest_ativo(d, tk, max_hold=60):
 
 def main():
     price_dir=sys.argv[1] if len(sys.argv)>1 else "prices"
+    alvo_R=float(sys.argv[2]) if len(sys.argv)>2 else 3.0
     arqs=sorted(glob.glob(os.path.join(price_dir,"*.csv")))
     todos=[]
-    print(f"Backtest Insidebar | {len(arqs)} ativos | alvo 2R\n")
+    print(f"Backtest Insidebar | {len(arqs)} ativos | alvo {alvo_R}R\n")
     for a in arqs:
         tk=os.path.basename(a).replace(".csv","").upper()
         try:
             d=carrega(a)
             if len(d)<150: continue
-            t=backtest_ativo(d, tk)
+            t=backtest_ativo(d, tk, alvo_R=alvo_R)
             todos+=t
             if t:
                 wr=100*sum(1 for x in t if x["R"]>0)/len(t)

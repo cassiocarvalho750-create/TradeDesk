@@ -81,7 +81,7 @@ def evaluate(tk, d, today):
         r_abs=entry-stop; r_pct=(r_abs/entry*100) if entry>0 else 0
         out["hoje"]={
             "ticker":tk,"market":_mkt(tk),"close":round(float(last["Close"]),2),
-            "entry":round(entry,2),"stop":round(stop,2),"alvo2r":round(entry+ALVO_R*r_abs,2),
+            "entry":round(entry,2),"stop":round(stop,2),"parcial1r":round(entry+1*r_abs,2),"breakeven":round(entry,2),"alvo_final":round(entry+ALVO_R*r_abs,2),
             "r_pct":round(float(r_pct),2),"ema20":round(float(last["ema20"]),2),
             "dist_ema":round(float(last["dist_ema"])*100,2),"compress":round(float(last["ib_ratio"]),2),
             "cons_len":int(last["cons_len"]) if not np.isnan(last["cons_len"]) else None,
@@ -96,7 +96,7 @@ def evaluate(tk, d, today):
         r_abs=entry-stop; r_pct=(r_abs/entry*100) if entry>0 else 0
         out["romp"]={
             "ticker":tk,"market":_mkt(tk),"close":round(float(last["Close"]),2),
-            "entry":round(entry,2),"stop":round(stop,2),"alvo2r":round(entry+ALVO_R*r_abs,2),
+            "entry":round(entry,2),"stop":round(stop,2),"parcial1r":round(entry+1*r_abs,2),"breakeven":round(entry,2),"alvo_final":round(entry+ALVO_R*r_abs,2),
             "r_pct":round(float(r_pct),2),"ema20":round(float(last["ema20"]),2),
             "compress":round(float(r.iloc[-2]["ib_ratio"]),2) if len(r)>=2 else None,
             "cons_len":int(r.attrs["romp_cons"]) if not (r.attrs.get("romp_cons") is None or np.isnan(r.attrs["romp_cons"])) else None,
@@ -201,7 +201,7 @@ def main():
     print("\n"+"="*60)
     print(f"  ENTRAR HOJE (rompimento): {len(grupos['romp'])}")
     for h in grupos["romp"]:
-        print(f"    {h['ticker']:<10}{h['market']:<5} entrada {h['entry']:>9} stop {h['stop']:>9} alvo3R {h.get('alvo2r','—')}")
+        print(f"    {h['ticker']:<10}{h['market']:<5} ent {h['entry']:>8} stop {h['stop']:>8} parc1R {h.get('parcial1r','—')} final3R {h.get('alvo_final','—')}")
     print(f"  RADAR (inside bar hoje): {len(grupos['hoje'])}")
     for h in grupos["hoje"]:
         print(f"    {h['ticker']:<10}{h['market']:<5} entrada {h['entry']:>9} stop {h['stop']:>9} compress {h['compress']}")
