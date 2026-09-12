@@ -26,9 +26,19 @@ jobs:
           python scanner_us.py --timeframe 1d || echo "scanner_us falhou (seguindo)"
           python scanner_b3.py --timeframe 1d || echo "scanner_b3 falhou (seguindo)"
 
-      - name: Enviar e-mail com os sinais
+      - name: Enviar e-mail da Agulhada
         env:
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: python enviar_email.py
+
+      - name: Rodar scanner Insidebar
+        run: python scanner_insidebar.py --mercado ambos || echo "scanner_insidebar falhou (seguindo)"
+
+      - name: Enviar e-mail do Insidebar
+        env:
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python enviar_email_insidebar.py

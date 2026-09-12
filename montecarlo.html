@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeDesk — Monte Carlo das Estratégias</title>
+<style>
+  :root{--bg:#0d1117;--card:#0e141b;--line:#30363d;--muted:#8b949e;--accent:#58a6ff;--txt:#e6edf3;--up:#3fb950;--dn:#f85149;--gold:#e3b341}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  header{padding:20px;border-bottom:1px solid var(--line)}
+  h1{margin:0;font-size:20px}
+  h2{font-size:16px;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:6px;margin:28px 0 14px}
+  .sub{color:var(--muted);font-size:13px;margin-top:4px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px 60px}
+  .controls{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+  .controls label{font-size:13px;color:var(--muted)}
+  input[type=number]{background:#161b22;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 8px;width:90px}
+  input[type=file]{color:var(--muted);font-size:13px}
+  .btn{background:var(--accent);color:#04101f;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer}
+  .btn:disabled{opacity:.5;cursor:default}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-align:right;cursor:pointer;user-select:none}
+  th:first-child,td:first-child{text-align:left}
+  tr:hover td{background:#131a22}
+  .mono{font-variant-numeric:tabular-nums}
+  .up{color:var(--up)} .dn{color:var(--dn)} .gold{color:var(--gold)}
+  .rank1{background:rgba(227,179,65,.12)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .muted{color:var(--muted);font-size:12px}
+  canvas{width:100%;max-width:100%;height:auto;background:#0a0f14;border-radius:8px;border:1px solid var(--line)}
+  .badge{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;background:var(--gold);color:#1a1200;margin-left:6px}
+  .concl{background:#0e141b;border-left:3px solid var(--accent);padding:12px 16px;margin:10px 0;border-radius:0 8px 8px 0}
+  .metric-help{font-size:11px;color:var(--muted);margin-top:2px}
+  .drop{border:2px dashed var(--line);border-radius:10px;padding:30px;text-align:center;color:var(--muted);margin-top:16px}
+</style>
+</head>
+<body>
+<header>
+  <h1>TradeDesk — Simulação Monte Carlo das Estratégias</h1>
+  <div class="sub">Carrega os R reais dos seus trades, calcula estatísticas de risco e simula milhares de sequências para ranquear as estratégias.</div>
+</header>
+<div class="wrap">
+
+  <div class="controls">
+    <div>
+      <label>Arquivo de trades (trades_montecarlo.csv)</label><br>
+      <input type="file" id="file" accept=".csv">
+    </div>
+    <div><label>Capital (R$)</label><br><input type="number" id="capital" value="10000"></div>
+    <div><label>Risco por trade (%)</label><br><input type="number" id="risco" value="0.5" step="0.1"></div>
+    <div><label>Nº simulações</label><br><input type="number" id="nsim" value="2000" step="500"></div>
+    <div><label>Trades por simulação</label><br><input type="number" id="ntrades" value="200" step="50"></div>
+    <div style="align-self:flex-end"><button class="btn" id="run" disabled>Rodar análise</button></div>
+  </div>
+
+  <div class="drop" id="drop">Selecione o arquivo <b>trades_montecarlo.csv</b> (gerado por <code>python exportar_trades.py prices_teste</code>) para começar.</div>
+
+  <div id="out" style="display:none">
+    <h2>1. Estatísticas por estratégia (dados reais)</h2>
+    <div class="muted">Calculadas sobre os R reais de cada trade do backtest. Clique nos títulos para ordenar.</div>
+    <table id="tbStats"><thead></thead><tbody></tbody></table>
+    <div class="grid" style="margin-top:6px">
+      <div class="metric-help"><b>Expectância:</b> R médio por trade (o motor do lucro).</div>
+      <div class="metric-help"><b>Payoff:</b> ganho médio ÷ perda média (quanto ganha por unidade perdida).</div>
+      <div class="metric-help"><b>Sharpe:</b> retorno ÷ volatilidade total (quanto retorno por unidade de risco).</div>
+      <div class="metric-help"><b>Sortino:</b> como Sharpe, mas só penaliza a volatilidade das perdas (mais justo).</div>
+    </div>
+
+    <h2>2. Monte Carlo — distribuição de resultados</h2>
+    <div class="muted">Cada estratégia foi simulada milhares de vezes, reembaralhando os trades reais. Mostra o intervalo de resultados possíveis (não só a média).</div>
+    <table id="tbMC"><thead></thead><tbody></tbody></table>
+    <div class="card">
+      <div class="muted" style="margin-bottom:8px">Curvas de capital simuladas (amostra) — estratégia selecionada:
+        <select id="selMC" style="background:#161b22;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:4px"></select>
+      </div>
+      <canvas id="cvMC" width="1040" height="320"></canvas>
+    </div>
+
+    <h2>3. Ranking e conclusões</h2>
+    <div id="ranking"></div>
+    <div id="conclusoes"></div>
+    <p class="muted" style="margin-top:20px">Ressalvas: o backtest não inclui custos (corretagem, spread, slippage) — o resultado real é menor, e o efeito é maior em estratégias com muitos trades. Passado não garante futuro. O Monte Carlo mostra a variabilidade dos resultados, não elimina o risco.</p>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let DATA=null;   // {estrategia: [R,...]}
+
+// ---------- carregar CSV ----------
+$("file").onchange=async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const txt=await f.text();
+  const linhas=txt.trim().split(/\r?\n/); linhas.shift(); // header
+  const map={};
+  for(const ln of linhas){
+    const [est,r]=ln.split(",");
+    if(!est) continue;
+    (map[est]=map[est]||[]).push(parseFloat(r));
+  }
+  DATA=map;
+  $("drop").style.display="none";
+  $("run").disabled=false;
+  $("run").click();
+};
+
+// ---------- estatisticas ----------
+function stats(rs){
+  const n=rs.length; if(!n) return null;
+  const wins=rs.filter(x=>x>0), losses=rs.filter(x=>x<0);
+  const mean=rs.reduce((a,b)=>a+b,0)/n;
+  const wr=wins.length/n;
+  const avgW=wins.length?wins.reduce((a,b)=>a+b,0)/wins.length:0;
+  const avgL=losses.length?Math.abs(losses.reduce((a,b)=>a+b,0)/losses.length):0;
+  const payoff=avgL?avgW/avgL:0;
+  const sd=Math.sqrt(rs.reduce((a,b)=>a+(b-mean)**2,0)/n);
+  const dn=rs.filter(x=>x<mean); // downside
+  const dsd=Math.sqrt(dn.reduce((a,b)=>a+(b-mean)**2,0)/(dn.length||1));
+  const sharpe = sd? mean/sd*Math.sqrt(n) : 0;      // anualizado-ish (por raiz de n)
+  const sortino= dsd? mean/dsd*Math.sqrt(n) : 0;
+  // expectativa de Kelly (fracao otima teorica) = W - (1-W)/payoff
+  const kelly = payoff? wr - (1-wr)/payoff : 0;
+  return {n, mean, wr, avgW, avgL, payoff, sd, sharpe, sortino, kelly, soma:rs.reduce((a,b)=>a+b,0)};
+}
+
+// ---------- monte carlo ----------
+function montecarlo(rs, nsim, ntrades, capital, riscoFrac){
+  const vR=capital*riscoFrac;
+  const finais=[], dds=[], curvasAmostra=[];
+  for(let s=0;s<nsim;s++){
+    let cap=capital, pico=capital, dd=0;
+    const curva=[cap];
+    for(let t=0;t<ntrades;t++){
+      const r=rs[(Math.random()*rs.length)|0];
+      cap+=r*vR;
+      pico=Math.max(pico,cap);
+      dd=Math.min(dd,(cap-pico)/pico);
+      if(s<40) curva.push(cap);
+    }
+    finais.push(cap); dds.push(dd*100);
+    if(s<40) curvasAmostra.push(curva);
+  }
+  finais.sort((a,b)=>a-b); dds.sort((a,b)=>a-b);
+  const pct=(arr,p)=>arr[Math.min(arr.length-1,Math.floor(arr.length*p))];
+  const lucroMed=finais.reduce((a,b)=>a+b,0)/finais.length - capital;
+  const probLucro=finais.filter(x=>x>capital).length/finais.length;
+  return {
+    lucroMed, probLucro,
+    p05:pct(finais,0.05)-capital, p50:pct(finais,0.50)-capital, p95:pct(finais,0.95)-capital,
+    ddMediano:pct(dds,0.50), ddP95:pct(dds,0.95), // dd mais negativo no percentil 95 (pior)
+    ddPior:dds[0],
+    curvas:curvasAmostra
+  };
+}
+
+// ---------- render ----------
+let STATS={}, MC={};
+$("run").onclick=()=>{
+  if(!DATA) return;
+  const capital=+$("capital").value, riscoFrac=(+$("risco").value)/100;
+  const nsim=+$("nsim").value, ntrades=+$("ntrades").value;
+  STATS={}; MC={};
+  for(const est in DATA){
+    STATS[est]=stats(DATA[est]);
+    MC[est]=montecarlo(DATA[est], nsim, ntrades, capital, riscoFrac);
+  }
+  renderStats(); renderMC(); renderRanking(capital);
+  $("out").style.display="block";
+};
+
+function fmt(v,d=2){return v==null||isNaN(v)?"—":Number(v).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});}
+function fmtR$(v){return "R$ "+Number(Math.round(v)).toLocaleString('pt-BR');}
+
+function renderStats(){
+  const cols=[["estrategia","Estratégia"],["n","Trades"],["wr","Win %"],["mean","Expect. (R)"],
+    ["payoff","Payoff"],["sharpe","Sharpe"],["sortino","Sortino"],["kelly","Kelly %"]];
+  const th=$("tbStats").querySelector("thead");
+  th.innerHTML="<tr>"+cols.map(c=>`<th data-k="${c[0]}">${c[1]}</th>`).join("")+"</tr>";
+  const rows=Object.entries(STATS).map(([est,s])=>({est,...s}));
+  window._statsRows=rows; window._statsCols=cols;
+  sortAndDraw("mean");
+  th.querySelectorAll("th").forEach(t=>t.onclick=()=>sortAndDraw(t.dataset.k));
+}
+function sortAndDraw(k){
+  const rows=window._statsRows;
+  rows.sort((a,b)=> k==="estrategia" ? a.est.localeCompare(b.est) : (b[k]-a[k]));
+  const tb=$("tbStats").querySelector("tbody");
+  tb.innerHTML=rows.map((r,i)=>`<tr class="${i===0&&k==='mean'?'rank1':''}">
+    <td>${r.est}</td><td class="mono">${r.n}</td>
+    <td class="mono">${(r.wr*100).toFixed(0)}%</td>
+    <td class="mono ${r.mean>0?'up':'dn'}">${r.mean>0?'+':''}${fmt(r.mean,3)}</td>
+    <td class="mono">${fmt(r.payoff,2)}</td>
+    <td class="mono">${fmt(r.sharpe,2)}</td>
+    <td class="mono">${fmt(r.sortino,2)}</td>
+    <td class="mono">${(r.kelly*100).toFixed(0)}%</td></tr>`).join("");
+}
+
+function renderMC(){
+  const th=$("tbMC").querySelector("thead");
+  th.innerHTML=`<tr><th>Estratégia</th><th>Prob. lucro</th><th>Lucro mediano</th>
+    <th>Pior 5% (P05)</th><th>Melhor 5% (P95)</th><th>Drawdown mediano</th><th>Drawdown P95</th></tr>`;
+  const tb=$("tbMC").querySelector("tbody");
+  const rows=Object.entries(MC).sort((a,b)=>b[1].p50-a[1].p50);
+  tb.innerHTML=rows.map(([est,m])=>`<tr>
+    <td>${est}</td>
+    <td class="mono">${(m.probLucro*100).toFixed(0)}%</td>
+    <td class="mono ${m.p50>0?'up':'dn'}">${fmtR$(m.p50)}</td>
+    <td class="mono dn">${fmtR$(m.p05)}</td>
+    <td class="mono up">${fmtR$(m.p95)}</td>
+    <td class="mono">${m.ddMediano.toFixed(0)}%</td>
+    <td class="mono dn">${m.ddP95.toFixed(0)}%</td></tr>`).join("");
+  // seletor de curvas
+  const sel=$("selMC"); sel.innerHTML=Object.keys(MC).map(e=>`<option>${e}</option>`).join("");
+  sel.onchange=()=>drawCurvas(sel.value);
+  drawCurvas(Object.keys(MC)[0]);
+}
+
+function drawCurvas(est){
+  const cv=$("cvMC"), ctx=cv.getContext("2d"); const W=cv.width,H=cv.height,pad=40;
+  ctx.clearRect(0,0,W,H);
+  const curvas=MC[est].curvas; if(!curvas||!curvas.length) return;
+  let lo=Infinity,hi=-Infinity;
+  curvas.forEach(c=>c.forEach(v=>{lo=Math.min(lo,v);hi=Math.max(hi,v);}));
+  const n=curvas[0].length;
+  const X=i=>pad+(i/(n-1))*(W-2*pad), Y=v=>H-pad-((v-lo)/(hi-lo||1))*(H-2*pad);
+  // linha do capital inicial
+  const cap0=curvas[0][0];
+  ctx.strokeStyle="#30363d"; ctx.setLineDash([4,3]); ctx.beginPath();
+  ctx.moveTo(pad,Y(cap0)); ctx.lineTo(W-pad,Y(cap0)); ctx.stroke(); ctx.setLineDash([]);
+  // curvas
+  curvas.forEach(c=>{
+    const fim=c[c.length-1];
+    ctx.strokeStyle = fim>=cap0 ? "rgba(63,185,80,.35)" : "rgba(248,81,73,.35)";
+    ctx.lineWidth=1; ctx.beginPath();
+    c.forEach((v,i)=> i? ctx.lineTo(X(i),Y(v)) : ctx.moveTo(X(i),Y(v)));
+    ctx.stroke();
+  });
+  // labels
+  ctx.fillStyle="#8b949e"; ctx.font="11px sans-serif";
+  ctx.fillText(fmtR$(hi), 4, Y(hi)+4);
+  ctx.fillText(fmtR$(lo), 4, Y(lo)+4);
+  ctx.fillText("inicial "+fmtR$(cap0), pad+4, Y(cap0)-4);
+}
+
+function renderRanking(capital){
+  // score composto: normaliza expectancia, sortino, prob de lucro e (menor) drawdown
+  const ests=Object.keys(STATS);
+  const vals=k=>ests.map(e=> k==="dd"? -MC[e].ddP95 : k==="prob"? MC[e].probLucro : k==="sortino"? STATS[e].sortino : STATS[e].mean);
+  const norm=arr=>{const mn=Math.min(...arr),mx=Math.max(...arr);return arr.map(v=>mx-mn?(v-mn)/(mx-mn):0.5);};
+  const nExp=norm(vals("mean")), nSor=norm(vals("sortino")), nProb=norm(vals("prob")), nDD=norm(vals("dd"));
+  const scores=ests.map((e,i)=>({
+    est:e,
+    score: 0.35*nExp[i] + 0.25*nSor[i] + 0.20*nProb[i] + 0.20*nDD[i],
+    exp:STATS[e].mean, sortino:STATS[e].sortino, prob:MC[e].probLucro, ddP95:MC[e].ddP95, n:STATS[e].n
+  }));
+  scores.sort((a,b)=>b.score-a.score);
+  let html='<table><thead><tr><th>#</th><th>Estratégia</th><th>Score</th><th>Expect.</th><th>Sortino</th><th>Prob. lucro</th><th>DD P95</th></tr></thead><tbody>';
+  scores.forEach((s,i)=>{
+    html+=`<tr class="${i===0?'rank1':''}"><td>${i+1}${i===0?'<span class="badge">TOP</span>':''}</td>
+      <td>${s.est}</td><td class="mono gold">${(s.score*100).toFixed(0)}</td>
+      <td class="mono ${s.exp>0?'up':'dn'}">${s.exp>0?'+':''}${fmt(s.exp,3)}R</td>
+      <td class="mono">${fmt(s.sortino,2)}</td>
+      <td class="mono">${(s.prob*100).toFixed(0)}%</td>
+      <td class="mono dn">${s.ddP95.toFixed(0)}%</td></tr>`;
+  });
+  html+='</tbody></table>';
+  $("ranking").innerHTML=html;
+
+  // conclusoes objetivas
+  const top=scores[0], seg=scores[1];
+  const maisRetorno=[...scores].sort((a,b)=>b.exp-a.exp)[0];
+  const maisSeguro=[...scores].sort((a,b)=>a.ddP95-b.ddP95)[0]; // dd menos negativo? ddP95 e negativo, maior = melhor
+  const maisSeguro2=[...scores].sort((a,b)=>b.ddP95-a.ddP95)[0];
+  let c=`<div class="concl"><b>Melhor no conjunto (score):</b> ${top.est} — combina boa expectância (${top.exp>0?'+':''}${fmt(top.exp,3)}R), Sortino ${fmt(top.sortino,2)} e ${(top.prob*100).toFixed(0)}% de chance de lucro na simulação, com drawdown P95 de ${top.ddP95.toFixed(0)}%.</div>`;
+  c+=`<div class="concl"><b>Maior retorno por trade:</b> ${maisRetorno.est} (${maisRetorno.exp>0?'+':''}${fmt(maisRetorno.exp,3)}R). Melhor se você prioriza crescimento e aguenta a volatilidade.</div>`;
+  c+=`<div class="concl"><b>Mais defensiva (menor drawdown):</b> ${maisSeguro2.est} (DD P95 ${maisSeguro2.ddP95.toFixed(0)}%). Melhor se você prioriza estabilidade e conforto.</div>`;
+  c+=`<div class="concl"><b>Como operar:</b> priorize a(s) estratégia(s) do topo do ranking. Se for operar mais de uma, prefira combinar uma de <i>maior retorno</i> com uma <i>mais defensiva</i> — elas tendem a suavizar a curva. Lembre que estratégias com muitos trades (ex.: Agulhada) sofrem mais com custos reais não incluídos aqui: desconte isso antes de decidir.</div>`;
+  $("conclusoes").innerHTML=c;
+}
+</script>
+</body>
+</html>
