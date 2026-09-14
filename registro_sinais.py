@@ -17,6 +17,27 @@ import os, csv, datetime
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 
+# ---- Verificacao de CANDLE FECHADO (a prova de erro) ----
+# So registra sinais de um mercado se o pregao daquele mercado JA FECHOU hoje
+# (horario de Brasilia). Evita gravar precos provisorios de mercado aberto.
+# Margem de seguranca de 15 min apos o fechamento.
+FECHAMENTO_BRT = {
+    "EUA": (18, 15),   # NYSE/Nasdaq ~ fecham 17h BRT (horario de verao) a 18h; usa 18h15 p/ garantir
+    "B3":  (18, 30),   # B3 fecha 18h (call ate ~18h05); usa 18h30 p/ garantir
+}
+def _agora_brt():
+    tz = datetime.timezone(datetime.timedelta(hours=-3))
+    return datetime.datetime.now(datetime.timezone.utc).astimezone(tz)
+
+def _mercado_fechado(market, agora=None):
+    """True se o pregao do 'market' ja fechou hoje (BRT). Fim de semana: fechado."""
+    agora = agora or _agora_brt()
+    if agora.weekday() >= 5:   # sabado(5)/domingo(6): mercado fechado (candle de sexta ja fechou)
+        return True
+    h, m = FECHAMENTO_BRT.get(market, (18, 30))
+    limite = agora.replace(hour=h, minute=m, second=0, microsecond=0)
+    return agora >= limite
+
 # ---- Campos guardados (tudo que o backtest futuro precisa) ----
 CAMPOS_DIDI = [
     "data","ticker","market","sistema",
@@ -74,9 +95,12 @@ def registrar_didi(hits, data=None):
     path = os.path.join(DIR, "historico_sinais_didi.csv")
     ja = _carrega_chaves(path)
     linhas=[]
+    pulados_aberto=0
     for h in hits:
         tk = h.get("ticker","")
         if (data, tk) in ja: continue     # ja registrado hoje
+        if not _mercado_fechado(h.get("market","")):
+            pulados_aberto+=1; continue    # candle ainda aberto: nao grava (a prova de erro)
         linhas.append({
             "data":data, "ticker":tk, "market":h.get("market",""), "sistema":"DIDI",
             "entrada":h.get("close"), "stop":h.get("stop"), "alvo_2r":h.get("alvo_2r"),
@@ -90,7 +114,8 @@ def registrar_didi(hits, data=None):
         })
         ja.add((data,tk))
     if linhas: _append(path, CAMPOS_DIDI, linhas)
-    print(f"  [registro DIDI] +{len(linhas)} sinais em historico_sinais_didi.csv")
+    aviso = f" ({pulados_aberto} pulados: mercado ainda aberto)" if pulados_aberto else ""
+    print(f"  [registro DIDI] +{len(linhas)} sinais em historico_sinais_didi.csv{aviso}")
     return len(linhas)
 
 def registrar_insidebar(grupos, data=None):
@@ -99,10 +124,13 @@ def registrar_insidebar(grupos, data=None):
     path = os.path.join(DIR, "historico_sinais_insidebar.csv")
     ja = _carrega_chaves(path)
     linhas=[]
+    pulados_aberto=[0]
     def add(h, grupo):
         tk=h.get("ticker","")
         # chave inclui grupo p/ permitir o mesmo ticker no radar e no entrar
         if (data, tk+"|"+grupo) in ja: return
+        if not _mercado_fechado(h.get("market","")):
+            pulados_aberto[0]+=1; return    # candle ainda aberto: nao grava
         linhas.append({
             "data":data, "ticker":tk, "market":h.get("market",""), "sistema":"INSIDEBAR",
             "grupo":grupo,
@@ -117,5 +145,6 @@ def registrar_insidebar(grupos, data=None):
     for h in grupos.get("romp",[]): add(h,"ENTRAR")
     for h in grupos.get("hoje",[]): add(h,"RADAR")
     if linhas: _append(path, CAMPOS_IB, linhas)
-    print(f"  [registro Insidebar] +{len(linhas)} sinais em historico_sinais_insidebar.csv")
+    aviso = f" ({pulados_aberto[0]} pulados: mercado ainda aberto)" if pulados_aberto[0] else ""
+    print(f"  [registro Insidebar] +{len(linhas)} sinais em historico_sinais_insidebar.csv{aviso}")
     return len(linhas)
