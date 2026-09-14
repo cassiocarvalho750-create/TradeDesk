@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-14",
-  "captura": "14/09/2026 16:19",
+  "captura": "14/09/2026 16:54",
   "timeframe": "1d",
   "n_entrar": 2,
   "n_radar": 4,
@@ -8,18 +8,18 @@
     {
       "ticker": "NTRA",
       "market": "EUA",
-      "close": 338.54,
-      "entry": 338.54,
+      "close": 341.42,
+      "entry": 341.42,
       "stop": 316.0,
-      "parcial2r": 383.62,
-      "breakeven": 338.54,
-      "alvo_final": 406.16,
-      "r_pct": 6.66,
-      "ema20": 323.02,
+      "parcial2r": 392.25,
+      "breakeven": 341.42,
+      "alvo_final": 417.66,
+      "r_pct": 7.44,
+      "ema20": 323.3,
       "compress": 0.54,
       "cons_len": 3,
-      "var_dia_pct": 3.24,
-      "vol_qtd": 615579.0,
+      "var_dia_pct": 4.12,
+      "vol_qtd": 716555.0,
       "date": "2026-09-14",
       "rompeu": false,
       "_tk": "NTRA",
@@ -148,7 +148,7 @@
         331.88,
         331.185,
         330.18,
-        338.55
+        341.55
       ],
       "l": [
         262.01,
@@ -232,7 +232,7 @@
         330.31,
         326.14,
         328.93,
-        338.475
+        341.515
       ],
       "ema20s": [
         263.5532,
@@ -274,24 +274,24 @@
         320.0128,
         320.5964,
         321.39,
-        323.0172
+        323.3067
       ]
     },
     {
       "ticker": "VEEV",
       "market": "EUA",
-      "close": 265.27,
-      "entry": 265.27,
+      "close": 264.08,
+      "entry": 264.08,
       "stop": 238.93,
-      "parcial2r": 317.94,
-      "breakeven": 265.27,
-      "alvo_final": 344.27,
-      "r_pct": 9.93,
-      "ema20": 259.47,
+      "parcial2r": 314.37,
+      "breakeven": 264.08,
+      "alvo_final": 339.51,
+      "r_pct": 9.52,
+      "ema20": 259.35,
       "compress": 0.65,
       "cons_len": 3,
-      "var_dia_pct": 0.13,
-      "vol_qtd": 838014.0,
+      "var_dia_pct": -0.32,
+      "vol_qtd": 991967.0,
       "date": "2026-09-14",
       "rompeu": false,
       "_tk": "VEEV",
@@ -504,7 +504,7 @@
         260.8,
         260.98,
         262.4,
-        265.355
+        264.24
       ],
       "ema20s": [
         185.946,
@@ -546,7 +546,7 @@
         258.2215,
         258.4842,
         258.8571,
-        259.476
+        259.3698
       ]
     }
   ],
@@ -554,7 +554,7 @@
     {
       "ticker": "STRK",
       "market": "EUA",
-      "close": 76.25,
+      "close": 76.21,
       "entry": 77.0,
       "stop": 71.21,
       "parcial2r": 88.58,
@@ -562,14 +562,14 @@
       "alvo_final": 94.37,
       "r_pct": 7.52,
       "ema20": 73.48,
-      "dist_ema": 3.76,
+      "dist_ema": 3.72,
       "compress": 0.44,
       "cons_len": 3,
       "contr_vol": 0.92,
       "mae_high": 77.78,
       "mae_low": 74.5,
-      "var_dia_pct": 0.31,
-      "vol_qtd": 147759.0,
+      "var_dia_pct": 0.26,
+      "vol_qtd": 162701.0,
       "date": "2026-09-14",
       "_tk": "STRK",
       "tv": "https://www.tradingview.com/chart/?symbol=STRK",
@@ -781,7 +781,7 @@
         76.3,
         76.01,
         76.0,
-        76.245
+        76.21
       ],
       "ema20s": [
         61.3733,
@@ -823,28 +823,28 @@
         72.5655,
         72.8936,
         73.1894,
-        73.4804
+        73.4771
       ]
     },
     {
       "ticker": "AWK",
       "market": "EUA",
-      "close": 139.1,
+      "close": 139.17,
       "entry": 139.73,
       "stop": 136.22,
       "parcial2r": 146.75,
       "breakeven": 139.73,
       "alvo_final": 150.26,
       "r_pct": 2.51,
-      "ema20": 138.22,
-      "dist_ema": 0.63,
+      "ema20": 138.23,
+      "dist_ema": 0.68,
       "compress": 0.6,
       "cons_len": 3,
       "contr_vol": 0.88,
       "mae_high": 140.95,
       "mae_low": 137.27,
-      "var_dia_pct": 0.15,
-      "vol_qtd": 855137.0,
+      "var_dia_pct": 0.21,
+      "vol_qtd": 1023913.0,
       "date": "2026-09-14",
       "_tk": "AWK",
       "tv": "https://www.tradingview.com/chart/?symbol=AWK",
@@ -1056,7 +1056,7 @@
         140.33,
         139.84,
         137.69,
-        139.195
+        138.96
       ],
       "ema20s": [
         130.4829,
@@ -1098,28 +1098,28 @@
         137.9971,
         138.1726,
         138.1267,
-        138.2284
+        138.206
       ]
     },
     {
       "ticker": "UNM",
       "market": "EUA",
-      "close": 94.43,
+      "close": 94.14,
       "entry": 95.32,
       "stop": 92.78,
       "parcial2r": 100.4,
       "breakeven": 95.32,
       "alvo_final": 102.94,
       "r_pct": 2.66,
-      "ema20": 92.68,
-      "dist_ema": 1.9,
+      "ema20": 92.65,
+      "dist_ema": 1.61,
       "compress": 0.72,
       "cons_len": 3,
       "contr_vol": 0.91,
       "mae_high": 95.69,
       "mae_low": 93.15,
-      "var_dia_pct": -0.39,
-      "vol_qtd": 1625796.0,
+      "var_dia_pct": -0.7,
+      "vol_qtd": 2080434.0,
       "date": "2026-09-14",
       "_tk": "UNM",
       "tv": "https://www.tradingview.com/chart/?symbol=UNM",
@@ -1331,7 +1331,7 @@
         93.07,
         94.31,
         94.42,
-        94.5
+        94.14
       ],
       "ema20s": [
         88.473,
@@ -1373,28 +1373,28 @@
         92.0739,
         92.2868,
         92.49,
-        92.6814
+        92.6471
       ]
     },
     {
       "ticker": "CPAY",
       "market": "EUA",
-      "close": 411.29,
+      "close": 411.45,
       "entry": 415.29,
       "stop": 403.27,
       "parcial2r": 439.33,
       "breakeven": 415.29,
       "alvo_final": 451.35,
       "r_pct": 2.89,
-      "ema20": 407.59,
-      "dist_ema": 0.91,
+      "ema20": 407.6,
+      "dist_ema": 0.94,
       "compress": 0.73,
       "cons_len": 3,
       "contr_vol": 0.9,
       "mae_high": 416.13,
       "mae_low": 408.09,
-      "var_dia_pct": -0.06,
-      "vol_qtd": 257841.0,
+      "var_dia_pct": -0.02,
+      "vol_qtd": 285775.0,
       "date": "2026-09-14",
       "_tk": "CPAY",
       "tv": "https://www.tradingview.com/chart/?symbol=CPAY",
@@ -1606,7 +1606,7 @@
         406.09,
         408.47,
         408.22,
-        411.4
+        411.51
       ],
       "ema20s": [
         355.361,
@@ -1648,7 +1648,7 @@
         406.9458,
         407.0909,
         407.1985,
-        407.5986
+        407.6091
       ]
     }
   ]
