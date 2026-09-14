@@ -220,6 +220,12 @@ def main():
     # ordena cada grupo por maior compressao
     for k in grupos:
         grupos[k].sort(key=lambda h:(h.get("compress") if h.get("compress") is not None else 9))
+    # registrar sinais do dia (forward testing) — nao interrompe o scan se falhar
+    try:
+        import registro_sinais
+        registro_sinais.registrar_insidebar(grupos)
+    except Exception as e:
+        print(f"  [registro Insidebar] falhou: {e}")
     build_panel(grupos, out_path="painel_insidebar.json")
 
     print("\n"+"="*60)

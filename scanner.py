@@ -540,6 +540,13 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
                "timeframe": timeframe, "n": len(ativos), "ativos": ativos}
     open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
     print(f"  Painel JSON: {out_path} ({len(ativos)} ativo(s))")
+    # registrar sinais do dia (forward testing) — SO no diario (1d)
+    if timeframe=="1d":
+        try:
+            import registro_sinais
+            registro_sinais.registrar_didi(ativos)
+        except Exception as e:
+            print(f"  [registro DIDI] falhou: {e}")
     return out_path
 
 def main():

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeDesk Prop — Controle da Mesa</title>
+<style>
+:root{
+  --bg:#f5f7fa; --surface:#ffffff; --surface2:#f0f2f6; --border:#dde2ec;
+  --accent:#0077cc; --accent2:#005fa3; --green:#008000; --red:#cc0000;
+  --yellow:#e6a000; --text:#000000; --muted:#6b7a90;
+  --font:'Times New Roman',Times,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);padding:16px}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:1.6rem;margin-bottom:2px}
+.sub{color:var(--muted);font-size:.9rem;margin-bottom:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tab{padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-weight:700}
+.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pane{display:none}.pane.active{display:block}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px}
+.card h2{font-size:1.05rem;margin-bottom:12px;color:var(--accent2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kpi{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.kpi .lab{font-size:.8rem;color:var(--muted)}
+.kpi .val{font-size:1.5rem;font-weight:700;margin-top:4px}
+.cfg{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+.cfg label{font-size:.82rem;color:var(--muted);display:block}
+input,select{font-family:var(--font);font-size:1rem;padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:#fff}
+input[type=number]{width:120px}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:var(--font)}
+.btn.sec{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+/* barras de compliance */
+.bar-wrap{margin:14px 0}
+.bar-top{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:4px}
+.bar{height:22px;background:var(--surface2);border-radius:6px;overflow:hidden;border:1px solid var(--border)}
+.bar .fill{height:100%;transition:width .3s;border-radius:5px 0 0 5px}
+.status{display:inline-block;padding:3px 10px;border-radius:6px;font-weight:700;font-size:.82rem}
+.ok{background:#e6f6e6;color:var(--green)} .warn{background:#fff4e0;color:var(--yellow)} .danger{background:#fdeaea;color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--border)}
+th{color:var(--muted);font-weight:700}
+/* tabela de Regras: alinhada à esquerda */
+#regras table th,#regras table td{text-align:left}
+/* tabela de OPERACOES: layout fixo p/ cabecalho e corpo alinharem */
+#tb{table-layout:fixed}
+#tb th,#tb td{text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+#tb th:nth-child(1),#tb td:nth-child(1){text-align:left;width:110px}   /* data */
+#tb th:nth-child(2),#tb td:nth-child(2){text-align:left;width:70px}    /* ticker */
+#tb th:nth-child(3),#tb td:nth-child(3){text-align:left;width:95px}   /* sistema */
+#tb th:nth-child(4),#tb td:nth-child(4){width:60px}   /* qtd */
+#tb th:nth-child(5),#tb td:nth-child(5){width:80px}   /* entrada */
+#tb th:nth-child(6),#tb td:nth-child(6){width:80px}   /* stop */
+#tb th:nth-child(7),#tb td:nth-child(7){width:78px}   /* risco */
+#tb th:nth-child(8),#tb td:nth-child(8){width:80px}   /* 2r */
+#tb th:nth-child(9),#tb td:nth-child(9){width:80px}   /* 3r */
+#tb th:nth-child(10),#tb td:nth-child(10){width:80px} /* saida */
+#tb th:nth-child(11),#tb td:nth-child(11){width:82px} /* result */
+#tb th:nth-child(12),#tb td:nth-child(12){width:60px} /* R */
+#tb th:nth-child(13),#tb td:nth-child(13){width:74px;overflow:visible;padding:4px 2px} /* acoes */
+#tb td input,#tb td select{width:100%;border:1px solid transparent;background:transparent;font-family:var(--font);font-size:.9rem;padding:3px 4px;text-align:right}
+#tb td:nth-child(1) input,#tb td:nth-child(2) input,#tb td:nth-child(3) select{text-align:left}
+#tb td input:focus{outline:none;border:1px solid var(--accent);border-radius:4px;background:#fff}
+.del{color:var(--red);cursor:pointer;font-weight:700;border:none;background:none;font-size:1rem}
+.del-btn{cursor:pointer;color:var(--red);font-weight:700} .del-btn:hover{background:#fdeaea;border-color:var(--red)}
+.pos{color:var(--green)} .neg{color:var(--red)}
+.hint{font-size:.82rem;color:var(--muted);margin-top:6px}
+.tbl-scroll{overflow-x:auto}
+/* checklist */
+.chk{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--surface2);cursor:pointer;font-size:.95rem}
+.chk:last-child{border-bottom:none}
+.chk::before{content:"";flex-shrink:0;width:20px;height:20px;border:2px solid var(--border);border-radius:5px;margin-top:1px}
+.chk.on::before{content:"✓";background:var(--green);border-color:var(--green);color:#fff;font-weight:700;text-align:center;line-height:18px}
+.chk.on{color:var(--muted);text-decoration:line-through}
+/* parciais */
+.mini{border:1px solid var(--border);background:var(--surface2);border-radius:5px;cursor:pointer;font-size:.85rem;padding:2px 5px;margin:0 1px;line-height:1.2}
+.badge-parc{background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:5px}
+.parc-box{background:var(--surface2);border-radius:8px;padding:12px;text-align:left}
+.parc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:8px}
+.parc-leg{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px}
+.parc-lab{font-size:.82rem;color:var(--accent2);margin-bottom:6px;font-weight:700}
+.parc-inputs{display:flex;gap:8px}
+.parc-in{flex:1;display:flex;flex-direction:column}
+.parc-in span{font-size:.72rem;color:var(--muted);margin-bottom:2px}
+.parc-in input{width:100%;border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-family:var(--font);font-size:.95rem}
+#tb tr.parc-row td{overflow:visible;white-space:normal;text-align:left;padding:0 0 10px}
+.parc-hint{font-size:.85rem;color:var(--muted);margin-top:10px}
+.parc-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:8px}
+.parc-tile{background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center}
+.pt-lab{font-size:.72rem;color:var(--muted)}
+.pt-val{font-size:1.1rem;font-weight:700;margin-top:2px}
+.big{font-size:2rem;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>TradeDesk Prop — Controle da Mesa</h1>
+  <div class="sub">Painel de operação e compliance para a mesa proprietária. Dados salvos neste navegador (localStorage).</div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="tab('painel')">🚦 Painel & Compliance</div>
+    <div class="tab" onclick="tab('trades')">📋 Operações</div>
+    <div class="tab" onclick="tab('calc')">🧮 Calculadora de Posição</div>
+    <div class="tab" onclick="tab('regras')">📖 Regras</div>
+    <div class="tab" onclick="tab('checklist')">✅ Checklist</div>
+  </div>
+
+  <!-- ===================== PAINEL & COMPLIANCE ===================== -->
+  <div id="painel" class="pane active">
+    <div class="card">
+      <h2>Configuração da conta</h2>
+      <div class="cfg">
+        <div><label>Poder de compra (US$)</label>
+          <select id="cfgConta" onchange="cfgChange()">
+            <option value="2000">US$ 2.000</option>
+            <option value="10000" selected>US$ 10.000</option>
+            <option value="20000">US$ 20.000</option>
+            <option value="40000">US$ 40.000</option>
+          </select></div>
+        <div><label>Risco por trade (%)</label><input id="cfgRisco" type="number" step="0.05" value="0.30" onchange="cfgChange()"></div>
+        <div><label>Custo/trade (US$)</label><input id="cfgCusto" type="number" step="0.01" value="0.75" onchange="cfgChange()"></div>
+        <div><button class="btn sec" onclick="cfgChange()">Atualizar</button></div>
+      </div>
+      <div class="hint" id="cfgResumo"></div>
+    </div>
+
+    <div class="card">
+      <h2>Progresso da meta &amp; limites</h2>
+      <!-- Meta -->
+      <div class="bar-wrap">
+        <div class="bar-top"><span><b>Meta (Target +15%)</b> <span id="metaStatus"></span></span><span id="metaTxt"></span></div>
+        <div class="bar"><div class="fill" id="metaFill" style="background:var(--green)"></div></div>
+      </div>
+      <!-- Max Loss -->
+      <div class="bar-wrap">
+        <div class="bar-top"><span><b>Max Loss (-7% total)</b> <span id="mlStatus"></span></span><span id="mlTxt"></span></div>
+        <div class="bar"><div class="fill" id="mlFill" style="background:var(--red)"></div></div>
+      </div>
+      <!-- Daily -->
+      <div class="bar-wrap">
+        <div class="bar-top"><span><b>Resultado de HOJE</b> (pausa -3% / teto +2%) <span id="dayStatus"></span></span><span id="dayTxt"></span></div>
+        <div class="bar"><div class="fill" id="dayFill" style="background:var(--accent)"></div></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="kpi"><div class="lab">P&amp;L total (líquido)</div><div class="val" id="kpiPL">—</div></div>
+      <div class="kpi"><div class="lab">% da conta</div><div class="val" id="kpiPct">—</div></div>
+      <div class="kpi"><div class="lab">Trades</div><div class="val" id="kpiN">—</div></div>
+      <div class="kpi"><div class="lab">Win rate</div><div class="val" id="kpiWR">—</div></div>
+    </div>
+
+    <div class="card">
+      <h2>Consistency Rule (50%)</h2>
+      <div class="bar-wrap">
+        <div class="bar-top"><span>Maior dia vs lucro total <span id="consStatus"></span></span><span id="consTxt"></span></div>
+        <div class="bar"><div class="fill" id="consFill" style="background:var(--yellow)"></div></div>
+      </div>
+      <div class="hint">Nenhum dia pode passar de 50% do lucro total. Se a barra passar de 50%, distribua mais o lucro nos próximos dias antes de sacar.</div>
+    </div>
+
+    <div class="card">
+      <h2>Requisitos de saque</h2>
+      <div class="grid">
+        <div class="kpi"><div class="lab">Dias com +0,5% (min. 3)</div><div class="val" id="reqDias">—</div></div>
+        <div class="kpi"><div class="lab">Posições (min. 5)</div><div class="val" id="reqPos">—</div></div>
+        <div class="kpi"><div class="lab">Consistency ok?</div><div class="val" id="reqCons">—</div></div>
+        <div class="kpi"><div class="lab">Apto a sacar?</div><div class="val" id="reqApto">—</div></div>
+      </div>
+      <div class="hint">Lembre também do período mínimo de 14 dias (contado pela mesa).</div>
+    </div>
+  </div>
+
+  <!-- ===================== OPERAÇÕES ===================== -->
+  <div id="trades" class="pane">
+    <div class="card">
+      <h2>Operações</h2>
+      <button class="btn" onclick="addRow()">+ Nova operação</button>
+      <button class="btn sec" onclick="exportar()">Exportar CSV</button>
+      <div class="tbl-scroll">
+      <table id="tb">
+        <thead><tr>
+          <th>Data</th><th>Ticker</th><th>Sistema</th><th>Qtd</th>
+          <th>Entrada</th><th>Stop</th><th>Risco US$</th><th>Alvo 2R</th><th>Alvo 3R</th>
+          <th>Saída</th><th>Result. US$</th><th>R</th><th></th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      </div>
+      <div class="hint">Sistema: Agulhada ou Insidebar. "Result. US$" = (saída−entrada)×qtd − custo. "R" = resultado ÷ risco do trade. Preencha a saída ao fechar.</div>
+    </div>
+  </div>
+
+  <!-- ===================== CALCULADORA ===================== -->
+  <div id="calc" class="pane">
+    <div class="card">
+      <h2>Calculadora de posição (risco 0,30%)</h2>
+      <div class="cfg">
+        <div><label>Entrada (US$)</label><input id="cEntry" type="number" step="0.01" oninput="calcPos()"></div>
+        <div><label>Stop / pivô (US$)</label><input id="cStop" type="number" step="0.01" oninput="calcPos()"></div>
+      </div>
+      <div class="grid" style="margin-top:14px">
+        <div class="kpi"><div class="lab">Risco por trade (US$)</div><div class="val" id="cRisco">—</div></div>
+        <div class="kpi"><div class="lab">Risco por ação (US$)</div><div class="val" id="cRacao">—</div></div>
+        <div class="kpi"><div class="lab">Quantidade</div><div class="val big" id="cQtd">—</div></div>
+        <div class="kpi"><div class="lab">Capital na posição</div><div class="val" id="cCap">—</div></div>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="kpi"><div class="lab">Parcial 2R (50% sai)</div><div class="val" id="c2r">—</div></div>
+        <div class="kpi"><div class="lab">Alvo 3R</div><div class="val" id="c3r">—</div></div>
+        <div class="kpi"><div class="lab">Breakeven (após 2R)</div><div class="val" id="cbe">—</div></div>
+      </div>
+      <div class="hint">A quantidade é calculada para arriscar exatamente 0,30% do saldo entre a entrada e o stop. Parcial 50% em 2R (move stop p/ breakeven), resto em 3R (Insidebar) ou saída no TRIX (Agulhada).</div>
+    </div>
+  </div>
+
+  <!-- ===================== REGRAS ===================== -->
+  <div id="regras" class="pane">
+    <div class="card">
+      <h2>Regras da mesa (resumo)</h2>
+      <table>
+        <tr><td><b>Target</b></td><td style="text-align:left">+15% (meta de lucro)</td></tr>
+        <tr><td><b>Daily Pause</b></td><td style="text-align:left">-3% no dia → para de operar</td></tr>
+        <tr><td><b>Max Loss</b></td><td style="text-align:left">-7% sobre o saldo inicial → perde a conta</td></tr>
+        <tr><td><b>Min. posições</b></td><td style="text-align:left">5 operações</td></tr>
+        <tr><td><b>Período</b></td><td style="text-align:left">ilimitado (Swing Flex)</td></tr>
+        <tr><td><b>Payout</b></td><td style="text-align:left">70/30 (você fica com 70%)</td></tr>
+        <tr><td><b>Consistency</b></td><td style="text-align:left">nenhum dia &gt; 50% do lucro total</td></tr>
+        <tr><td><b>Saque</b></td><td style="text-align:left">mín. 14 dias + 3 dias com +0,5% + consistency ok</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Os 5 mandamentos</h2>
+      <ol style="padding-left:20px;line-height:2">
+        <li><b>Risco sempre 0,30%</b> por trade. Sem exceção.</li>
+        <li><b>Sempre com stop no pivô.</b> Nunca afastar o stop.</li>
+        <li><b>Pare em -2% no dia.</b> Nunca recuperar aumentando risco.</li>
+        <li><b>Lucro distribuído.</b> Teto ~2%/dia (Consistency Rule).</li>
+        <li><b>Sem pressa.</b> Período ilimitado — a expectância trabalha no tempo.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===================== CHECKLIST ===================== -->
+  <div id="checklist" class="pane">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <h2 style="margin:0">✅ Checklist operacional</h2>
+        <div><span class="hint" id="chkProg" style="margin-right:10px"></span><button class="btn sec" onclick="chkReset()">Limpar</button></div>
+      </div>
+      <div class="hint" style="margin-bottom:6px">Consulte antes de cada trade e no fim do dia. As marcações ficam salvas neste navegador.</div>
+    </div>
+
+    <div class="card">
+      <h2>☀️ Antes de abrir o dia</h2>
+      <div class="chk" data-k="d1">Perda total da conta está longe de -7%? (se já em -3% total, PARE)</div>
+      <div class="chk" data-k="d2">Mercado US em regime bom? (VTI acima da SMA200 e subindo — senão não opero US no Insidebar)</div>
+      <div class="chk" data-k="d3">Defini o valor de risco de hoje: 0,30% do saldo</div>
+    </div>
+
+    <div class="card">
+      <h2>🎯 Antes de cada trade (tudo SIM)</h2>
+      <div class="chk" data-k="t1">O sinal veio do scanner (Agulhada pivô+TRIX ou Insidebar)?</div>
+      <div class="chk" data-k="t2">Vou entrar no critério certo (fechamento do sinal / rompimento)?</div>
+      <div class="chk" data-k="t3">Usei a Calculadora: quantidade = (0,30%) ÷ (entrada − stop)</div>
+      <div class="chk" data-k="t4">Stop definido no pivô 3×3? (nunca entrar sem stop)</div>
+      <div class="chk" data-k="t5">O risco é exatamente 0,30%? (sem aumentar por emoção)</div>
+      <div class="chk" data-k="t6">Já fiz +2% no dia? Se sim, considere parar (Consistency)</div>
+      <div class="chk" data-k="t7">Perder este trade me leva a -2% no dia? Se sim, é o último de hoje</div>
+    </div>
+
+    <div class="card">
+      <h2>⚙️ Durante o trade</h2>
+      <div class="chk" data-k="g1">Realizar 50% da posição ao atingir 2R</div>
+      <div class="chk" data-k="g2">Ao realizar a parcial: mover stop da metade restante p/ o breakeven</div>
+      <div class="chk" data-k="g3">Saída final: 3R (Insidebar) ou TRIX virando (Agulhada)</div>
+      <div class="chk" data-k="g4">Stop só sobe, nunca desce/afasta</div>
+    </div>
+
+    <div class="card">
+      <h2>🛑 Limites do dia</h2>
+      <div class="chk" data-k="l1">-2% no dia → PARO (voluntário)</div>
+      <div class="chk" data-k="l2">-3% no dia → PARO (obrigatório, Daily Pause)</div>
+      <div class="chk" data-k="l3">+2% no dia → considero parar (Consistency Rule)</div>
+      <div class="chk" data-k="l4">Nunca aumentar risco para recuperar perda</div>
+    </div>
+
+    <div class="card">
+      <h2>🌙 Fechamento do dia</h2>
+      <div class="chk" data-k="f1">Registrei os trades do dia na aba Operações</div>
+      <div class="chk" data-k="f2">Nenhum dia virou >50% do lucro total (Consistency Rule)</div>
+      <div class="chk" data-k="f3">Acompanho: já tenho 3 dias com +0,5%? Já fiz 5 posições?</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let rows=JSON.parse(localStorage.getItem('prop_trades')||'[]');
+let cfg=JSON.parse(localStorage.getItem('prop_cfg')||'{"conta":10000,"risco":0.30,"custo":0.75}');
+
+function tab(n){document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  $(n).classList.add('active'); event.target.classList.add('active');}
+
+function cfgChange(){
+  cfg.conta=+$('cfgConta').value; cfg.risco=+$('cfgRisco').value; cfg.custo=+$('cfgCusto').value;
+  localStorage.setItem('prop_cfg',JSON.stringify(cfg));
+  const rt=cfg.conta*cfg.risco/100;
+  $('cfgResumo').innerHTML=`Risco por trade: <b>US$ ${rt.toFixed(2)}</b> &middot; Meta (+15%): <b>US$ ${(cfg.conta*0.15).toFixed(0)}</b> &middot; Max Loss (-7%): <b>US$ ${(cfg.conta*0.07).toFixed(0)}</b> &middot; Daily Pause (-3%): <b>US$ ${(cfg.conta*0.03).toFixed(0)}</b>`;
+  render(); calcPos();
+}
+
+function addRow(d={}){ rows.push(d); save(); renderRows(); render(); }
+function delRow(i){
+  const r=rows[i]||{};
+  const nome = r.s ? `${r.s} (${r.data||'sem data'})` : `a operação ${i+1}`;
+  if(confirm(`Excluir ${nome}? Esta ação não pode ser desfeita.`)){
+    rows.splice(i,1); save(); renderRows(); render();
+  }
+}
+function save(){ localStorage.setItem('prop_trades',JSON.stringify(rows)); }
+
+function riscoTrade(){ return cfg.conta*cfg.risco/100; }
+
+// risco da OPERACAO em US$ = |entrada - stop| x quantidade
+function riscoOp(r){
+  const q=+r.q||0, pc=+r.pc||0, sp=+r.stop||0;
+  if(!q||!pc||!sp) return null;
+  return Math.abs(pc-sp)*q;
+}
+function alvoR(r, mult){
+  const pc=+r.pc||0, sp=+r.stop||0;
+  if(!pc||!sp||pc<=sp) return null;
+  return pc + mult*(pc-sp);
+}
+// pernas de saida: r.legs = [{p,q},{p,q},{p,q}] (parcial1, parcial2, final)
+function temParciais(r){
+  return r.legs && r.legs.some(l=>(+l.p>0 && +l.q>0));
+}
+function resultTrade(r){
+  const pc=+r.pc||0; if(!pc) return null;
+  const custo=+cfg.custo||0;
+  if(temParciais(r)){
+    let res=0, qtd=0;
+    r.legs.forEach(l=>{ const p=+l.p||0,q=+l.q||0; if(p>0&&q>0){res+=(p-pc)*q; qtd+=q;} });
+    return qtd>0 ? res-custo : null;   // um custo por operacao
+  }
+  const q=+r.q||0, pv=+r.pv||0;
+  if(!q||!pv) return null;
+  return (pv-pc)*q - custo;
+}
+function rMult(r){
+  const pc=+r.pc||0, sp=+r.stop||0;
+  const Runit=(pc>sp && sp>0)?(pc-sp):0;
+  if(temParciais(r) && Runit>0){
+    // R combinado ponderado pela quantidade de cada perna (igual ao v16)
+    let totR=0, qt=0;
+    r.legs.forEach(l=>{ const p=+l.p||0,q=+l.q||0; if(p>0&&q>0){ totR+=((p-pc)/Runit)*q; qt+=q; } });
+    return qt>0 ? totR/qt : null;
+  }
+  const res=resultTrade(r); if(res==null) return null;
+  let qtot=+r.q||0;
+  const risco=(pc&&sp&&qtot)?Math.abs(pc-sp)*qtot:riscoTrade();
+  return risco>0 ? res/risco : null;
+}
+
+function renderRows(){
+  const tb=$('tbody'); tb.innerHTML=rows.map((r,i)=>{
+    const tp=temParciais(r);
+    return `<tr data-i="${i}">
+      <td><input type="date" value="${r.data||''}" onchange="upd(${i},'data',this.value)"></td>
+      <td><input type="text" value="${r.s||''}" style="text-transform:uppercase;font-weight:700;color:var(--accent)" onblur="upd(${i},'s',this.value.toUpperCase())"></td>
+      <td><select onchange="upd(${i},'sist',this.value)"><option ${r.sist=='Agulhada'?'selected':''}>Agulhada</option><option ${r.sist=='Insidebar'?'selected':''}>Insidebar</option></select></td>
+      <td><input type="number" value="${r.q||''}" oninput="live(${i},'q',this.value)"></td>
+      <td><input type="number" step="0.01" value="${r.pc||''}" oninput="live(${i},'pc',this.value)"></td>
+      <td><input type="number" step="0.01" value="${r.stop||''}" oninput="live(${i},'stop',this.value)"></td>
+      <td class="c-risco"></td>
+      <td class="c-2r"></td>
+      <td class="c-3r"></td>
+      <td>${ tp ? '<span class="badge-parc">parciais</span>' : `<input type="number" step="0.01" value="${r.pv||''}" oninput="live(${i},'pv',this.value)">`}</td>
+      <td class="c-res"></td>
+      <td class="c-r"></td>
+      <td style="white-space:nowrap;text-align:center">
+        <button class="mini" title="Saídas parciais" onclick="toggleParc(${i})">🎯</button>
+        <button class="mini del-btn" title="Excluir operação" onclick="delRow(${i})">✕</button></td>
+    </tr>
+    <tr class="parc-row" data-parc="${i}" style="display:none">
+      <td colspan="13">
+        <div class="parc-box">
+          <b>Saídas parciais — ${r.s||'operação'}</b>
+          <div class="parc-grid">
+            ${legInputs(i,0,'Parcial 1 (2R)')}
+            ${legInputs(i,1,'Parcial 2')}
+            ${legInputs(i,2,'Final (3R/TRIX)')}
+          </div>
+          <div class="parc-hint" id="parc-sum-${i}"></div>
+        </div>
+      </td>
+    </tr>`;}).join('');
+  rows.forEach((_,i)=>updCalc(i));
+}
+
+function legInputs(i,k,label){
+  const r=rows[i]; const l=(r.legs&&r.legs[k])||{};
+  return `<div class="parc-leg">
+    <div class="parc-lab">${label}</div>
+    <div class="parc-inputs">
+      <div class="parc-in"><span>Preço</span><input type="number" step="0.01" placeholder="0.00" value="${l.p||''}" oninput="setLeg(${i},${k},'p',this.value)"></div>
+      <div class="parc-in"><span>Qtd</span><input type="number" placeholder="0" value="${l.q||''}" oninput="setLeg(${i},${k},'q',this.value)"></div>
+    </div>
+  </div>`;
+}
+function setLeg(i,k,campo,v){
+  const r=rows[i];
+  if(!r.legs) r.legs=[{},{},{}];
+  r.legs[k][campo]=v; save(); updCalc(i); parcSum(i); renderPainelDebounced();
+}
+function toggleParc(i){
+  const el=document.querySelector(`tr[data-parc="${i}"]`);
+  if(el){ el.style.display = el.style.display==='none'?'table-row':'none'; parcSum(i); }
+}
+function parcSum(i){
+  const box=document.getElementById(`parc-sum-${i}`); if(!box) return;
+  const r=rows[i], pc=+r.pc||0, sp=+r.stop||0, qTot=+r.q||0;
+  const Runit=(pc>sp && sp>0)?(pc-sp):0;   // risco unitario (compra - stop)
+  if(!temParciais(r)){ box.textContent='Preencha preço e qtd de cada parcial. O resultado será a média ponderada das vendas (igual ao seu controle de capital próprio).'; return; }
+  const nomes=['Parcial 1','Parcial 2','Final'];
+  let totQty=0, totRes=0, totR=0, somaPxQ=0;
+  const linhas=[];
+  r.legs.forEach((l,k)=>{
+    const p=+l.p||0, q=+l.q||0;
+    if(p>0&&q>0){
+      const res=(p-pc)*q; totRes+=res; totQty+=q; somaPxQ+=p*q;
+      if(Runit>0) totR += ((p-pc)/Runit)*q;
+      linhas.push(`<b>${nomes[k]}</b> — ${q} × $${p.toFixed(2)} = <span class="${res>=0?'pos':'neg'}">${res>=0?'+':''}$${res.toFixed(2)}</span>`);
+    }
+  });
+  const custo=+cfg.custo||0;
+  const resLiq=totRes-custo;
+  const blendedR=(Runit>0&&totQty>0)?totR/totQty:0;       // R combinado ponderado (igual v16)
+  const precoMedio=totQty>0?somaPxQ/totQty:0;             // preco medio de venda ponderado
+  const saldo=Math.max(0,qTot-totQty);
+  const status = saldo>0
+    ? `<span class="badge-parc" style="background:var(--accent)">PARCIAL</span> saldo em aberto: <b>${saldo}</b> de ${qTot}`
+    : `<span class="badge-parc" style="background:var(--green)">POSIÇÃO ZERADA</span> trade finalizado — resultado = média ponderada das vendas`;
+  box.innerHTML=`
+    <div style="font-size:.85rem;line-height:1.9;margin-bottom:8px">${linhas.join('<br>')}</div>
+    <div class="parc-tiles">
+      <div class="parc-tile"><div class="pt-lab">Qtd realizada</div><div class="pt-val">${totQty}${qTot>0?' / '+qTot:''}</div></div>
+      <div class="parc-tile"><div class="pt-lab">Preço médio venda</div><div class="pt-val">$${precoMedio.toFixed(2)}</div></div>
+      <div class="parc-tile"><div class="pt-lab">Resultado líq.</div><div class="pt-val ${resLiq>=0?'pos':'neg'}">${resLiq>=0?'+':''}$${resLiq.toFixed(2)}</div></div>
+      <div class="parc-tile"><div class="pt-lab">R combinado</div><div class="pt-val ${blendedR>=0?'pos':'neg'}">${blendedR>=0?'+':''}${blendedR.toFixed(2)}R</div></div>
+    </div>
+    <div style="font-size:.82rem;margin-top:8px">${status}</div>`;
+}
+
+// atualiza SO as celulas calculadas de uma linha (nao redesenha os inputs)
+function updCalc(i){
+  const tr=document.querySelector(`tr[data-i="${i}"]`); if(!tr) return;
+  const r=rows[i];
+  const ro=riscoOp(r), a2=alvoR(r,2), a3=alvoR(r,3), res=resultTrade(r), rm=rMult(r);
+  tr.querySelector('.c-risco').textContent = ro==null?'—':'$'+ro.toFixed(2);
+  const e2=tr.querySelector('.c-2r'); e2.textContent=a2==null?'—':'$'+a2.toFixed(2); e2.className='c-2r pos';
+  const e3=tr.querySelector('.c-3r'); e3.textContent=a3==null?'—':'$'+a3.toFixed(2); e3.className='c-3r pos';
+  const cr=tr.querySelector('.c-res'); cr.textContent=res==null?'—':'$'+res.toFixed(2); cr.className='c-res '+(res>0?'pos':res<0?'neg':'');
+  const cm=tr.querySelector('.c-r'); cm.textContent=rm==null?'—':rm.toFixed(2)+'R'; cm.className='c-r '+(rm>0?'pos':rm<0?'neg':'');
+}
+
+// digitando: salva e atualiza SO os calculados da linha (sem redesenhar => nao perde o foco)
+function live(i,k,v){ rows[i][k]=v; save(); updCalc(i); renderPainelDebounced(); }
+// mudancas estruturais: redesenham
+function upd(i,k,v){ rows[i][k]=v; save(); render(); renderRows(); }
+
+let _t=null;
+function renderPainelDebounced(){ clearTimeout(_t); _t=setTimeout(render,400); }
+
+function porDia(){
+  const m={};
+  rows.forEach(r=>{ const res=resultTrade(r); if(res==null||!r.data) return;
+    m[r.data]=(m[r.data]||0)+res; });
+  return m;
+}
+
+function render(){
+  const conta=cfg.conta;
+  const fechados=rows.map(resultTrade).filter(x=>x!=null);
+  const pl=fechados.reduce((a,b)=>a+b,0);
+  const pct=pl/conta*100;
+  const wins=fechados.filter(x=>x>0).length;
+  $('kpiPL').textContent='$'+pl.toFixed(2); $('kpiPL').className='val '+(pl>=0?'pos':'neg');
+  $('kpiPct').textContent=pct.toFixed(2)+'%'; $('kpiPct').className='val '+(pct>=0?'pos':'neg');
+  $('kpiN').textContent=fechados.length;
+  $('kpiWR').textContent=fechados.length?Math.round(100*wins/fechados.length)+'%':'—';
+
+  // Meta 15%
+  const metaPct=Math.max(0,Math.min(100, pct/15*100));
+  $('metaFill').style.width=metaPct+'%';
+  $('metaTxt').textContent=pct.toFixed(2)+'% / 15%';
+  $('metaStatus').innerHTML = pct>=15?'<span class="status ok">META ATINGIDA</span>':'';
+
+  // Max Loss -7%
+  const perda=Math.min(0,pct);
+  const mlPct=Math.max(0,Math.min(100, (-perda)/7*100));
+  $('mlFill').style.width=mlPct+'%';
+  $('mlTxt').textContent=pct<0?pct.toFixed(2)+'% / -7%':'0% / -7%';
+  $('mlStatus').innerHTML = pct<=-7?'<span class="status danger">CONTA PERDIDA</span>':(pct<=-5?'<span class="status danger">PERIGO</span>':(pct<=-3?'<span class="status warn">ATENÇÃO</span>':'<span class="status ok">OK</span>'));
+
+  // Dia de hoje
+  const hoje=new Date().toISOString().slice(0,10);
+  const dia=porDia(); const rHoje=dia[hoje]||0; const pctHoje=rHoje/conta*100;
+  const dayW=Math.max(0,Math.min(100,Math.abs(pctHoje)/3*100));
+  $('dayFill').style.width=dayW+'%';
+  $('dayFill').style.background = pctHoje<0?'var(--red)':'var(--green)';
+  $('dayTxt').textContent=pctHoje.toFixed(2)+'% hoje';
+  $('dayStatus').innerHTML = pctHoje<=-3?'<span class="status danger">PARE (Daily Pause)</span>':(pctHoje<=-2?'<span class="status warn">PARE (voluntário)</span>':(pctHoje>=2?'<span class="status warn">TETO (Consistency)</span>':'<span class="status ok">OK</span>'));
+
+  // Consistency
+  const dias=Object.values(dia); const lucroTotal=dias.filter(x=>x>0).reduce((a,b)=>a+b,0);
+  const maiorDia=Math.max(0,...dias);
+  const consPct = lucroTotal>0 ? maiorDia/lucroTotal*100 : 0;
+  $('consFill').style.width=Math.min(100,consPct)+'%';
+  $('consFill').style.background = consPct>50?'var(--red)':'var(--yellow)';
+  $('consTxt').textContent=consPct.toFixed(0)+'% / 50%';
+  $('consStatus').innerHTML = consPct>50?'<span class="status danger">ACIMA de 50%</span>':'<span class="status ok">OK</span>';
+
+  // Requisitos de saque
+  const diasLucro=Object.entries(dia).filter(([d,v])=>v/conta*100>=0.5).length;
+  $('reqDias').textContent=diasLucro+' / 3'; $('reqDias').className='val '+(diasLucro>=3?'pos':'');
+  $('reqPos').textContent=fechados.length+' / 5'; $('reqPos').className='val '+(fechados.length>=5?'pos':'');
+  const consOk=consPct<=50;
+  $('reqCons').textContent=consOk?'Sim':'Não'; $('reqCons').className='val '+(consOk?'pos':'neg');
+  const apto = diasLucro>=3 && fechados.length>=5 && consOk && pct>=15;
+  $('reqApto').textContent=apto?'SIM 🎉':'Ainda não'; $('reqApto').className='val '+(apto?'pos':'');
+}
+
+function calcPos(){
+  const e=+$('cEntry').value, s=+$('cStop').value, rt=riscoTrade();
+  $('cRisco').textContent='$'+rt.toFixed(2);
+  if(!e||!s||e<=s){ ['cRacao','cQtd','cCap','c2r','c3r','cbe'].forEach(id=>$(id).textContent='—'); return; }
+  const rAcao=e-s, qtd=Math.floor(rt/rAcao);
+  $('cRacao').textContent='$'+rAcao.toFixed(2);
+  $('cQtd').textContent=qtd;
+  $('cCap').textContent='$'+(qtd*e).toFixed(2);
+  $('c2r').textContent='$'+(e+2*rAcao).toFixed(2);
+  $('c3r').textContent='$'+(e+3*rAcao).toFixed(2);
+  $('cbe').textContent='$'+e.toFixed(2);
+}
+
+function exportar(){
+  const linhas=[['data','ticker','sistema','qtd','entrada','stop','risco','alvo2R','alvo3R','saida','resultado','R']];
+  rows.forEach(r=>linhas.push([r.data||'',r.s||'',r.sist||'',r.q||'',r.pc||'',r.stop||'',
+    (riscoOp(r)??'').toString(),(alvoR(r,2)??'').toString(),(alvoR(r,3)??'').toString(),
+    r.pv||'',(resultTrade(r)??'').toString(),(rMult(r)??'').toString()]));
+  const csv=linhas.map(l=>l.join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='operacoes_prop.csv'; a.click();
+}
+
+// ===== checklist =====
+let chkState=JSON.parse(localStorage.getItem('prop_checklist')||'{}');
+function chkInit(){
+  document.querySelectorAll('.chk').forEach(el=>{
+    const k=el.dataset.k;
+    if(chkState[k]) el.classList.add('on');
+    el.onclick=()=>{
+      el.classList.toggle('on');
+      chkState[k]=el.classList.contains('on');
+      localStorage.setItem('prop_checklist',JSON.stringify(chkState));
+      chkProg();
+    };
+  });
+  chkProg();
+}
+function chkProg(){
+  const all=document.querySelectorAll('.chk'), on=document.querySelectorAll('.chk.on');
+  const p=$('chkProg'); if(p) p.textContent=`${on.length}/${all.length} marcados`;
+}
+function chkReset(){
+  chkState={}; localStorage.setItem('prop_checklist','{}');
+  document.querySelectorAll('.chk').forEach(el=>el.classList.remove('on'));
+  chkProg();
+}
+
+// init
+$('cfgConta').value=cfg.conta; $('cfgRisco').value=cfg.risco; $('cfgCusto').value=cfg.custo;
+cfgChange(); renderRows(); chkInit();
+</script>
+</body>
+</html>

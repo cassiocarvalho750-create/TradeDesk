@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Por que eu confio no meu sistema</title>
+<style>
+:root{--bg:#0d1117;--card:#0e141b;--line:#30363d;--muted:#8b949e;--accent:#58a6ff;--txt:#e6edf3;--up:#3fb950;--dn:#f85149;--gold:#e3b341}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;padding:20px}
+.wrap{max-width:760px;margin:0 auto}
+h1{font-size:1.7rem;text-align:center;margin-bottom:4px}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:16px}
+.big-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center}
+.bn .n{font-size:2.1rem;font-weight:800}
+.bn .l{font-size:.78rem;color:var(--muted)}
+.up{color:var(--up)}.dn{color:var(--dn)}.gold{color:var(--gold)}.accent{color:var(--accent)}
+.truth{font-size:1.15rem;margin:10px 0}
+.truth b{color:var(--gold)}
+.hl{background:linear-gradient(180deg,transparent 60%,rgba(63,185,80,.25) 60%);padding:0 3px}
+h2{font-size:1.15rem;color:var(--accent);margin-bottom:10px}
+.sim-btns{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.btn{background:var(--accent);color:#04101f;border:none;border-radius:8px;padding:10px 18px;font-weight:700;cursor:pointer;font-size:.95rem}
+.btn.sec{background:#161b22;color:var(--txt);border:1px solid var(--line)}
+.sim-out{font-size:1.05rem;margin-top:10px;min-height:2.4em}
+.seq{display:flex;gap:3px;flex-wrap:wrap;margin:10px 0}
+.seq span{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff}
+.mantra{text-align:center;font-size:1.3rem;font-weight:700;padding:20px;background:linear-gradient(135deg,#132b1a,#0e141b);border:1px solid var(--up);border-radius:14px;margin-bottom:16px}
+ul{margin:8px 0 0 20px}li{margin:8px 0}
+.stop-watching{background:linear-gradient(135deg,#2b1a13,#0e141b);border:1px solid var(--gold)}
+.footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎯 Por que eu confio no meu sistema</h1>
+  <div class="sub">Leia isto quando a insegurança bater. São os SEUS números — não opinião, não fé. Prova.</div>
+
+  <div class="mantra">Eu não sou o trade.<br>Eu sou o cassino.</div>
+
+  <div class="card">
+    <h2>A prova que eu mesmo construí</h2>
+    <div class="big-nums">
+      <div class="bn"><div class="n accent">4.456</div><div class="l">trades testados<br>(2 cestas independentes)</div></div>
+      <div class="bn"><div class="n up">+0,32R</div><div class="l">expectância<br>(ganho médio por trade)</div></div>
+      <div class="bn"><div class="n gold">100%</div><div class="l">chance de lucro<br>em 200 trades (Monte Carlo)</div></div>
+    </div>
+    <p class="truth" style="margin-top:18px">Eu <b>medi</b> isto. Não é achismo. Ao longo de muitos trades, meu sistema <span class="hl">ganha dinheiro</span>. Isso já está decidido pela matemática. O que eu vejo na tela hoje é só uma amostra pequena de um jogo que eu já sei que é vencedor.</p>
+  </div>
+
+  <div class="card">
+    <h2>Perder um trade NÃO é errar</h2>
+    <p class="truth">Meu sistema acerta <b>~44%</b> das vezes. Isso significa que eu <b>perco mais da metade dos trades</b> — e mesmo assim lucro, porque meus ganhos (2R, 3R) são maiores que minhas perdas (1R).</p>
+    <p class="truth">Quando um trade bate o stop, <span class="hl">o sistema funcionou exatamente como devia</span>. A perda estava no orçamento. Não errei. Segui o plano.</p>
+    <div class="sim-btns">
+      <button class="btn" onclick="simula()">▶ Simular 200 trades reais</button>
+      <button class="btn sec" onclick="reset()">Limpar</button>
+    </div>
+    <div class="seq" id="seq"></div>
+    <div class="sim-out" id="simout"></div>
+  </div>
+
+  <div class="card stop-watching">
+    <h2 style="color:var(--gold)">⛔ Parar de assistir o preço no intraday</h2>
+    <p class="truth">Meu sistema é <b>diário</b>. A decisão inteira — entrada, stop, alvo — é tomada no fechamento do candle. Depois disso:</p>
+    <ul>
+      <li>Ficar olhando o preço andar <b>não muda o resultado</b> — só alimenta minha ansiedade.</li>
+      <li>Cada tick vermelho ativa meu alarme de perda (que sente o dobro da dor do ganho). É biologia, não informação.</li>
+      <li>O movimento dentro do dia é <b>ruído</b>. Meu edge está no fechamento, não no meio do pregão.</li>
+    </ul>
+    <p class="truth" style="margin-top:12px">👉 <b>Depois de montar o trade, eu fecho o gráfico.</b> Meu stop me protege. Meu alvo me tira. Eu não preciso assistir.</p>
+  </div>
+
+  <div class="card">
+    <h2>Meus 3 lembretes de aço</h2>
+    <ul>
+      <li><b>Sou o cassino, não o apostador.</b> O cassino perde mãos e não liga — a vantagem está no conjunto.</li>
+      <li><b>A sequência de perdas é esperada.</b> Num sistema de 44%, perder 5, 6, 7 seguidas acontece — e não quebra a matemática. A hora de duvidar é se o resultado fugir MUITO do backtest por MUITOS trades, nunca numa sequência isolada.</li>
+      <li><b>Disciplina > previsão.</b> Não preciso adivinhar o próximo trade. Preciso executar 0,30% de risco, stop no pivô, e deixar a expectância trabalhar no tempo.</li>
+    </ul>
+  </div>
+
+  <div class="mantra" style="background:linear-gradient(135deg,#13202b,#0e141b);border-color:var(--accent)">
+    Um trade é ruído.<br>Mil trades são o meu edge.
+  </div>
+
+  <div class="footer">Feche esta aba e vá viver. O sistema trabalha por você.</div>
+</div>
+
+<script>
+// pool de R sintetico que respeita win 44% e expectancia +0.32R (aprox dos dados reais)
+// usa mistura: perdas -1R (56%) e ganhos distribuidos (44%) media ~ +0.32R total
+function sorteiaR(){
+  const r=Math.random();
+  if(r<0.56) return -1;               // perda
+  // ganhos: mistura de 1R,2R,3R para dar expectancia positiva
+  const g=Math.random();
+  if(g<0.30) return 1;
+  if(g<0.70) return 2;
+  return 3;
+}
+function simula(){
+  const seq=document.getElementById('seq'); seq.innerHTML='';
+  let cap=0, wins=0, maxLoss=0, curLoss=0;
+  const N=200;
+  for(let i=0;i<N;i++){
+    const r=sorteiaR(); cap+=r; if(r>0){wins++;curLoss=0;} else {curLoss++;maxLoss=Math.max(maxLoss,curLoss);}
+    if(i<60){ // mostra os primeiros 60 visualmente
+      const s=document.createElement('span');
+      s.style.background = r>0 ? 'var(--up)' : 'var(--dn)';
+      s.textContent = r>0?('+'+r):'✕';
+      seq.appendChild(s);
+    }
+  }
+  const wr=Math.round(100*wins/N);
+  const reais = (cap*50).toLocaleString('pt-BR'); // 1R = R$50 (0,5% de 10k) exemplo
+  document.getElementById('simout').innerHTML =
+    `Resultado: <b class="${cap>=0?'up':'dn'}">${cap>=0?'+':''}${cap.toFixed(0)}R</b> em ${N} trades · acertei <b>${wr}%</b> · maior sequência de perdas: <b>${maxLoss} seguidas</b><br>`+
+    `<span style="color:var(--muted)">Mesmo perdendo ${100-wr}% das vezes e passando por ${maxLoss} perdas seguidas, terminei <b class="${cap>=0?'up':'dn'}">${cap>=0?'no lucro':'no prejuízo'}</b>. `+
+    (cap>=0?'É assim que o edge funciona — as perdas fazem parte.':'Aconteceu de dar negativo nesta amostra rara — role de novo e veja que na maioria dá positivo.')+'</span>';
+}
+function reset(){ document.getElementById('seq').innerHTML=''; document.getElementById('simout').innerHTML=''; }
+</script>
+</body>
+</html>
