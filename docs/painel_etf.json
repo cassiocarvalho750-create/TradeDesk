@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-09-14",
-  "captura": "14/09/2026 18:08",
+  "gerado": "2026-09-15",
+  "captura": "15/09/2026 08:22",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 118.56,
       "stop": 107.58,
       "r_pct": 9.26,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-14",
       "ult_candle": "2026-09-14",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 34.3,
       "tv": "https://www.tradingview.com/chart/?symbol=HACK",
-      "vol_qtd": 964087.0,
+      "vol_qtd": 965000.0,
       "var_dia_pct": 5.57,
       "alvo_2r": 140.52,
       "acima_ema70": true,
