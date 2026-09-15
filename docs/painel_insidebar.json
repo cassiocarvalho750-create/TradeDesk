@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-15",
-  "captura": "15/09/2026 14:23",
+  "captura": "15/09/2026 15:31",
   "timeframe": "1d",
   "n_entrar": 1,
   "n_radar": 7,
@@ -8,18 +8,18 @@
     {
       "ticker": "UNM",
       "market": "EUA",
-      "close": 95.4,
-      "entry": 95.4,
+      "close": 95.35,
+      "entry": 95.35,
       "stop": 92.78,
-      "parcial2r": 100.63,
-      "breakeven": 95.4,
-      "alvo_final": 103.25,
-      "r_pct": 2.74,
-      "ema20": 92.98,
+      "parcial2r": 100.49,
+      "breakeven": 95.35,
+      "alvo_final": 103.06,
+      "r_pct": 2.7,
+      "ema20": 92.97,
       "compress": 0.73,
       "cons_len": 3,
-      "var_dia_pct": 0.95,
-      "vol_qtd": 1276098.0,
+      "var_dia_pct": 0.9,
+      "vol_qtd": 1482760.0,
       "date": "2026-09-15",
       "rompeu": false,
       "_tk": "UNM",
@@ -148,7 +148,7 @@
         94.65,
         95.69,
         95.33,
-        95.45
+        95.61
       ],
       "l": [
         87.2772,
@@ -232,7 +232,7 @@
         94.31,
         94.42,
         94.92,
-        95.41
+        95.33
       ],
       "ema20s": [
         88.415,
@@ -274,7 +274,7 @@
         92.2868,
         92.49,
         92.7214,
-        92.9775
+        92.9699
       ]
     }
   ],
@@ -297,7 +297,7 @@
       "mae_high": 197.81,
       "mae_low": 191.33,
       "var_dia_pct": -0.54,
-      "vol_qtd": 220207.0,
+      "vol_qtd": 275022.0,
       "date": "2026-09-15",
       "_tk": "TKO",
       "tv": "https://www.tradingview.com/chart/?symbol=TKO",
@@ -557,22 +557,22 @@
     {
       "ticker": "CDW",
       "market": "EUA",
-      "close": 151.9,
+      "close": 152.9,
       "entry": 154.0,
       "stop": 140.91,
       "parcial2r": 180.18,
       "breakeven": 154.0,
       "alvo_final": 193.27,
       "r_pct": 8.5,
-      "ema20": 146.15,
-      "dist_ema": 3.94,
+      "ema20": 146.25,
+      "dist_ema": 4.55,
       "compress": 0.44,
       "cons_len": 3,
       "contr_vol": 0.94,
       "mae_high": 154.99,
       "mae_low": 148.04,
-      "var_dia_pct": 0.12,
-      "vol_qtd": 372859.0,
+      "var_dia_pct": 0.77,
+      "vol_qtd": 500191.0,
       "date": "2026-09-15",
       "_tk": "CDW",
       "tv": "https://www.tradingview.com/chart/?symbol=CDW",
@@ -784,7 +784,7 @@
         142.6,
         153.79,
         151.7,
-        151.855
+        152.89
       ],
       "ema20s": [
         133.5066,
@@ -826,28 +826,28 @@
         143.9616,
         144.8977,
         145.5455,
-        146.1464
+        146.245
       ]
     },
     {
       "ticker": "BG",
       "market": "EUA",
-      "close": 122.07,
+      "close": 121.28,
       "entry": 123.3,
       "stop": 109.82,
       "parcial2r": 150.26,
       "breakeven": 123.3,
       "alvo_final": 163.74,
       "r_pct": 10.93,
-      "ema20": 118.78,
-      "dist_ema": 2.77,
+      "ema20": 118.7,
+      "dist_ema": 2.17,
       "compress": 0.51,
       "cons_len": 3,
       "contr_vol": 0.9,
       "mae_high": 125.82,
       "mae_low": 120.05,
-      "var_dia_pct": 1.08,
-      "vol_qtd": 470696.0,
+      "var_dia_pct": 0.42,
+      "vol_qtd": 671764.0,
       "date": "2026-09-15",
       "_tk": "BG",
       "tv": "https://www.tradingview.com/chart/?symbol=BG",
@@ -1059,7 +1059,7 @@
         124.59,
         122.41,
         121.23,
-        122.25
+        121.3
       ],
       "ema20s": [
         115.4011,
@@ -1101,28 +1101,28 @@
         117.6882,
         118.1379,
         118.4324,
-        118.796
+        118.7055
       ]
     },
     {
       "ticker": "DDS",
       "market": "EUA",
-      "close": 647.98,
+      "close": 648.77,
       "entry": 656.09,
       "stop": 610.02,
       "parcial2r": 748.23,
       "breakeven": 656.09,
       "alvo_final": 794.3,
       "r_pct": 7.02,
-      "ema20": 631.74,
-      "dist_ema": 2.57,
+      "ema20": 631.81,
+      "dist_ema": 2.68,
       "compress": 0.51,
       "cons_len": 3,
       "contr_vol": 0.94,
       "mae_high": 665.25,
       "mae_low": 644.38,
-      "var_dia_pct": -0.94,
-      "vol_qtd": 51764.0,
+      "var_dia_pct": -0.82,
+      "vol_qtd": 61298.0,
       "date": "2026-09-15",
       "_tk": "DDS",
       "tv": "https://www.tradingview.com/chart/?symbol=DDS",
@@ -1334,7 +1334,7 @@
         624.33,
         650.57,
         652.39,
-        647.98
+        647.53
       ],
       "ema20s": [
         546.769,
@@ -1376,28 +1376,28 @@
         625.2665,
         627.6763,
         630.03,
-        631.7395
+        631.6967
       ]
     },
     {
       "ticker": "MSFT",
       "market": "EUA",
-      "close": 499.58,
+      "close": 498.53,
       "entry": 505.9,
       "stop": 486.0,
       "parcial2r": 545.7,
       "breakeven": 505.9,
       "alvo_final": 565.6,
       "r_pct": 3.93,
-      "ema20": 493.11,
-      "dist_ema": 1.31,
-      "compress": 0.53,
+      "ema20": 493.01,
+      "dist_ema": 1.12,
+      "compress": 0.57,
       "cons_len": 3,
-      "contr_vol": 0.87,
+      "contr_vol": 0.88,
       "mae_high": 509.95,
       "mae_low": 495.34,
-      "var_dia_pct": -0.08,
-      "vol_qtd": 7465157.0,
+      "var_dia_pct": -0.29,
+      "vol_qtd": 8670855.0,
       "date": "2026-09-15",
       "_tk": "MSFT",
       "tv": "https://www.tradingview.com/chart/?symbol=MSFT",
@@ -1567,7 +1567,7 @@
         486.0,
         492.58,
         495.34,
-        498.2
+        497.58
       ],
       "price": [
         397.0026,
@@ -1609,7 +1609,7 @@
         492.44,
         495.63,
         505.41,
-        499.7375
+        498.4865
       ],
       "ema20s": [
         390.3497,
@@ -1651,28 +1651,28 @@
         490.5805,
         491.0614,
         492.4279,
-        493.1241
+        493.0049
       ]
     },
     {
       "ticker": "ADM",
       "market": "EUA",
-      "close": 87.14,
+      "close": 86.92,
       "entry": 88.11,
       "stop": 75.86,
       "parcial2r": 112.61,
       "breakeven": 88.11,
       "alvo_final": 124.86,
       "r_pct": 13.9,
-      "ema20": 83.85,
-      "dist_ema": 3.92,
+      "ema20": 83.83,
+      "dist_ema": 3.69,
       "compress": 0.73,
       "cons_len": 3,
       "contr_vol": 0.84,
       "mae_high": 88.73,
       "mae_low": 86.06,
-      "var_dia_pct": 1.31,
-      "vol_qtd": 931149.0,
+      "var_dia_pct": 1.06,
+      "vol_qtd": 1187449.0,
       "date": "2026-09-15",
       "_tk": "ADM",
       "tv": "https://www.tradingview.com/chart/?symbol=ADM",
@@ -1884,7 +1884,7 @@
         86.91,
         86.72,
         86.44,
-        87.205
+        86.925
       ],
       "ema20s": [
         80.7143,
@@ -1926,28 +1926,28 @@
         82.825,
         83.196,
         83.5049,
-        83.8573
+        83.8307
       ]
     },
     {
       "ticker": "PGR",
       "market": "EUA",
-      "close": 220.15,
+      "close": 220.88,
       "entry": 221.57,
       "stop": 212.63,
       "parcial2r": 239.43,
       "breakeven": 221.57,
       "alvo_final": 248.37,
       "r_pct": 4.03,
-      "ema20": 217.96,
-      "dist_ema": 1.01,
+      "ema20": 218.03,
+      "dist_ema": 1.31,
       "compress": 0.77,
       "cons_len": 3,
       "contr_vol": 0.8,
       "mae_high": 222.08,
       "mae_low": 219.04,
-      "var_dia_pct": 0.07,
-      "vol_qtd": 724866.0,
+      "var_dia_pct": 0.4,
+      "vol_qtd": 1045652.0,
       "date": "2026-09-15",
       "_tk": "PGR",
       "tv": "https://www.tradingview.com/chart/?symbol=PGR",
@@ -2159,7 +2159,7 @@
         216.19,
         217.62,
         221.02,
-        220.175
+        220.84
       ],
       "ema20s": [
         216.425,
@@ -2201,7 +2201,7 @@
         217.3525,
         217.378,
         217.7249,
-        217.9582
+        218.0216
       ]
     }
   ]
