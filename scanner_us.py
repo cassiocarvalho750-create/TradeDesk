@@ -7,6 +7,7 @@ USO: python scanner_us.py    |    python scanner_us.py --quick
 import argparse, datetime, time, json
 import numpy as np, pandas as pd
 import bt_engine as bt
+import humor_sp500 as hs  # [humor_sp500] painel injetado
 import run_backtest_v2 as rb
 import scanner as sc   # reusa fetch_intraday_ok e scan
 
@@ -15,26 +16,18 @@ MARKET="us"; SETUP="Agulhada"
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--quick",action="store_true")
-    ap.add_argument("--days",type=int,default=None,help="candles a olhar (padrao: por timeframe)")
+    ap.add_argument("--days",type=int,default=1)
     ap.add_argument("--out",default="scanner_us")
     ap.add_argument("--no-batch",dest="batch",action="store_false",help="download individual (lento)")
     ap.add_argument("--chunk",type=int,default=100,help="tamanho do lote no download")
-    ap.add_argument("--timeframe",default="1d",choices=["1d","1wk","4h","2h","1h","15m","5m"],
-                    help="timeframe do grafico (1d padrao)")
     a=ap.parse_args()
     uni=[t for t in rb.get_universe(quick=a.quick) if not t.endswith(".SA")]
-    tf=a.timeframe
-    days = a.days if a.days is not None else sc.default_days_back(tf)
-    sufxo = "" if tf=="1d" else f"_{tf}"
-    if a.out=="scanner_us": a.out=f"scanner_us{sufxo}"
-    print(f"Scanner EUA (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | tf {tf} | ultimos {days} candle(s)\n")
-    hits=sc.scan(uni, days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf)
+    print(f"Scanner EUA (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | ultimos {a.days} candle(s)\n")
+    hits=sc.scan(uni, a.days, batch=getattr(a,"batch",True), chunk=a.chunk)
     if hits:
         print(f"  buscando P/E e Market Cap de {len(hits)} ativo(s) com sinal...")
         sc.enrich_fundamentals(hits)
-    # SEMPRE gera o painel (mesmo com 0 sinais), para o arquivo refletir o scan
-    # mais recente e nao ficar com dados antigos de um scan anterior.
-    sc.build_panel_data(hits, out_path=f"painel_us{sufxo}.json", timeframe=tf)
+        sc.build_panel_data(hits, out_path="painel_us.json")
     hits.sort(key=lambda h:(not h["forming"], h["ticker"]))
 
     # terminal
@@ -82,6 +75,7 @@ def main():
     <p style="font-size:12px;color:#888;margin-top:14px">Sinais técnicos para análise própria. Confira contexto, liquidez (volume) e R% antes de operar. Não é recomendação.</p>
     </body></html>"""
     hpath=a.out+".html"
+    html = html.replace("<body>", "<body>"+hs.painel_html(), 1)  # [humor_sp500] painel injetado
     open(hpath,"w",encoding="utf-8").write(html)
     print(f"  HTML: {hpath}")
 

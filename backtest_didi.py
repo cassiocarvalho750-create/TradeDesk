@@ -19,7 +19,7 @@ import glob, sys, os
 import numpy as np, pandas as pd
 import bt_engine as bt
 
-TRIX_FAST=4; TRIX_SLOW=9   # EMAs do TRIX conforme especificado
+TRIX_LEN=9; TRIX_SIGNAL=4   # TRIX MA da imagem: Length=9 (base tripla EMA), MA=4 (linha de sinal)
 
 def carrega(path):
     d=pd.read_csv(path, parse_dates=["date"]).set_index("date")
@@ -32,21 +32,22 @@ def swings_low(h,l,pos,k=3):
     return float(l.iloc[cand[-1]]) if cand else None
 
 def trix_ema(close):
-    """TRIX (tripla EMA do %change) e suas EMAs 4 e 9 para o cruzamento."""
-    e1=close.ewm(span=15,adjust=False).mean()  # TRIX base (len 15 ~ padrao Didi)
-    e2=e1.ewm(span=15,adjust=False).mean()
-    e3=e2.ewm(span=15,adjust=False).mean()
-    tr=e3.pct_change()*100.0
-    ema_f=tr.ewm(span=TRIX_FAST,adjust=False).mean()
-    ema_s=tr.ewm(span=TRIX_SLOW,adjust=False).mean()
-    return ema_f, ema_s
+    """TRIX MA (conforme imagem): TRIX = tripla EMA de 9 do preco, e a variacao
+    percentual disso e a linha do TRIX. A linha de sinal e a media (EMA) de 4
+    do proprio TRIX. Retorna (trix, sinal)."""
+    e1=close.ewm(span=TRIX_LEN,adjust=False).mean()   # tripla EMA de 9
+    e2=e1.ewm(span=TRIX_LEN,adjust=False).mean()
+    e3=e2.ewm(span=TRIX_LEN,adjust=False).mean()
+    trix=e3.pct_change()*100.0                          # linha do TRIX
+    sinal=trix.ewm(span=TRIX_SIGNAL,adjust=False).mean()# linha de sinal (MA 4 do TRIX)
+    return trix, sinal
 
 def backtest(d, tk, stop_modo, saida_modo, max_hold=120):
     s=bt.compute_signals_windowed(d)
     o,h,l,c=d["Open"],d["High"],d["Low"],d["Close"]
     adx=s["adx"]
-    trf,trs=trix_ema(c)
-    trix_venda=(trf < trs) & (trf.shift(1) >= trs.shift(1))
+    trix,sinal=trix_ema(c)
+    trix_venda=(trix < sinal) & (trix.shift(1) >= sinal.shift(1))   # TRIX cruza abaixo do sinal (MA4)
     adx_kick=(adx < adx.shift(1))
     n=len(d); trades=[]
     i=60
