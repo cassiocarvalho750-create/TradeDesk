@@ -1,0 +1,60 @@
+{
+  "gerado_em": "2026-09-18T21:54:30Z",
+  "data_sp": "2026-09-18",
+  "didi3": -0.039,
+  "zona": "mau_fraco",
+  "nome": "MAU HUMOR FRACO",
+  "risco": "Risco padrão/reduzido",
+  "acao": "Maré morna — cautela, tamanho normal ou menor.",
+  "exp": "≈ +0.30R/trade",
+  "emoji": "▼",
+  "cor": "#f9a825",
+  "cor2": "#fff8e1",
+  "fonte": "yfinance (^GSPC)",
+  "tabela": [
+    {
+      "zona": "bom_forte",
+      "nome": "BOM HUMOR FORTE",
+      "faixa": "≥ +0,70",
+      "risco": "Risco CHEIO",
+      "exp": "≈ +0.35R/trade",
+      "cor": "#1b8a3a",
+      "cor2": "#e6f5ea",
+      "emoji": "▲▲",
+      "hoje": false
+    },
+    {
+      "zona": "bom_fraco",
+      "nome": "BOM HUMOR FRACO",
+      "faixa": "0 a +0,70",
+      "risco": "Risco padrão",
+      "exp": "≈ +0.26R/trade",
+      "cor": "#7cb342",
+      "cor2": "#f1f8e9",
+      "emoji": "▲",
+      "hoje": false
+    },
+    {
+      "zona": "mau_fraco",
+      "nome": "MAU HUMOR FRACO",
+      "faixa": "−0,40 a 0",
+      "risco": "Risco padrão/reduzido",
+      "exp": "≈ +0.30R/trade",
+      "cor": "#f9a825",
+      "cor2": "#fff8e1",
+      "emoji": "▼",
+      "hoje": true
+    },
+    {
+      "zona": "mau_forte",
+      "nome": "MAU HUMOR FORTE",
+      "faixa": "< −0,40",
+      "risco": "Risco MÍNIMO",
+      "exp": "≈ +0.24R/trade",
+      "cor": "#e53935",
+      "cor2": "#ffebee",
+      "emoji": "▼▼",
+      "hoje": false
+    }
+  ]
+}
