@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-18",
-  "captura": "18/09/2026 17:04",
+  "captura": "18/09/2026 18:23",
   "timeframe": "1d",
   "n": 9,
   "ativos": [
@@ -11,31 +11,31 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 145.83,
+      "close": 145.84,
       "stop": 145.0,
-      "r_pct": 0.57,
+      "r_pct": 0.58,
       "forming": true,
       "date": "2026-09-18",
       "ult_candle": "2026-09-18",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 87.0,
+      "vol_fin_mi": 91.9,
       "tv": "https://www.tradingview.com/chart/?symbol=ACA",
-      "vol_qtd": 550459.0,
-      "var_dia_pct": 0.26,
-      "alvo_2r": 147.49,
+      "vol_qtd": 1223460.0,
+      "var_dia_pct": 0.27,
+      "alvo_2r": 147.52,
       "acima_ema70": true,
-      "ema70": 141.2129,
+      "ema70": 141.2132,
       "ema70_incl": "sobe",
       "quality": 100.0,
       "didi_dist": 0.043,
       "pos_range": 1.0,
       "dist_max_pct": 0.0,
-      "adx_var_pct": -2.0,
+      "adx_var_pct": -1.6,
       "confluencia": true,
       "bb_primeira": true,
-      "high": 145.83,
+      "high": 145.84,
       "dates": [
         "2026-07-24",
         "2026-07-27",
@@ -118,7 +118,7 @@
         145.15,
         145.14,
         145.45,
-        145.83
+        145.84
       ],
       "o": [
         145.17,
@@ -202,7 +202,7 @@
         145.29,
         145.45,
         145.64,
-        145.83
+        145.84
       ],
       "l": [
         144.93,
@@ -286,7 +286,7 @@
         145.1,
         145.1467,
         145.2467,
-        145.4733
+        145.4767
       ],
       "ma8": [
         144.9363,
@@ -328,7 +328,7 @@
         145.315,
         145.2725,
         145.2725,
-        145.295
+        145.2962
       ],
       "ma20": [
         144.9205,
@@ -370,7 +370,7 @@
         145.31,
         145.2995,
         145.3095,
-        145.331
+        145.3315
       ],
       "didi_curta": [
         0.0992,
@@ -412,7 +412,7 @@
         -0.148,
         -0.0866,
         -0.0178,
-        0.1227
+        0.1242
       ],
       "didi_longa": [
         -0.0108,
@@ -454,7 +454,7 @@
         -0.0034,
         0.0186,
         0.0255,
-        0.0248
+        0.0243
       ],
       "adx": [
         51.399,
@@ -496,7 +496,7 @@
         22.534,
         20.3899,
         20.1749,
-        22.0898
+        22.1766
       ],
       "dip": [
         25.1017,
@@ -538,7 +538,7 @@
         8.2416,
         13.2406,
         17.6687,
-        22.0158
+        22.2906
       ],
       "dim": [
         9.9052,
@@ -580,7 +580,7 @@
         17.0166,
         14.7466,
         12.1093,
-        10.4811
+        10.4442
       ],
       "bb_sup": [
         145.282,
@@ -622,7 +622,7 @@
         145.7434,
         145.6935,
         145.6935,
-        145.8157
+        145.8228
       ],
       "bb_mid": [
         144.9363,
@@ -664,7 +664,7 @@
         145.315,
         145.2725,
         145.2725,
-        145.295
+        145.2962
       ],
       "bb_inf": [
         144.5905,
@@ -706,7 +706,7 @@
         144.8866,
         144.8515,
         144.8515,
-        144.7743
+        144.7697
       ]
     },
     {
@@ -725,9 +725,9 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 1288.0,
+      "vol_fin_mi": 1322.7,
       "tv": "https://www.tradingview.com/chart/?symbol=ADI",
-      "vol_qtd": 5796368.0,
+      "vol_qtd": 7697018.0,
       "var_dia_pct": 3.06,
       "alvo_2r": 414.92,
       "acima_ema70": true,
@@ -1430,9 +1430,9 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 3620.7,
+      "vol_fin_mi": 3646.2,
       "tv": "https://www.tradingview.com/chart/?symbol=MSTR",
-      "vol_qtd": 50282794.0,
+      "vol_qtd": 54152295.0,
       "var_dia_pct": 12.7,
       "alvo_2r": 219.0,
       "acima_ema70": true,
@@ -2135,9 +2135,9 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 16960.8,
+      "vol_fin_mi": 17087.5,
       "tv": "https://www.tradingview.com/chart/?symbol=SNDK",
-      "vol_qtd": 16010439.0,
+      "vol_qtd": 17602837.0,
       "var_dia_pct": 10.33,
       "alvo_2r": 2504.24,
       "acima_ema70": true,
@@ -2840,9 +2840,9 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 1992.5,
+      "vol_fin_mi": 1996.4,
       "tv": "https://www.tradingview.com/chart/?symbol=COIN",
-      "vol_qtd": 21389001.0,
+      "vol_qtd": 21822131.0,
       "var_dia_pct": 9.03,
       "alvo_2r": 238.69,
       "acima_ema70": true,
@@ -3545,9 +3545,9 @@
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 1,
-      "vol_fin_mi": 202.4,
+      "vol_fin_mi": 205.6,
       "tv": "https://www.tradingview.com/chart/?symbol=HALO",
-      "vol_qtd": 9593449.0,
+      "vol_qtd": 10182436.0,
       "var_dia_pct": 2.49,
       "alvo_2r": 130.41,
       "acima_ema70": true,
@@ -4250,9 +4250,9 @@
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 2,
-      "vol_fin_mi": 156.9,
+      "vol_fin_mi": 158.1,
       "tv": "https://www.tradingview.com/chart/?symbol=MXL",
-      "vol_qtd": 4480830.0,
+      "vol_qtd": 4867180.0,
       "var_dia_pct": 6.61,
       "alvo_2r": 113.94,
       "acima_ema70": true,
@@ -4955,9 +4955,9 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 1,
-      "vol_fin_mi": 110.0,
+      "vol_fin_mi": 112.4,
       "tv": "https://www.tradingview.com/chart/?symbol=AVT",
-      "vol_qtd": 2156982.0,
+      "vol_qtd": 2665078.0,
       "var_dia_pct": 2.46,
       "alvo_2r": 115.63,
       "acima_ema70": true,
@@ -5660,9 +5660,9 @@
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 0,
-      "vol_fin_mi": 345.5,
+      "vol_fin_mi": 354.6,
       "tv": "https://www.tradingview.com/chart/?symbol=DXCM",
-      "vol_qtd": 12462429.0,
+      "vol_qtd": 14523057.0,
       "var_dia_pct": 1.04,
       "alvo_2r": 103.47,
       "acima_ema70": true,
