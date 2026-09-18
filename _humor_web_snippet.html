@@ -17,14 +17,20 @@
     }).join('');
     var d3=(h.didi3!=null)?((h.didi3>=0?'+':'')+h.didi3.toFixed(2)):'—';
     var quando=h.data_sp?(' · '+h.data_sp):'';
+    var dirtxt=h.dir_txt||'';
+    var comboCor=h.combo_cor||h.cor, comboTit=h.combo_titulo||'', comboMsg=h.combo_msg||'';
+    var combo=(comboTit? '  <div style="background:'+comboCor+';color:#fff;padding:9px 18px;font-size:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+      +'<span style="background:rgba(255,255,255,.22);border-radius:6px;padding:2px 9px;font-size:12px;font-weight:800;letter-spacing:.5px">'+comboTit+'</span>'
+      +'<span>'+comboMsg+'</span></div>' : '');
     el.innerHTML=''
       +'<div style="border:1px solid rgba(128,128,128,.28);border-radius:12px;overflow:hidden;font-family:inherit">'
       +'  <div style="background:'+h.cor+';color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">'
       +'    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:24px;line-height:1">'+h.emoji+'</span>'
       +'      <div><div style="font-size:11px;opacity:.85;letter-spacing:.5px">HUMOR DO S&amp;P 500 HOJE'+quando+'</div><div style="font-size:19px;font-weight:800">'+h.nome+'</div></div></div>'
-      +'    <div style="text-align:right"><div style="font-size:11px;opacity:.85">DIDI do S&amp;P (média 3 vs 8)</div><div style="font-size:21px;font-weight:800;font-family:monospace">'+d3+'</div></div>'
+      +'    <div style="text-align:right"><div style="font-size:11px;opacity:.85">DIDI do S&amp;P (média 3 vs 8) · '+dirtxt+'</div><div style="font-size:21px;font-weight:800;font-family:monospace">'+d3+'</div></div>'
       +'  </div>'
-      +'  <div style="background:'+h.cor2+';color:#222;padding:9px 18px;font-size:14px;border-bottom:1px solid rgba(128,128,128,.2)"><b>'+h.risco+'</b> — '+h.acao+'</div>'
+      +combo
+      +'  <div style="background:'+h.cor2+';color:#222;padding:9px 18px;font-size:13px;border-bottom:1px solid rgba(128,128,128,.2)"><b>Posição:</b> '+h.nome+' — '+h.risco+'</div>'
       +'  <table style="width:100%;border-collapse:collapse;font-size:13px">'
       +'    <thead><tr style="text-align:left;opacity:.65">'
       +'      <th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Zona</th><th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">didi3 S&amp;P</th>'

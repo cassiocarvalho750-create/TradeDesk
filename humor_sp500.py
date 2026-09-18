@@ -54,19 +54,41 @@ REF = {
                  "emoji": "?", "acao": "Não consegui ler o S&P 500 hoje — opere com o critério padrão."},
 }
 
+# leitura COMBINADA (posicao + direcao da MA3) — a direcao foi o sinal mais
+# robusto das 3 cestas; combinada com a forca da o teto do humor.
+COMBO = {
+    "cheia":      {"titulo": "MARÉ CHEIA", "cor": "#1b8a3a",
+                   "msg": "S&P forte E com a MA3 subindo — é o teto do humor. Risco cheio, pise fundo."},
+    "favor":      {"titulo": "A FAVOR", "cor": "#2e7d32",
+                   "msg": "Bom humor com a MA3 subindo — vento a favor. Risco normal/cheio."},
+    "virando":    {"titulo": "VIRANDO", "cor": "#f9a825",
+                   "msg": "Ainda em bom humor, MAS a MA3 já virou p/ baixo — o grupo mais fraco. Alivie o risco."},
+    "recuperando":{"titulo": "RECUPERANDO", "cor": "#f9a825",
+                   "msg": "Mau humor, mas a MA3 voltou a subir — melhorando. Cautela, tamanho normal."},
+    "seca":       {"titulo": "MARÉ SECA", "cor": "#e53935",
+                   "msg": "Mau humor e MA3 descendo — pé no freio, risco mínimo."},
+    "sem_dado":   {"titulo": "SEM DADO", "cor": "#9e9e9e",
+                   "msg": "Sem leitura do S&P hoje — opere com o critério padrão."},
+}
+
 def _didi3_sp(caminho="sp500.csv"):
-    """Devolve (didi3_hoje, data_hoje, fonte) do S&P 500. didi3 = (MA3/MA8-1)*100."""
+    """Devolve (didi3_hoje, inclinacao_hoje, data_hoje, fonte) do S&P 500.
+    didi3 = (MA3/MA8-1)*100 ; inclinacao = MA3 hoje - MA3 ontem (>0 sobe)."""
     def calc(c):
         ma3 = c.rolling(3).mean(); ma8 = c.rolling(8).mean()
         d3 = (ma3 / ma8 - 1.0) * 100.0
-        return d3
+        inc = ma3.diff()
+        return d3, inc
     # 1) arquivo local
     if os.path.exists(caminho):
         try:
             d = pd.read_csv(caminho, parse_dates=["date"]).set_index("date")
             d = d.rename(columns={"close": "Close"})
-            d3 = calc(d["Close"]).dropna()
-            return float(d3.iloc[-1]), d3.index[-1].date(), f"arquivo {caminho}"
+            d3, inc = calc(d["Close"])
+            d3 = d3.dropna()
+            ic = inc.reindex(d3.index)
+            iv = ic.iloc[-1]
+            return float(d3.iloc[-1]), (None if pd.isna(iv) else float(iv)), d3.index[-1].date(), f"arquivo {caminho}"
         except Exception:
             pass
     # 2) yfinance
@@ -75,11 +97,13 @@ def _didi3_sp(caminho="sp500.csv"):
         d = yf.Ticker("^GSPC").history(period="6mo", interval="1d", auto_adjust=True)
         if d is not None and not d.empty:
             if d.index.tz is not None: d.index = d.index.tz_localize(None)
-            d3 = calc(d["Close"]).dropna()
-            return float(d3.iloc[-1]), d3.index[-1].date(), "yfinance (^GSPC)"
+            d3, inc = calc(d["Close"])
+            d3 = d3.dropna(); ic = inc.reindex(d3.index)
+            iv = ic.iloc[-1]
+            return float(d3.iloc[-1]), (None if pd.isna(iv) else float(iv)), d3.index[-1].date(), "yfinance (^GSPC)"
     except Exception:
         pass
-    return None, None, None
+    return None, None, None, None
 
 def zona(didi3):
     if didi3 is None: return "sem_dado"
@@ -89,10 +113,33 @@ def zona(didi3):
     return "mau_forte"
 
 def situacao(caminho="sp500.csv"):
-    """Devolve um dict com a situacao de hoje (p/ quem quiser usar sem HTML)."""
-    d3, data, fonte = _didi3_sp(caminho)
+    """Devolve um dict com a situacao de hoje (p/ quem quiser usar sem HTML).
+    Alem da POSICAO (zona), traz a DIRECAO da MA3 (subindo/descendo) — o sinal
+    mais robusto dos backtests — e a leitura combinada (mare cheia de verdade)."""
+    d3, inc, data, fonte = _didi3_sp(caminho)
     z = zona(d3)
-    return {"didi3": d3, "data": data, "fonte": fonte, "zona": z, **REF[z]}
+    base = {"didi3": d3, "incl": inc, "data": data, "fonte": fonte, "zona": z, **REF[z]}
+    # direcao da MA3
+    if inc is None:
+        base["direcao"] = None; base["dir_txt"] = "—"
+    elif inc > 0:
+        base["direcao"] = "sobe"; base["dir_txt"] = "MA3 subindo ▲"
+    else:
+        base["direcao"] = "desce"; base["dir_txt"] = "MA3 descendo ▼"
+    # leitura combinada: forca (posicao) + direcao
+    if d3 is None or inc is None:
+        base["combo"] = "sem_dado"
+    elif d3 >= LIM_BOM_FORTE and inc > 0:
+        base["combo"] = "cheia"      # bom-forte E subindo = mare cheia de verdade
+    elif inc > 0 and d3 >= 0:
+        base["combo"] = "favor"      # bom humor subindo = a favor
+    elif inc <= 0 and d3 >= 0:
+        base["combo"] = "virando"    # bom humor MAS ja virando p/ baixo = alerta
+    elif inc > 0:
+        base["combo"] = "recuperando"# mau humor mas subindo = melhorando
+    else:
+        base["combo"] = "seca"       # mau humor e descendo = mare seca
+    return base
 
 def painel_html(caminho="sp500.csv"):
     """Bloco HTML do painel de humor do S&P 500 (situacao de hoje + tabela ref)."""
@@ -141,12 +188,16 @@ def painel_html(caminho="sp500.csv"):
       </div>
     </div>
     <div style="text-align:right">
-      <div style="font-size:12px;opacity:.85">DIDI do S&amp;P (média 3 vs 8)</div>
+      <div style="font-size:12px;opacity:.85">DIDI do S&amp;P (média 3 vs 8) · {s['dir_txt']}</div>
       <div style="font-size:22px;font-weight:800;font-family:monospace">{d3txt}</div>
     </div>
   </div>
-  <div style="background:{r['cor2']};padding:10px 18px;font-size:14px;color:#333;border-bottom:1px solid #eee">
-    <b>{r['risco']}</b> — {r['acao']}
+  <div style="background:{COMBO[s['combo']]['cor']};color:#fff;padding:9px 18px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px">
+    <span style="background:rgba(255,255,255,.22);border-radius:6px;padding:2px 9px;font-size:12px;font-weight:800;letter-spacing:.5px">{COMBO[s['combo']]['titulo']}</span>
+    <span style="font-weight:500">{COMBO[s['combo']]['msg']}</span>
+  </div>
+  <div style="background:{r['cor2']};padding:10px 18px;font-size:13px;color:#333;border-bottom:1px solid #eee">
+    <b>Posição:</b> {r['nome']} — {r['risco']} <span style="color:#888">({r['acao']})</span>
   </div>
   <table style="width:100%;border-collapse:collapse;font-size:13px">
     <thead>
@@ -184,6 +235,10 @@ def gerar_json(caminho="sp500.csv", out="painel_humor.json"):
         "gerado_em": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "data_sp": str(s["data"]) if s["data"] else None,
         "didi3": round(s["didi3"], 3) if s["didi3"] is not None else None,
+        "incl": round(s["incl"], 4) if s["incl"] is not None else None,
+        "direcao": s["direcao"], "dir_txt": s["dir_txt"],
+        "combo": s["combo"], "combo_titulo": COMBO[s["combo"]]["titulo"],
+        "combo_msg": COMBO[s["combo"]]["msg"], "combo_cor": COMBO[s["combo"]]["cor"],
         "zona": s["zona"], "nome": s["nome"], "risco": s["risco"],
         "acao": s["acao"], "exp": s["exp"], "emoji": s["emoji"],
         "cor": s["cor"], "cor2": s["cor2"], "fonte": s["fonte"],
