@@ -166,8 +166,40 @@ def painel_html(caminho="sp500.csv"):
 </div>
 """
 
+def gerar_json(caminho="sp500.csv", out="painel_humor.json"):
+    """Grava painel_humor.json com a situacao de hoje + a tabela de referencia,
+    para as paginas do site (GitHub Pages) desenharem o painel em JavaScript."""
+    import json, datetime
+    s = situacao(caminho)
+    ordem = ["bom_forte", "bom_fraco", "mau_fraco", "mau_forte"]
+    faixa = {"bom_forte": "≥ +0,70", "bom_fraco": "0 a +0,70",
+             "mau_fraco": "−0,40 a 0", "mau_forte": "< −0,40"}
+    tabela = [{
+        "zona": k, "nome": REF[k]["nome"], "faixa": faixa[k],
+        "risco": REF[k]["risco"], "exp": REF[k]["exp"],
+        "cor": REF[k]["cor"], "cor2": REF[k]["cor2"], "emoji": REF[k]["emoji"],
+        "hoje": (k == s["zona"]),
+    } for k in ordem]
+    payload = {
+        "gerado_em": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "data_sp": str(s["data"]) if s["data"] else None,
+        "didi3": round(s["didi3"], 3) if s["didi3"] is not None else None,
+        "zona": s["zona"], "nome": s["nome"], "risco": s["risco"],
+        "acao": s["acao"], "exp": s["exp"], "emoji": s["emoji"],
+        "cor": s["cor"], "cor2": s["cor2"], "fonte": s["fonte"],
+        "tabela": tabela,
+    }
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+    return payload
+
 if __name__ == "__main__":
-    # teste rapido no terminal
-    s = situacao()
-    print(f"Humor do S&P 500 hoje: {s['nome']}  (didi3={s['didi3']})  fonte={s['fonte']}")
-    print(f"  {s['risco']} — {s['acao']}")
+    import sys
+    # 'python humor_sp500.py --json' grava painel_humor.json (usado pelo GitHub Actions)
+    if "--json" in sys.argv:
+        p = gerar_json()
+        print(f"painel_humor.json gerado: {p['nome']} (didi3={p['didi3']}) fonte={p['fonte']}")
+    else:
+        s = situacao()
+        print(f"Humor do S&P 500 hoje: {s['nome']}  (didi3={s['didi3']})  fonte={s['fonte']}")
+        print(f"  {s['risco']} — {s['acao']}")

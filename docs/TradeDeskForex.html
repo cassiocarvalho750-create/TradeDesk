@@ -117,6 +117,44 @@
   </div>
   <div class="statusbar"><span class="dot" id="dot"></span><span id="status">Pronto.</span></div>
 </header>
+<!-- [humor_sp500_web] painel de humor do S&P 500 -->
+<div id="humorSP" style="max-width:1200px;margin:14px auto 0 auto;padding:0 16px"></div>
+<script>
+(function(){
+  fetch('painel_humor.json?'+Date.now()).then(r=>r.ok?r.json():null).then(function(h){
+    var el=document.getElementById('humorSP'); if(!el||!h) return;
+    var linhas=h.tabela.map(function(t){
+      var bg=t.hoje?t.cor2:'transparent';
+      var txt=t.hoje?'#222':'inherit';       // linha de hoje tem fundo claro -> texto escuro
+      var marca=t.hoje?('<span style="background:'+t.cor+';color:#fff;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:700;margin-left:6px">HOJE</span>'):'';
+      var peso=t.hoje?'700':'500';
+      return '<tr style="background:'+bg+';color:'+txt+'">'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:'+t.cor+';margin-right:7px"></span><b style="color:'+t.cor+';font-weight:'+peso+'">'+t.nome+'</b>'+marca+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);font-family:monospace">'+t.faixa+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);font-weight:'+peso+'">'+t.risco+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);opacity:.8">'+t.exp+'</td></tr>';
+    }).join('');
+    var d3=(h.didi3!=null)?((h.didi3>=0?'+':'')+h.didi3.toFixed(2)):'—';
+    var quando=h.data_sp?(' · '+h.data_sp):'';
+    el.innerHTML=''
+      +'<div style="border:1px solid rgba(128,128,128,.28);border-radius:12px;overflow:hidden;font-family:inherit">'
+      +'  <div style="background:'+h.cor+';color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">'
+      +'    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:24px;line-height:1">'+h.emoji+'</span>'
+      +'      <div><div style="font-size:11px;opacity:.85;letter-spacing:.5px">HUMOR DO S&amp;P 500 HOJE'+quando+'</div><div style="font-size:19px;font-weight:800">'+h.nome+'</div></div></div>'
+      +'    <div style="text-align:right"><div style="font-size:11px;opacity:.85">DIDI do S&amp;P (média 3 vs 8)</div><div style="font-size:21px;font-weight:800;font-family:monospace">'+d3+'</div></div>'
+      +'  </div>'
+      +'  <div style="background:'+h.cor2+';color:#222;padding:9px 18px;font-size:14px;border-bottom:1px solid rgba(128,128,128,.2)"><b>'+h.risco+'</b> — '+h.acao+'</div>'
+      +'  <table style="width:100%;border-collapse:collapse;font-size:13px">'
+      +'    <thead><tr style="text-align:left;opacity:.65">'
+      +'      <th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Zona</th><th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">didi3 S&amp;P</th>'
+      +'      <th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Tamanho da posição</th><th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Expectância</th></tr></thead>'
+      +'    <tbody>'+linhas+'</tbody></table>'
+      +'  <div style="padding:7px 18px;font-size:11px;opacity:.6">Termômetro validado em 3 cestas. Não é filtro de entrada; é acelerador de tamanho: entre em todo sinal válido, pise fundo no risco só na maré cheia.</div>'
+      +'</div>';
+  }).catch(function(){});
+})();
+</script>
+<!-- [/humor_sp500_web] -->
 
 <div class="meta" id="meta">Carregando dados publicados…</div>
 
