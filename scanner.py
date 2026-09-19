@@ -31,25 +31,74 @@ import bt_engine as bt
 import humor_sp500 as hs  # [humor_sp500] painel injetado
 import run_backtest_v2 as rb
 
-def fetch_intraday_ok(ticker):
-    """Busca dados diarios incluindo o candle de hoje (em formacao se for pregao)."""
+# --- timeframes ---
+# yfinance nao tem '2h' nativo: baixamos '1h' e reamostramos para 2h.
+# Mapa: timeframe -> (interval_yf, period_yf, regra_resample_ou_None)
+TF_CONFIG = {
+    "1d":  ("1d",  "1y",   None),
+    "1wk": ("1wk", "5y",   None),   # semanal nativo, 5 anos de historico
+    "1h":  ("1h",  "730d", None),
+    "2h":  ("1h",  "730d", "2h"),   # baixa 1h e reamostra p/ 2h
+    "4h":  ("1h",  "730d", "4h"),   # baixa 1h e reamostra p/ 4h
+    "15m": ("15m", "60d",  None),
+    "5m":  ("5m",  "60d",  None),
+}
+
+# quantos candles recentes olhar por timeframe (o gatilho e mais raro no intraday,
+# entao ampliamos a janela para nao perder sinais do pregao corrente).
+TF_DAYS_BACK = {"1d": 1, "1wk": 1, "4h": 2, "2h": 2, "1h": 3, "15m": 4, "5m": 6}
+
+# janelas de tolerancia (DIDI, ADX) em candles, por timeframe.
+# Semanal usa 3/2, 4h usa 4/2; os demais herdam o padrao do diario (5/3).
+TF_WINDOWS = {"1wk": (3, 2), "4h": (4, 2)}
+def tf_windows(timeframe):
+    return TF_WINDOWS.get(timeframe, (5, 3))
+
+def default_days_back(timeframe):
+    return TF_DAYS_BACK.get(timeframe, 1)
+
+def _resample_ohlcv(d, regra):
+    """Reamostra OHLCV para um timeframe maior (ex.: 1h -> 2h).
+    IMPORTANTE: o resample do pandas cria uma grade continua 24h, gerando
+    candles vazios fora do pregao (noite, fim de semana). Removemos esses
+    candles fantasma exigindo que tenham preco real (Close nao-NaN) e que
+    algum volume/negociacao tenha ocorrido — senao os indicadores sao
+    calculados sobre candles inexistentes e o setup nunca dispara."""
+    if d is None or d.empty:
+        return d
+    agg = {"Open":"first","High":"max","Low":"min","Close":"last","Volume":"sum"}
+    cols = [c for c in agg if c in d.columns]
+    r = d[cols].resample(regra, label="left", closed="left").agg({c:agg[c] for c in cols})
+    # descarta candles sem preco real (buracos entre pregoes)
+    if "Close" in r.columns:
+        r = r[r["Close"].notna()]
+    # descarta tambem candles com OHLC todo NaN por seguranca
+    ohlc = [c for c in ("Open","High","Low","Close") if c in r.columns]
+    if ohlc:
+        r = r.dropna(subset=ohlc, how="all")
+    return r
+
+def fetch_intraday_ok(ticker, timeframe="1d"):
+    """Busca dados no timeframe pedido, incluindo o candle corrente (em formacao).
+    Para 2h, baixa 1h e reamostra."""
     import yfinance as yf
+    interval, period, regra = TF_CONFIG.get(timeframe, TF_CONFIG["1d"])
     try:
-        # period 1y, interval 1d -> inclui o candle do dia corrente quando ha pregao
-        d = yf.Ticker(ticker).history(period="1y", interval="1d", auto_adjust=True)
+        d = yf.Ticker(ticker).history(period=period, interval=interval, auto_adjust=True)
         if d is None or d.empty: return pd.DataFrame()
         d.columns = [c.capitalize() for c in d.columns]
         if d.index.tz is not None: d.index = d.index.tz_localize(None)
+        if regra: d = _resample_ohlcv(d, regra)
         return d
     except Exception:
         return pd.DataFrame()
 
-def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
+def fetch_batch(tickers, timeframe="1d", chunk=100, pause=1.0, retries=2):
     """Baixa varios tickers de uma vez com yf.download (group_by='ticker').
-    Retorna dict {ticker: DataFrame} com colunas capitalizadas (Open/High/Low/Close/Volume),
-    indice sem timezone. Tickers que falharem simplesmente nao entram no dict.
-    Faz o download em lotes de `chunk` para nao montar um request gigante."""
+    Retorna dict {ticker: DataFrame} com colunas capitalizadas, indice sem tz.
+    Para 2h, baixa 1h e reamostra cada ticker."""
     import yfinance as yf
+    interval, period, regra = TF_CONFIG.get(timeframe, TF_CONFIG["1d"])
     out = {}
     n = len(tickers)
     for start in range(0, n, chunk):
@@ -58,7 +107,7 @@ def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
         df = None
         for attempt in range(retries+1):
             try:
-                df = yf.download(part, period=period, interval="1d",
+                df = yf.download(part, period=period, interval=interval,
                                  auto_adjust=True, group_by="ticker",
                                  threads=True, progress=False)
                 if df is not None and not df.empty:
@@ -74,9 +123,9 @@ def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
             d.columns = [str(c).capitalize() for c in d.columns]
             if getattr(d.index,"tz",None) is not None: d.index = d.index.tz_localize(None)
             d = d.dropna(how="all")
+            if regra and not d.empty: d = _resample_ohlcv(d, regra)
             if not d.empty: out[part[0]] = d
         else:
-            # MultiIndex (ticker, campo): fatiar por ticker
             for tk in part:
                 if tk not in df.columns.get_level_values(0):
                     continue
@@ -84,6 +133,7 @@ def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
                 d.columns = [str(c).capitalize() for c in d.columns]
                 if getattr(d.index,"tz",None) is not None: d.index = d.index.tz_localize(None)
                 d = d.dropna(how="all")
+                if regra and not d.empty: d = _resample_ohlcv(d, regra)
                 if not d.empty: out[tk] = d
         time.sleep(pause)
     return out
@@ -138,8 +188,9 @@ def _liquidez_ok(tk, d, min_us_mi, min_b3_mi):
     except Exception:
         return False
 
-def _evaluate(tk, d, days_back, today):
+def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
     """Avalia UM ticker (DataFrame ja baixado) e retorna lista de hits.
+    lado: 'compra' (padrao) usa signal_win; 'venda' usa signal_venda (espelho).
     Logica identica para download em lote e individual."""
     res=[]
     if d is None or len(d) < 60:
@@ -148,27 +199,99 @@ def _evaluate(tk, d, days_back, today):
     for col in ("Open","High","Low","Close","Volume"):
         if col not in d.columns:
             return res
+    didi_win, adx_win = tf_windows(timeframe)
     try:
-        s = bt.compute_signals_windowed(d, didi_window=5, adx_window=3)
+        s = bt.compute_signals_windowed(d, didi_window=didi_win, adx_window=adx_win)
     except Exception:
         return res
+    venda = (lado == "venda")
+    sig_col   = "signal_venda" if venda else "signal_win"
+    didi_col  = "didi_recent_venda" if venda else "didi_recent"  # (nao usado direto abaixo)
+    didi_evt  = "didi_cross" if not venda else "didi_cross"       # evento base p/ contar dias
+    # intraday = timeframes menores que o diario (usam hora). Semanal e diario nao.
+    intraday = timeframe in ("4h","2h","1h","15m","5m")
+    last_idx = s.index[-1]
     tail = s.iloc[-days_back:]
     for idx, row in tail.iterrows():
-        if bool(row["signal_win"]):
-            is_forming = (idx.normalize() == today)
-            entry = row["Close"]; low = row["Low"]; r = entry - low
-            r_pct = (r/entry*100) if entry>0 else 0
+        if bool(row[sig_col]):
+            # intraday: "em formacao" = ultimo candle. Diario/semanal: candle corrente.
+            if intraday:
+                is_forming = (idx == last_idx)
+            elif timeframe == "1wk":
+                # semana corrente: o ultimo candle semanal (ainda em formacao ate sexta)
+                is_forming = (idx == last_idx)
+            else:
+                is_forming = (idx.normalize() == today)
+            # COMPRA: stop no ultimo pivo 3x3 (validado em backtest); VENDA: stop
+            # na maxima. Objetivo 1: 2R (primeiro alvo).
+            entry = row["Close"]
             pos = s.index.get_loc(idx)
+            if venda:
+                high = row["High"]; r = high - entry; stop_level = high
+            else:
+                # ultimo swing low 3x3 disponivel ate `pos`; fallback = minima do candle
+                _lo = s["Low"]
+                _sl = None
+                for k in range(pos-3, 2, -1):
+                    jl = _lo.iloc[k-3:k+4]
+                    if len(jl)==7 and _lo.iloc[k]==jl.min():
+                        _sl = float(_lo.iloc[k]); break
+                low = _sl if _sl is not None else float(row["Low"])
+                r = entry - low; stop_level = low
+            r_pct = (r/entry*100) if entry>0 else 0
+            alvo_2r = (entry + 2*r) if not venda else (entry - 2*r)   # primeiro objetivo 2R
+            # variacao do candle de hoje (Close/Open - 1): quanto o ativo
+            # valorizou no dia. Ex.: +14.69%.
+            c_open = float(row["Open"])
+            var_dia_pct = ((float(entry)/c_open - 1.0)*100.0) if c_open>0 else 0.0
+            # MME de 70 periodos (EMA) no timeframe do scan: contexto de tendencia.
+            # Calculada sobre o Close ate o candle do sinal (inclusive). Se nao ha
+            # candles suficientes (< 70), fica indefinida (None).
+            ema70_val = None; acima_ema70 = None
+            ema70_incl = None  # "sobe" | "desce" | "lado" | None (poucos candles)
+            if pos >= 69:
+                ema70_ser = s["Close"].iloc[:pos+1].ewm(span=70, adjust=False).mean()
+                ema70_val = float(ema70_ser.iloc[-1])
+                if not np.isnan(ema70_val):
+                    acima_ema70 = bool(float(entry) >= ema70_val)
+                # inclinacao: variacao % da MME70 em 5 candles. Limiar +-0.15%
+                # separa "horizontal" (media lenta; abaixo disso e ruido/lado)
+                # de "sobe"/"desce".
+                if pos >= 74:
+                    ema70_ant = float(ema70_ser.iloc[-6])  # 5 candles atras
+                    if ema70_ant > 0:
+                        var_ema = (ema70_val/ema70_ant - 1.0)*100.0
+                        LIM = 0.15
+                        if var_ema > LIM:   ema70_incl = "sobe"
+                        elif var_ema < -LIM: ema70_incl = "desce"
+                        else:                ema70_incl = "lado"
             vol20 = s["Volume"].iloc[max(0,pos-19):pos+1].mean()
             px20  = s["Close"].iloc[max(0,pos-19):pos+1].mean()
             fin_vol = (vol20 * px20) / 1e6 if not np.isnan(vol20) else 0.0
             vol_dia_qtd = float(s["Volume"].iloc[pos])
             vol_dia_fin = (vol_dia_qtd * float(entry)) / 1e6 if not np.isnan(vol_dia_qtd) else 0.0
             didi_ago = adx_ago = None
-            for k in range(0,6):
-                if pos-k>=0 and bool(s["didi_cross"].iloc[pos-k]): didi_ago=k; break
-            for k in range(0,4):
-                if pos-k>=0 and bool(s["adx_event"].iloc[pos-k]): adx_ago=k; break
+            for k in range(0, didi_win+1):
+                if pos-k < 0: break
+                if venda:
+                    # cruzamento de baixa: didi3 cruzou de >=0 para <0
+                    evt = (s["didi3"].iloc[pos-k] < 0) and (pos-k-1>=0) and (s["didi3"].iloc[pos-k-1] >= 0)
+                else:
+                    evt = bool(s["didi_cross"].iloc[pos-k])
+                if evt: didi_ago=k; break
+            adx_evt_col = "adx_event"  # compra
+            for k in range(0, adx_win+1):
+                if pos-k < 0: break
+                if venda:
+                    # evento ADX de venda: 1a inclinacao + DI->DI+ + ADX>=105%DI+
+                    ai = (s["adx"].iloc[pos-k] > s["adx"].iloc[pos-k-1]) if pos-k-1>=0 else False
+                    prev_flat = (s["adx"].iloc[pos-k-1] <= s["adx"].iloc[pos-k-2]) if pos-k-2>=0 else False
+                    bear = s["dim"].iloc[pos-k] > s["dip"].iloc[pos-k]
+                    above = s["adx"].iloc[pos-k] >= (bt.ADX_DIM_RATIO * s["dip"].iloc[pos-k])
+                    evt = ai and prev_flat and bear and above
+                else:
+                    evt = bool(s["adx_event"].iloc[pos-k])
+                if evt: adx_ago=k; break
 
             # ---- QUALIDADE: compressao do Didi + sincronia dos gatilhos ----
             # Compressao: menor distancia entre a Didi curta (3/8) e longa (20/8)
@@ -188,38 +311,106 @@ def _evaluate(tk, d, days_back, today):
                 q_comp = 0.0
             else:
                 q_comp = max(0.0, min(100.0, (1.0 - min_dist/2.0)*100.0))
-            # nota de sincronia (0-100): gatilhos no mesmo candle -> 100 ;
-            # espalhados no limite das janelas (didi 5d, adx 3d) -> baixo.
-            da = didi_ago if didi_ago is not None else 5
-            aa = adx_ago if adx_ago is not None else 3
-            q_sinc = max(0.0, 100.0 - (da/5.0*50.0) - (aa/3.0*50.0))
-            # score final: 60% compressao + 40% sincronia
-            quality = round(0.60*q_comp + 0.40*q_sinc, 1)
+            # nota de sincronia (0-100): premia FORTEMENTE o gatilho coincidindo
+            # com DIDI e ADX no mesmo candle (dia 0/0). Curva quadratica suave
+            # (expoente 1.5): perto do zero cai devagar (1 dia ainda e bom),
+            # afastamentos maiores caem mais rapido. Zera no limite das janelas.
+            da = didi_ago if didi_ago is not None else didi_win
+            aa = adx_ago  if adx_ago  is not None else adx_win
+            fd = (da/max(didi_win,1))**1.5
+            fa = (aa/max(adx_win,1))**1.5
+            q_sinc = max(0.0, 100.0 - 50.0*fd - 50.0*fa)
+            # nota de FECHAMENTO (0-100): COMPRA premia fechar perto da MAXIMA
+            # (forca compradora ate o fim); VENDA premia fechar perto da MINIMA
+            # (forca vendedora). pos_range e a posicao do fechamento no range.
+            try:
+                c_hi = float(row["High"]); c_lo = float(row["Low"]); c_cl = float(entry)
+                rng = c_hi - c_lo
+                if rng > 0:
+                    pos_range = (c_cl - c_lo) / rng   # 1=fechou na maxima, 0=na minima
+                    if venda:
+                        q_fech = max(0.0, min(100.0, (1.0 - pos_range)*100.0))
+                        dist_max_pct = ((c_cl - c_lo)/c_cl*100.0) if c_cl > 0 else 0.0  # dist da MINIMA
+                    else:
+                        q_fech = max(0.0, min(100.0, pos_range*100.0))
+                        dist_max_pct = ((c_hi - c_cl)/c_hi*100.0) if c_hi > 0 else 0.0  # dist da MAXIMA
+                else:
+                    q_fech = 100.0; dist_max_pct = 0.0
+            except Exception:
+                q_fech = 0.0; pos_range = np.nan; dist_max_pct = np.nan
+            # nota de INCLINACAO DO ADX (0-100): variacao percentual do ADX desde
+            # a virada para cima ate o candio do gatilho. Mede a ACELERACAO da
+            # forca da tendencia. Lookback minimo de 3 candles (quando a virada
+            # cai no mesmo candle do gatilho, nao haveria intervalo p/ medir).
+            # Regua calibrada sobre a distribuicao real: +15% -> 100 ; 0% -> 50 ; -15% -> 0.
+            try:
+                lb = max(adx_ago if adx_ago is not None else 0, 3)
+                if pos-lb >= 0:
+                    a_ini = float(s["adx"].iloc[pos-lb]); a_fim = float(s["adx"].iloc[pos])
+                    if a_ini > 0 and np.isfinite(a_ini) and np.isfinite(a_fim):
+                        adx_var_pct = (a_fim - a_ini)/a_ini*100.0
+                    else:
+                        adx_var_pct = 0.0
+                else:
+                    adx_var_pct = 0.0
+                q_incl = max(0.0, min(100.0, 50.0 + (adx_var_pct/15.0)*50.0))
+            except Exception:
+                adx_var_pct = np.nan; q_incl = 50.0
+            # score final: 25% compressao + 30% sincronia + 25% fechamento + 20% inclinacao ADX
+            # sincronia recebe o maior peso: a confluencia perfeita (DIDI 0 / ADX 0
+            # no candle do gatilho) e o melhor indicador de qualidade na pratica.
+            quality = 0.25*q_comp + 0.30*q_sinc + 0.25*q_fech + 0.20*q_incl
+            # BONUS DE CONFLUENCIA PERFEITA: quando os TRES sinais coincidem no
+            # mesmo candle (DIDI 0d + ADX 0d + BB, que e sempre 0d), o ativo ganha
+            # +12 pontos e se destaca no topo do ranking. E o melhor setup na
+            # pratica (todos os pilares disparando juntos).
+            confluencia_perfeita = (didi_ago == 0 and adx_ago == 0)
+            if confluencia_perfeita:
+                quality += 12.0
+            quality = round(min(100.0, quality), 1)
 
             res.append({
                 "ticker": tk, "market": market_of(tk),
                 "date": idx.date(), "forming": is_forming,
-                "close": round(float(entry),2), "stop": round(float(low),2),
+                "timeframe": timeframe,
+                "candle_ts": str(idx),
+                "close": round(float(entry),2), "stop": round(float(stop_level),2),
+                "high": round(float(row["High"]),2),
                 "r_pct": round(float(r_pct),2),
                 "adx": round(float(row.get("adx",np.nan)),1),
                 "didi_ago": didi_ago, "adx_ago": adx_ago,
                 "vol_fin_mi": round(float(fin_vol),1),
                 "vol_dia_mi": round(float(vol_dia_fin),1),
+                "vol_qtd": float(vol_dia_qtd) if not np.isnan(vol_dia_qtd) else 0.0,
+                "var_dia_pct": round(float(var_dia_pct),2),
+                "alvo_2r": round(float(alvo_2r),2),
+                "acima_ema70": acima_ema70,
+                "ema70_incl": ema70_incl,
+                "ema70": round(ema70_val,4) if ema70_val is not None else None,
                 "didi_dist": round(min_dist,3) if not np.isnan(min_dist) else None,
+                "pos_range": round(float(pos_range),3) if not (isinstance(pos_range,float) and np.isnan(pos_range)) else None,
+                "dist_max_pct": round(float(dist_max_pct),2) if not (isinstance(dist_max_pct,float) and np.isnan(dist_max_pct)) else None,
+                "adx_var_pct": round(float(adx_var_pct),1) if not (isinstance(adx_var_pct,float) and np.isnan(adx_var_pct)) else None,
+                "confluencia": bool(confluencia_perfeita),
+                "bb_primeira": bool(row.get("bb_primeira_abertura", False)),
+                "lado": lado,
                 "quality": quality,
                 "pe": None, "mktcap": None,
             })
     return res
 
 
-def scan(tickers, days_back=1, batch=True, chunk=100):
-    """Retorna lista de sinais nos ultimos `days_back` candles.
+def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra"):
+    """Retorna lista de sinais nos ultimos `days_back` candles do timeframe dado.
 
+    timeframe: '1d' (diario, padrao), '2h', '1h', '15m', '5m'.
     batch=True  -> download em LOTE via yf.download (rapido; recomendado p/ universo grande).
     batch=False -> download individual via fetch_intraday_ok (lento; fallback).
     O filtro de liquidez e aplicado a AMBOS os mercados, reusando o historico
     baixado (sem requisicao extra): US >= rb.US_MIN_VOL_FIN_MI (USD),
     B3 >= rb.B3_MIN_VOL_FIN_MI (BRL).
+    skip_liquidez=True -> ignora o piso de liquidez (usado no Forex, que nao tem
+    volume real confiavel e e liquido por natureza).
     """
     hits=[]
     today = pd.Timestamp(datetime.date.today())
@@ -233,41 +424,47 @@ def scan(tickers, days_back=1, batch=True, chunk=100):
         B3_MIN = 5.0
 
     if batch:
-        data = fetch_batch(tickers, period="1y", chunk=chunk)
+        data = fetch_batch(tickers, timeframe=timeframe, chunk=chunk)
         print(f"  baixados {len(data)}/{len(tickers)} (demais falharam/sem dados e foram pulados)")
         for tk in tickers:
             d = data.get(tk)
             if d is None:
                 continue
-            if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
+            if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 continue
-            hits.extend(_evaluate(tk, d, days_back, today))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado))
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
-            d = fetch_intraday_ok(tk)
+            d = fetch_intraday_ok(tk, timeframe=timeframe)
             if len(d) < 60:
                 time.sleep(0.02); continue
-            if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
+            if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 time.sleep(0.01); continue
-            hits.extend(_evaluate(tk, d, days_back, today))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado))
             time.sleep(0.03)
     return hits
 
 
-def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
+def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d"):
     """Para cada ativo com sinal, recalcula as series dos 3 indicadores
     (DIDI, ADX, BB) nos ultimos n_bars candles e grava um JSON que o painel
     HTML consome. Reusa fetch (individual) so para os POUCOS ativos com sinal.
     As formulas sao as mesmas do bt_engine (DIDI 3/8/20, ADX 8, BB 8,2)."""
     import json
+    # horario de captura em Brasilia (UTC-3). O Actions roda em UTC, entao
+    # convertemos explicitamente para nao sair 3h adiantado.
+    tz_br = datetime.timezone(datetime.timedelta(hours=-3))
+    captura = datetime.datetime.now(datetime.timezone.utc).astimezone(tz_br)
+    captura_str = captura.strftime("%d/%m/%Y %H:%M")
     ativos = []
+    intraday = timeframe in ("4h","2h","1h","15m","5m")  # semanal/diario usam data, nao hora
     for h in hits:
         tk = h["ticker"]
-        d = fetch_intraday_ok(tk)
+        d = fetch_intraday_ok(tk, timeframe=timeframe)
         if len(d) < 30:
             continue
-        c = d["Close"]; hi = d["High"]; lo = d["Low"]
+        c = d["Close"]; hi = d["High"]; lo = d["Low"]; op = d["Open"]
         ma3, ma8, ma20 = bt.sma(c,3), bt.sma(c,8), bt.sma(c,20)
         # Didi Index: curta (MA3/MA8) e longa (MA20/MA8), centradas em 0, em %
         didi_curta = (ma3/ma8 - 1.0)*100.0
@@ -279,26 +476,78 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
         def tail(s):
             return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
                     for v in s.tail(n_bars).tolist()]
-        dates = [str(x.date()) for x in c.tail(n_bars).index]
+        # rotulo do eixo: no intraday mostra data+hora; no diario so a data
+        if intraday:
+            dates = [x.strftime("%d/%m %H:%M") for x in c.tail(n_bars).index]
+            ult_candle = c.index[-1].strftime("%d/%m %H:%M") if len(c) else None
+        else:
+            dates = [str(x.date()) for x in c.tail(n_bars).index]
+            ult_candle = str(c.index[-1].date()) if len(c) else None
         ativos.append({
             "ticker": tk.replace(".SA",""), "market": h["market"],
+            "setor": h.get("setor",""),
+            "par": h.get("par",""),
+            "classe": h.get("classe",""),
+            "lado": h.get("lado","compra"),
             "close": h["close"], "stop": h["stop"], "r_pct": h["r_pct"],
             "forming": h["forming"], "date": str(h["date"]),
+            "ult_candle": ult_candle, "timeframe": timeframe,
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
+            "vol_qtd": h.get("vol_qtd",0), "var_dia_pct": h.get("var_dia_pct"),
+            "alvo_2r": h.get("alvo_2r"),
+            "acima_ema70": h.get("acima_ema70"), "ema70": h.get("ema70"), "ema70_incl": h.get("ema70_incl"),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
+            "pos_range": h.get("pos_range"), "dist_max_pct": h.get("dist_max_pct"),
+            "adx_var_pct": h.get("adx_var_pct"), "confluencia": h.get("confluencia", False),
+            "bb_primeira": h.get("bb_primeira", False),
+            "high": h.get("high"),
             "dates": dates,
             "price": tail(c),
+            "o": tail(op), "h": tail(hi), "l": tail(lo),
+            "ma3": tail(ma3), "ma8": tail(ma8), "ma20": tail(ma20),
             "didi_curta": tail(didi_curta), "didi_longa": tail(didi_longa),
             "adx": tail(adx), "dip": tail(dip), "dim": tail(dim),
             "bb_sup": tail(bb_sup), "bb_mid": tail(m), "bb_inf": tail(bb_inf),
         })
         time.sleep(0.05)
-    # ordena por qualidade (melhores primeiro); em formacao/fechado nao afeta a ordem
-    ativos.sort(key=lambda a: (a.get("quality") if a.get("quality") is not None else -1), reverse=True)
-    payload = {"gerado": str(datetime.date.today()), "n": len(ativos), "ativos": ativos}
+    # FILTRO: so entram sinais "bons". Um sinal vale a pena quando tem algum
+    # GATILHO FRESCO hoje. Tres formas de ser fresco:
+    #   - abertura hoje (a BB comecou a abrir hoje), OU
+    #   - 3 juntos (DIDI, ADX e BB no mesmo candle), OU
+    #   - ADX virou HOJE (adx_ago==0), mesmo que a BB tenha aberto ontem/anteontem.
+    # A ultima captura casos como a KEY: a BB ja vinha aberta, mas o ADX deu o
+    # gatilho hoje — a forca acabou de chegar, entao vale analisar.
+    # Fica de fora so o REALMENTE atrasado: BB abriu antes E ADX ja tinha virado
+    # antes (nenhum gatilho fresco hoje).
+    def _rank(a):
+        prim = bool(a.get("bb_primeira"))
+        conf = bool(a.get("confluencia"))
+        adx_hoje = (a.get("adx_ago") == 0)
+        # prioridade: 1) 3 juntos + abertura  2) 3 juntos  3) abertura hoje
+        #             4) ADX virou hoje (BB ja aberta) — gatilho fresco do ADX
+        if conf and prim: return 0
+        if conf:          return 1
+        if prim:          return 2
+        if adx_hoje:      return 3
+        return 9  # atrasado (sera removido)
+    ativos = [a for a in ativos if _rank(a) < 9]
+    # ordena por grupo de prioridade e, dentro do grupo, por nota (desc)
+    ativos.sort(key=lambda a: (
+        _rank(a),
+        -(a.get("quality") if a.get("quality") is not None else -1)
+    ))
+    payload = {"gerado": str(datetime.date.today()), "captura": captura_str,
+               "timeframe": timeframe, "n": len(ativos), "ativos": ativos}
     open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
     print(f"  Painel JSON: {out_path} ({len(ativos)} ativo(s))")
+    # registrar sinais do dia (forward testing) — SO no diario (1d)
+    if timeframe=="1d":
+        try:
+            import registro_sinais
+            registro_sinais.registrar_didi(ativos)
+        except Exception as e:
+            print(f"  [registro DIDI] falhou: {e}")
     return out_path
 
 def main():
