@@ -44,6 +44,50 @@ def fetch_intraday_ok(ticker):
     except Exception:
         return pd.DataFrame()
 
+def fetch_batch(tickers, period="1y", chunk=100, pause=1.0, retries=2):
+    """Baixa varios tickers de uma vez com yf.download (group_by='ticker').
+    Retorna dict {ticker: DataFrame} com colunas capitalizadas (Open/High/Low/Close/Volume),
+    indice sem timezone. Tickers que falharem simplesmente nao entram no dict.
+    Faz o download em lotes de `chunk` para nao montar um request gigante."""
+    import yfinance as yf
+    out = {}
+    n = len(tickers)
+    for start in range(0, n, chunk):
+        part = tickers[start:start+chunk]
+        print(f"  baixando {start+1}-{min(start+chunk,n)}/{n}...")
+        df = None
+        for attempt in range(retries+1):
+            try:
+                df = yf.download(part, period=period, interval="1d",
+                                 auto_adjust=True, group_by="ticker",
+                                 threads=True, progress=False)
+                if df is not None and not df.empty:
+                    break
+            except Exception:
+                df = None
+            time.sleep(pause*(attempt+1))
+        if df is None or df.empty:
+            continue
+        # Caso 1 ticker: colunas simples (sem MultiIndex)
+        if not isinstance(df.columns, pd.MultiIndex):
+            d = df.copy()
+            d.columns = [str(c).capitalize() for c in d.columns]
+            if getattr(d.index,"tz",None) is not None: d.index = d.index.tz_localize(None)
+            d = d.dropna(how="all")
+            if not d.empty: out[part[0]] = d
+        else:
+            # MultiIndex (ticker, campo): fatiar por ticker
+            for tk in part:
+                if tk not in df.columns.get_level_values(0):
+                    continue
+                d = df[tk].copy()
+                d.columns = [str(c).capitalize() for c in d.columns]
+                if getattr(d.index,"tz",None) is not None: d.index = d.index.tz_localize(None)
+                d = d.dropna(how="all")
+                if not d.empty: out[tk] = d
+        time.sleep(pause)
+    return out
+
 def market_of(tk): return "B3" if tk.endswith(".SA") else "EUA"
 
 def tv_symbol(tk):
@@ -66,6 +110,7 @@ def fmt_mktcap(v):
 def enrich_fundamentals(hits):
     """Busca P/E e Market Cap SOMENTE dos ativos que deram sinal (poucos),
     para nao pesar o scan inteiro. Falhas viram '—' sem quebrar o scan."""
+    import yfinance as yf
     for h in hits:
         try:
             info = yf.Ticker(h["ticker"]).info
@@ -79,50 +124,182 @@ def enrich_fundamentals(hits):
     return hits
 
 
-def scan(tickers, days_back=1):
-    """Retorna lista de sinais nos ultimos `days_back` candles."""
+def _liquidez_ok(tk, d, min_us_mi, min_b3_mi):
+    """True se o ticker passa no piso de liquidez do seu mercado.
+    US: piso em milhoes de USD. B3: piso em milhoes de BRL."""
+    try:
+        v20 = d["Volume"].tail(20).mean()
+        p20 = d["Close"].tail(20).mean()
+        vfin_mi = (v20 * p20) / 1e6
+        if not np.isfinite(vfin_mi):
+            return False
+        piso = min_b3_mi if tk.endswith(".SA") else min_us_mi
+        return bool(vfin_mi >= piso)
+    except Exception:
+        return False
+
+def _evaluate(tk, d, days_back, today):
+    """Avalia UM ticker (DataFrame ja baixado) e retorna lista de hits.
+    Logica identica para download em lote e individual."""
+    res=[]
+    if d is None or len(d) < 60:
+        return res
+    # garante colunas necessarias
+    for col in ("Open","High","Low","Close","Volume"):
+        if col not in d.columns:
+            return res
+    try:
+        s = bt.compute_signals_windowed(d, didi_window=5, adx_window=3)
+    except Exception:
+        return res
+    tail = s.iloc[-days_back:]
+    for idx, row in tail.iterrows():
+        if bool(row["signal_win"]):
+            is_forming = (idx.normalize() == today)
+            entry = row["Close"]; low = row["Low"]; r = entry - low
+            r_pct = (r/entry*100) if entry>0 else 0
+            pos = s.index.get_loc(idx)
+            vol20 = s["Volume"].iloc[max(0,pos-19):pos+1].mean()
+            px20  = s["Close"].iloc[max(0,pos-19):pos+1].mean()
+            fin_vol = (vol20 * px20) / 1e6 if not np.isnan(vol20) else 0.0
+            vol_dia_qtd = float(s["Volume"].iloc[pos])
+            vol_dia_fin = (vol_dia_qtd * float(entry)) / 1e6 if not np.isnan(vol_dia_qtd) else 0.0
+            didi_ago = adx_ago = None
+            for k in range(0,6):
+                if pos-k>=0 and bool(s["didi_cross"].iloc[pos-k]): didi_ago=k; break
+            for k in range(0,4):
+                if pos-k>=0 and bool(s["adx_event"].iloc[pos-k]): adx_ago=k; break
+
+            # ---- QUALIDADE: compressao do Didi + sincronia dos gatilhos ----
+            # Compressao: menor distancia entre a Didi curta (3/8) e longa (20/8)
+            # nos candles em torno do gatilho. Quanto menor, melhor a agulhada.
+            try:
+                c = s["Close"]
+                ma3 = c.rolling(3).mean(); ma8 = c.rolling(8).mean(); ma20 = c.rolling(20).mean()
+                didi_curta = (ma3/ma8 - 1.0)*100.0
+                didi_longa = (ma20/ma8 - 1.0)*100.0
+                j0 = max(0, pos-4)
+                dist = (didi_curta.iloc[j0:pos+1] - didi_longa.iloc[j0:pos+1]).abs()
+                min_dist = float(dist.min()) if len(dist) else np.nan
+            except Exception:
+                min_dist = np.nan
+            # nota de compressao (0-100): dist 0 -> 100 ; dist >= 2.0% -> 0
+            if np.isnan(min_dist):
+                q_comp = 0.0
+            else:
+                q_comp = max(0.0, min(100.0, (1.0 - min_dist/2.0)*100.0))
+            # nota de sincronia (0-100): gatilhos no mesmo candle -> 100 ;
+            # espalhados no limite das janelas (didi 5d, adx 3d) -> baixo.
+            da = didi_ago if didi_ago is not None else 5
+            aa = adx_ago if adx_ago is not None else 3
+            q_sinc = max(0.0, 100.0 - (da/5.0*50.0) - (aa/3.0*50.0))
+            # score final: 60% compressao + 40% sincronia
+            quality = round(0.60*q_comp + 0.40*q_sinc, 1)
+
+            res.append({
+                "ticker": tk, "market": market_of(tk),
+                "date": idx.date(), "forming": is_forming,
+                "close": round(float(entry),2), "stop": round(float(low),2),
+                "r_pct": round(float(r_pct),2),
+                "adx": round(float(row.get("adx",np.nan)),1),
+                "didi_ago": didi_ago, "adx_ago": adx_ago,
+                "vol_fin_mi": round(float(fin_vol),1),
+                "vol_dia_mi": round(float(vol_dia_fin),1),
+                "didi_dist": round(min_dist,3) if not np.isnan(min_dist) else None,
+                "quality": quality,
+                "pe": None, "mktcap": None,
+            })
+    return res
+
+
+def scan(tickers, days_back=1, batch=True, chunk=100):
+    """Retorna lista de sinais nos ultimos `days_back` candles.
+
+    batch=True  -> download em LOTE via yf.download (rapido; recomendado p/ universo grande).
+    batch=False -> download individual via fetch_intraday_ok (lento; fallback).
+    O filtro de liquidez e aplicado a AMBOS os mercados, reusando o historico
+    baixado (sem requisicao extra): US >= rb.US_MIN_VOL_FIN_MI (USD),
+    B3 >= rb.B3_MIN_VOL_FIN_MI (BRL).
+    """
     hits=[]
     today = pd.Timestamp(datetime.date.today())
-    for i,tk in enumerate(tickers,1):
-        if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
-        d = fetch_intraday_ok(tk)
-        if len(d) < 60: continue
-        try:
-            s = bt.compute_signals_windowed(d, didi_window=5, adx_window=3)
-        except Exception:
-            continue
-        # olha os ultimos days_back candles
-        tail = s.iloc[-days_back:]
-        for idx, row in tail.iterrows():
-            if bool(row["signal_win"]):
-                is_forming = (idx.normalize() == today)
-                entry = row["Close"]; low = row["Low"]; r = entry - low
-                r_pct = (r/entry*100) if entry>0 else 0
-                pos = s.index.get_loc(idx)
-                vol20 = s["Volume"].iloc[max(0,pos-19):pos+1].mean()
-                px20  = s["Close"].iloc[max(0,pos-19):pos+1].mean()
-                fin_vol = (vol20 * px20) / 1e6 if not np.isnan(vol20) else 0.0
-                # volume financeiro DO DIA (preco de fechamento x volume do dia), em milhoes
-                vol_dia_qtd = float(s["Volume"].iloc[pos])
-                vol_dia_fin = (vol_dia_qtd * float(entry)) / 1e6 if not np.isnan(vol_dia_qtd) else 0.0
-                didi_ago = adx_ago = None
-                for k in range(0,6):
-                    if pos-k>=0 and bool(s["didi_cross"].iloc[pos-k]): didi_ago=k; break
-                for k in range(0,4):
-                    if pos-k>=0 and bool(s["adx_event"].iloc[pos-k]): adx_ago=k; break
-                hits.append({
-                    "ticker": tk, "market": market_of(tk),
-                    "date": idx.date(), "forming": is_forming,
-                    "close": round(float(entry),2), "stop": round(float(low),2),
-                    "r_pct": round(float(r_pct),2),
-                    "adx": round(float(row.get("adx",np.nan)),1),
-                    "didi_ago": didi_ago, "adx_ago": adx_ago,
-                    "vol_fin_mi": round(float(fin_vol),1),
-                    "vol_dia_mi": round(float(vol_dia_fin),1),
-                    "pe": None, "mktcap": None,   # preenchidos depois, so p/ os que deram sinal
-                })
-        time.sleep(0.03)
+    try:
+        US_MIN = float(getattr(rb, "US_MIN_VOL_FIN_MI", 5.0))
+    except Exception:
+        US_MIN = 5.0
+    try:
+        B3_MIN = float(getattr(rb, "B3_MIN_VOL_FIN_MI", 5.0))
+    except Exception:
+        B3_MIN = 5.0
+
+    if batch:
+        data = fetch_batch(tickers, period="1y", chunk=chunk)
+        print(f"  baixados {len(data)}/{len(tickers)} (demais falharam/sem dados e foram pulados)")
+        for tk in tickers:
+            d = data.get(tk)
+            if d is None:
+                continue
+            if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
+                continue
+            hits.extend(_evaluate(tk, d, days_back, today))
+    else:
+        for i,tk in enumerate(tickers,1):
+            if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
+            d = fetch_intraday_ok(tk)
+            if len(d) < 60:
+                time.sleep(0.02); continue
+            if not _liquidez_ok(tk, d, US_MIN, B3_MIN):
+                time.sleep(0.01); continue
+            hits.extend(_evaluate(tk, d, days_back, today))
+            time.sleep(0.03)
     return hits
+
+
+def build_panel_data(hits, n_bars=40, out_path="painel_didi.json"):
+    """Para cada ativo com sinal, recalcula as series dos 3 indicadores
+    (DIDI, ADX, BB) nos ultimos n_bars candles e grava um JSON que o painel
+    HTML consome. Reusa fetch (individual) so para os POUCOS ativos com sinal.
+    As formulas sao as mesmas do bt_engine (DIDI 3/8/20, ADX 8, BB 8,2)."""
+    import json
+    ativos = []
+    for h in hits:
+        tk = h["ticker"]
+        d = fetch_intraday_ok(tk)
+        if len(d) < 30:
+            continue
+        c = d["Close"]; hi = d["High"]; lo = d["Low"]
+        ma3, ma8, ma20 = bt.sma(c,3), bt.sma(c,8), bt.sma(c,20)
+        # Didi Index: curta (MA3/MA8) e longa (MA20/MA8), centradas em 0, em %
+        didi_curta = (ma3/ma8 - 1.0)*100.0
+        didi_longa = (ma20/ma8 - 1.0)*100.0
+        adx, dip, dim = bt.calc_adx(hi, lo, c, period=8)
+        # Bollinger 8,2
+        m = bt.sma(c,8); sd = c.rolling(8).std()
+        bb_sup = m + 2.0*sd; bb_inf = m - 2.0*sd
+        def tail(s):
+            return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
+                    for v in s.tail(n_bars).tolist()]
+        dates = [str(x.date()) for x in c.tail(n_bars).index]
+        ativos.append({
+            "ticker": tk.replace(".SA",""), "market": h["market"],
+            "close": h["close"], "stop": h["stop"], "r_pct": h["r_pct"],
+            "forming": h["forming"], "date": str(h["date"]),
+            "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
+            "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
+            "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
+            "dates": dates,
+            "price": tail(c),
+            "didi_curta": tail(didi_curta), "didi_longa": tail(didi_longa),
+            "adx": tail(adx), "dip": tail(dip), "dim": tail(dim),
+            "bb_sup": tail(bb_sup), "bb_mid": tail(m), "bb_inf": tail(bb_inf),
+        })
+        time.sleep(0.05)
+    # ordena por qualidade (melhores primeiro); em formacao/fechado nao afeta a ordem
+    ativos.sort(key=lambda a: (a.get("quality") if a.get("quality") is not None else -1), reverse=True)
+    payload = {"gerado": str(datetime.date.today()), "n": len(ativos), "ativos": ativos}
+    open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
+    print(f"  Painel JSON: {out_path} ({len(ativos)} ativo(s))")
+    return out_path
 
 def main():
     ap=argparse.ArgumentParser()
@@ -130,6 +307,8 @@ def main():
     ap.add_argument("--market",choices=["b3","us","all"],default="all")
     ap.add_argument("--days",type=int,default=1,help="quantos candles olhar p/ tras")
     ap.add_argument("--out",default="scanner_resultado.html")
+    ap.add_argument("--no-batch",dest="batch",action="store_false",help="download individual (lento)")
+    ap.add_argument("--chunk",type=int,default=100,help="tamanho do lote no download")
     a=ap.parse_args()
 
     uni = rb.get_universe(quick=a.quick)
@@ -137,7 +316,7 @@ def main():
     elif a.market=="us": uni=[t for t in uni if not t.endswith(".SA")]
     print(f"Scanner DIDI+ADX+BB | {len(uni)} ativos | ultimos {a.days} candle(s)\n")
 
-    hits = scan(uni, a.days)
+    hits = scan(uni, a.days, batch=getattr(a,"batch",True), chunk=a.chunk)
     hits.sort(key=lambda h:(not h["forming"], h["market"], h["ticker"]))
 
     print("\n"+"="*60)

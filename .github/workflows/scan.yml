@@ -65,13 +65,13 @@ jobs:
             python scanner_b3.py $FLAGS || echo "scanner_b3 falhou (seguindo)"
           fi
           if [ "$MERCADO" = "etf" ] || [ "$MERCADO" = "ambos" ]; then
-            python scanner_etf.py $FLAGS || echo "scanner_etf falhou (seguindo)"
+            echo "scanner_etf desativado (aguardando conserto das funcoes timeframe/default_days_back)"
           fi
           if [ "$MERCADO" = "forex" ] || [ "$MERCADO" = "ambos" ]; then
-            python scanner_forex.py $FLAGS || echo "scanner_forex falhou (seguindo)"
+            echo "scanner_forex desativado (aguardando conserto)"
           fi
           if [ "$TF" = "1d" ] && { [ "$MERCADO" = "insidebar" ] || [ "$MERCADO" = "ambos" ]; }; then
-            python scanner_insidebar.py || echo "scanner_insidebar falhou (seguindo)"
+            echo "scanner_insidebar desativado (aguardando conserto do _liquidez_ok/timeframe)"
           fi
           python humor_sp500.py --json || echo "humor_sp500 falhou (seguindo)"
 
