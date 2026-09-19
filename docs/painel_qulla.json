@@ -1,0 +1,54 @@
+{
+  "gerado": "2026-09-19",
+  "n": 3,
+  "ativos": [
+    {
+      "entrada": 144.92,
+      "stop": 136.18,
+      "alvo_3r": 171.14,
+      "preco": 153.92,
+      "r_pct": 6.03,
+      "mom1": 48.0,
+      "mom3": 37.0,
+      "mom6": 11.0,
+      "consol_dias": 14,
+      "rompendo": true,
+      "acima_ema20": true,
+      "ticker": "MSTR",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=MSTR"
+    },
+    {
+      "entrada": 121.3,
+      "stop": 111.07,
+      "alvo_3r": 151.99,
+      "preco": 110.29,
+      "r_pct": 8.43,
+      "mom1": -7.0,
+      "mom3": 38.0,
+      "mom6": 224.0,
+      "consol_dias": 15,
+      "rompendo": false,
+      "acima_ema20": false,
+      "ticker": "CORT",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=CORT"
+    },
+    {
+      "entrada": 3.05,
+      "stop": 2.9,
+      "alvo_3r": 3.5,
+      "preco": 2.87,
+      "r_pct": 4.92,
+      "mom1": 35.0,
+      "mom3": 6.0,
+      "mom6": -27.0,
+      "consol_dias": 9,
+      "rompendo": false,
+      "acima_ema20": true,
+      "ticker": "ANIM3.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:ANIM3"
+    }
+  ]
+}
