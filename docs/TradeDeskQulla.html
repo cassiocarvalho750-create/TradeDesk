@@ -63,7 +63,7 @@
 <header>
   <div class="toprow">
     <h1>TradeDesk · Qullamäggie</h1>
-    <span class="sub">Momentum breakout · +30%/1M ou +90%/3M ou +150%/6M</span>
+    <span class="sub">Momentum breakout · +20%/1M ou +60%/3M ou +100%/6M</span>
     <span class="spacer"></span>
     <div class="controls">
       <select id="mercado" title="Mercado">
@@ -162,7 +162,7 @@ const WORKFLOW_FILE="scan.yml";
 const $=id=>document.getElementById(id);
 function setStatus(msg, kind){ $("status").textContent=msg; const d=$("dot"); d.className="dot"+(kind?(" "+kind):""); }
 function fmt(v,d){return v==null?"—":Number(v).toFixed(d==null?2:d);}
-function pctTag(v){ if(v==null) return "—"; const s=(v>0?"+":"")+Math.round(v)+"%"; return `<span class="mom${v>=90?' big':''}">${s}</span>`; }
+function pctTag(v){ if(v==null) return "—"; const s=(v>0?"+":"")+Math.round(v)+"%"; return `<span class="mom${v>=60?' big':''}">${s}</span>`; }
 
 function linhaAtivo(a){
   const st = a.rompendo

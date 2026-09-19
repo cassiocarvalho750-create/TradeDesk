@@ -24,7 +24,7 @@ import numpy as np, pandas as pd
 import backtest_didi as bd   # reaproveita carrega()
 
 # ---- parametros (todos ajustaveis no topo) ----
-MOM_1M, MOM_3M, MOM_6M = 30.0, 90.0, 150.0   # % minimos por janela p/ ser LIDER
+MOM_1M, MOM_3M, MOM_6M = 20.0, 60.0, 100.0   # afrouxado 30/90/150 -> 20/60/100 (validado: +0.738R, pega lideres moderados)   # % minimos por janela p/ ser LIDER
 CONSOL_MIN, CONSOL_MAX = 5, 15               # dias da consolidacao
 ATR_CONTRACAO = 1.10       # afrouxado 1.0->1.10 (validado: +21% sinais, exp igual)
 DIST_EMA_MAX = 0.10        # preco a no maximo 10% da EMA20 (nao esticado)
