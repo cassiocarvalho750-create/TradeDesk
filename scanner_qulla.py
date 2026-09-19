@@ -4,7 +4,7 @@
 SCANNER QULLAMAGGIE — lideres de momentum em consolidacao/rompimento HOJE
 ============================================================================
 Lista os ativos que HOJE sao candidatos ao setup Qullamaggie:
-  1) LIDER de momentum: +20%/1M ou +60%/3M ou +100%/6M
+  1) LIDER de momentum: +25%/1M ou +75%/3M ou +125%/6M
   2) em CONSOLIDACAO valida (5-15d, ATR contraindo, colado na EMA20)
   3) ou ja ROMPENDO a maxima da consolidacao no candle de hoje.
 
@@ -24,7 +24,7 @@ import scanner as sc
 import run_backtest_v2 as rb
 
 # --- parametros (iguais ao backtest validado) ---
-MOM_1M, MOM_3M, MOM_6M = 20.0, 60.0, 100.0   # afrouxado 30/90/150 -> 20/60/100 (validado: +0.738R, pega lideres moderados)
+MOM_1M, MOM_3M, MOM_6M = 25.0, 75.0, 125.0   # sweet spot: quase sem perda de qualidade (+0.785R), 70% mais sinais
 CONSOL_MIN, CONSOL_MAX = 5, 15
 ATR_CONTRACAO = 1.10   # afrouxado de 1.0 -> 1.10 (validado: +21% sinais, exp igual)
 DIST_EMA_MAX = 0.10
@@ -164,7 +164,7 @@ def main():
     th{{background:#1A4731;color:#fff;padding:9px;text-align:right}}th:first-child,th:nth-child(2),th:nth-child(3){{text-align:left}}
     td{{padding:8px 9px;border-bottom:1px solid #eee}} tbody tr:hover{{background:#fdf7e6}}</style></head><body>
     <h2>Scanner Qullamaggie — momentum breakout</h2>
-    <p style="font-size:13px;color:#666">{n} candidato(s) · gerado em {today}. Líderes de momentum (+20%/1M ou +60%/3M ou +100%/6M) em consolidação (5-15d) ou rompendo.
+    <p style="font-size:13px;color:#666">{n} candidato(s) · gerado em {today}. Líderes de momentum (+25%/1M ou +75%/3M ou +125%/6M) em consolidação (5-15d) ou rompendo.
     <b>Entrada</b> = rompimento da máxima da consolidação · <b>Stop</b> = mínima do dia · <b>Alvo</b> = 3R.</p>
     <table><thead><tr><th>Ativo</th><th>Mercado</th><th>Status</th><th>Preço</th><th>Entrada</th><th>Stop</th><th>Alvo 3R</th><th>R%</th><th>1M</th><th>3M</th><th>6M</th><th>Consol.</th></tr></thead>
     <tbody>{rows if rows else '<tr><td colspan=12 style=text-align:center;color:#888;padding:20px>Nenhum líder em consolidação/rompimento hoje.</td></tr>'}</tbody></table>

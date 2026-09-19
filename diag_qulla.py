@@ -9,7 +9,7 @@ Uso: python diag_qulla.py NTNX
 import sys
 import numpy as np, pandas as pd
 
-MOM_1M, MOM_3M, MOM_6M = 20.0, 60.0, 100.0   # afrouxado 30/90/150 -> 20/60/100 (validado: +0.738R, pega lideres moderados)
+MOM_1M, MOM_3M, MOM_6M = 25.0, 75.0, 125.0   # sweet spot: quase sem perda de qualidade (+0.785R), 70% mais sinais
 CONSOL_MIN, CONSOL_MAX = 5, 15
 ATR_CONTRACAO = 1.10
 DIST_EMA_MAX = 0.10
