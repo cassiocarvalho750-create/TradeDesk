@@ -26,7 +26,7 @@ import run_backtest_v2 as rb
 # --- parametros (iguais ao backtest validado) ---
 MOM_1M, MOM_3M, MOM_6M = 30.0, 90.0, 150.0
 CONSOL_MIN, CONSOL_MAX = 5, 15
-ATR_CONTRACAO = 1.0
+ATR_CONTRACAO = 1.10   # afrouxado de 1.0 -> 1.10 (validado: +21% sinais, exp igual)
 DIST_EMA_MAX = 0.10
 ALVO_R = 3.0
 

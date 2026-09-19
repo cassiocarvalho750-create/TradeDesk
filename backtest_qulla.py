@@ -26,7 +26,7 @@ import backtest_didi as bd   # reaproveita carrega()
 # ---- parametros (todos ajustaveis no topo) ----
 MOM_1M, MOM_3M, MOM_6M = 30.0, 90.0, 150.0   # % minimos por janela p/ ser LIDER
 CONSOL_MIN, CONSOL_MAX = 5, 15               # dias da consolidacao
-ATR_CONTRACAO = 1.0        # ATR5 < ATR20 * isso (volatilidade caindo)
+ATR_CONTRACAO = 1.10       # afrouxado 1.0->1.10 (validado: +21% sinais, exp igual)
 DIST_EMA_MAX = 0.10        # preco a no maximo 10% da EMA20 (nao esticado)
 EMA_PROX = 20              # EMA de referencia p/ "colado" na consolidacao
 ALVO_R = 3.0               # SAIDA validada: alvo fixo 3R (robusto, sem ilusao do trailing)
