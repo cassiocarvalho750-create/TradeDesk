@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeDesk Qullamäggie · Momentum</title>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#111823; --panel-2:#0d141d; --line:#1e2a38;
+    --ink:#e6edf3; --muted:#6b7d92; --up:#3fb950; --down:#f0603a;
+    --accent:#e6a817; --gold:#e3b341;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"SFMono-Regular",Consolas,"Courier New",monospace}
+  header{padding:16px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0c121b,transparent)}
+  .toprow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  header h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  header .sub{font-size:12px;color:var(--muted)}
+  .spacer{flex:1}
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  select,.btn{font-size:12px;font-family:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 12px;border-radius:6px;cursor:pointer;}
+  select:hover,.btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);color:#1a1200;border-color:var(--accent);font-weight:700}
+  .btn.primary:disabled{opacity:.5;cursor:not-allowed}
+  .btn.ghost{color:var(--muted)}
+  .statusbar{margin-top:12px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);min-height:20px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+  .dot.run{background:var(--gold);animation:blink 1s infinite}
+  .dot.ok{background:var(--up)} .dot.err{background:var(--down)}
+  @keyframes blink{50%{opacity:.3}}
+  .meta{padding:10px 24px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line)}
+  .meta b{color:var(--ink)}
+  .wrap{max-width:1200px;margin:0 auto;padding:18px 24px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead th{position:sticky;top:0;background:var(--panel-2);color:var(--muted);text-align:right;padding:10px;border-bottom:2px solid var(--line);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.04em}
+  thead th:first-child,thead th:nth-child(2),thead th:nth-child(3){text-align:left}
+  tbody td{padding:10px;border-bottom:1px solid var(--line);text-align:right}
+  tbody td:first-child,tbody td:nth-child(2),tbody td:nth-child(3){text-align:left}
+  tbody tr:hover{background:var(--panel)}
+  .tk a{color:#fff;text-decoration:none;font-weight:700;font-size:15px}
+  .tk a:hover{color:var(--accent)}
+  .mkt{font-size:10px;color:var(--muted);border:1px solid var(--line);padding:1px 5px;border-radius:4px;margin-left:6px}
+  .badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:5px}
+  .badge.romp{background:linear-gradient(135deg,#e6a817,#d29922);color:#1a1200}
+  .badge.cons{background:rgba(107,125,146,.16);color:var(--muted)}
+  .mom{font-weight:700}.mom.big{color:var(--up)}
+  .up{color:var(--up)} .down{color:var(--down)}
+  .empty{text-align:center;color:var(--muted);padding:50px 20px;font-size:13px;line-height:1.7}
+  .empty code{color:var(--accent);background:var(--panel);padding:2px 6px;border-radius:4px}
+  dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:0;max-width:460px;width:92%}
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  .dlg-h{padding:16px 18px;border-bottom:1px solid var(--line);font-weight:700}
+  .dlg-b{padding:16px 18px;font-size:13px;line-height:1.6;color:var(--muted)}
+  .dlg-b input{width:100%;margin-top:10px;padding:9px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:6px;font-family:monospace}
+  .dlg-f{padding:12px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}
+  .dlg-b a{color:var(--accent)}
+  footer{padding:16px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--line);text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="toprow">
+    <h1>TradeDesk · Qullamäggie</h1>
+    <span class="sub">Momentum breakout · +30%/1M ou +90%/3M ou +150%/6M</span>
+    <span class="spacer"></span>
+    <div class="controls">
+      <select id="mercado" title="Mercado">
+        <option value="all">Ambos</option>
+        <option value="us">EUA</option>
+        <option value="b3">B3</option>
+      </select>
+      <button class="btn primary" id="runBtn">Rodar scanner agora</button>
+      <button class="btn ghost" id="reloadBtn" title="Recarregar dados já publicados">Recarregar</button>
+      <a href="TradeDesk.html" class="btn ghost" style="text-decoration:none">← Ações (Agulhada)</a>
+      <button class="btn ghost" id="cfgBtn" title="Configurar repositório e token">⚙</button>
+    </div>
+  </div>
+  <div class="statusbar"><span class="dot" id="dot"></span><span id="status">Pronto.</span></div>
+</header>
+<!-- [humor_sp500_web] painel de humor do S&P 500 -->
+<div id="humorSP" style="max-width:1200px;margin:14px auto 0 auto;padding:0 16px"></div>
+<script>
+(function(){
+  fetch('painel_humor.json?'+Date.now()).then(r=>r.ok?r.json():null).then(function(h){
+    var el=document.getElementById('humorSP'); if(!el||!h) return;
+    var linhas=h.tabela.map(function(t){
+      var bg=t.hoje?t.cor2:'transparent';
+      var txt=t.hoje?'#222':'inherit';       // linha de hoje tem fundo claro -> texto escuro
+      var marca=t.hoje?('<span style="background:'+t.cor+';color:#fff;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:700;margin-left:6px">HOJE</span>'):'';
+      var peso=t.hoje?'700':'500';
+      return '<tr style="background:'+bg+';color:'+txt+'">'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:'+t.cor+';margin-right:7px"></span><b style="color:'+t.cor+';font-weight:'+peso+'">'+t.nome+'</b>'+marca+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);font-family:monospace">'+t.faixa+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);font-weight:'+peso+'">'+t.risco+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);opacity:.8">'+t.exp+'</td></tr>';
+    }).join('');
+    var d3=(h.didi3!=null)?((h.didi3>=0?'+':'')+h.didi3.toFixed(2)):'—';
+    var quando=h.data_sp?(' · '+h.data_sp):'';
+    var dirtxt=h.dir_txt||'';
+    var comboCor=h.combo_cor||h.cor, comboTit=h.combo_titulo||'', comboMsg=h.combo_msg||'';
+    var combo=(comboTit? '  <div style="background:'+comboCor+';color:#fff;padding:9px 18px;font-size:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+      +'<span style="background:rgba(255,255,255,.22);border-radius:6px;padding:2px 9px;font-size:12px;font-weight:800;letter-spacing:.5px">'+comboTit+'</span>'
+      +'<span>'+comboMsg+'</span></div>' : '');
+    el.innerHTML=''
+      +'<div style="border:1px solid rgba(128,128,128,.28);border-radius:12px;overflow:hidden;font-family:inherit">'
+      +'  <div style="background:'+h.cor+';color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">'
+      +'    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:24px;line-height:1">'+h.emoji+'</span>'
+      +'      <div><div style="font-size:11px;opacity:.85;letter-spacing:.5px">HUMOR DO S&amp;P 500 HOJE'+quando+'</div><div style="font-size:19px;font-weight:800">'+h.nome+'</div></div></div>'
+      +'    <div style="text-align:right"><div style="font-size:11px;opacity:.85">DIDI do S&amp;P (média 3 vs 8) · '+dirtxt+'</div><div style="font-size:21px;font-weight:800;font-family:monospace">'+d3+'</div></div>'
+      +'  </div>'
+      +combo
+      +'  <div style="background:'+h.cor2+';color:#222;padding:9px 18px;font-size:13px;border-bottom:1px solid rgba(128,128,128,.2)"><b>Posição:</b> '+h.nome+' — '+h.risco+'</div>'
+      +'  <table style="width:100%;border-collapse:collapse;font-size:13px">'
+      +'    <thead><tr style="text-align:left;opacity:.65">'
+      +'      <th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Zona</th><th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">didi3 S&amp;P</th>'
+      +'      <th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Tamanho da posição</th><th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Expectância</th></tr></thead>'
+      +'    <tbody>'+linhas+'</tbody></table>'
+      +'  <div style="padding:7px 18px;font-size:11px;opacity:.6">Termômetro validado em 3 cestas. Não é filtro de entrada; é acelerador de tamanho: entre em todo sinal válido, pise fundo no risco só na maré cheia.</div>'
+      +'</div>';
+  }).catch(function(){});
+})();
+</script>
+<!-- [/humor_sp500_web] -->
+
+<div class="meta" id="meta">Carregando dados publicados…</div>
+
+<div class="wrap">
+  <table>
+    <thead><tr>
+      <th>Ativo</th><th>Merc</th><th>Status</th>
+      <th>Preço</th><th>Entrada</th><th>Stop</th><th>Alvo 3R</th><th>R%</th>
+      <th>1M</th><th>3M</th><th>6M</th><th>Consol.</th>
+    </tr></thead>
+    <tbody id="tbody"><tr><td colspan="12" class="empty">Carregando…</td></tr></tbody>
+  </table>
+</div>
+
+<footer>
+  Setup Qullamäggie: só líderes de momentum em consolidação/rompimento. Win rate ~45%, alvo 3R paga as perdas (backtest ~+0.8R/trade).
+  Sinais técnicos para análise própria. Não é recomendação de investimento.
+</footer>
+
+<dialog id="cfg">
+  <div class="dlg-h">Configuração</div>
+  <div class="dlg-b">
+    Para <b>rodar o scanner na nuvem</b>, informe seu repositório e um token fine-grained com permissão de <b>Actions: write</b>.
+    <input id="repo" placeholder="usuario/repositorio (ex.: cassio/tradedesk)">
+    <input id="token" type="password" placeholder="token fine-grained (github_pat_...)">
+  </div>
+  <div class="dlg-f">
+    <button class="btn ghost" id="cfgCancel">Cancelar</button>
+    <button class="btn primary" id="cfgSave">Salvar</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+const LS_REPO="td_repo", LS_TOK="td_token";
+const WORKFLOW_FILE="scan.yml";
+const $=id=>document.getElementById(id);
+function setStatus(msg, kind){ $("status").textContent=msg; const d=$("dot"); d.className="dot"+(kind?(" "+kind):""); }
+function fmt(v,d){return v==null?"—":Number(v).toFixed(d==null?2:d);}
+function pctTag(v){ if(v==null) return "—"; const s=(v>0?"+":"")+Math.round(v)+"%"; return `<span class="mom${v>=90?' big':''}">${s}</span>`; }
+
+function linhaAtivo(a){
+  const st = a.rompendo
+    ? `<span class="badge romp">rompendo</span>`
+    : `<span class="badge cons">consolidando</span>`;
+  const mkt = a.market||"";
+  return `<tr>
+    <td class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${(a.ticker||'').replace('.SA','')} ↗</a></td>
+    <td><span class="mkt">${mkt}</span></td>
+    <td>${st}</td>
+    <td class="mono">${fmt(a.preco)}</td>
+    <td class="mono">${fmt(a.entrada)}</td>
+    <td class="mono down">${fmt(a.stop)}</td>
+    <td class="mono up">${fmt(a.alvo_3r)}</td>
+    <td class="mono">${a.r_pct==null?"—":a.r_pct.toFixed(1)+"%"}</td>
+    <td class="mono">${pctTag(a.mom1)}</td>
+    <td class="mono">${pctTag(a.mom3)}</td>
+    <td class="mono">${pctTag(a.mom6)}</td>
+    <td class="mono">${a.consol_dias==null?"—":a.consol_dias+"d"}</td>
+  </tr>`;
+}
+
+function render(list, gerado){
+  const tb=$("tbody");
+  if(!list.length){
+    $("meta").innerHTML=`Nenhum líder em consolidação/rompimento · dados de <b>${gerado||'—'}</b>`;
+    tb.innerHTML=`<tr><td colspan="12" class="empty">Nenhum líder de momentum em consolidação ou rompendo hoje.<br>O scan rodou normalmente — o Qullamäggie é seletivo, num mercado morno há poucos ou nenhum.</td></tr>`;
+    return;
+  }
+  // rompendo primeiro, depois maior momentum de 3M
+  list.sort((a,b)=>{
+    if(!!a.rompendo!==!!b.rompendo) return a.rompendo?-1:1;
+    return (b.mom3||b.mom1||0)-(a.mom3||a.mom1||0);
+  });
+  const nRomp=list.filter(x=>x.rompendo).length;
+  $("meta").innerHTML=`<b>${list.length}</b> candidato(s) · <b>${nRomp}</b> rompendo hoje · dados de <b>${gerado||'—'}</b> · entrada = rompimento da máxima · stop = mínima do dia · alvo = 3R`;
+  tb.innerHTML=list.map(linhaAtivo).join("");
+}
+
+async function loadData(){
+  const sel=$("mercado").value;
+  let ativos=[], gerado=null;
+  try{
+    const r=await fetch("painel_qulla.json?t="+Date.now(),{cache:"no-store"});
+    if(r.ok){const d=await r.json(); gerado=d.gerado||null; (d.ativos||[]).forEach(x=>ativos.push(x));}
+  }catch(e){}
+  if(sel==="us") ativos=ativos.filter(a=>a.market!=="B3");
+  else if(sel==="b3") ativos=ativos.filter(a=>a.market==="B3");
+  render(ativos, gerado);
+  return ativos.length;
+}
+
+function cfg(){return {repo:localStorage.getItem(LS_REPO)||"", token:localStorage.getItem(LS_TOK)||""};}
+async function ghDispatch(){
+  const {repo,token}=cfg();
+  if(!repo||!token){ openCfg(); setStatus("Configure repositório e token primeiro.","err"); return; }
+  setStatus("Disparando scan na nuvem…","run"); $("runBtn").disabled=true;
+  try{
+    const url=`https://api.github.com/repos/${repo}/actions/workflows/${WORKFLOW_FILE}/dispatches`;
+    const res=await fetch(url,{method:"POST",headers:{
+      "Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"},
+      body:JSON.stringify({ref:"main",inputs:{mercado:"qulla",quick:false}})});
+    if(res.status===204){ setStatus("Scan disparado. Rodando na nuvem — isso leva alguns minutos.","run"); pollRun(repo,token); }
+    else{ const t=await res.text(); setStatus("Falha ao disparar ("+res.status+"). Verifique repo/token/branch.","err"); console.error(t); $("runBtn").disabled=false; }
+  }catch(e){ setStatus("Erro de rede ao disparar: "+e.message,"err"); $("runBtn").disabled=false; }
+}
+async function pollRun(repo,token){
+  const headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"};
+  let tries=0;
+  const timer=setInterval(async()=>{
+    tries++;
+    try{
+      const r=await fetch(`https://api.github.com/repos/${repo}/actions/runs?per_page=1`,{headers,cache:"no-store"});
+      const d=await r.json(); const run=(d.workflow_runs||[])[0];
+      if(run){
+        if(run.status==="completed"){
+          clearInterval(timer); $("runBtn").disabled=false;
+          if(run.conclusion==="success"){ setStatus("Scan concluído. Atualizando painel…","ok"); setTimeout(loadData,4000); }
+          else setStatus("Scan terminou com status: "+run.conclusion,"err");
+        }else setStatus("Rodando na nuvem… ("+run.status+", "+tries+")","run");
+      }
+    }catch(e){}
+    if(tries>60){ clearInterval(timer); $("runBtn").disabled=false; setStatus("Tempo excedido acompanhando o scan. Use Recarregar em alguns minutos.","err"); }
+  },10000);
+}
+
+function openCfg(){const c=cfg();$("repo").value=c.repo;$("token").value=c.token;$("cfg").showModal();}
+$("cfgBtn").onclick=openCfg;
+$("cfgCancel").onclick=()=>$("cfg").close();
+$("cfgSave").onclick=()=>{localStorage.setItem(LS_REPO,$("repo").value.trim());localStorage.setItem(LS_TOK,$("token").value.trim());$("cfg").close();setStatus("Configuração salva.","ok");};
+$("runBtn").onclick=ghDispatch;
+$("reloadBtn").onclick=()=>{setStatus("Recarregando…","run");loadData().then(n=>setStatus(n?"Atualizado.":"Sem dados publicados ainda.","ok"));};
+$("mercado").onchange=loadData;
+
+loadData().then(n=>setStatus(n?"Dados carregados.":"Sem dados ainda — rode o scanner.","ok"));
+</script>
+</body>
+</html>
