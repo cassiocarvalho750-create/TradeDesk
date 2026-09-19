@@ -39,7 +39,7 @@ def main():
     print(f"\n=== DIAGNOSTICO QULLAMAGGIE: {tk} ===")
     print(f"preco hoje: {c.iloc[-1]:.2f}  ({d.index[-1].date()})\n")
 
-    print("1) MOMENTUM (precisa 1M>=30 OU 3M>=90 OU 6M>=150):")
+    print(f"1) MOMENTUM (precisa 1M>={MOM_1M:.0f} OU 3M>={MOM_3M:.0f} OU 6M>={MOM_6M:.0f}):")
     print(f"   1M = {mom1:+.0f}%   3M = {mom3:+.0f}%   6M = {mom6:+.0f}%")
     lider = (mom1>=MOM_1M) or (mom3>=MOM_3M) or (mom6>=MOM_6M)
     print(f"   -> LIDER? {'SIM ✓' if lider else 'NAO ✗ (barrado aqui)'}\n")
