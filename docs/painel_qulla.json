@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-19",
-  "n": 3,
+  "n": 5,
   "ativos": [
     {
       "entrada": 144.92,
@@ -17,6 +17,22 @@
       "ticker": "MSTR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MSTR"
+    },
+    {
+      "entrada": 23.21,
+      "stop": 22.3,
+      "alvo_3r": 25.94,
+      "preco": 23.2,
+      "r_pct": 3.92,
+      "mom1": 31.0,
+      "mom3": 20.0,
+      "mom6": 0.0,
+      "consol_dias": 10,
+      "rompendo": true,
+      "acima_ema20": true,
+      "ticker": "BBAS3.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BBAS3"
     },
     {
       "entrada": 121.3,
@@ -41,14 +57,30 @@
       "preco": 2.87,
       "r_pct": 4.92,
       "mom1": 35.0,
-      "mom3": 6.0,
-      "mom6": -27.0,
+      "mom3": 5.0,
+      "mom6": -26.0,
       "consol_dias": 9,
       "rompendo": false,
       "acima_ema20": true,
       "ticker": "ANIM3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:ANIM3"
+    },
+    {
+      "entrada": 247.89,
+      "stop": 240.0,
+      "alvo_3r": 271.56,
+      "preco": 244.25,
+      "r_pct": 3.18,
+      "mom1": 3.0,
+      "mom3": -21.0,
+      "mom6": 173.0,
+      "consol_dias": 11,
+      "rompendo": false,
+      "acima_ema20": true,
+      "ticker": "MRVL",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=MRVL"
     }
   ]
 }
