@@ -25,6 +25,7 @@ import run_backtest_v2 as rb
 
 # --- parametros (iguais ao backtest validado) ---
 MOM_1M, MOM_3M, MOM_6M = 25.0, 75.0, 125.0   # sweet spot: quase sem perda de qualidade (+0.785R), 70% mais sinais
+PURO_1M, PURO_3M, PURO_6M = 30.0, 90.0, 150.0   # criterios RIGOROSOS do criador (selo de elite)
 CONSOL_MIN, CONSOL_MAX = 5, 15
 ATR_CONTRACAO = 1.10   # afrouxado de 1.0 -> 1.10 (validado: +21% sinais, exp igual)
 DIST_EMA_MAX = 0.10
@@ -77,6 +78,7 @@ def avalia(d, funil=None):
         "mom6": None if np.isnan(mom6) else round(mom6,0),
         "consol_dias": ndias, "rompendo": bool(rompendo),
         "acima_ema20": bool(preco > ema20.iloc[-1]),
+        "puro": bool((mom1>=PURO_1M) or (mom3>=PURO_3M) or (mom6>=PURO_6M)),  # cumpre criterios rigorosos do criador
     }
 
 def main():

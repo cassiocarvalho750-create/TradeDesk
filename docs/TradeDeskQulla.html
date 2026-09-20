@@ -44,6 +44,7 @@
   .badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:5px}
   .badge.romp{background:linear-gradient(135deg,#e6a817,#d29922);color:#1a1200}
   .badge.cons{background:rgba(107,125,146,.16);color:var(--muted)}
+  .selo-elite{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.05em;padding:2px 7px;border-radius:5px;margin-left:6px;background:linear-gradient(135deg,#e6a817,#b8860b);color:#1a1200;box-shadow:0 0 8px rgba(230,168,23,.45);vertical-align:middle}
   .mom{font-weight:700}.mom.big{color:var(--up)}
   .up{color:var(--up)} .down{color:var(--down)}
   .empty{text-align:center;color:var(--muted);padding:50px 20px;font-size:13px;line-height:1.7}
@@ -170,7 +171,7 @@ function linhaAtivo(a){
     : `<span class="badge cons">consolidando</span>`;
   const mkt = a.market||"";
   return `<tr>
-    <td class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${(a.ticker||'').replace('.SA','')} ↗</a></td>
+    <td class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${(a.ticker||'').replace('.SA','')} ↗</a>${a.puro?'<span class="selo-elite" title="Cumpre os criterios RIGOROSOS do criador (+30%/1M ou +90%/3M ou +150%/6M) - foguete de verdade">★ ELITE</span>':''}</td>
     <td><span class="mkt">${mkt}</span></td>
     <td>${st}</td>
     <td class="mono">${fmt(a.preco)}</td>
@@ -194,11 +195,13 @@ function render(list, gerado){
   }
   // rompendo primeiro, depois maior momentum de 3M
   list.sort((a,b)=>{
-    if(!!a.rompendo!==!!b.rompendo) return a.rompendo?-1:1;
+    if(!!a.rompendo!==!!b.rompendo) return a.rompendo?-1:1;   // rompendo primeiro
+    if(!!a.puro!==!!b.puro) return a.puro?-1:1;               // depois os ELITE
     return (b.mom3||b.mom1||0)-(a.mom3||a.mom1||0);
   });
   const nRomp=list.filter(x=>x.rompendo).length;
-  $("meta").innerHTML=`<b>${list.length}</b> candidato(s) · <b>${nRomp}</b> rompendo hoje · dados de <b>${gerado||'—'}</b> · entrada = rompimento da máxima · stop = mínima do dia · alvo = 3R`;
+  const nElite=list.filter(x=>x.puro).length;
+  $("meta").innerHTML=`<b>${list.length}</b> candidato(s) · <b>${nRomp}</b> rompendo · <b style="color:#e6a817">${nElite} ★ elite</b> · dados de <b>${gerado||'—'}</b> · entrada = rompimento da máxima · stop = mínima do dia · alvo = 3R`;
   tb.innerHTML=list.map(linhaAtivo).join("");
 }
 
