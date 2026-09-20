@@ -64,6 +64,8 @@ def avalia(d, funil=None):
         topo = float(hh); ndias = n; break
     if topo is None: return _stop("lider_sem_consol")
     preco = float(c.iloc[-1]); maxhoje = float(h.iloc[-1]); minhoje = float(l.iloc[-1])
+    hoje = pd.Timestamp(datetime.date.today())
+    forming = (d.index[-1].normalize() == hoje)   # candle de hoje ainda em formacao (pregao aberto)
     rompendo = maxhoje > topo
     entrada = topo                     # nivel de entrada (rompimento)
     stop = minhoje if rompendo else float(l.iloc[i-1])  # min do dia se rompeu, senao min do candle anterior
@@ -79,6 +81,7 @@ def avalia(d, funil=None):
         "consol_dias": ndias, "rompendo": bool(rompendo),
         "acima_ema20": bool(preco > ema20.iloc[-1]),
         "puro": bool((mom1>=PURO_1M) or (mom3>=PURO_3M) or (mom6>=PURO_6M)),  # cumpre criterios rigorosos do criador
+        "forming": bool(forming),   # candle de hoje em formacao (rompimento provisorio)
     }
 
 def main():

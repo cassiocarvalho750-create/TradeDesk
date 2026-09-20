@@ -44,6 +44,7 @@
   .badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:5px}
   .badge.romp{background:linear-gradient(135deg,#e6a817,#d29922);color:#1a1200}
   .badge.cons{background:rgba(107,125,146,.16);color:var(--muted)}
+  .badge.form{background:rgba(227,179,65,.18);color:var(--gold);border:1px solid rgba(227,179,65,.4)}
   .selo-elite{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.05em;padding:2px 7px;border-radius:5px;margin-left:6px;background:linear-gradient(135deg,#e6a817,#b8860b);color:#1a1200;box-shadow:0 0 8px rgba(230,168,23,.45);vertical-align:middle}
   .mom{font-weight:700}.mom.big{color:var(--up)}
   .up{color:var(--up)} .down{color:var(--down)}
@@ -167,7 +168,9 @@ function pctTag(v){ if(v==null) return "—"; const s=(v>0?"+":"")+Math.round(v)
 
 function linhaAtivo(a){
   const st = a.rompendo
-    ? `<span class="badge romp">rompendo</span>`
+    ? (a.forming
+        ? `<span class="badge romp">rompendo</span> <span class="badge form" title="Candle de hoje ainda em formação — o rompimento pode não confirmar até o fechamento. Confirme a força antes de entrar.">provisório</span>`
+        : `<span class="badge romp">rompendo</span>`)
     : `<span class="badge cons">consolidando</span>`;
   const mkt = a.market||"";
   return `<tr>
