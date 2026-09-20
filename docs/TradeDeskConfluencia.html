@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeDesk Confluência · DIDI + Qullamäggie</title>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#111823; --panel-2:#0d141d; --line:#1e2a38;
+    --ink:#e6edf3; --muted:#6b7d92; --up:#3fb950; --down:#f0603a;
+    --accent:#4aa8ff; --gold:#e6a817;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"SFMono-Regular",Consolas,"Courier New",monospace}
+  header{padding:16px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0c121b,transparent)}
+  .toprow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  header h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  header .sub{font-size:12px;color:var(--muted)}
+  .spacer{flex:1}
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .btn{font-size:12px;font-family:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 12px;border-radius:6px;cursor:pointer;text-decoration:none}
+  .btn:hover{border-color:var(--accent)} .btn.ghost{color:var(--muted)}
+  .statusbar{margin-top:12px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);min-height:20px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)} .dot.ok{background:var(--up)} .dot.err{background:var(--down)}
+  .meta{padding:10px 24px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line)}
+  .meta b{color:var(--ink)}
+  .legenda{max-width:1200px;margin:14px auto 0;padding:0 24px;display:flex;gap:10px;flex-wrap:wrap;font-size:12px}
+  .lg{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+  .wrap{max-width:1200px;margin:0 auto;padding:14px 24px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead th{position:sticky;top:0;background:var(--panel-2);color:var(--muted);text-align:right;padding:10px;border-bottom:2px solid var(--line);font-weight:600;text-transform:uppercase;font-size:11px}
+  thead th:first-child,thead th:nth-child(2),thead th:nth-child(3){text-align:left}
+  tbody td{padding:10px;border-bottom:1px solid var(--line);text-align:right}
+  tbody td:first-child,tbody td:nth-child(2),tbody td:nth-child(3){text-align:left}
+  tbody tr:hover{background:var(--panel)}
+  .tk a{color:#fff;text-decoration:none;font-weight:700;font-size:15px} .tk a:hover{color:var(--accent)}
+  .mkt{font-size:10px;color:var(--muted);border:1px solid var(--line);padding:1px 5px;border-radius:4px;margin-left:6px}
+  .prio{font-weight:800;font-size:13px;padding:3px 10px;border-radius:6px;white-space:nowrap}
+  .p1{background:linear-gradient(135deg,#3fb950,#2ea043);color:#fff;box-shadow:0 0 10px rgba(63,185,80,.4)}
+  .p2{background:linear-gradient(135deg,#4aa8ff,#1f6feb);color:#fff}
+  .p3{background:linear-gradient(135deg,#e6a817,#d29922);color:#1a1200}
+  .p4{background:rgba(107,125,146,.2);color:var(--muted)}
+  .tag{font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:5px;margin-left:4px}
+  .tag.didi{background:rgba(74,168,255,.16);color:var(--accent)}
+  .tag.romp{background:rgba(230,168,23,.18);color:var(--gold)}
+  .tag.cons{background:rgba(107,125,146,.16);color:var(--muted)}
+  .tag.elite{background:linear-gradient(135deg,#e6a817,#b8860b);color:#1a1200}
+  .empty{text-align:center;color:var(--muted);padding:50px 20px;font-size:13px;line-height:1.7}
+  footer{padding:16px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--line);text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="toprow">
+    <h1>TradeDesk · Confluência</h1>
+    <span class="sub">DIDI (Agulhada) × Qullamäggie (momentum) — prioridade de entrada</span>
+    <span class="spacer"></span>
+    <div class="controls">
+      <a href="TradeDesk.html" class="btn ghost">DIDI →</a>
+      <a href="TradeDeskQulla.html" class="btn ghost">Qullamäggie →</a>
+      <button class="btn" id="reloadBtn">Recarregar</button>
+    </div>
+  </div>
+  <div class="statusbar"><span class="dot" id="dot"></span><span id="status">Carregando…</span></div>
+</header>
+
+<div class="legenda">
+  <span class="lg"><span class="prio p1">🥇 1</span> DIDI entrou + Qullamäggie rompeu</span>
+  <span class="lg"><span class="prio p2">🔵 2</span> DIDI entrou + Qullamäggie consolidando</span>
+  <span class="lg"><span class="prio p3">🥈 3</span> Só Qullamäggie rompeu</span>
+  <span class="lg"><span class="prio p4">4</span> Só DIDI entrou</span>
+</div>
+
+<div class="meta" id="meta">Cruzando os dois setups…</div>
+
+<div class="wrap">
+  <table>
+    <thead><tr>
+      <th>Prioridade</th><th>Ativo</th><th>Merc</th><th>Sinais</th>
+      <th>Preço</th><th>Entrada</th><th>Stop</th><th>Alvo 3R</th>
+      <th>1M</th><th>3M</th><th>6M</th>
+    </tr></thead>
+    <tbody id="tbody"><tr><td colspan="11" class="empty">Carregando…</td></tr></tbody>
+  </table>
+</div>
+
+<footer>
+  Confluência dos dois setups principais. Prioridade 1 = os dois confirmam (probabilidade máxima).
+  Sinais técnicos para análise própria. Não é recomendação de investimento.
+</footer>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+function setStatus(m,k){ $("status").textContent=m; $("dot").className="dot"+(k?" "+k:""); }
+function fmt(v){ return v==null?"—":Number(v).toFixed(2); }
+function pct(v){ if(v==null) return "—"; const s=(v>0?"+":"")+Math.round(v)+"%"; const c=v>=75?'style="color:var(--up);font-weight:700"':(v<0?'style="color:var(--down)"':''); return `<span ${c}>${s}</span>`; }
+function norm(tk){ return (tk||"").replace(".SA","").toUpperCase(); }
+
+// filtro do DIDI: mesmo criterio da pagina DIDI (gatilho fresco hoje)
+function didiAprovado(a){
+  const prim=!!a.bb_primeira, conf=!!a.confluencia, adxHoje=(a.adx_ago===0);
+  return conf||prim||adxHoje;   // rank<9 na pagina DIDI
+}
+
+async function getJson(f){ try{ const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"}); return r.ok?await r.json():null; }catch(e){ return null; } }
+
+async function loadData(){
+  setStatus("Carregando os dois setups…");
+  const [dus,db3,dq] = await Promise.all([
+    getJson("painel_us.json"), getJson("painel_b3.json"), getJson("painel_qulla.json")
+  ]);
+  // mapa DIDI: ticker normalizado -> dado (so os aprovados)
+  const didi={};
+  [dus,db3].forEach(d=>{ if(d&&d.ativos) d.ativos.forEach(a=>{ if(didiAprovado(a)) didi[norm(a.ticker)]=a; }); });
+  // mapa Qulla
+  const qulla={};
+  if(dq&&dq.ativos) dq.ativos.forEach(a=>{ qulla[norm(a.ticker)]=a; });
+
+  // une todos os tickers dos dois lados
+  const tickers=new Set([...Object.keys(didi), ...Object.keys(qulla)]);
+  const linhas=[];
+  tickers.forEach(tk=>{
+    const d=didi[tk], q=qulla[tk];
+    const temDidi=!!d;
+    const qRompeu = q&&q.rompendo;
+    const qCons   = q&&!q.rompendo;
+    let prio, rot;
+    if(temDidi && qRompeu){ prio=1; rot="🥇 1"; }
+    else if(temDidi && qCons){ prio=2; rot="🔵 2"; }
+    else if(!temDidi && qRompeu){ prio=3; rot="🥈 3"; }
+    else if(temDidi){ prio=4; rot="4"; }
+    else { return; } // so consolidando no qulla sem DIDI -> nao entra na lista de acao
+    const base = q || d;  // dados de entrada: prefere o qulla (tem entrada/alvo), senao DIDI
+    linhas.push({
+      tk, prio, rot,
+      market: (q&&q.market)||(d&&d.market)||"",
+      temDidi, qRompeu, qCons, puro: q&&q.puro,
+      preco: q?q.preco:(d?d.close:null),
+      entrada: q?q.entrada:null, stop: q?q.stop:(d?d.stop:null), alvo: q?q.alvo_3r:null,
+      mom1:q?q.mom1:null, mom3:q?q.mom3:null, mom6:q?q.mom6:null,
+      tv: (q&&q.tv)||(d&&d.tv)||("https://www.tradingview.com/chart/?symbol="+tk),
+    });
+  });
+  // ordena por prioridade, e dentro dela: elite primeiro, depois maior mom3
+  linhas.sort((a,b)=> a.prio-b.prio || (b.puro?1:0)-(a.puro?1:0) || (b.mom3||0)-(a.mom3||0));
+  render(linhas);
+  return linhas.length;
+}
+
+function sinaisTags(x){
+  let t="";
+  if(x.temDidi) t+='<span class="tag didi">DIDI</span>';
+  if(x.qRompeu) t+='<span class="tag romp">rompeu</span>';
+  if(x.qCons)   t+='<span class="tag cons">consolidando</span>';
+  if(x.puro)    t+='<span class="tag elite">★</span>';
+  return t;
+}
+
+function render(list){
+  const tb=$("tbody");
+  if(!list.length){
+    $("meta").innerHTML="Nenhum ativo nos setups agora.";
+    tb.innerHTML='<tr><td colspan="11" class="empty">Nenhum ativo cruzou os setups neste scan.<br>Rode os scanners DIDI e Qullamäggie e volte aqui.</td></tr>';
+    return;
+  }
+  const n1=list.filter(x=>x.prio===1).length, n2=list.filter(x=>x.prio===2).length, n3=list.filter(x=>x.prio===3).length;
+  $("meta").innerHTML=`<b>${list.length}</b> ativo(s) · <b style="color:var(--up)">${n1} prioridade 1</b> · <b style="color:var(--accent)">${n2} prio 2</b> · <b style="color:var(--gold)">${n3} prio 3</b> · ★ = elite Qullamäggie`;
+  tb.innerHTML=list.map(x=>`<tr>
+    <td><span class="prio p${x.prio}">${x.rot}</span></td>
+    <td class="tk"><a href="${x.tv}" target="_blank" rel="noopener">${x.tk} ↗</a></td>
+    <td><span class="mkt">${x.market}</span></td>
+    <td>${sinaisTags(x)}</td>
+    <td class="mono">${fmt(x.preco)}</td>
+    <td class="mono">${x.entrada==null?"—":fmt(x.entrada)}</td>
+    <td class="mono" style="color:var(--down)">${fmt(x.stop)}</td>
+    <td class="mono" style="color:var(--up)">${x.alvo==null?"—":fmt(x.alvo)}</td>
+    <td class="mono">${pct(x.mom1)}</td>
+    <td class="mono">${pct(x.mom3)}</td>
+    <td class="mono">${pct(x.mom6)}</td>
+  </tr>`).join("");
+}
+
+$("reloadBtn").onclick=()=>{ setStatus("Recarregando…"); loadData().then(n=>setStatus(n?"Atualizado.":"Sem dados ainda — rode os scanners.","ok")); };
+loadData().then(n=>setStatus(n?"Dados carregados.":"Sem dados — rode DIDI e Qullamäggie.","ok"));
+</script>
+</body>
+</html>
