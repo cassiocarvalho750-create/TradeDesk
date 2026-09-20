@@ -1,6 +1,6 @@
 {
   "gerado": "2026-09-20",
-  "n": 16,
+  "n": 17,
   "ativos": [
     {
       "entrada": 144.92,
@@ -19,6 +19,24 @@
       "ticker": "MSTR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MSTR"
+    },
+    {
+      "entrada": 23.21,
+      "stop": 22.3,
+      "alvo_3r": 25.94,
+      "preco": 23.2,
+      "r_pct": 3.92,
+      "mom1": 31.0,
+      "mom3": 20.0,
+      "mom6": 0.0,
+      "consol_dias": 10,
+      "rompendo": true,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": false,
+      "ticker": "BBAS3.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BBAS3"
     },
     {
       "entrada": 13.59,
@@ -111,24 +129,6 @@
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CYRE3"
     },
     {
-      "entrada": 23.21,
-      "stop": 21.92,
-      "alvo_3r": 27.08,
-      "preco": 22.71,
-      "r_pct": 5.56,
-      "mom1": 27.0,
-      "mom3": 18.0,
-      "mom6": -4.0,
-      "consol_dias": 15,
-      "rompendo": false,
-      "acima_ema20": true,
-      "puro": false,
-      "forming": false,
-      "ticker": "BBAS3.SA",
-      "market": "B3",
-      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BBAS3"
-    },
-    {
       "entrada": 34.48,
       "stop": 31.88,
       "alvo_3r": 42.28,
@@ -145,6 +145,24 @@
       "ticker": "OSCR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=OSCR"
+    },
+    {
+      "entrada": 7.26,
+      "stop": 6.17,
+      "alvo_3r": 10.53,
+      "preco": 5.85,
+      "r_pct": 15.01,
+      "mom1": 29.0,
+      "mom3": 11.0,
+      "mom6": -3.0,
+      "consol_dias": 5,
+      "rompendo": false,
+      "acima_ema20": false,
+      "puro": false,
+      "forming": false,
+      "ticker": "CSNA3.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CSNA3"
     },
     {
       "entrada": 125.25,
