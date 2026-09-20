@@ -79,10 +79,10 @@
   <table>
     <thead><tr>
       <th>Prioridade</th><th>Ativo</th><th>Merc</th><th>Sinais</th>
-      <th>Preço</th><th>Entrada</th><th>Stop</th><th>Alvo 3R</th>
+      <th>Preço</th><th>Entrada</th><th>Stop</th><th>Alvo 3R</th><th>R%</th>
       <th>1M</th><th>3M</th><th>6M</th>
     </tr></thead>
-    <tbody id="tbody"><tr><td colspan="11" class="empty">Carregando…</td></tr></tbody>
+    <tbody id="tbody"><tr><td colspan="12" class="empty">Carregando…</td></tr></tbody>
   </table>
 </div>
 
@@ -140,12 +140,17 @@ async function loadData(){
       temDidi, qRompeu, qCons, puro: q&&q.puro,
       preco: q?q.preco:(d?d.close:null),
       entrada: q?q.entrada:null, stop: q?q.stop:(d?d.stop:null), alvo: q?q.alvo_3r:null,
+      rpct: (function(){ const e=q?q.entrada:(d?d.close:null), st=q?q.stop:(d?d.stop:null);
+                         return (e&&st&&e>0)?((e-st)/e*100):null; })(),
       mom1:q?q.mom1:null, mom3:q?q.mom3:null, mom6:q?q.mom6:null,
       tv: (q&&q.tv)||(d&&d.tv)||("https://www.tradingview.com/chart/?symbol="+tk),
     });
   });
-  // ordena por prioridade, e dentro dela: elite primeiro, depois maior mom3
-  linhas.sort((a,b)=> a.prio-b.prio || (b.puro?1:0)-(a.puro?1:0) || (b.mom3||0)-(a.mom3||0));
+  // ordena: prioridade -> MENOR R% (menor perda ate o stop) -> elite -> maior mom3
+  linhas.sort((a,b)=> a.prio-b.prio
+    || ((a.rpct==null?1e9:a.rpct)-(b.rpct==null?1e9:b.rpct))
+    || (b.puro?1:0)-(a.puro?1:0)
+    || (b.mom3||0)-(a.mom3||0));
   render(linhas);
   return linhas.length;
 }
@@ -163,7 +168,7 @@ function render(list){
   const tb=$("tbody");
   if(!list.length){
     $("meta").innerHTML="Nenhum ativo nos setups agora.";
-    tb.innerHTML='<tr><td colspan="11" class="empty">Nenhum ativo cruzou os setups neste scan.<br>Rode os scanners DIDI e Qullamäggie e volte aqui.</td></tr>';
+    tb.innerHTML='<tr><td colspan="12" class="empty">Nenhum ativo cruzou os setups neste scan.<br>Rode os scanners DIDI e Qullamäggie e volte aqui.</td></tr>';
     return;
   }
   const n1=list.filter(x=>x.prio===1).length, n2=list.filter(x=>x.prio===2).length, n3=list.filter(x=>x.prio===3).length;
@@ -177,6 +182,7 @@ function render(list){
     <td class="mono">${x.entrada==null?"—":fmt(x.entrada)}</td>
     <td class="mono" style="color:var(--down)">${fmt(x.stop)}</td>
     <td class="mono" style="color:var(--up)">${x.alvo==null?"—":fmt(x.alvo)}</td>
+    <td class="mono">${x.rpct==null?"—":x.rpct.toFixed(1)+"%"}</td>
     <td class="mono">${pct(x.mom1)}</td>
     <td class="mono">${pct(x.mom3)}</td>
     <td class="mono">${pct(x.mom6)}</td>
