@@ -473,6 +473,12 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
         # Bollinger 8,2
         m = bt.sma(c,8); sd = c.rolling(8).std()
         bb_sup = m + 2.0*sd; bb_inf = m - 2.0*sd
+        # momentum (so no diario/semanal; ~1M/3M/6M em pregoes)
+        def _mom(n):
+            if intraday or len(c) <= n: return None
+            base = float(c.iloc[-n-1])
+            return round((float(c.iloc[-1])/base - 1.0)*100.0, 0) if base>0 else None
+        mom1, mom3, mom6 = _mom(21), _mom(63), _mom(126)
         def tail(s):
             return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
                     for v in s.tail(n_bars).tolist()]
@@ -495,6 +501,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "didi_ago": h["didi_ago"], "adx_ago": h["adx_ago"],
             "vol_fin_mi": h["vol_fin_mi"], "tv": tv_url(tk),
             "vol_qtd": h.get("vol_qtd",0), "var_dia_pct": h.get("var_dia_pct"),
+            "mom1": mom1, "mom3": mom3, "mom6": mom6,
             "alvo_2r": h.get("alvo_2r"),
             "acima_ema70": h.get("acima_ema70"), "ema70": h.get("ema70"), "ema70_incl": h.get("ema70_incl"),
             "quality": h.get("quality"), "didi_dist": h.get("didi_dist"),
