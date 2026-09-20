@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-09-19",
-  "captura": "19/09/2026 12:09",
+  "gerado": "2026-09-20",
+  "captura": "20/09/2026 13:08",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -24,6 +24,9 @@
       "tv": "https://www.tradingview.com/chart/?symbol=ARKK",
       "vol_qtd": 4398400.0,
       "var_dia_pct": 0.78,
+      "mom1": 6.0,
+      "mom3": 10.0,
+      "mom6": 24.0,
       "alvo_2r": 99.85,
       "acima_ema70": true,
       "ema70": 80.9123,
