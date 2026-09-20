@@ -142,12 +142,15 @@ async function loadData(){
       entrada: q?q.entrada:null, stop: q?q.stop:(d?d.stop:null), alvo: q?q.alvo_3r:null,
       rpct: (function(){ const e=q?q.entrada:(d?d.close:null), st=q?q.stop:(d?d.stop:null);
                          return (e&&st&&e>0)?((e-st)/e*100):null; })(),
-      mom1:q?q.mom1:null, mom3:q?q.mom3:null, mom6:q?q.mom6:null,
+      mom1:q?q.mom1:(d?d.mom1:null), mom3:q?q.mom3:(d?d.mom3:null), mom6:q?q.mom6:(d?d.mom6:null),
       tv: (q&&q.tv)||(d&&d.tv)||("https://www.tradingview.com/chart/?symbol="+tk),
     });
   });
-  // ordena: prioridade -> MENOR R% (menor perda ate o stop) -> elite -> maior mom3
+  // faixa de momentum (mesmas faixas da pagina DIDI): forte>=30, medio 10-30, fraco<10, sem dado por ultimo
+  const faixaMom=(x)=>{ const m=x.mom3; if(m==null) return 3; if(m>=30) return 0; if(m>=10) return 1; return 2; };
+  // ordena: prioridade -> FAIXA de momentum (maior primeiro) -> MENOR R% (menor perda) -> elite -> maior mom3
   linhas.sort((a,b)=> a.prio-b.prio
+    || faixaMom(a)-faixaMom(b)
     || ((a.rpct==null?1e9:a.rpct)-(b.rpct==null?1e9:b.rpct))
     || (b.puro?1:0)-(a.puro?1:0)
     || (b.mom3||0)-(a.mom3||0));

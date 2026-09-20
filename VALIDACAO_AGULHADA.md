@@ -99,3 +99,17 @@ CESTA VARIADA (110 ativos):
 
   Parametros do sinal ficam em bt_engine.py (ADX_DIM_RATIO, janelas DIDI/ADX,
   Bollinger) e no scanner.py (calculo do stop pivo e alvo 2R).
+
+═══════════════════════════════════════════════════════════════
+## CORRECAO DO TRIX (importante)
+═══════════════════════════════════════════════════════════════
+O TRIX usado na SAIDA foi corrigido para bater com o TradingView do usuario:
+  - ANTES (errado): base = tripla EMA de 15; cruzamento entre EMA4 e EMA9 do TRIX.
+  - AGORA (correto): TRIX Length = 9 (base tripla EMA), linha de sinal = MA 4 do
+    TRIX. Venda = TRIX cruza ABAIXO da linha de sinal. (Histogram Multiplier 2
+    e so visual, nao entra no calculo.)
+Efeito na config vencedora (pivo+TRIX, cesta techs): resultado praticamente
+igual (+0,470R vs +0,503R antes), poucos trades a mais (TRIX de 9 sai um pouco
+mais cedo). Conclusao inalterada, mas agora o backtest testa o MESMO TRIX do
+grafico real. Correcao aplicada em backtest_didi.py e herdada por
+backtest_didi_blocos/corpo/filtros (que importam a funcao).
