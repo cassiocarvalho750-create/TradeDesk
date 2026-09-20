@@ -15,6 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
+      "forming": false,
       "ticker": "MSTR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MSTR"
@@ -32,6 +33,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
+      "forming": false,
       "ticker": "BBAS3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BBAS3"
@@ -49,6 +51,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "EZTC3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:EZTC3"
@@ -66,6 +69,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
+      "forming": false,
       "ticker": "CORT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CORT"
@@ -83,6 +87,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "VAMO3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:VAMO3"
@@ -100,6 +105,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "GMAT3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:GMAT3"
@@ -117,6 +123,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "CYRE3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CYRE3"
@@ -134,6 +141,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "OSCR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=OSCR"
@@ -151,6 +159,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": false,
+      "forming": false,
       "ticker": "CSNA3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CSNA3"
@@ -168,6 +177,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "HOOD",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HOOD"
@@ -185,6 +195,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "DASA3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:DASA3"
@@ -202,6 +213,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": false,
+      "forming": false,
       "ticker": "HUM",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HUM"
@@ -219,6 +231,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
+      "forming": false,
       "ticker": "ANIM3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:ANIM3"
@@ -236,6 +249,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "SIMH3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SIMH3"
@@ -253,6 +267,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "MU",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MU"
@@ -270,6 +285,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": false,
+      "forming": false,
       "ticker": "SNDK",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SNDK"
@@ -287,6 +303,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
+      "forming": false,
       "ticker": "MRVL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MRVL"
