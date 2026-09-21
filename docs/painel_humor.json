@@ -1,22 +1,22 @@
 {
-  "gerado_em": "2026-09-20T16:10:20Z",
-  "data_sp": "2026-09-18",
-  "didi3": -0.039,
-  "incl": 21.59,
+  "gerado_em": "2026-09-21T14:23:16Z",
+  "data_sp": "2026-09-21",
+  "didi3": 0.559,
+  "incl": 56.0799,
   "direcao": "sobe",
   "dir_txt": "MA3 subindo ▲",
-  "combo": "recuperando",
-  "combo_titulo": "RECUPERANDO",
-  "combo_msg": "Mau humor, mas a MA3 voltou a subir — melhorando. Cautela, tamanho normal.",
-  "combo_cor": "#f9a825",
-  "zona": "mau_fraco",
-  "nome": "MAU HUMOR FRACO",
-  "risco": "Risco padrão/reduzido",
-  "acao": "Maré morna — cautela, tamanho normal ou menor.",
-  "exp": "≈ +0.30R/trade",
-  "emoji": "▼",
-  "cor": "#f9a825",
-  "cor2": "#fff8e1",
+  "combo": "favor",
+  "combo_titulo": "A FAVOR",
+  "combo_msg": "Bom humor com a MA3 subindo — vento a favor. Risco normal/cheio.",
+  "combo_cor": "#2e7d32",
+  "zona": "bom_fraco",
+  "nome": "BOM HUMOR FRACO",
+  "risco": "Risco padrão",
+  "acao": "Maré morna — opera normal, sem acelerar.",
+  "exp": "≈ +0.26R/trade",
+  "emoji": "▲",
+  "cor": "#7cb342",
+  "cor2": "#f1f8e9",
   "fonte": "yfinance (^GSPC)",
   "tabela": [
     {
@@ -39,7 +39,7 @@
       "cor": "#7cb342",
       "cor2": "#f1f8e9",
       "emoji": "▲",
-      "hoje": false
+      "hoje": true
     },
     {
       "zona": "mau_fraco",
@@ -50,7 +50,7 @@
       "cor": "#f9a825",
       "cor2": "#fff8e1",
       "emoji": "▼",
-      "hoje": true
+      "hoje": false
     },
     {
       "zona": "mau_forte",
