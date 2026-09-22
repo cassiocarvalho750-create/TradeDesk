@@ -133,13 +133,14 @@ def montar_confluencia(didi_ativos, qulla_ativos):
         elif tem_didi:                 prio = 4
         else:                          continue  # so consolidando sem DIDI: fora
 
-        entrada = q.get("entrada") if q else None
+        # entrada: do Qulla quando existe (rompimento), senao o close do DIDI
+        # (assim a prioridade 4 tambem fica backtestavel no forward test).
+        entrada = (q.get("entrada") if q else None) or (d.get("close") if d else None)
         stop = q.get("stop") if q else (d.get("stop") if d else None)
         alvo = q.get("alvo_3r") if q else None
-        preco_ref = (q.get("entrada") if q else None) or (d.get("close") if d else None)
         rpct = None
-        if preco_ref and stop and preco_ref > 0:
-            rpct = round((preco_ref - stop) / preco_ref * 100, 2)
+        if entrada and stop and entrada > 0:
+            rpct = round((entrada - stop) / entrada * 100, 2)
 
         def _mom(k):
             v = q.get(k) if q else None
