@@ -96,7 +96,7 @@ jobs:
           git config user.name  "tradedesk-bot"
           git config user.email "actions@github.com"
           git add docs/ || true
-          git add historico_sinais_didi.csv historico_sinais_insidebar.csv || true
+          git add historico_sinais_didi.csv historico_sinais_insidebar.csv historico_confluencia.csv || true
           if git diff --staged --quiet; then
             echo "Nada novo para comitar."
           else

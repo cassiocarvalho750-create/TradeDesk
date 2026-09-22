@@ -143,6 +143,14 @@ def main():
     open(f"painel_qulla.json","w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
     print(f"  JSON: painel_qulla.json")
 
+    # registro da CONFLUENCIA (forward testing): tira a foto DIDI x Qulla e grava
+    # no historico_confluencia.csv (so com pregao fechado; a prova de erro embutida).
+    try:
+        import registro_confluencia
+        registro_confluencia.registrar(qulla_ativos=hits)
+    except Exception as e:
+        print(f"  [registro Confluencia] falhou: {e}")
+
     # HTML
     rows=""
     for x in hits:
