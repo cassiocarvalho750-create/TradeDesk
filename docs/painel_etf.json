@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-09-21",
-  "captura": "21/09/2026 19:40",
+  "gerado": "2026-09-22",
+  "captura": "22/09/2026 08:45",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 168.21,
       "stop": 156.31,
       "r_pct": 7.07,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-21",
       "ult_candle": "2026-09-21",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 36.8,
       "tv": "https://www.tradingview.com/chart/?symbol=SKYY",
-      "vol_qtd": 254599.0,
+      "vol_qtd": 254600.0,
       "var_dia_pct": 3.09,
       "mom1": 6.0,
       "mom3": 30.0,
