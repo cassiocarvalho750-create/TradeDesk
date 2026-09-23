@@ -1,22 +1,22 @@
 {
-  "gerado_em": "2026-09-23T12:10:08Z",
-  "data_sp": "2026-09-21",
-  "didi3": 0.68,
-  "incl": 70.9634,
+  "gerado_em": "2026-09-23T14:42:56Z",
+  "data_sp": "2026-09-23",
+  "didi3": 0.831,
+  "incl": 27.8634,
   "direcao": "sobe",
   "dir_txt": "MA3 subindo ▲",
-  "combo": "favor",
-  "combo_titulo": "A FAVOR",
-  "combo_msg": "Bom humor com a MA3 subindo — vento a favor. Risco normal/cheio.",
-  "combo_cor": "#2e7d32",
-  "zona": "bom_fraco",
-  "nome": "BOM HUMOR FRACO",
-  "risco": "Risco padrão",
-  "acao": "Maré morna — opera normal, sem acelerar.",
-  "exp": "≈ +0.26R/trade",
-  "emoji": "▲",
-  "cor": "#7cb342",
-  "cor2": "#f1f8e9",
+  "combo": "cheia",
+  "combo_titulo": "MARÉ CHEIA",
+  "combo_msg": "S&P forte E com a MA3 subindo — é o teto do humor. Risco cheio, pise fundo.",
+  "combo_cor": "#1b8a3a",
+  "zona": "bom_forte",
+  "nome": "BOM HUMOR FORTE",
+  "risco": "Risco CHEIO",
+  "acao": "Maré cheia — é aqui que vale se dedicar.",
+  "exp": "≈ +0.35R/trade",
+  "emoji": "▲▲",
+  "cor": "#1b8a3a",
+  "cor2": "#e6f5ea",
   "fonte": "yfinance (^GSPC)",
   "tabela": [
     {
@@ -28,7 +28,7 @@
       "cor": "#1b8a3a",
       "cor2": "#e6f5ea",
       "emoji": "▲▲",
-      "hoje": false
+      "hoje": true
     },
     {
       "zona": "bom_fraco",
@@ -39,7 +39,7 @@
       "cor": "#7cb342",
       "cor2": "#f1f8e9",
       "emoji": "▲",
-      "hoje": true
+      "hoje": false
     },
     {
       "zona": "mau_fraco",
