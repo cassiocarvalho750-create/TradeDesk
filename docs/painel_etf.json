@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-09-24",
-  "captura": "24/09/2026 17:52",
+  "gerado": "2026-09-25",
+  "captura": "25/09/2026 08:57",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,15 +14,15 @@
       "close": 113.99,
       "stop": 110.37,
       "r_pct": 3.17,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-24",
       "ult_candle": "2026-09-24",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": null,
-      "vol_fin_mi": 539.1,
+      "vol_fin_mi": 539.2,
       "tv": "https://www.tradingview.com/chart/?symbol=XLC",
-      "vol_qtd": 5461680.0,
+      "vol_qtd": 5487800.0,
       "var_dia_pct": 1.31,
       "mom1": 2.0,
       "mom3": 7.0,
@@ -31,14 +31,14 @@
       "acima_ema70": true,
       "ema70": 111.5682,
       "ema70_incl": "sobe",
-      "quality": 81.1,
+      "quality": 80.9,
       "didi_dist": 0.21,
-      "pos_range": 0.949,
-      "dist_max_pct": 0.07,
+      "pos_range": 0.942,
+      "dist_max_pct": 0.08,
       "adx_var_pct": 22.0,
       "confluencia": false,
       "bb_primeira": true,
-      "high": 114.07,
+      "high": 114.08,
       "dates": [
         "2026-07-29",
         "2026-07-30",
@@ -205,7 +205,7 @@
         112.0308,
         115.51,
         113.54,
-        114.07
+        114.08
       ],
       "l": [
         108.5921,
@@ -499,7 +499,7 @@
         16.629,
         17.7842,
         18.7949,
-        20.28
+        20.2906
       ],
       "dip": [
         30.7966,
@@ -541,7 +541,7 @@
         23.7907,
         37.2813,
         31.9159,
-        32.1186
+        32.1594
       ],
       "dim": [
         28.4893,
@@ -583,7 +583,7 @@
         31.3826,
         21.9564,
         18.7965,
-        17.0392
+        17.029
       ],
       "bb_sup": [
         112.0356,
