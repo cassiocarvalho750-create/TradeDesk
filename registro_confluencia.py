@@ -166,9 +166,20 @@ def montar_confluencia(didi_ativos, qulla_ativos):
         })
 
     # mesma ordenacao da pagina: prio -> faixa mom -> menor R% -> elite -> maior mom3
+    # chave de momentum POR PRIORIDADE (igual a pagina):
+    #  prio 1: so menor R% | prio 3: 3M<30 topo, 30-60 meio, 60+ fim | prio 2 e 4: faixa como antes
+    def _chave_mom(x):
+        if x["prioridade"] == 1: return 0
+        if x["prioridade"] == 3:
+            m = x["mom3"]
+            if m is None: return 1
+            if m >= 60: return 2
+            if m >= 30: return 1
+            return 0
+        return x["_fx"]
     linhas.sort(key=lambda x: (
         x["prioridade"],
-        x["_fx"],
+        _chave_mom(x),
         (1e9 if x["r_pct"] is None else x["r_pct"]),
         0 if x["elite"] else 1,
         -(x["mom3"] or 0),
