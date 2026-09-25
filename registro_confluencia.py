@@ -135,9 +135,14 @@ def montar_confluencia(didi_ativos, qulla_ativos):
 
         # entrada: do Qulla quando existe (rompimento), senao o close do DIDI
         # (assim a prioridade 4 tambem fica backtestavel no forward test).
-        entrada = (q.get("entrada") if q else None) or (d.get("close") if d else None)
-        stop = q.get("stop") if q else (d.get("stop") if d else None)
-        alvo = q.get("alvo_3r") if q else None
+        # execucao validada: com rompimento (P1/P3) usa entrada/stop do Qulla;
+        # sem rompimento (P2/P4) segue o DIDI: entrada no fechamento, stop no pivo, alvo 3R
+        if q_rompeu:
+            entrada, stop, alvo = q.get("entrada"), q.get("stop"), q.get("alvo_3r")
+        else:
+            entrada = d.get("close") if d else None
+            stop = d.get("stop") if d else None
+            alvo = round(entrada + 3 * (entrada - stop), 2) if (entrada and stop and entrada > stop) else None
         rpct = None
         if entrada and stop and entrada > 0:
             rpct = round((entrada - stop) / entrada * 100, 2)

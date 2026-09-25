@@ -138,9 +138,13 @@ async function loadData(){
       tk, prio, rot,
       market: (q&&q.market)||(d&&d.market)||"",
       temDidi, qRompeu, qCons, puro: q&&q.puro,
+      // execucao validada: com rompimento (P1/P3) usa entrada/stop do Qulla;
+      // sem rompimento (P2/P4) segue a regra do DIDI: entrada no fechamento, stop no pivo, alvo 3R
       preco: q?q.preco:(d?d.close:null),
-      entrada: q?q.entrada:null, stop: q?q.stop:(d?d.stop:null), alvo: q?q.alvo_3r:null,
-      rpct: (function(){ const e=q?q.entrada:(d?d.close:null), st=q?q.stop:(d?d.stop:null);
+      entrada: qRompeu?q.entrada:(d?d.close:null),
+      stop: qRompeu?q.stop:(d?d.stop:null),
+      alvo: qRompeu?q.alvo_3r:((d&&d.close&&d.stop&&d.close>d.stop)?+(d.close+3*(d.close-d.stop)).toFixed(2):null),
+      rpct: (function(){ const e=qRompeu?q.entrada:(d?d.close:null), st=qRompeu?q.stop:(d?d.stop:null);
                          return (e&&st&&e>0)?((e-st)/e*100):null; })(),
       mom1:q?q.mom1:(d?d.mom1:null), mom3:q?q.mom3:(d?d.mom3:null), mom6:q?q.mom6:(d?d.mom6:null),
       tv: (q&&q.tv)||(d&&d.tv)||("https://www.tradingview.com/chart/?symbol="+tk),
