@@ -77,13 +77,17 @@ def consolidacao_ok(d, i):
         break
     return (melhor_topo is not None), melhor_topo
 
+IDEALIZADO = False   # True = regra antiga (entra no rompimento com stop na minima do PROPRIO dia: usa
+                     # informacao que so existe no fechamento). False = execucao realista.
+
 def backtest(d, tk):
     d = indicadores(d)
     c, h, l = d["Close"], d["High"], d["Low"]
     n = len(d); trades = []; i = 130   # comeca depois de ter 6M de historico
     while i < n - 1:
-        row = d.iloc[i]
-        # 1) tem que ser LIDER de momentum
+        # 1) tem que ser LIDER de momentum. Realista: avaliado no fechamento de ONTEM
+        #    (a lista de candidatos e montada antes do pregao do rompimento).
+        row = d.iloc[i] if IDEALIZADO else d.iloc[i-1]
         if not eh_lider(row): i += 1; continue
         # 2) consolidacao valida logo antes
         ok, topo = consolidacao_ok(d, i)
@@ -94,12 +98,17 @@ def backtest(d, tk):
         # senao, entra no topo (nivel do rompimento intradia).
         op_i = float(d["Open"].iloc[i])
         entry = max(topo, op_i)           # nao da pra entrar abaixo da abertura
-        stop  = float(l.iloc[i])          # stop na minima do dia de rompimento
+        # stop: idealizado = minima do dia do rompimento (so conhecida no fechamento);
+        #       realista   = minima de ONTEM (conhecida na hora da ordem)
+        stop  = float(l.iloc[i]) if IDEALIZADO else float(l.iloc[i-1])
         risk  = entry - stop
         if risk <= 0: i += 1; continue
         # ---- SAIDA validada: alvo fixo 3R (o trailing era ilusao de backtest) ----
         alvo = entry + ALVO_R * risk; res = None; saiu = i + 1
-        for j in range(i + 1, min(i + MAX_HOLD, n)):
+        # realista: se o preco volta abaixo do stop no proprio dia da entrada, stopou
+        if (not IDEALIZADO) and float(l.iloc[i]) <= stop:
+            res = -1.0; saiu = i
+        for j in (range(i + 1, min(i + MAX_HOLD, n)) if res is None else []):
             saiu = j
             lo = float(l.iloc[j]); hi = float(h.iloc[j])
             if lo <= stop: res = -1.0; break            # stop
@@ -121,7 +130,9 @@ def estat(rs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("pasta", nargs="?", default="prices_todos")
+    ap.add_argument("--idealizado", action="store_true", help="regra antiga (com vies de execucao)")
     a = ap.parse_args()
+    global IDEALIZADO; IDEALIZADO = a.idealizado
     arqs = sorted(glob.glob(f"{a.pasta}/*.csv"))
     dfs = []
     for arq in arqs:
@@ -139,7 +150,10 @@ def main():
     print(f"BACKTEST QULLAMAGGIE | cesta '{a.pasta}' | {len(dfs)} ativos")
     print(f"Momentum: +{MOM_1M:.0f}%/1M ou +{MOM_3M:.0f}%/3M ou +{MOM_6M:.0f}%/6M | "
           f"consol {CONSOL_MIN}-{CONSOL_MAX}d")
-    print(f"Entrada no rompimento | stop na minima do dia | alvo fixo {ALVO_R:.0f}R\n")
+    if IDEALIZADO:
+        print(f"Execucao IDEALIZADA: rompimento | stop na minima do proprio dia | alvo {ALVO_R:.0f}R\n")
+    else:
+        print(f"Execucao REALISTA: lider/consolidacao de ontem | compra no rompimento | stop na minima de ontem (stop no mesmo dia conta) | alvo {ALVO_R:.0f}R\n")
     print(f"  {'trades':>7}{'win':>7}{'exp':>10}{'acum':>11}{'payoff':>8}")
     print("  " + "-"*45)
     print(f"  {N:>7}{wr:>6.0f}%{exp:>+9.3f}R{acc:>+10.1f}R{po:>8.2f}")
