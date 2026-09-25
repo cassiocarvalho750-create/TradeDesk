@@ -1,22 +1,22 @@
 {
-  "gerado_em": "2026-09-25T12:00:16Z",
-  "data_sp": "2026-09-24",
-  "didi3": 0.946,
-  "incl": 17.8766,
-  "direcao": "sobe",
-  "dir_txt": "MA3 subindo ▲",
-  "combo": "cheia",
-  "combo_titulo": "MARÉ CHEIA",
-  "combo_msg": "S&P forte E com a MA3 subindo — é o teto do humor. Risco cheio, pise fundo.",
-  "combo_cor": "#1b8a3a",
-  "zona": "bom_forte",
-  "nome": "BOM HUMOR FORTE",
-  "risco": "Risco CHEIO",
-  "acao": "Maré cheia — é aqui que vale se dedicar.",
-  "exp": "≈ +0.35R/trade",
-  "emoji": "▲▲",
-  "cor": "#1b8a3a",
-  "cor2": "#e6f5ea",
+  "gerado_em": "2026-09-25T14:51:19Z",
+  "data_sp": "2026-09-25",
+  "didi3": 0.273,
+  "incl": -17.4701,
+  "direcao": "desce",
+  "dir_txt": "MA3 descendo ▼",
+  "combo": "virando",
+  "combo_titulo": "VIRANDO",
+  "combo_msg": "Ainda em bom humor, MAS a MA3 já virou p/ baixo — o grupo mais fraco. Alivie o risco.",
+  "combo_cor": "#f9a825",
+  "zona": "bom_fraco",
+  "nome": "BOM HUMOR FRACO",
+  "risco": "Risco padrão",
+  "acao": "Maré morna — opera normal, sem acelerar.",
+  "exp": "≈ +0.26R/trade",
+  "emoji": "▲",
+  "cor": "#7cb342",
+  "cor2": "#f1f8e9",
   "fonte": "yfinance (^GSPC)",
   "tabela": [
     {
@@ -28,7 +28,7 @@
       "cor": "#1b8a3a",
       "cor2": "#e6f5ea",
       "emoji": "▲▲",
-      "hoje": true
+      "hoje": false
     },
     {
       "zona": "bom_fraco",
@@ -39,7 +39,7 @@
       "cor": "#7cb342",
       "cor2": "#f1f8e9",
       "emoji": "▲",
-      "hoje": false
+      "hoje": true
     },
     {
       "zona": "mau_fraco",
