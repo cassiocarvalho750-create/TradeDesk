@@ -177,8 +177,10 @@ def montar_confluencia(didi_ativos, qulla_ativos):
             if m >= 30: return 1
             return 0
         return x["_fx"]
+    # ordem de exibicao (igual a pagina): 1, 2, 4, 3 — pela execucao realista
+    ORDEM_PRIO = {1: 0, 2: 1, 4: 2, 3: 3}
     linhas.sort(key=lambda x: (
-        x["prioridade"],
+        ORDEM_PRIO[x["prioridade"]],
         _chave_mom(x),
         (1e9 if x["r_pct"] is None else x["r_pct"]),
         0 if x["elite"] else 1,

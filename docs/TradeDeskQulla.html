@@ -65,7 +65,7 @@
 <header>
   <div class="toprow">
     <h1>TradeDesk · Qullamäggie</h1>
-    <span class="sub">Momentum breakout · +25%/1M ou +75%/3M ou +125%/6M</span>
+    <span class="sub">Momentum breakout · +30%/1M ou +90%/3M ou +150%/6M</span>
     <span class="spacer"></span>
     <div class="controls">
       <select id="mercado" title="Mercado">
@@ -205,7 +205,7 @@ function render(list, gerado){
   });
   const nRomp=list.filter(x=>x.rompendo).length;
   const nElite=list.filter(x=>x.puro).length;
-  $("meta").innerHTML=`<b>${list.length}</b> candidato(s) · <b>${nRomp}</b> rompendo · <b style="color:#e6a817">${nElite} ★ elite</b> · dados de <b>${gerado||'—'}</b> · entrada = rompimento da máxima · stop = mínima do dia · alvo = 3R`;
+  $("meta").innerHTML=`<b>${list.length}</b> candidato(s) · <b>${nRomp}</b> rompendo · <b style="color:#e6a817">${nElite} ★ elite</b> · dados de <b>${gerado||'—'}</b> · entrada = rompimento da máxima · stop = mínima do dia anterior à entrada · alvo = 3R`;
   tb.innerHTML=list.map(linhaAtivo).join("");
 }
 

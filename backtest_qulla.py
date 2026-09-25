@@ -24,7 +24,7 @@ import numpy as np, pandas as pd
 import backtest_didi as bd   # reaproveita carrega()
 
 # ---- parametros (todos ajustaveis no topo) ----
-MOM_1M, MOM_3M, MOM_6M = 25.0, 75.0, 125.0   # sweet spot: quase sem perda de qualidade (+0.785R), 70% mais sinais
+MOM_1M, MOM_3M, MOM_6M = 30.0, 90.0, 150.0   # recalibrado c/ execucao realista (set/2026): melhor por trade nas 3 cestas, ~40% menos sinais
 CONSOL_MIN, CONSOL_MAX = 5, 15               # dias da consolidacao
 ATR_CONTRACAO = 1.10       # afrouxado 1.0->1.10 (validado: +21% sinais, exp igual)
 DIST_EMA_MAX = 0.10        # preco a no maximo 10% da EMA20 (nao esticado)

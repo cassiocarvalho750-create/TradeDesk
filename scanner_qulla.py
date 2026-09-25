@@ -4,12 +4,12 @@
 SCANNER QULLAMAGGIE — lideres de momentum em consolidacao/rompimento HOJE
 ============================================================================
 Lista os ativos que HOJE sao candidatos ao setup Qullamaggie:
-  1) LIDER de momentum: +25%/1M ou +75%/3M ou +125%/6M
+  1) LIDER de momentum: +30%/1M ou +90%/3M ou +150%/6M
   2) em CONSOLIDACAO valida (5-15d, ATR contraindo, colado na EMA20)
   3) ou ja ROMPENDO a maxima da consolidacao no candle de hoje.
 
 Entrada sugerida: rompimento da maxima da consolidacao.
-Stop: minima do dia do rompimento. Alvo: 3R (saida validada no backtest).
+Stop: minima do dia ANTERIOR ao da entrada (conhecida na hora da ordem). Alvo: 3R.
 
 USO:
   python scanner_qulla.py            # universo completo (B3 + EUA)
@@ -24,7 +24,7 @@ import scanner as sc
 import run_backtest_v2 as rb
 
 # --- parametros (iguais ao backtest validado) ---
-MOM_1M, MOM_3M, MOM_6M = 25.0, 75.0, 125.0   # sweet spot: quase sem perda de qualidade (+0.785R), 70% mais sinais
+MOM_1M, MOM_3M, MOM_6M = 30.0, 90.0, 150.0   # recalibrado c/ execucao realista (set/2026): melhor por trade nas 3 cestas, ~40% menos sinais
 PURO_1M, PURO_3M, PURO_6M = 30.0, 90.0, 150.0   # criterios RIGOROSOS do criador (selo de elite)
 CONSOL_MIN, CONSOL_MAX = 5, 15
 ATR_CONTRACAO = 1.10   # afrouxado de 1.0 -> 1.10 (validado: +21% sinais, exp igual)
@@ -67,8 +67,17 @@ def avalia(d, funil=None):
     hoje = pd.Timestamp(datetime.date.today())
     forming = (d.index[-1].normalize() == hoje)   # candle de hoje ainda em formacao (pregao aberto)
     rompendo = maxhoje > topo
-    entrada = topo                     # nivel de entrada (rompimento)
-    stop = minhoje if rompendo else float(l.iloc[i-1])  # min do dia se rompeu, senao min do candle anterior
+    # Execucao realista (validada no backtest): o stop e a minima do dia ANTERIOR ao da entrada,
+    # que ja e conhecida na hora de pôr a ordem.
+    #  - rompendo hoje: entrada no topo (ou na abertura, se abriu acima), stop na minima de ONTEM
+    #  - consolidando: a entrada seria amanha no topo, com stop na minima de HOJE
+    abertura = float(d["Open"].iloc[-1])
+    if rompendo:
+        entrada = max(topo, abertura)
+        stop = float(l.iloc[i-1])
+    else:
+        entrada = topo
+        stop = minhoje
     risk = entrada - stop
     if risk <= 0: return None
     alvo = round(entrada + ALVO_R*risk, 2)
@@ -177,8 +186,8 @@ def main():
     th{{background:#1A4731;color:#fff;padding:9px;text-align:right}}th:first-child,th:nth-child(2),th:nth-child(3){{text-align:left}}
     td{{padding:8px 9px;border-bottom:1px solid #eee}} tbody tr:hover{{background:#fdf7e6}}</style></head><body>
     <h2>Scanner Qullamaggie — momentum breakout</h2>
-    <p style="font-size:13px;color:#666">{n} candidato(s) · gerado em {today}. Líderes de momentum (+25%/1M ou +75%/3M ou +125%/6M) em consolidação (5-15d) ou rompendo.
-    <b>Entrada</b> = rompimento da máxima da consolidação · <b>Stop</b> = mínima do dia · <b>Alvo</b> = 3R.</p>
+    <p style="font-size:13px;color:#666">{n} candidato(s) · gerado em {today}. Líderes de momentum (+30%/1M ou +90%/3M ou +150%/6M) em consolidação (5-15d) ou rompendo.
+    <b>Entrada</b> = rompimento da máxima da consolidação · <b>Stop</b> = mínima do dia anterior à entrada · <b>Alvo</b> = 3R.</p>
     <table><thead><tr><th>Ativo</th><th>Mercado</th><th>Status</th><th>Preço</th><th>Entrada</th><th>Stop</th><th>Alvo 3R</th><th>R%</th><th>1M</th><th>3M</th><th>6M</th><th>Consol.</th></tr></thead>
     <tbody>{rows if rows else '<tr><td colspan=12 style=text-align:center;color:#888;padding:20px>Nenhum líder em consolidação/rompimento hoje.</td></tr>'}</tbody></table>
     <p style="font-size:12px;color:#888;margin-top:14px">Setup Qullamaggie: só líderes de momentum. Win rate ~45%, mas alvo 3R paga as perdas. Backtest: +0.80R/trade nas cestas. Não é recomendação.</p>
