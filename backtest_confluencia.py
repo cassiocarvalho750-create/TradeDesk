@@ -7,7 +7,7 @@ trade com alvo fixo 3R (stop na minima registrada).
 
 Responde as perguntas que importam:
   - a CONFLUENCIA funciona? (resultado geral)
-  - qual PRIORIDADE rende mais? (1 DIDI+rompeu / 2 DIDI+consolid / 3 so rompeu / 4 so DIDI)
+  - qual PRIORIDADE rende mais? (1 DIDI+rompeu / 2 DIDI+consolid / 3 so DIDI / 4 so rompeu)
   - a POSICAO NA FILA prediz melhores trades? (topo da lista vs resto;
     topo de cada subgrupo vs resto)
   - a FAIXA de momentum e o selo ELITE ajudam?
@@ -78,6 +78,22 @@ def _num(v):
         return None
 
 
+def _sim(v):
+    return str(v).strip().lower() in ("true", "1", "sim")
+
+
+def _prio_da_linha(s):
+    """Prioridade recalculada pelas colunas de sinais, e nao pelo numero gravado:
+    ate 26/09/2026 o registro gravava 3 = so rompeu e 4 = so DIDI (invertido).
+    Assim as linhas antigas e as novas usam a mesma numeracao."""
+    didi, romp, cons = _sim(s.get("tem_didi")), _sim(s.get("q_rompeu")), _sim(s.get("q_consolidando"))
+    if didi and romp: return "1"
+    if didi and cons: return "2"
+    if didi:          return "3"
+    if romp:          return "4"
+    return s.get("prioridade", "?")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--hold", type=int, default=60, help="max dias no trade (default 60)")
@@ -129,7 +145,7 @@ def main():
             if R is None:
                 continue
             todos.append(R)
-            prio = s.get("prioridade", "?")
+            prio = _prio_da_linha(s)
             por_prio[prio].append(R)
             por_faixa[s.get("faixa_mom", "?")].append(R)
             por_elite["ELITE" if s.get("elite") in ("True", "true", True) else "nao-elite"].append(R)
@@ -146,7 +162,7 @@ def main():
         print(f"  ({ignorados_preco} ignorados: sem historico de preco)")
     print()
 
-    ROT_PRIO = {"1": "1 DIDI+rompeu", "2": "2 DIDI+consolid", "3": "3 so rompeu", "4": "4 so DIDI"}
+    ROT_PRIO = {"1": "1 DIDI+rompeu", "2": "2 DIDI+consolid", "3": "3 so DIDI", "4": "4 so rompeu"}
     print("Por PRIORIDADE (a confluencia mais forte rende mais?):")
     for p in sorted(por_prio):
         print(linha_stat(ROT_PRIO.get(p, p), por_prio[p]))

@@ -39,8 +39,8 @@
   .prio{font-weight:800;font-size:13px;padding:3px 10px;border-radius:6px;white-space:nowrap}
   .p1{background:linear-gradient(135deg,#3fb950,#2ea043);color:#fff;box-shadow:0 0 10px rgba(63,185,80,.4)}
   .p2{background:linear-gradient(135deg,#4aa8ff,#1f6feb);color:#fff}
-  .p3{background:rgba(107,125,146,.2);color:var(--muted)}
-  .p4{background:linear-gradient(135deg,#e6a817,#d29922);color:#1a1200}
+  .p3{background:linear-gradient(135deg,#e6a817,#d29922);color:#1a1200}
+  .p4{background:rgba(107,125,146,.2);color:var(--muted)}
   .tag{font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:5px;margin-left:4px}
   .tag.didi{background:rgba(74,168,255,.16);color:var(--accent)}
   .tag.romp{background:rgba(230,168,23,.18);color:var(--gold)}
@@ -69,8 +69,8 @@
 <div class="legenda">
   <span class="lg"><span class="prio p1">🥇 1</span> DIDI entrou + Qullamäggie rompeu</span>
   <span class="lg"><span class="prio p2">🔵 2</span> DIDI entrou + Qullamäggie consolidando</span>
-  <span class="lg"><span class="prio p4">🥈 4</span> Só DIDI entrou</span>
-  <span class="lg"><span class="prio p3">3</span> Só Qullamäggie rompeu</span>
+  <span class="lg"><span class="prio p3">🥈 3</span> Só DIDI entrou</span>
+  <span class="lg"><span class="prio p4">4</span> Só Qullamäggie rompeu</span>
 </div>
 
 <div class="meta" id="meta">Cruzando os dois setups…</div>
@@ -130,8 +130,8 @@ async function loadData(){
     let prio, rot;
     if(temDidi && qRompeu){ prio=1; rot="🥇 1"; }
     else if(temDidi && qCons){ prio=2; rot="🔵 2"; }
-    else if(!temDidi && qRompeu){ prio=3; rot="3"; }
-    else if(temDidi){ prio=4; rot="🥈 4"; }
+    else if(temDidi){ prio=3; rot="🥈 3"; }
+    else if(!temDidi && qRompeu){ prio=4; rot="4"; }
     else { return; } // so consolidando no qulla sem DIDI -> nao entra na lista de acao
     const base = q || d;  // dados de entrada: prefere o qulla (tem entrada/alvo), senao DIDI
     linhas.push({
@@ -154,17 +154,16 @@ async function loadData(){
   const faixaMom=(x)=>{ const m=x.mom3; if(m==null) return 3; if(m>=30) return 0; if(m>=10) return 1; return 2; };
   // chave de momentum POR PRIORIDADE (validada no backtest_confluencia_momentum):
   //  prio 1: momentum nao importa -> ordena so pelo menor R%
-  //  prio 3: rompimento esticado (3M>=60) rende pior -> 3M<30 no topo, 30-60 no meio, 60+ no fim
-  //  prio 2 e 4: como antes (faixa forte>=30 / medio / fraco)
+  //  prio 4 (so rompeu): esticado (3M>=60) rende pior -> 3M<30 no topo, 30-60 no meio, 60+ no fim
+  //  prio 2 e 3: como antes (faixa forte>=30 / medio / fraco)
   const chaveMom=(x)=>{
     if(x.prio===1) return 0;
-    if(x.prio===3){ const m=x.mom3; if(m==null) return 1; if(m>=60) return 2; if(m>=30) return 1; return 0; }
+    if(x.prio===4){ const m=x.mom3; if(m==null) return 1; if(m>=60) return 2; if(m>=30) return 1; return 0; }
     return faixaMom(x);
   };
   // ordena: prioridade -> chave de momentum -> MENOR R% (menor perda) -> elite -> maior mom3
-  // ordem de exibicao pela execucao realista: 1 e 2 (+0,5R) > 4 so DIDI (+0,35R) > 3 so rompeu (~0R)
-  const ORDEM_PRIO={1:0,2:1,4:2,3:3};
-  linhas.sort((a,b)=> ORDEM_PRIO[a.prio]-ORDEM_PRIO[b.prio]
+  // ranking pela execucao realista: 1 e 2 (+0,5R) > 3 so DIDI (+0,35R) > 4 so rompeu (~0R)
+  linhas.sort((a,b)=> a.prio-b.prio
     || chaveMom(a)-chaveMom(b)
     || ((a.rpct==null?1e9:a.rpct)-(b.rpct==null?1e9:b.rpct))
     || (b.puro?1:0)-(a.puro?1:0)
@@ -190,7 +189,7 @@ function render(list){
     return;
   }
   const n1=list.filter(x=>x.prio===1).length, n2=list.filter(x=>x.prio===2).length, n3=list.filter(x=>x.prio===3).length, n4=list.filter(x=>x.prio===4).length;
-  $("meta").innerHTML=`<b>${list.length}</b> ativo(s) · <b style="color:var(--up)">${n1} prioridade 1</b> · <b style="color:var(--accent)">${n2} prio 2</b> · <b style="color:var(--gold)">${n4} prio 4</b> · <b>${n3} prio 3</b> · ★ = elite Qullamäggie`;
+  $("meta").innerHTML=`<b>${list.length}</b> ativo(s) · <b style="color:var(--up)">${n1} prioridade 1</b> · <b style="color:var(--accent)">${n2} prio 2</b> · <b style="color:var(--gold)">${n3} prio 3</b> · <b>${n4} prio 4</b> · ★ = elite Qullamäggie`;
   tb.innerHTML=list.map(x=>`<tr>
     <td><span class="prio p${x.prio}">${x.rot}</span></td>
     <td class="tk"><a href="${x.tv}" target="_blank" rel="noopener">${x.tk} ↗</a></td>

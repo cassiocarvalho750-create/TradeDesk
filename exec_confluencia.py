@@ -6,15 +6,15 @@ Usado por backtest_confluencia_hist.py e backtest_confluencia_momentum.py.
 Dois modos de execucao:
 
 REALISTA (padrao) — so usa informacao disponivel no momento da decisao:
-  - Lado Qulla (prio 1 e 3, quando ha rompimento):
+  - Lado Qulla (prio 1 e 4, quando ha rompimento):
       a lista de candidatos (lider de momentum + consolidacao valida) e montada
       com os dados de ONTEM; hoje a ordem de compra fica no topo da consolidacao
       (ou na abertura, se abrir acima). Stop na MINIMA DE ONTEM. Se o preco volta
       abaixo do stop no proprio dia da entrada, conta como stop (-1R).
-  - Lado DIDI (prio 2 e 4): entrada no FECHAMENTO do dia do sinal, stop no
+  - Lado DIDI (prio 2 e 3): entrada no FECHAMENTO do dia do sinal, stop no
       PIVO de baixa 3x3 (regra do scanner DIDI ao vivo).
   - A prioridade (1 x 3, 2 x 4) e decidida no fechamento, quando se sabe se o
-      DIDI confirmou. Prio 1 e 3 sao executadas do mesmo jeito.
+      DIDI confirmou. Prio 1 e 4 sao executadas do mesmo jeito.
 
 IDEALIZADO — a regra antiga, para comparacao: lider avaliado no proprio dia,
   entrada no rompimento com stop na minima do PROPRIO dia (so conhecida no
@@ -71,8 +71,8 @@ def processa(d, idealizado=False):
                 else: cons = True
         if didi and romp:   prio = 1
         elif didi and cons: prio = 2
-        elif romp:          prio = 3
-        elif didi:          prio = 4
+        elif didi:          prio = 3   # so DIDI
+        elif romp:          prio = 4   # so Qulla rompeu
         else:
             i += 1; continue
 

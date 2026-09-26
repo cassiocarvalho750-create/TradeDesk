@@ -10,7 +10,8 @@ prioridade / posicao na fila rende mais.
 
 Replica EXATAMENTE a logica de docs/TradeDeskConfluencia.html:
   - DIDI aprovado: confluencia OR bb_primeira OR adx_ago==0
-  - prioridades: 1 (DIDI+rompeu) / 2 (DIDI+consolidando) / 3 (so rompeu) / 4 (so DIDI)
+  - prioridades: 1 (DIDI+rompeu) / 2 (DIDI+consolidando) / 3 (so DIDI) / 4 (so rompeu)
+    (ate 26/09/2026 o 3 e o 4 eram invertidos; o backtest recalcula pelas colunas de sinais)
   - ordem: prioridade -> faixa de momentum (forte>=30 / medio 10-30 / fraco<10 /
     sem dado) -> menor R% -> elite -> maior mom3
   - registra ordem_geral (posicao na lista toda) e ordem_subgrupo (dentro da prioridade)
@@ -129,8 +130,8 @@ def montar_confluencia(didi_ativos, qulla_ativos):
         q_cons = bool(q and not q.get("rompendo"))
         if tem_didi and q_rompeu:      prio = 1
         elif tem_didi and q_cons:      prio = 2
-        elif (not tem_didi) and q_rompeu: prio = 3
-        elif tem_didi:                 prio = 4
+        elif tem_didi:                 prio = 3   # so DIDI
+        elif q_rompeu:                 prio = 4   # so Qulla rompeu
         else:                          continue  # so consolidando sem DIDI: fora
 
         # entrada: do Qulla quando existe (rompimento), senao o close do DIDI
@@ -172,20 +173,19 @@ def montar_confluencia(didi_ativos, qulla_ativos):
 
     # mesma ordenacao da pagina: prio -> faixa mom -> menor R% -> elite -> maior mom3
     # chave de momentum POR PRIORIDADE (igual a pagina):
-    #  prio 1: so menor R% | prio 3: 3M<30 topo, 30-60 meio, 60+ fim | prio 2 e 4: faixa como antes
+    #  prio 1: so menor R% | prio 4 (so rompeu): 3M<30 topo, 30-60 meio, 60+ fim | prio 2 e 3: faixa como antes
     def _chave_mom(x):
         if x["prioridade"] == 1: return 0
-        if x["prioridade"] == 3:
+        if x["prioridade"] == 4:
             m = x["mom3"]
             if m is None: return 1
             if m >= 60: return 2
             if m >= 30: return 1
             return 0
         return x["_fx"]
-    # ordem de exibicao (igual a pagina): 1, 2, 4, 3 — pela execucao realista
-    ORDEM_PRIO = {1: 0, 2: 1, 4: 2, 3: 3}
+    # ranking (igual a pagina): 1 DIDI+rompeu, 2 DIDI+consolid, 3 so DIDI, 4 so rompeu
     linhas.sort(key=lambda x: (
-        ORDEM_PRIO[x["prioridade"]],
+        x["prioridade"],
         _chave_mom(x),
         (1e9 if x["r_pct"] is None else x["r_pct"]),
         0 if x["elite"] else 1,

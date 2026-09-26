@@ -4,7 +4,7 @@ BACKTEST HISTORICO da CONFLUENCIA (DIDI x Qullamaggie) sobre uma cesta de precos
 
 Varre o passado da cesta e reconstroi, a cada dia de cada ativo, a prioridade:
   1 = DIDI entrou + Qulla ROMPEU      2 = DIDI entrou + Qulla CONSOLIDANDO
-  3 = so Qulla ROMPEU                 4 = so DIDI entrou
+  3 = so DIDI entrou                  4 = so Qulla ROMPEU
 Simula alvo fixo 3R. Execucao REALISTA por padrao (ver exec_confluencia.py);
 --idealizado reproduz a regra antiga, que usava a minima do proprio dia como stop.
 
@@ -57,7 +57,7 @@ def main():
     print("  (vies de passado conhecido — o forward test e a validacao honesta)\n")
     N, wr, exp, acc = st(todos)
     print(f"GERAL: {N} sinais | win {wr:.0f}% | exp {exp:+.3f}R | acum {acc:+.0f}R\n")
-    ROT = {1: "1 DIDI+rompeu", 2: "2 DIDI+consolid", 3: "3 so rompeu", 4: "4 so DIDI"}
+    ROT = {1: "1 DIDI+rompeu", 2: "2 DIDI+consolid", 3: "3 so DIDI", 4: "4 so rompeu"}
     print("Por PRIORIDADE:")
     for p in sorted(por_prio): print(linha(ROT[p], por_prio[p]))
     print("\nPor FAIXA de momentum 3M:")
