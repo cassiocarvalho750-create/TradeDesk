@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-09-25",
+  "gerado": "2026-09-26",
   "n": 4,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "BE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=BE"
@@ -23,7 +23,7 @@
     {
       "entrada": 595.51,
       "stop": 541.24,
-      "alvo_3r": 758.33,
+      "alvo_3r": 758.32,
       "preco": 562.89,
       "r_pct": 9.11,
       "mom1": 21.0,
@@ -33,7 +33,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
@@ -51,7 +51,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SWKS",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SWKS"
@@ -69,7 +69,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "OSCR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=OSCR"

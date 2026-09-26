@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-09-25",
-  "captura": "25/09/2026 18:54",
+  "gerado": "2026-09-26",
+  "captura": "26/09/2026 07:21",
   "timeframe": "1d",
   "n": 13,
   "ativos": [
@@ -14,15 +14,15 @@
       "close": 55.04,
       "stop": 50.8,
       "r_pct": 7.7,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 773.6,
+      "vol_fin_mi": 773.7,
       "tv": "https://www.tradingview.com/chart/?symbol=PYPL",
-      "vol_qtd": 20326878.0,
+      "vol_qtd": 20379200.0,
       "var_dia_pct": 4.66,
       "mom1": -11.0,
       "mom3": 25.0,
@@ -722,7 +722,7 @@
       "close": 397.93,
       "stop": 386.83,
       "r_pct": 2.79,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
@@ -730,7 +730,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 380.7,
       "tv": "https://www.tradingview.com/chart/?symbol=HUM",
-      "vol_qtd": 1938342.0,
+      "vol_qtd": 1938500.0,
       "var_dia_pct": 2.11,
       "mom1": 2.0,
       "mom3": 4.0,
@@ -955,7 +955,7 @@
         370.0,
         369.13,
         372.08,
-        386.7072
+        386.71
       ],
       "ma3": [
         365.31,
@@ -1430,16 +1430,16 @@
       "close": 516.17,
       "stop": 487.23,
       "r_pct": 5.61,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 0,
-      "vol_fin_mi": 10902.6,
+      "vol_fin_mi": 10906.9,
       "tv": "https://www.tradingview.com/chart/?symbol=MSFT",
-      "vol_qtd": 37985485.0,
-      "var_dia_pct": 3.41,
+      "vol_qtd": 38154200.0,
+      "var_dia_pct": 3.43,
       "mom1": 4.0,
       "mom3": 39.0,
       "mom6": 42.0,
@@ -1579,7 +1579,7 @@
         507.32,
         500.76,
         495.07,
-        499.14
+        499.04
       ],
       "h": [
         465.9628,
@@ -1663,7 +1663,7 @@
         493.65,
         495.88,
         491.22,
-        497.3
+        497.25
       ],
       "ma3": [
         434.6351,
@@ -1957,7 +1957,7 @@
         32.3312,
         28.4304,
         25.3552,
-        40.5716
+        40.5509
       ],
       "dim": [
         10.2334,
@@ -1999,7 +1999,7 @@
         15.9221,
         13.4768,
         17.3985,
-        13.4709
+        13.464
       ],
       "bb_sup": [
         470.2966,
@@ -2138,15 +2138,15 @@
       "close": 97.14,
       "stop": 93.97,
       "r_pct": 3.26,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 1,
-      "vol_fin_mi": 170.2,
+      "vol_fin_mi": 171.3,
       "tv": "https://www.tradingview.com/chart/?symbol=VLTO",
-      "vol_qtd": 1629636.0,
+      "vol_qtd": 1850500.0,
       "var_dia_pct": 1.13,
       "mom1": -2.0,
       "mom3": 8.0,
@@ -2846,7 +2846,7 @@
       "close": 664.07,
       "stop": 620.38,
       "r_pct": 6.58,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
@@ -2854,7 +2854,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 117.2,
       "tv": "https://www.tradingview.com/chart/?symbol=DDS",
-      "vol_qtd": 112270.0,
+      "vol_qtd": 112300.0,
       "var_dia_pct": 1.25,
       "mom1": 5.0,
       "mom3": 15.0,
@@ -2863,14 +2863,14 @@
       "acima_ema70": true,
       "ema70": 612.3898,
       "ema70_incl": "sobe",
-      "quality": 75.3,
+      "quality": 75.2,
       "didi_dist": 0.206,
-      "pos_range": 0.899,
-      "dist_max_pct": 0.27,
-      "adx_var_pct": -8.6,
+      "pos_range": 0.889,
+      "dist_max_pct": 0.3,
+      "adx_var_pct": -8.4,
       "confluencia": false,
       "bb_primeira": true,
-      "high": 665.85,
+      "high": 666.04,
       "dates": [
         "2026-07-31",
         "2026-08-03",
@@ -3037,7 +3037,7 @@
         659.15,
         658.74,
         660.39,
-        665.855
+        666.04
       ],
       "l": [
         586.39,
@@ -3331,7 +3331,7 @@
         16.7775,
         15.6067,
         14.8975,
-        15.3291
+        15.3613
       ],
       "dip": [
         29.8817,
@@ -3373,7 +3373,7 @@
         22.4165,
         20.4739,
         19.6557,
-        20.8606
+        20.9488
       ],
       "dim": [
         7.0005,
@@ -3415,7 +3415,7 @@
         19.3231,
         17.6486,
         16.1038,
-        14.3917
+        14.3757
       ],
       "bb_sup": [
         609.932,
@@ -3554,7 +3554,7 @@
       "close": 133.13,
       "stop": 124.75,
       "r_pct": 6.29,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
@@ -3562,7 +3562,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 103.9,
       "tv": "https://www.tradingview.com/chart/?symbol=WMS",
-      "vol_qtd": 784204.0,
+      "vol_qtd": 784200.0,
       "var_dia_pct": 2.83,
       "mom1": -6.0,
       "mom3": -14.0,
@@ -4262,15 +4262,15 @@
       "close": 78.69,
       "stop": 68.75,
       "r_pct": 12.63,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 0,
-      "vol_fin_mi": 623.8,
+      "vol_fin_mi": 624.2,
       "tv": "https://www.tradingview.com/chart/?symbol=MCHP",
-      "vol_qtd": 9622192.0,
+      "vol_qtd": 9747400.0,
       "var_dia_pct": 4.64,
       "mom1": 6.0,
       "mom3": -10.0,
@@ -4279,14 +4279,14 @@
       "acima_ema70": true,
       "ema70": 77.8861,
       "ema70_incl": "desce",
-      "quality": 79.5,
+      "quality": 79.4,
       "didi_dist": 0.031,
-      "pos_range": 0.94,
-      "dist_max_pct": 0.3,
-      "adx_var_pct": 3.2,
+      "pos_range": 0.933,
+      "dist_max_pct": 0.34,
+      "adx_var_pct": 3.3,
       "confluencia": false,
       "bb_primeira": false,
-      "high": 78.93,
+      "high": 78.96,
       "dates": [
         "2026-07-31",
         "2026-08-03",
@@ -4453,7 +4453,7 @@
         76.55,
         75.77,
         74.75,
-        78.93
+        78.96
       ],
       "l": [
         73.7364,
@@ -4495,7 +4495,7 @@
         74.44,
         73.77,
         73.13,
-        74.945
+        74.93
       ],
       "ma3": [
         73.1168,
@@ -4747,7 +4747,7 @@
         19.621,
         19.0454,
         17.4976,
-        20.2447
+        20.2637
       ],
       "dip": [
         14.0862,
@@ -4789,7 +4789,7 @@
         29.8731,
         26.8156,
         23.5858,
-        38.2567
+        38.3421
       ],
       "dim": [
         32.1867,
@@ -4831,7 +4831,7 @@
         18.3464,
         19.8138,
         20.6392,
-        16.6018
+        16.5789
       ],
       "bb_sup": [
         85.564,
@@ -4970,7 +4970,7 @@
       "close": 14.15,
       "stop": 12.6,
       "r_pct": 10.95,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
@@ -4978,7 +4978,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 93.5,
       "tv": "https://www.tradingview.com/chart/?symbol=VFC",
-      "vol_qtd": 8712760.0,
+      "vol_qtd": 8713500.0,
       "var_dia_pct": 2.24,
       "mom1": 3.0,
       "mom3": -18.0,
@@ -4987,14 +4987,14 @@
       "acima_ema70": false,
       "ema70": 14.6983,
       "ema70_incl": "desce",
-      "quality": 77.6,
+      "quality": 77.4,
       "didi_dist": 0.189,
-      "pos_range": 0.99,
-      "dist_max_pct": 0.04,
+      "pos_range": 0.98,
+      "dist_max_pct": 0.07,
       "adx_var_pct": 1.5,
       "confluencia": false,
       "bb_primeira": false,
-      "high": 14.15,
+      "high": 14.16,
       "dates": [
         "2026-07-31",
         "2026-08-03",
@@ -5161,7 +5161,7 @@
         13.74,
         13.71,
         13.78,
-        14.155
+        14.16
       ],
       "l": [
         14.1804,
@@ -5455,7 +5455,7 @@
         29.8485,
         29.7088,
         28.7069,
-        30.2848
+        30.3092
       ],
       "dip": [
         16.7021,
@@ -5497,7 +5497,7 @@
         27.9283,
         25.0947,
         21.6139,
-        29.038
+        29.1354
       ],
       "dim": [
         37.9624,
@@ -5539,7 +5539,7 @@
         15.4619,
         13.8932,
         13.908,
-        12.0544
+        12.0379
       ],
       "bb_sup": [
         18.9026,
@@ -5678,15 +5678,15 @@
       "close": 77.2,
       "stop": 65.8,
       "r_pct": 14.77,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": 0,
-      "vol_fin_mi": 805.7,
+      "vol_fin_mi": 806.0,
       "tv": "https://www.tradingview.com/chart/?symbol=ON",
-      "vol_qtd": 11119165.0,
+      "vol_qtd": 11194700.0,
       "var_dia_pct": 3.95,
       "mom1": 5.0,
       "mom3": -15.0,
@@ -5911,7 +5911,7 @@
         71.18,
         72.21,
         71.79,
-        73.655
+        73.66
       ],
       "ma3": [
         81.4033,
@@ -6386,7 +6386,7 @@
       "close": 67.12,
       "stop": 59.84,
       "r_pct": 10.85,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
@@ -6394,7 +6394,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 18.8,
       "tv": "https://www.tradingview.com/chart/?symbol=MCHPP",
-      "vol_qtd": 16019.0,
+      "vol_qtd": 16000.0,
       "var_dia_pct": 4.74,
       "mom1": 5.0,
       "mom3": -8.0,
@@ -7094,7 +7094,7 @@
       "close": 434.15,
       "stop": 406.92,
       "r_pct": 6.27,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
@@ -7102,7 +7102,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 305.9,
       "tv": "https://www.tradingview.com/chart/?symbol=ROK",
-      "vol_qtd": 409427.0,
+      "vol_qtd": 413000.0,
       "var_dia_pct": 0.04,
       "mom1": 1.0,
       "mom3": -9.0,
@@ -7111,14 +7111,14 @@
       "acima_ema70": false,
       "ema70": 436.4489,
       "ema70_incl": "desce",
-      "quality": 58.7,
+      "quality": 58.6,
       "didi_dist": 0.436,
-      "pos_range": 0.407,
-      "dist_max_pct": 0.97,
-      "adx_var_pct": -6.1,
+      "pos_range": 0.402,
+      "dist_max_pct": 0.99,
+      "adx_var_pct": -6.0,
       "confluencia": false,
       "bb_primeira": false,
-      "high": 438.41,
+      "high": 438.5,
       "dates": [
         "2026-07-31",
         "2026-08-03",
@@ -7285,7 +7285,7 @@
         428.85,
         435.69,
         434.45,
-        438.41
+        438.5
       ],
       "l": [
         466.6326,
@@ -7579,7 +7579,7 @@
         26.1194,
         25.0946,
         24.1978,
-        24.5377
+        24.5604
       ],
       "dip": [
         20.2382,
@@ -7621,7 +7621,7 @@
         24.4466,
         29.0129,
         26.065,
-        28.6774
+        28.7576
       ],
       "dim": [
         15.5099,
@@ -7663,7 +7663,7 @@
         23.5064,
         20.1947,
         18.1427,
-        16.5134
+        16.4948
       ],
       "bb_sup": [
         479.6841,
@@ -7802,7 +7802,7 @@
       "close": 373.69,
       "stop": 339.87,
       "r_pct": 9.05,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
@@ -7810,7 +7810,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 103.3,
       "tv": "https://www.tradingview.com/chart/?symbol=AMG",
-      "vol_qtd": 241482.0,
+      "vol_qtd": 241500.0,
       "var_dia_pct": 0.2,
       "mom1": 1.0,
       "mom3": 9.0,
@@ -8510,15 +8510,15 @@
       "close": 97.15,
       "stop": 91.11,
       "r_pct": 6.22,
-      "forming": true,
+      "forming": false,
       "date": "2026-09-25",
       "ult_candle": "2026-09-25",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 0,
-      "vol_fin_mi": 99.9,
+      "vol_fin_mi": 100.1,
       "tv": "https://www.tradingview.com/chart/?symbol=TTC",
-      "vol_qtd": 676816.0,
+      "vol_qtd": 710800.0,
       "var_dia_pct": 0.29,
       "mom1": -3.0,
       "mom3": 0.0,
