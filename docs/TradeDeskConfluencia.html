@@ -55,10 +55,16 @@
 <header>
   <div class="toprow">
     <h1>TradeDesk · Confluência</h1>
-    <span class="sub">DIDI (Agulhada) × Qullamäggie (momentum) — prioridade de entrada</span>
+    <span class="sub" id="subtit">DIDI (Agulhada) × Qullamäggie (momentum) — prioridade de entrada</span>
     <span class="spacer"></span>
     <div class="controls">
-      <a href="TradeDesk.html" class="btn ghost">DIDI →</a>
+      <select id="tfSel" class="btn" title="Tempo gráfico do DIDI (o Qullamäggie é sempre do diário)">
+        <option value="1d">Diário</option>
+        <option value="2h">2h</option>
+        <option value="4h">4h</option>
+        <option value="1wk">Semanal</option>
+      </select>
+      <a href="TradeDesk.html" class="btn ghost" id="didiLink">DIDI →</a>
       <a href="TradeDeskQulla.html" class="btn ghost">Qullamäggie →</a>
       <button class="btn" id="reloadBtn">Recarregar</button>
     </div>
@@ -73,6 +79,7 @@
   <span class="lg"><span class="prio p4">4</span> Só Qullamäggie rompeu</span>
 </div>
 
+<div class="meta" id="tfNota" style="display:none"></div>
 <div class="meta" id="meta">Cruzando os dois setups…</div>
 
 <div class="wrap">
@@ -107,10 +114,37 @@ function didiAprovado(a){
 
 async function getJson(f){ try{ const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"}); return r.ok?await r.json():null; }catch(e){ return null; } }
 
+// ---- tempo grafico do DIDI (o Qullamaggie e sempre do diario) ----
+const TF_INFO={
+  "1d":{suf:"",     nome:"Diário",  pag:"TradeDesk.html"},
+  "2h":{suf:"_2h",  nome:"2h",      pag:"TradeDesk2h.html"},
+  "4h":{suf:"_4h",  nome:"4h",      pag:"TradeDesk4h.html"},
+  "1wk":{suf:"_1wk",nome:"Semanal", pag:"TradeDeskSemanal.html"},
+};
+let TF=(new URLSearchParams(location.search).get("tf")||"1d");
+if(!TF_INFO[TF]) TF="1d";
+function aplicaTF(){
+  const t=TF_INFO[TF];
+  $("tfSel").value=TF;
+  $("didiLink").href=t.pag;
+  $("subtit").textContent= TF==="1d"
+    ? "DIDI (Agulhada) × Qullamäggie (momentum) — prioridade de entrada"
+    : `DIDI no ${t.nome} × Qullamäggie no diário — prioridade de entrada`;
+  const nota=$("tfNota");
+  if(TF==="1d"){ nota.style.display="none"; }
+  else{
+    nota.style.display="block";
+    nota.innerHTML = (TF==="1wk"
+      ? "<b>Semanal:</b> o DIDI vem do gráfico semanal; o Qullamäggie e o momentum são sempre do diário. P1/P2 = tendência forte nos dois prazos."
+      : `<b>${t.nome}:</b> o DIDI vem do gráfico de ${t.nome}; o Qullamäggie e o momentum são sempre do diário. P2 (DIDI ${t.nome} + consolidando no diário) funciona como entrada antecipada dentro da base; P1 (+ rompendo no diário) confirma o rompimento.`)
+      + " <span style='color:var(--gold)'>Ainda não validado por backtest — as expectativas da estratégia valem para o diário.</span>";
+  }
+}
 async function loadData(){
+  aplicaTF();
   setStatus("Carregando os dois setups…");
   const [dus,db3,dq] = await Promise.all([
-    getJson("painel_us.json"), getJson("painel_b3.json"), getJson("painel_qulla.json")
+    getJson("painel_us"+TF_INFO[TF].suf+".json"), getJson("painel_b3"+TF_INFO[TF].suf+".json"), getJson("painel_qulla.json")
   ]);
   // mapa DIDI: ticker normalizado -> dado (so os aprovados)
   const didi={};
@@ -206,6 +240,8 @@ function render(list){
   </tr>`).join("");
 }
 
+$("tfSel").onchange=()=>{ TF=$("tfSel").value; const u=new URL(location.href); u.searchParams.set("tf",TF); history.replaceState(null,"",u);
+  setStatus("Carregando…"); loadData().then(n=>setStatus(n?"Dados carregados.":"Sem sinais neste tempo gráfico.","ok")); };
 $("reloadBtn").onclick=()=>{ setStatus("Recarregando…"); loadData().then(n=>setStatus(n?"Atualizado.":"Sem dados ainda — rode os scanners.","ok")); };
 loadData().then(n=>setStatus(n?"Dados carregados.":"Sem dados — rode DIDI e Qullamäggie.","ok"));
 </script>

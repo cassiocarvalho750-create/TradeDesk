@@ -473,11 +473,20 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
         # Bollinger 8,2
         m = bt.sma(c,8); sd = c.rolling(8).std()
         bb_sup = m + 2.0*sd; bb_inf = m - 2.0*sd
-        # momentum (so no diario/semanal; ~1M/3M/6M em pregoes)
+        # momentum: SEMPRE medido no DIARIO (~1M/3M/6M = 21/63/126 pregoes), em qualquer
+        # timeframe. Momentum e caracteristica do ativo (como no Qullamaggie): no semanal,
+        # 21/63/126 candles seriam 5/15/30 meses. Fora do diario, baixa o diario so p/ isso.
+        cm = c
+        if timeframe != "1d":
+            try:
+                dd = fetch_intraday_ok(tk, timeframe="1d")
+                cm = dd["Close"] if len(dd) else None
+            except Exception:
+                cm = None
         def _mom(n):
-            if intraday or len(c) <= n: return None
-            base = float(c.iloc[-n-1])
-            return round((float(c.iloc[-1])/base - 1.0)*100.0, 0) if base>0 else None
+            if cm is None or len(cm) <= n: return None
+            base = float(cm.iloc[-n-1])
+            return round((float(cm.iloc[-1])/base - 1.0)*100.0, 0) if base>0 else None
         mom1, mom3, mom6 = _mom(21), _mom(63), _mom(126)
         def tail(s):
             return [None if (v is None or (isinstance(v,float) and np.isnan(v))) else round(float(v),4)
