@@ -184,8 +184,10 @@ def montar_confluencia(didi_ativos, qulla_ativos):
             return 0
         return x["_fx"]
     # ranking (igual a pagina): 1 DIDI+rompeu, 2 DIDI+consolid, 3 so DIDI, 4 so rompeu
+    # prio 3 (so DIDI): so pelo momentum 3M, do maior para o menor (igual a pagina)
     linhas.sort(key=lambda x: (
         x["prioridade"],
+        (-(x["mom3"]) if x["mom3"] is not None else 1e9) if x["prioridade"] == 3 else 0,
         _chave_mom(x),
         (1e9 if x["r_pct"] is None else x["r_pct"]),
         0 if x["elite"] else 1,
