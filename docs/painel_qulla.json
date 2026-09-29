@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-09-28",
+  "gerado": "2026-09-29",
   "n": 9,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HPE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HPE"
@@ -33,7 +33,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CRWD",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CRWD"
@@ -51,7 +51,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
@@ -69,7 +69,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SWKS",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SWKS"
@@ -77,7 +77,7 @@
     {
       "entrada": 396.3,
       "stop": 367.27,
-      "alvo_3r": 483.4,
+      "alvo_3r": 483.39,
       "preco": 392.09,
       "r_pct": 7.33,
       "mom1": 2.0,
@@ -87,7 +87,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "PANW",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PANW"
@@ -105,7 +105,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
@@ -123,7 +123,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "OSCR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=OSCR"
@@ -141,7 +141,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MU",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MU"
@@ -159,7 +159,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SNDK",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SNDK"
