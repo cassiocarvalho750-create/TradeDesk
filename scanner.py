@@ -546,8 +546,12 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
         if conf:          return 1
         if prim:          return 2
         if adx_hoje:      return 3
-        return 9  # atrasado (sera removido)
-    ativos = [a for a in ativos if _rank(a) < 9]
+        return 9  # atrasado: nenhum gatilho fresco hoje
+    # Os ATRASADOS ficam no painel, marcados, e vao para o fim da lista: a pagina
+    # DIDI os mostra nas ultimas posicoes e a Confluencia so os usa junto com o
+    # Qullamaggie (P1/P2). No backtest eles renderam o mesmo que os frescos.
+    for a in ativos:
+        a["atrasado"] = (_rank(a) == 9)
     # ordena por grupo de prioridade e, dentro do grupo, por nota (desc)
     ativos.sort(key=lambda a: (
         _rank(a),
@@ -561,7 +565,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
     if timeframe=="1d":
         try:
             import registro_sinais
-            registro_sinais.registrar_didi(ativos)
+            registro_sinais.registrar_didi([a for a in ativos if not a.get("atrasado")])  # historico DIDI segue so com os frescos
         except Exception as e:
             print(f"  [registro DIDI] falhou: {e}")
     return out_path

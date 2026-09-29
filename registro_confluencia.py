@@ -78,10 +78,11 @@ def _didi_aprovado(a):
 def _didi_tipo(a):
     conf = bool(a.get("confluencia")); prim = bool(a.get("bb_primeira"))
     adx0 = (a.get("adx_ago") == 0)
-    if conf and prim: return "3JUNTOS"
+    if conf and prim: return "3JUNTOS_ABERTURA"
+    if conf:          return "3JUNTOS"
     if prim:          return "ABERTURA"
     if adx0:          return "ADXHOJE"
-    return "OUTRO"
+    return "ATRASADO"   # sem gatilho fresco hoje (so entra junto com o Qulla)
 
 
 def _faixa_mom(m3):
@@ -113,10 +114,14 @@ def _le_painel(path):
 def montar_confluencia(didi_ativos, qulla_ativos):
     """Reproduz a lista ordenada da aba Confluencia. Retorna lista de dicts ja
     na ordem final, com prioridade e campos calculados."""
-    didi = {}
+    # DIDI fresco entra sempre; ATRASADO (sem gatilho novo hoje) so junto com o Qulla (P1/P2)
+    didi = {}; atrasado = set()
     for a in didi_ativos:
+        k = _norm(a.get("ticker"))
         if _didi_aprovado(a):
-            didi[_norm(a.get("ticker"))] = a
+            didi[k] = a; atrasado.discard(k)
+        elif k not in didi:
+            didi[k] = a; atrasado.add(k)
     qulla = {}
     for a in qulla_ativos:
         qulla[_norm(a.get("ticker"))] = a
@@ -125,6 +130,8 @@ def montar_confluencia(didi_ativos, qulla_ativos):
     linhas = []
     for tk in tickers:
         d = didi.get(tk); q = qulla.get(tk)
+        if d is not None and tk in atrasado and q is None:
+            continue   # atrasado sem Qulla: fica de fora
         tem_didi = d is not None
         q_rompeu = bool(q and q.get("rompendo"))
         q_cons = bool(q and not q.get("rompendo"))
