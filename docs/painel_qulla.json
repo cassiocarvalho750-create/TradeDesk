@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-09-29",
+  "gerado": "2026-09-30",
   "n": 15,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CORT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CORT"
@@ -33,7 +33,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
@@ -45,23 +45,23 @@
       "preco": 8.73,
       "r_pct": 4.76,
       "mom1": 33.0,
-      "mom3": 13.0,
-      "mom6": -18.0,
+      "mom3": 12.0,
+      "mom6": -17.0,
       "consol_dias": 5,
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SIMH3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SIMH3"
     },
     {
-      "entrada": 943.38,
+      "entrada": 943.5,
       "stop": 870.38,
-      "alvo_3r": 1162.38,
+      "alvo_3r": 1162.86,
       "preco": 913.45,
-      "r_pct": 7.74,
+      "r_pct": 7.75,
       "mom1": 10.0,
       "mom3": -5.0,
       "mom6": 152.0,
@@ -69,7 +69,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "STX",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=STX"
@@ -87,7 +87,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "BMNR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=BMNR"
@@ -105,7 +105,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HPE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HPE"
@@ -123,7 +123,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SWKS",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SWKS"
@@ -141,17 +141,17 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
     },
     {
       "entrada": 396.3,
-      "stop": 377.96,
-      "alvo_3r": 451.3,
+      "stop": 377.8,
+      "alvo_3r": 451.8,
       "preco": 388.41,
-      "r_pct": 4.63,
+      "r_pct": 4.67,
       "mom1": 5.0,
       "mom3": 14.0,
       "mom6": 152.0,
@@ -159,17 +159,17 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "PANW",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PANW"
     },
     {
       "entrada": 190.64,
-      "stop": 177.18,
-      "alvo_3r": 231.02,
+      "stop": 177.03,
+      "alvo_3r": 231.47,
       "preco": 180.1,
-      "r_pct": 7.06,
+      "r_pct": 7.14,
       "mom1": 37.0,
       "mom3": 11.0,
       "mom6": 155.0,
@@ -177,7 +177,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SMTC",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SMTC"
@@ -195,7 +195,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "OSCR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=OSCR"
@@ -213,7 +213,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MU",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MU"
@@ -231,7 +231,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MRVL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MRVL"
@@ -249,7 +249,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "INTC",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=INTC"
@@ -267,7 +267,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SNDK",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SNDK"
