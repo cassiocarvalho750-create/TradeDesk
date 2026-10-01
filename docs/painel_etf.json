@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-01",
-  "captura": "01/10/2026 19:16",
+  "captura": "01/10/2026 19:53",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -38,6 +38,7 @@
       "adx_var_pct": -1.9,
       "confluencia": true,
       "bb_primeira": true,
+      "cruz_antigo": false,
       "high": 198.54,
       "dates": [
         "2026-08-06",

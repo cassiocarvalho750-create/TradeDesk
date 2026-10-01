@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-01",
-  "captura": "01/10/2026 19:16",
+  "captura": "01/10/2026 19:54",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -38,6 +38,7 @@
       "adx_var_pct": -1.3,
       "confluencia": true,
       "bb_primeira": true,
+      "cruz_antigo": false,
       "high": 63.11,
       "dates": [
         "2026-08-06",
@@ -747,6 +748,7 @@
       "adx_var_pct": -13.9,
       "confluencia": true,
       "bb_primeira": false,
+      "cruz_antigo": false,
       "high": 153.15,
       "dates": [
         "2026-08-06",
@@ -1431,7 +1433,7 @@
       "lado": "compra",
       "close": 1.9,
       "stop": 1.87,
-      "r_pct": 1.66,
+      "r_pct": 1.64,
       "forming": true,
       "date": "2026-10-01",
       "ult_candle": "2026-10-01",
@@ -1441,7 +1443,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPAUD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.11,
+      "var_dia_pct": 0.09,
       "mom1": 1.0,
       "mom3": -1.0,
       "mom6": 1.0,
@@ -1449,13 +1451,14 @@
       "acima_ema70": true,
       "ema70": 1.897,
       "ema70_incl": "lado",
-      "quality": 88.7,
+      "quality": 85.6,
       "didi_dist": 0.102,
-      "pos_range": 0.993,
-      "dist_max_pct": 0.0,
+      "pos_range": 0.868,
+      "dist_max_pct": 0.02,
       "adx_var_pct": 31.2,
       "confluencia": false,
       "bb_primeira": false,
+      "cruz_antigo": false,
       "high": 1.9,
       "dates": [
         "2026-08-07",
@@ -1539,7 +1542,7 @@
         1.8871,
         1.889,
         1.8929,
-        1.9049
+        1.9045
       ],
       "o": [
         1.9131,
@@ -1707,7 +1710,7 @@
         1.8849,
         1.8872,
         1.8896,
-        1.8956
+        1.8955
       ],
       "ma8": [
         1.9131,
@@ -1833,7 +1836,7 @@
         0.1717,
         0.2876,
         0.3099,
-        0.4581
+        0.4545
       ],
       "didi_longa": [
         0.175,
@@ -1875,7 +1878,7 @@
         0.0656,
         0.0575,
         -0.0426,
-        -0.1473
+        -0.1459
       ],
       "adx": [
         16.9762,
@@ -1959,7 +1962,7 @@
         19.7141,
         21.9117,
         34.2554,
-        29.3376
+        29.3306
       ],
       "dim": [
         15.5897,
@@ -2001,7 +2004,7 @@
         17.4056,
         14.5114,
         10.7733,
-        9.2266
+        9.2244
       ],
       "bb_sup": [
         1.924,
@@ -2043,7 +2046,7 @@
         1.8911,
         1.8917,
         1.8954,
-        1.9053
+        1.905
       ],
       "bb_mid": [
         1.9131,
@@ -2127,7 +2130,7 @@
         1.8723,
         1.872,
         1.8722,
-        1.8686
+        1.8687
       ],
       "atrasado": true
     }
