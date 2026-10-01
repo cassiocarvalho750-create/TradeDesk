@@ -1,19 +1,19 @@
 {
   "gerado": "2026-10-01",
-  "gerado_utc": "2026-10-01 15:25 UTC",
+  "gerado_utc": "2026-10-01 19:03 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 739.12,
-      "mm200": 666.51,
+      "close": 742.94,
+      "mm200": 666.53,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 184924.62,
-      "mm200": 177841.53,
+      "close": 186637.38,
+      "mm200": 177850.1,
       "validado": false
     }
   },
@@ -30,9 +30,9 @@
       "stop": 47.89,
       "alvo_3r": 56.49,
       "r_pct": 4.3,
-      "preco": 49.44,
+      "preco": 49.82,
       "ema20": 47.91,
-      "mom3": 33.0,
+      "mom3": 34.0,
       "mom_fraco": false,
       "status": "ORDEM",
       "ordem_dia": "hoje",
@@ -51,13 +51,13 @@
       "stop": 428.93,
       "alvo_3r": 512.13,
       "r_pct": 4.62,
-      "preco": 444.51,
+      "preco": 447.85,
       "ema20": 429.09,
       "mom3": 5.0,
       "mom_fraco": false,
       "status": "ORDEM",
       "ordem_dia": "hoje",
-      "execucao": "aguardando",
+      "execucao": "ativada",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
