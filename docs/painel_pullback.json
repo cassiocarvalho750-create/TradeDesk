@@ -1,25 +1,25 @@
 {
   "gerado": "2026-10-01",
-  "gerado_utc": "2026-10-01 14:50 UTC",
+  "gerado_utc": "2026-10-01 15:25 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 739.4,
+      "close": 739.12,
       "mm200": 666.51,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 186286.59,
-      "mm200": 177848.34,
+      "close": 184924.62,
+      "mm200": 177841.53,
       "validado": false
     }
   },
   "funil": {
-    "total": 1134,
-    "liquidos": 1078,
+    "total": 1135,
+    "liquidos": 1079,
     "sinais": 2
   },
   "n": 2,
@@ -30,7 +30,7 @@
       "stop": 47.89,
       "alvo_3r": 56.49,
       "r_pct": 4.3,
-      "preco": 49.73,
+      "preco": 49.44,
       "ema20": 47.91,
       "mom3": 33.0,
       "mom_fraco": false,
@@ -51,7 +51,7 @@
       "stop": 428.93,
       "alvo_3r": 512.13,
       "r_pct": 4.62,
-      "preco": 443.14,
+      "preco": 444.51,
       "ema20": 429.09,
       "mom3": 5.0,
       "mom_fraco": false,
