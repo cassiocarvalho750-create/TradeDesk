@@ -1,70 +1,26 @@
 {
   "gerado": "2026-10-01",
-  "gerado_utc": "2026-10-01 19:23 UTC",
+  "gerado_utc": "2026-10-01 22:09 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 742.86,
-      "mm200": 666.53,
+      "close": 742.03,
+      "mm200": 666.52,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
-      "ok": null,
-      "close": null,
-      "mm200": null,
+      "ok": true,
+      "close": 187197.45,
+      "mm200": 177852.9,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
-    "liquidos": 1079,
-    "sinais": 2
+    "liquidos": 1079
   },
-  "n": 2,
-  "ativos": [
-    {
-      "data_sinal": "2026-09-30",
-      "entrada": 449.73,
-      "stop": 428.93,
-      "alvo_3r": 512.13,
-      "r_pct": 4.62,
-      "preco": 446.5,
-      "ema20": 429.09,
-      "mom3": 5.0,
-      "mom_fraco": false,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "ativada",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "FFIV",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=FFIV",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-09-30",
-      "entrada": 50.04,
-      "stop": 47.89,
-      "alvo_3r": 56.49,
-      "r_pct": 4.3,
-      "preco": 49.89,
-      "ema20": 47.91,
-      "mom3": 33.0,
-      "mom_fraco": false,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "aguardando",
-      "stop_tocado": false,
-      "mercado_ok": null,
-      "indice": "IBOV",
-      "ticker": "PETR4.SA",
-      "market": "B3",
-      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:PETR4",
-      "forming": true
-    }
-  ]
+  "n": 0,
+  "ativos": []
 }
