@@ -72,12 +72,14 @@ def _norm(tk):
 
 
 def _didi_aprovado(a):
+    if a.get("cruz_antigo"): return False   # cruzamento ha 6-10 pregoes: so vale junto com o Qulla
     return bool(a.get("confluencia")) or bool(a.get("bb_primeira")) or (a.get("adx_ago") == 0)
 
 
 def _didi_tipo(a):
     conf = bool(a.get("confluencia")); prim = bool(a.get("bb_primeira"))
     adx0 = (a.get("adx_ago") == 0)
+    if a.get("cruz_antigo"): return "CRUZ_6_10D"   # cruzamento do DIDI ha 6-10 pregoes
     if conf and prim: return "3JUNTOS_ABERTURA"
     if conf:          return "3JUNTOS"
     if prim:          return "ABERTURA"

@@ -51,6 +51,10 @@ TF_DAYS_BACK = {"1d": 1, "1wk": 1, "4h": 2, "2h": 2, "1h": 3, "15m": 4, "5m": 6}
 # janelas de tolerancia (DIDI, ADX) em candles, por timeframe.
 # Semanal usa 3/2, 4h usa 4/2; os demais herdam o padrao do diario (5/3).
 TF_WINDOWS = {"1wk": (3, 2), "4h": (4, 2)}
+# Janela AMPLIADA do cruzamento do DIDI (so no diario de acoes, lado compra): sinais cujo
+# cruzamento ocorreu ha 6-10 pregoes saem MARCADOS (cruz_antigo), separados dos normais.
+# Backtest (out/2026): no DIDI sozinho rendem igual aos frescos; na Confluencia P1, menos.
+DIDI_WIN_EXT = 10
 def tf_windows(timeframe):
     return TF_WINDOWS.get(timeframe, (5, 3))
 
@@ -188,7 +192,7 @@ def _liquidez_ok(tk, d, min_us_mi, min_b3_mi):
     except Exception:
         return False
 
-def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
+def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=None):
     """Avalia UM ticker (DataFrame ja baixado) e retorna lista de hits.
     lado: 'compra' (padrao) usa signal_win; 'venda' usa signal_venda (espelho).
     Logica identica para download em lote e individual."""
@@ -200,8 +204,10 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
         if col not in d.columns:
             return res
     didi_win, adx_win = tf_windows(timeframe)
+    # janela usada na busca: a normal, ou a ampliada (didi_ext) quando pedida (so compra)
+    win_busca = max(didi_win, int(didi_ext)) if (didi_ext and lado == "compra") else didi_win
     try:
-        s = bt.compute_signals_windowed(d, didi_window=didi_win, adx_window=adx_win)
+        s = bt.compute_signals_windowed(d, didi_window=win_busca, adx_window=adx_win)
     except Exception:
         return res
     venda = (lado == "venda")
@@ -271,7 +277,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
             vol_dia_qtd = float(s["Volume"].iloc[pos])
             vol_dia_fin = (vol_dia_qtd * float(entry)) / 1e6 if not np.isnan(vol_dia_qtd) else 0.0
             didi_ago = adx_ago = None
-            for k in range(0, didi_win+1):
+            for k in range(0, win_busca+1):
                 if pos-k < 0: break
                 if venda:
                     # cruzamento de baixa: didi3 cruzou de >=0 para <0
@@ -316,6 +322,9 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
             # (expoente 1.5): perto do zero cai devagar (1 dia ainda e bom),
             # afastamentos maiores caem mais rapido. Zera no limite das janelas.
             da = didi_ago if didi_ago is not None else didi_win
+            da = min(da, didi_win)   # cruzamento alem da janela normal: sincronia zerada
+            # cruzamento ANTIGO: ocorreu alem da janela normal (6-10 pregoes atras no diario)
+            cruz_antigo = bool(didi_ago is not None and didi_ago > didi_win)
             aa = adx_ago  if adx_ago  is not None else adx_win
             fd = (da/max(didi_win,1))**1.5
             fa = (aa/max(adx_win,1))**1.5
@@ -393,6 +402,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
                 "adx_var_pct": round(float(adx_var_pct),1) if not (isinstance(adx_var_pct,float) and np.isnan(adx_var_pct)) else None,
                 "confluencia": bool(confluencia_perfeita),
                 "bb_primeira": bool(row.get("bb_primeira_abertura", False)),
+                "cruz_antigo": cruz_antigo,
                 "lado": lado,
                 "quality": quality,
                 "pe": None, "mktcap": None,
@@ -400,7 +410,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra"):
     return res
 
 
-def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra"):
+def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra", didi_ext=None):
     """Retorna lista de sinais nos ultimos `days_back` candles do timeframe dado.
 
     timeframe: '1d' (diario, padrao), '2h', '1h', '15m', '5m'.
@@ -432,7 +442,7 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
                 continue
             if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 continue
-            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext))
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
@@ -441,7 +451,7 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
                 time.sleep(0.02); continue
             if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 time.sleep(0.01); continue
-            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext))
             time.sleep(0.03)
     return hits
 
@@ -517,6 +527,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "pos_range": h.get("pos_range"), "dist_max_pct": h.get("dist_max_pct"),
             "adx_var_pct": h.get("adx_var_pct"), "confluencia": h.get("confluencia", False),
             "bb_primeira": h.get("bb_primeira", False),
+            "cruz_antigo": bool(h.get("cruz_antigo", False)),
             "high": h.get("high"),
             "dates": dates,
             "price": tail(c),
@@ -553,7 +564,9 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
     for a in ativos:
         a["atrasado"] = (_rank(a) == 9)
     # ordena por grupo de prioridade e, dentro do grupo, por nota (desc)
+    # cruzamento antigo (6-10 pregoes): grupo SEPARADO, depois de todos os normais
     ativos.sort(key=lambda a: (
+        bool(a.get("cruz_antigo")),
         _rank(a),
         -(a.get("quality") if a.get("quality") is not None else -1)
     ))
@@ -565,7 +578,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
     if timeframe=="1d":
         try:
             import registro_sinais
-            registro_sinais.registrar_didi([a for a in ativos if not a.get("atrasado")])  # historico DIDI segue so com os frescos
+            registro_sinais.registrar_didi([a for a in ativos if not a.get("atrasado") and not a.get("cruz_antigo")])  # historico DIDI segue so com os frescos
         except Exception as e:
             print(f"  [registro DIDI] falhou: {e}")
     return out_path

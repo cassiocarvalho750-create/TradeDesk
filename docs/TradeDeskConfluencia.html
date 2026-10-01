@@ -150,7 +150,7 @@ async function loadData(){
   // mapa DIDI: ticker normalizado -> dado (so os aprovados)
   const didi={};
   // DIDI com gatilho fresco entra sempre; o ATRASADO (sem gatilho novo hoje) so conta junto com o Qulla (P1/P2)
-  [dus,db3].forEach(d=>{ if(d&&d.ativos) d.ativos.forEach(a=>{ const x=Object.assign({},a,{_atrasado:!didiAprovado(a)}); const k=norm(a.ticker); if(!didi[k]||didi[k]._atrasado) didi[k]=x; }); });
+  [dus,db3].forEach(d=>{ if(d&&d.ativos) d.ativos.forEach(a=>{ const x=Object.assign({},a,{_atrasado:(!didiAprovado(a)||!!a.cruz_antigo)}); const k=norm(a.ticker); if(!didi[k]||didi[k]._atrasado) didi[k]=x; }); });
   // mapa Qulla
   const qulla={};
   if(dq&&dq.ativos) dq.ativos.forEach(a=>{ qulla[norm(a.ticker)]=a; });
@@ -161,7 +161,7 @@ async function loadData(){
   tickers.forEach(tk=>{
     const q=qulla[tk]; let d=didi[tk];
     if(d && d._atrasado && !q) d=null;       // atrasado sem Qulla: fica de fora
-    const temDidi=!!d, didiAtrasado=!!(d&&d._atrasado);
+    const temDidi=!!d, didiAtrasado=!!(d&&d._atrasado), didiCruz=(d&&d.cruz_antigo)?d.didi_ago:null;
     if(!d && !q) return;
     const qRompeu = q&&q.rompendo;
     const qCons   = q&&!q.rompendo;
@@ -175,7 +175,7 @@ async function loadData(){
     linhas.push({
       tk, prio, rot,
       market: (q&&q.market)||(d&&d.market)||"",
-      temDidi, didiAtrasado, qRompeu, qCons, puro: q&&q.puro,
+      temDidi, didiAtrasado, didiCruz, qRompeu, qCons, puro: q&&q.puro,
       // execucao validada: com rompimento (P1/P3) usa entrada/stop do Qulla;
       // sem rompimento (P2/P4) segue a regra do DIDI: entrada no fechamento, stop no pivo, alvo 3R
       preco: q?q.preco:(d?d.close:null),
@@ -216,7 +216,8 @@ async function loadData(){
 
 function sinaisTags(x){
   let t="";
-  if(x.temDidi) t+= x.didiAtrasado ? '<span class="tag cons" title="DIDI sem gatilho novo hoje (disparou em dias anteriores)">DIDI atrasado</span>' : '<span class="tag didi">DIDI</span>';
+  if(x.temDidi && x.didiCruz!=null) t+=`<span class="tag cons" style="color:#e3b341;border:1px dashed #e3b341" title="O cruzamento da média 3 na 8 aconteceu há ${x.didiCruz} pregões (fora da janela normal de 5). No backtest, essas confluências renderam menos que as normais.">DIDI cruz. há ${x.didiCruz}d</span>`;
+  else if(x.temDidi) t+= x.didiAtrasado ? '<span class="tag cons" title="DIDI sem gatilho novo hoje (disparou em dias anteriores)">DIDI atrasado</span>' : '<span class="tag didi">DIDI</span>';
   if(x.qRompeu) t+='<span class="tag romp">rompeu</span>';
   if(x.qCons)   t+='<span class="tag cons">consolidando</span>';
   if(x.puro)    t+='<span class="tag elite">★</span>';

@@ -39,7 +39,7 @@ def carregar_sinais():
             if d.get("captura") and not captura: captura=d["captura"]
         except Exception:
             pass
-    ativos=[a for a in ativos if _rank(a)<9]
+    ativos=[a for a in ativos if _rank(a)<9 and not a.get("cruz_antigo")]
     ativos.sort(key=lambda a:(_rank(a), -(a.get("quality") or -1)))
     return ativos, captura
 

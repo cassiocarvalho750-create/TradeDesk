@@ -27,11 +27,15 @@ def main():
     sufxo='' if tf=='1d' else f'_{tf}'
     uni=[t for t in rb.get_universe(quick=a.quick) if t.endswith(".SA")]
     print(f"Scanner B3 (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | ultimos {a.days} candle(s)\n")
-    hits=sc.scan(uni, days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf)
+    # no diario, busca tambem os cruzamentos de 6-10 pregoes (saem marcados como cruz_antigo)
+    hits=sc.scan(uni, days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf,
+                 didi_ext=(sc.DIDI_WIN_EXT if tf=='1d' else None))
     if hits:
         print(f"  buscando P/E e Market Cap de {len(hits)} ativo(s) com sinal...")
         sc.enrich_fundamentals(hits)
         sc.build_panel_data(hits, out_path=f"painel_b3{sufxo}.json", timeframe=tf)
+    # relatorio HTML e JSON do TradeDesk seguem so com os sinais normais
+    hits=[h for h in hits if not h.get("cruz_antigo")]
     hits.sort(key=lambda h:(not h["forming"], h["ticker"]))
 
     # terminal
