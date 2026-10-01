@@ -8,7 +8,7 @@ on:
         required: false
         default: "ambos"
         type: choice
-        options: ["ambos", "us", "b3", "etf", "forex", "insidebar", "qulla"]
+        options: ["ambos", "us", "b3", "etf", "forex", "insidebar", "qulla", "pullback"]
       quick:
         description: "Teste rápido (~40 ativos)"
         required: false
@@ -76,13 +76,16 @@ jobs:
           if [ "$TF" = "1d" ] && { [ "$MERCADO" = "qulla" ] || [ "$MERCADO" = "ambos" ]; }; then
             python scanner_qulla.py || echo "scanner_qulla falhou (seguindo)"
           fi
+          if [ "$TF" = "1d" ] && { [ "$MERCADO" = "pullback" ] || [ "$MERCADO" = "ambos" ]; }; then
+            python scanner_pullback.py || echo "scanner_pullback falhou (seguindo)"
+          fi
           python humor_sp500.py --json || echo "humor_sp500 falhou (seguindo)"
 
       - name: Carimbar horario e copiar resultados p/ docs/
         run: |
           mkdir -p docs
           date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt
-          for f in painel_humor.json painel_qulla.json painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json painel_us_1wk.json painel_b3_1wk.json painel_us_4h.json painel_b3_4h.json painel_forex.json painel_forex_venda.json painel_insidebar.json \
+          for f in painel_humor.json painel_qulla.json painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json painel_us_1wk.json painel_b3_1wk.json painel_us_4h.json painel_b3_4h.json painel_forex.json painel_forex_venda.json painel_insidebar.json painel_pullback.json \
                    scanner_us.json scanner_b3.json \
                    scanner_us_tradedesk_USA.json scanner_b3_tradedesk_BRL.json \
                    scanner_us.html scanner_b3.html \
@@ -96,7 +99,7 @@ jobs:
           git config user.name  "tradedesk-bot"
           git config user.email "actions@github.com"
           git add docs/ || true
-          git add historico_sinais_didi.csv historico_sinais_insidebar.csv historico_confluencia.csv || true
+          git add historico_sinais_didi.csv historico_sinais_insidebar.csv historico_confluencia.csv historico_pullback.csv || true
           if git diff --staged --quiet; then
             echo "Nada novo para comitar."
           else
