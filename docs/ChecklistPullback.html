@@ -1,0 +1,484 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checklist Pullback EMA20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: ficha de operação — cada passo é uma linha com o critério à esquerda e o gráfico do que olhar à direita; três fases na ordem em que o trade acontece. Mesma família visual do checklist DIDI + Qullamäggie. */
+:root{
+  --bg:#F2F4F7; --panel:#FFFFFF; --ink:#18202C; --muted:#5A6576; --line:#D8DDE5; --grid:#E9ECF1;
+  --accent:#1D5BC9; --accent-soft:#E3ECFB;
+  --up:#1B8A4B; --down:#C5352B; --down-soft:#FBE7E5; --warn:#A76A00; --warn-soft:#FFF3DC;
+  --e10:#D48400; --e20:#8047CF; --e50:#2E8A86; --qqq:#18202C;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F131A; --panel:#161B24; --ink:#E5E9EF; --muted:#98A2B3; --line:#2A313D; --grid:#1F2530;
+  --accent:#6E9FFF; --accent-soft:#1B2740;
+  --up:#3DBE6F; --down:#F0635A; --down-soft:#2E1A1A; --warn:#E8A93A; --warn-soft:#2C2412;
+  --e10:#F0AE3C; --e20:#B58AF4; --e50:#4CC2BC; --qqq:#E5E9EF; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0F131A; --panel:#161B24; --ink:#E5E9EF; --muted:#98A2B3; --line:#2A313D; --grid:#1F2530;
+  --accent:#6E9FFF; --accent-soft:#1B2740;
+  --up:#3DBE6F; --down:#F0635A; --down-soft:#2E1A1A; --warn:#E8A93A; --warn-soft:#2C2412;
+  --e10:#F0AE3C; --e20:#B58AF4; --e50:#4CC2BC; --qqq:#E5E9EF; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:28px 56px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 24px;justify-content:space-between;margin-bottom:22px}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,5vw,44px);line-height:1;letter-spacing:.01em;margin:0;text-wrap:balance}
+.lead{color:var(--muted);max-width:62ch;margin:8px 0 0}
+.progress{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.pill{font-family:var(--f-mono);font-size:12.5px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-variant-numeric:tabular-nums}
+.pill.ok{border-color:var(--up);color:var(--up)}
+button.reset{font:600 13px var(--f-body);padding:7px 14px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button.reset:hover{border-color:var(--accent)}
+button.reset:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.phase{margin-top:34px}
+.phase-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:4px}
+.phase-head h2{font-family:var(--f-display);font-weight:700;font-size:26px;letter-spacing:.02em;text-transform:uppercase;margin:0}
+.phase-head span{color:var(--muted);font-size:14px}
+
+.step{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;padding:20px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.txt{min-width:0;display:grid;grid-template-columns:34px minmax(0,1fr);gap:0 12px;align-content:start}
+.txt > :not(.chk){grid-column:2}
+.chk{grid-column:1;grid-row:1;width:26px;height:26px;margin-top:2px;accent-color:var(--up);cursor:pointer}
+.num{font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.txt h3{font-family:var(--f-display);font-weight:600;font-size:23px;line-height:1.1;margin:2px 0 6px;text-wrap:balance}
+.txt p{margin:0 0 8px;max-width:60ch}
+.txt ul{margin:2px 0 8px;padding-left:18px}
+.txt li{margin:2px 0}
+.step.done h3{color:var(--up)}
+.tag{display:inline-block;font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px;vertical-align:middle;margin-left:6px}
+.tag.opt{background:var(--warn-soft);color:var(--warn)}
+.note{font-size:13px;color:var(--muted);border-left:3px solid var(--line);padding-left:10px;margin-top:6px}
+.note.warn{border-color:var(--warn)}
+.fig{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px 8px}
+.fig svg{display:block;width:100%;height:auto}
+.cap{font-size:12.5px;color:var(--muted);margin-top:4px}
+
+/* SVG */
+.g-grid{stroke:var(--grid);stroke-width:1}
+.g-zero{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4}
+.g-lbl{fill:var(--muted);font:500 10.5px var(--f-mono)}
+.g-lbl-ink{fill:var(--ink);font:600 11px var(--f-body)}
+.c-up{fill:var(--up);stroke:var(--up)} .c-down{fill:var(--down);stroke:var(--down)}
+.wick{stroke-width:1.2}
+.l-ink{stroke:var(--ink);fill:none;stroke-width:2} .l-muted{stroke:var(--muted);fill:none;stroke-width:1.6}
+.l-qqq{stroke:var(--qqq);fill:none;stroke-width:1.8}
+.l-e10{stroke:var(--e10);fill:none;stroke-width:1.8} .l-e20{stroke:var(--e20);fill:none;stroke-width:2.4} .l-e50{stroke:var(--e50);fill:none;stroke-width:1.8}
+.h-entry{stroke:var(--accent);stroke-width:1.6;stroke-dasharray:6 4} .h-stop{stroke:var(--down);stroke-width:1.6;stroke-dasharray:6 4;fill:none}
+.h-alvo{stroke:var(--up);stroke-width:1.6;stroke-dasharray:6 4} .h-res{stroke:var(--ink);stroke-width:1.4;stroke-dasharray:3 3}
+.l-up{stroke:var(--up);fill:none;stroke-width:2.2} .l-down{stroke:var(--down);fill:none;stroke-width:2.2}
+.mark{fill:var(--panel);stroke:var(--ink);stroke-width:1.6}
+.vline{stroke:var(--muted);stroke-width:1;stroke-dasharray:2 3}
+.t-up{fill:var(--up);font:600 11px var(--f-body)} .t-down{fill:var(--down);font:600 11px var(--f-body)} .t-acc{fill:var(--accent);font:600 11px var(--f-body)}
+.t-warn{fill:var(--warn);font:600 11px var(--f-body)}
+.t-e10{fill:var(--e10);font:600 11px var(--f-mono)} .t-e20{fill:var(--e20);font:600 11px var(--f-mono)} .t-e50{fill:var(--e50);font:600 11px var(--f-mono)}
+.box-base{fill:var(--accent-soft);stroke:none} .box-off{fill:var(--down-soft);stroke:none}
+
+/* tabelas */
+.clas{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.clas th,.clas td{border:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+.clas th{background:var(--bg);font:600 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.clas tr.best td{background:var(--accent-soft)}
+.clas td.neg{color:var(--down)}
+.clas td:not(:first-child),.clas th{white-space:nowrap}
+.rec{font-family:var(--f-mono);font-size:13px;line-height:1.9;font-variant-numeric:tabular-nums}
+.rec div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line)}
+.rec div:last-child{border-bottom:none;font-weight:600;color:var(--up)}
+
+footer{margin-top:36px;color:var(--muted);font-size:13px;max-width:78ch}
+
+@media (max-width:760px){
+  .step{grid-template-columns:minmax(0,1fr);gap:12px}
+}
+@media (prefers-reduced-motion:no-preference){ .step h3{transition:color .2s} }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p style="margin:0 0 8px"><a href="TradeDeskPullback.html" style="color:var(--accent);font-size:13px">← Scanner Pullback EMA20</a></p>
+      <h1>Checklist Pullback EMA20</h1>
+      <p class="lead">Primeiro toque na EMA20 de uma ação em tendência, com candle de força. Marque cada critério; a coluna da direita mostra o que procurar no gráfico diário.</p>
+    </div>
+    <div class="progress">
+      <span class="pill" id="pg-a">Entrada 0/4</span>
+      <span class="pill" id="pg-b">Montagem 0/4</span>
+      <span class="pill" id="pg-c">Saída 0/3</span>
+      <button class="reset" id="reset" type="button">Novo trade</button>
+    </div>
+  </header>
+
+  <!-- ============ FASE 1 ============ -->
+  <section class="phase" data-fase="a">
+    <div class="phase-head"><h2>Antes de entrar</h2><span>Mercado, tendência, recuo até a média e o candle de gatilho</span></div>
+
+    <div class="step">
+      <label class="txt" for="s1">
+        <input type="checkbox" class="chk" id="s1">
+        <span class="num">Passo 1 · Mercado</span>
+        <h3>O QQQ está acima da média de 200 dias</h3>
+        <p>Olhe o gráfico diário do QQQ. Fechamento acima da média simples de 200 = mercado liberado. Abaixo dela, não abra trades deste setup.</p>
+        <p class="note">Com o QQQ acima da MM200 o setup rendeu +0,25 a +0,31R por trade; abaixo, só +0,04 a +0,17R. Foi o filtro que mais melhorou o resultado.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-qqq"></div><figcaption class="cap">Faixa vermelha: QQQ abaixo da MM200, setup desligado.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <label class="txt" for="s2">
+        <input type="checkbox" class="chk" id="s2">
+        <span class="num">Passo 2 · Tendência da ação</span>
+        <h3>EMA10 acima da EMA20, acima da EMA50, e a EMA50 subindo</h3>
+        <p>As três médias exponenciais estão empilhadas na ordem: a mais curta em cima. A EMA50 de hoje está mais alta que a de 10 pregões atrás.</p>
+        <p class="note">Médias embaralhadas ou EMA50 de lado = sem tendência. Pule a ação.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-trend"></div><figcaption class="cap">Ordem de cima para baixo: EMA10, EMA20, EMA50.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <label class="txt" for="s3">
+        <input type="checkbox" class="chk" id="s3">
+        <span class="num">Passo 3 · Retorno à média</span>
+        <h3>Primeiro toque na EMA20 em 10 pregões</h3>
+        <p>A mínima de ontem ou de hoje encostou na EMA20 (ou passou dela) e hoje o preço fechou acima da EMA20.</p>
+        <p>Nos 10 pregões antes disso, nenhuma mínima tinha tocado a EMA20.</p>
+        <p class="note">O primeiro recuo depois de uma pernada é o que funciona. Quando o preço já vinha batendo na média, o resultado caiu para +0,19 a +0,26R.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-toque"></div><figcaption class="cap">Dez pregões longe da média, depois o primeiro recuo até ela.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <label class="txt" for="s4">
+        <input type="checkbox" class="chk" id="s4">
+        <span class="num">Passo 4 · Gatilho</span>
+        <h3>Candle de força: fechou acima da máxima de ontem</h3>
+        <p>O candle do sinal fecha acima da EMA20 <strong>e</strong> acima da máxima do candle anterior. É o comprador retomando o controle depois do recuo.</p>
+        <p class="note">Inside bar, martelo e "só o toque" foram testados como gatilho e renderam menos. O inside bar ficou no nível de entrar em qualquer dia.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-gat"></div><figcaption class="cap">Ontem tocou a média; hoje fechou acima da máxima de ontem.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <div class="txt">
+        <span class="num">Resultado · Por que estes filtros</span>
+        <h3>O que cada filtro acrescentou</h3>
+        <p>Base: médias empilhadas + toque na EMA20 + candle de força. Cada linha soma um filtro.</p>
+        <p class="note">Expectativa por trade com alvo fixo de 3R, nas 3 cestas (2017–2026). R = o valor que você arrisca. A referência é comprar em qualquer dia de tendência com a mesma execução.</p>
+      </div>
+      <div class="fig" style="overflow-x:auto">
+        <table class="clas">
+          <thead><tr><th>Filtros</th><th>Expectativa</th><th>Acerto</th></tr></thead>
+          <tbody>
+            <tr><td>Referência: qualquer dia de tendência</td><td>+0,16 a +0,18R</td><td>~30%</td></tr>
+            <tr><td>Passos 2 + 3 + 4 (sem o 1º toque)</td><td>+0,20 a +0,27R</td><td>31–33%</td></tr>
+            <tr><td>+ QQQ acima da MM200</td><td>+0,25 a +0,31R</td><td>32–34%</td></tr>
+            <tr class="best"><td><strong>+ primeiro toque (todos os passos)</strong></td><td><strong>+0,30 a +0,41R</strong></td><td>33–36%</td></tr>
+          </tbody>
+        </table>
+        <p class="cap">Inside bar como gatilho: +0,13 a +0,25R. Volume seco no recuo piorou o resultado em vez de ajudar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FASE 2 ============ -->
+  <section class="phase" data-fase="b">
+    <div class="phase-head"><h2>Montando o trade</h2><span>Ordem, stop, tamanho e plano de saída, antes de apertar o botão</span></div>
+
+    <div class="step">
+      <label class="txt" for="s5">
+        <input type="checkbox" class="chk" id="s5">
+        <span class="num">Passo 5 · Entrada</span>
+        <h3>Compra stop 1 centavo acima da máxima do candle de gatilho</h3>
+        <p>Deixe a ordem para o pregão seguinte, valendo só naquele dia.</p>
+        <ul>
+          <li>Abriu acima do gatilho: a entrada é na abertura.</li>
+          <li>Não chegou no gatilho: cancele. O sinal morreu.</li>
+        </ul>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-trade"></div><figcaption class="cap">Máxima do gatilho 49,99 → ordem em 50,00. No dia seguinte o preço passa e executa.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <label class="txt" for="s6">
+        <input type="checkbox" class="chk" id="s6">
+        <span class="num">Passo 6 · Stop</span>
+        <h3>Na menor mínima entre ontem e o candle de gatilho</h3>
+        <p>Normalmente é a mínima do candle que tocou a EMA20. A distância da entrada até o stop é o <strong>1R</strong> do trade.</p>
+        <p class="note">No backtest, a distância mediana foi de ~5% do preço. Se o mercado abrir abaixo do stop, a venda sai na abertura e a perda passa um pouco de 1R.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-stop"></div><figcaption class="cap">1R = 50,00 − 47,50 = 2,50.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <label class="txt" for="s7">
+        <input type="checkbox" class="chk" id="s7">
+        <span class="num">Passo 7 · Tamanho</span>
+        <h3>Arrisque 0,5% do capital</h3>
+        <p>A quantidade se ajusta à distância do stop, para que toda perda de −1R custe o mesmo valor.</p>
+        <p><strong>Quantidade = (capital × 0,5%) ÷ (entrada − stop)</strong></p>
+        <p class="note">Arredonde sempre para baixo.</p>
+      </label>
+      <div class="fig">
+        <div class="rec">
+          <div><span>Capital</span><span>$ 10.000</span></div>
+          <div><span>× risco por trade 0,5%</span><span>$ 50,00</span></div>
+          <div><span>÷ 1R por ação (50,00 − 47,50)</span><span>$ 2,50</span></div>
+          <div><span>= quantidade</span><span>20 ações</span></div>
+        </div>
+        <p class="cap">20 × 2,50 = $ 50 de risco. Posição de 20 × 50,00 = $ 1.000.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <label class="txt" for="s8">
+        <input type="checkbox" class="chk" id="s8">
+        <span class="num">Passo 8 · Plano de saída</span>
+        <h3>Metade no alvo de 3R, a outra metade segue a EMA20</h3>
+        <p><strong>Alvo da metade = entrada + 3 × 1R.</strong> No exemplo: 50,00 + 3 × 2,50 = 57,50.</p>
+        <p>Deixe colocadas a venda de 10 ações em 57,50 e o stop das 20 ações em 47,50.</p>
+        <p class="note">Esta saída rendeu +0,34 a +0,50R por trade, contra +0,23 a +0,36R do alvo fixo de 3R com a posição inteira.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-plano"></div><figcaption class="cap">Os três desfechos possíveis, em R do trade inteiro.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ FASE 3 ============ -->
+  <section class="phase" data-fase="c">
+    <div class="phase-head"><h2>Com o trade aberto</h2><span>Siga a ordem dos acontecimentos</span></div>
+
+    <div class="step">
+      <label class="txt" for="s9">
+        <input type="checkbox" class="chk" id="s9">
+        <span class="num">Saída A · Stop</span>
+        <h3>Tocou o stop antes do alvo: sai tudo, −1R</h3>
+        <p>As 20 ações saem em 47,50. São −$ 50 em $ 10.000. Cerca de 2 em cada 3 trades terminam assim, então os stops seguidos são normais.</p>
+        <p class="note">O stop não sobe antes da parcial. Subir para o zero em +1R foi testado e piorou o resultado.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-sa"></div><figcaption class="cap">O recuo virou queda: o stop fecha o trade.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <label class="txt" for="s10">
+        <input type="checkbox" class="chk" id="s10">
+        <span class="num">Saída B · Parcial em 3R</span>
+        <h3>Bateu 57,50: vende metade e sobe o stop para a entrada</h3>
+        <p>As 10 ações vendidas garantem +1,5R do trade inteiro. Mova o stop das 10 restantes para 50,00 (o preço de entrada).</p>
+        <p class="note">Daqui em diante o pior caso é sair no zero com a outra metade: trade fechado em +1,5R.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-sb"></div><figcaption class="cap">O stop (vermelho) sobe para a entrada no dia da parcial.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <label class="txt" for="s11">
+        <input type="checkbox" class="chk" id="s11">
+        <span class="num">Saída C · Resto pela EMA20</span>
+        <h3>Fechou abaixo da EMA20: vende o resto na abertura seguinte</h3>
+        <p>Confira só no fechamento. Enquanto fechar acima da EMA20, segure. No primeiro fechamento abaixo dela, venda as 10 ações restantes na abertura do dia seguinte.</p>
+        <p class="note">Mediana de 17 pregões no trade. Se nada disso acontecer em 250 pregões, saia no fechamento.</p>
+      </label>
+      <figure class="fig" style="margin:0"><div id="f-sc"></div><figcaption class="cap">Exemplo: metade em +3R e metade em +3,4R = +3,2R no trade.</figcaption></figure>
+    </div>
+
+    <div class="step">
+      <div class="txt">
+        <span class="num">Resultado · Saídas testadas</span>
+        <h3>Por que esta saída</h3>
+        <p>Mesmas entradas, só a saída muda. Expectativa nas 3 cestas.</p>
+        <p class="note warn">A saída por fechamento abaixo da EMA50 parece a melhor, mas quase todo o resultado vem de 2% dos trades (um deles de 76R). Sem eles, cai para +0,06 a +0,17R.</p>
+      </div>
+      <div class="fig" style="overflow-x:auto">
+        <table class="clas">
+          <thead><tr><th>Saída</th><th>Expectativa</th><th>Acerto</th><th>Dias</th></tr></thead>
+          <tbody>
+            <tr><td>Alvo fixo 3R, posição inteira</td><td>+0,23 a +0,36R</td><td>32–36%</td><td>12</td></tr>
+            <tr><td>Alvo fixo 4R</td><td>+0,29 a +0,40R</td><td>28–31%</td><td>14</td></tr>
+            <tr><td>Fechamento abaixo da EMA20</td><td>+0,19 a +0,40R</td><td>35–37%</td><td>11</td></tr>
+            <tr><td>Fechamento abaixo da EMA10</td><td class="neg">+0,11 a +0,13R</td><td>38–40%</td><td>6</td></tr>
+            <tr><td>Metade em 2R + resto pela EMA20 <span class="tag opt">mais acerto</span></td><td>+0,25 a +0,44R</td><td>40–45%</td><td>16</td></tr>
+            <tr class="best"><td><strong>Metade em 3R + resto pela EMA20</strong></td><td><strong>+0,34 a +0,50R</strong></td><td>32–36%</td><td>17</td></tr>
+          </tbody>
+        </table>
+        <p class="cap">Prefere sair no lucro mais vezes? Use a parcial em 2R: rende um pouco menos, mas acerta 40–45%.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Regras e números do backtest com execução realista (out/2026): compra stop no dia seguinte, stop com gap de abertura e um trade por vez em cada ativo, em 3 cestas de 112, 221 e 227 ações entre 2017 e 2026.
+    Foram testadas cerca de 30 combinações de média e gatilho antes de chegar a esta, então parte da vantagem pode ser acaso; 2021 e 2022 foram negativos.
+    Os números não incluem custos, derrapagem nem imposto. Setup em estudo: confirme em forward test antes de operar. Não é recomendação de investimento.
+  </footer>
+</div>
+
+<script>
+(function(){
+  const NS="http://www.w3.org/2000/svg";
+  function el(tag,attrs,parent,text){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); if(text!=null) e.textContent=text; if(parent) parent.appendChild(e); return e; }
+  function fig(id,H){ const W=360; const s=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"}); document.getElementById(id).appendChild(s); return {s,W,H}; }
+  function scaler(lo,hi,top,bot){ return v=>bot-(v-lo)/(hi-lo)*(bot-top); }
+  function xs(n,x0,x1){ return Array.from({length:n},(_,i)=>x0+(x1-x0)*i/(n-1)); }
+  function path(pts,cls,p){ return el("path",{d:pts.map((q,i)=>(i?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)).join(" "),class:cls},p); }
+  function grid(f,top,bot,n){ for(let i=0;i<=n;i++){ const y=top+(bot-top)*i/n; el("line",{x1:10,x2:f.W-10,y1:y,y2:y,class:"g-grid"},f.s); } }
+  function candles(f,data,X,Y,w){
+    data.forEach((c,i)=>{ const [o,h,l,cl]=c; const cls=cl>=o?"c-up":"c-down";
+      el("line",{x1:X[i],x2:X[i],y1:Y(h),y2:Y(l),class:cls+" wick"},f.s);
+      const y1=Y(Math.max(o,cl)), y2=Y(Math.min(o,cl)); el("rect",{x:X[i]-w/2,y:y1,width:w,height:Math.max(1.5,y2-y1),class:cls},f.s); });
+  }
+  function ohlc(closes,rng,o0){
+    return closes.map((c,i)=>{ const o=i?closes[i-1]:(o0??c-rng*0.5); const r=rng*(0.6+0.4*((i*37)%7)/7); return [o,Math.max(o,c)+r*0.5,Math.min(o,c)-r*0.5,c]; });
+  }
+  function ema(v,n,seed){ const a=2/(n+1); let e=seed??v[0]; return v.map(x=>(e+=(x-e)*a)); }
+  function sma(v,n){ return v.map((_,i)=>{ const s=v.slice(Math.max(0,i-n+1),i+1); return s.reduce((a,b)=>a+b,0)/s.length; }); }
+
+  // 1) QQQ x MM200
+  (function(){ const f=fig("f-qqq",190);
+    const N=260, v=[]; let p=100;
+    for(let i=0;i<N;i++){ const t=i/N; const drift= t<0.55?0.0012: t<0.72?-0.0045:0.0036; p*=1+drift+Math.sin(i*0.9)*0.006+Math.sin(i*0.23)*0.004; v.push(p); }
+    const m=sma(v,120); const S=100, vv=v.slice(S), mm=m.slice(S), n=vv.length;
+    const X=xs(n,14,300), lo=Math.min(...vv,...mm)*0.98, hi=Math.max(...vv,...mm)*1.02, Y=scaler(lo,hi,16,170);
+    grid(f,16,170,4);
+    // faixas abaixo da media
+    let st=null; for(let i=0;i<=n;i++){ const below=i<n && vv[i]<mm[i];
+      if(below && st===null) st=i; if(!below && st!==null){ el("rect",{x:X[st],y:16,width:Math.max(2,X[Math.min(i,n-1)]-X[st]),height:154,class:"box-off"},f.s);
+        el("text",{x:X[st]+4,y:30,class:"t-down"},f.s,"abaixo: não opera"); st=null; } }
+    path(mm.map((q,i)=>[X[i],Y(q)]),"l-muted",f.s);
+    path(vv.map((q,i)=>[X[i],Y(q)]),"l-qqq",f.s);
+    el("text",{x:304,y:Y(mm[n-1])+4,class:"g-lbl"},f.s,"MM200");
+    el("text",{x:304,y:Y(vv[n-1])+4,class:"g-lbl-ink"},f.s,"QQQ");
+    el("circle",{cx:X[n-1],cy:Y(vv[n-1]),r:4.5,class:"mark"},f.s);
+    el("text",{x:X[n-1]-96,y:Y(vv[n-1])-12,class:"t-up"},f.s,"acima: liberado");
+  })();
+
+  // 2) Medias empilhadas
+  (function(){ const f=fig("f-trend",200); grid(f,16,184,4);
+    const N=110, c=[]; for(let i=0;i<N;i++) c.push(40+i*0.16+1.6*Math.sin(i/3.2)+0.5*Math.sin(i*1.3));
+    const e10=ema(c,10), e20=ema(c,20), e50=ema(c,50,c[0]-4);
+    const S=60, n=N-S, cc=c.slice(S), a=e10.slice(S), b=e20.slice(S), d=e50.slice(S);
+    const X=xs(n,16,296), Y=scaler(Math.min(...d,...cc)-1,Math.max(...cc)+1.5,16,184);
+    path(cc.map((q,i)=>[X[i],Y(q)]),"l-muted",f.s);
+    path(d.map((q,i)=>[X[i],Y(q)]),"l-e50",f.s); path(b.map((q,i)=>[X[i],Y(q)]),"l-e20",f.s); path(a.map((q,i)=>[X[i],Y(q)]),"l-e10",f.s);
+    el("text",{x:300,y:Y(a[n-1])-2,class:"t-e10"},f.s,"EMA10"); el("text",{x:300,y:Y(b[n-1])+8,class:"t-e20"},f.s,"EMA20"); el("text",{x:300,y:Y(d[n-1])+4,class:"t-e50"},f.s,"EMA50");
+    const i0=n-11; el("circle",{cx:X[i0],cy:Y(d[i0]),r:4,class:"mark"},f.s); el("circle",{cx:X[n-1],cy:Y(d[n-1]),r:4,class:"mark"},f.s);
+    el("text",{x:X[i0]-70,y:Y(d[i0])+22,class:"g-lbl"},f.s,"EMA50 há 10 pregões < hoje");
+    el("text",{x:22,y:30,class:"g-lbl"},f.s,"preço");
+  })();
+
+  // 3) Primeiro toque
+  const TQ=[[51.5,52.6,51.2,52.3],[52.3,53.4,52.0,53.1],[53.1,54.0,52.7,53.8],[53.8,55.0,53.5,54.7],[54.7,55.6,54.2,55.3],[55.3,56.4,55.0,56.0],
+    [56.0,56.5,55.2,55.6],[55.6,56.9,55.3,56.6],[56.6,57.4,56.0,57.1],[57.1,57.6,56.3,56.7],[56.7,57.0,55.6,55.9],[55.9,56.2,54.6,54.9],
+    [54.9,55.3,53.9,54.2],[54.2,54.5,53.6,53.9],[53.9,54.2,53.1,53.7],[53.8,55.0,53.6,54.8]];
+  const TQE=TQ.map((_,i)=>50+0.25*i);
+  (function(){ const f=fig("f-toque",210); grid(f,16,190,4);
+    const X=xs(16,22,300), Y=scaler(49.3,58.4,16,190);
+    el("rect",{x:X[4]-7,y:22,width:X[13]-X[4]+14,height:166,class:"box-base"},f.s);
+    el("text",{x:X[4]-3,y:34,class:"t-acc"},f.s,"10 pregões sem tocar a EMA20");
+    path(TQE.map((q,i)=>[X[i],Y(q)]),"l-e20",f.s);
+    candles(f,TQ,X,Y,10);
+    el("circle",{cx:X[14],cy:Y(TQE[14]),r:6,class:"mark"},f.s);
+    el("text",{x:X[14]-58,y:Y(53.1)+22,class:"g-lbl-ink"},f.s,"1º toque");
+    el("text",{x:X[1]-6,y:Y(50.3)+16,class:"t-e20"},f.s,"EMA20");
+  })();
+
+  // 4) Gatilho (zoom)
+  (function(){ const f=fig("f-gat",210); grid(f,16,190,4);
+    const d=TQ.slice(11), E=TQE.slice(11), X=xs(5,46,250), Y=scaler(52.6,56.6,16,190);
+    path(E.map((q,i)=>[X[i],Y(q)]),"l-e20",f.s);
+    candles(f,d,X,Y,22);
+    el("line",{x1:X[3]-16,x2:340,y1:Y(54.2),y2:Y(54.2),class:"h-res"},f.s);
+    el("text",{x:X[3]-16,y:Y(54.2)-6,class:"g-lbl-ink"},f.s,"máxima de ontem 54,20");
+    el("circle",{cx:X[3],cy:Y(E[3]),r:5,class:"mark"},f.s);
+    el("text",{x:X[3]-118,y:Y(53.1)+18,class:"g-lbl"},f.s,"ontem: tocou e fechou acima");
+    el("circle",{cx:X[4],cy:Y(54.8),r:5,class:"mark"},f.s);
+    el("text",{x:X[4]-60,y:Y(55.0)-34,class:"t-up"},f.s,"hoje: fechou acima");
+    el("text",{x:X[4]-60,y:Y(55.0)-20,class:"t-up"},f.s,"da máxima → sinal");
+    el("text",{x:X[0]-30,y:Y(E[0])+16,class:"t-e20"},f.s,"EMA20");
+  })();
+
+  // 5/6) Entrada, stop e 1R
+  const TR=[[52.0,52.4,51.0,51.3],[51.3,51.6,50.2,50.5],[50.5,50.8,49.4,49.7],[49.6,49.8,47.5,48.6],[48.7,49.99,48.2,49.9],[49.95,51.3,49.7,51.0]];
+  function tradeFig(id,showR){ const f=fig(id,210); grid(f,16,194,4);
+    const X=xs(6,30,222), Y=scaler(46.5,58.6,16,194);
+    path([47.4,47.6,47.8,48.0,48.2,48.4].map((q,i)=>[X[i],Y(q)]),"l-e20",f.s);
+    candles(f,TR,X,Y,13);
+    [[57.5,"h-alvo","t-up","3R · 57,50"],[50,"h-entry","t-acc","entrada · 50,00"],[47.5,"h-stop","t-down","stop · 47,50"]].forEach(([v,lc,tc,t])=>{
+      el("line",{x1:14,x2:254,y1:Y(v),y2:Y(v),class:lc},f.s); el("text",{x:258,y:Y(v)+4,class:tc},f.s,t); });
+    el("text",{x:X[4]-22,y:Y(49.99)-24,class:"g-lbl"},f.s,"gatilho");
+    el("text",{x:X[3]-20,y:Y(47.5)+18,class:"g-lbl"},f.s,"toque");
+    el("circle",{cx:X[5],cy:Y(50),r:5,class:"mark"},f.s);
+    if(showR){ const bx=242; el("line",{x1:bx,x2:bx,y1:Y(50),y2:Y(47.5),class:"l-down"},f.s); el("text",{x:bx-22,y:(Y(50)+Y(47.5))/2+4,class:"t-down"},f.s,"1R");
+      el("line",{x1:bx,x2:bx,y1:Y(57.5),y2:Y(50),class:"l-up"},f.s); el("text",{x:bx-22,y:(Y(57.5)+Y(50))/2+4,class:"t-up"},f.s,"3R"); }
+  }
+  tradeFig("f-trade",false); tradeFig("f-stop",true);
+
+  // 8) Plano: desfechos
+  (function(){ const f=fig("f-plano",200);
+    const Y=scaler(-1.4,3.6,22,170);
+    el("line",{x1:20,x2:340,y1:Y(0),y2:Y(0),class:"g-zero"},f.s);
+    el("text",{x:22,y:Y(0)-6,class:"g-lbl"},f.s,"zero");
+    const bars=[[-1,"stop antes","da parcial","var(--down)","−1R"],[1.5,"parcial + resto","sai no zero","var(--up)","+1,5R"],[3.2,"parcial + resto","pela EMA20","var(--up)","+3,2R"]];
+    bars.forEach(([v,a,b,col,t],k)=>{ const x=58+k*100, w=54;
+      const y0=Y(Math.max(0,v)), h=Math.abs(Y(v)-Y(0));
+      el("rect",{x,y:y0,width:w,height:h,style:`fill:${col}`},f.s);
+      el("text",{x:x+4,y:v>0?Y(v)-6:Y(v)+16,class:v>0?"t-up":"t-down",style:"font-size:14px"},f.s,t);
+      el("text",{x:x-6,y:186,class:"g-lbl"},f.s,a); el("text",{x:x-6,y:198,class:"g-lbl"},f.s,b);
+    });
+    el("text",{x:262,y:Y(3.2)-22,class:"g-lbl"},f.s,"(exemplo)");
+  })();
+
+  // Saida A: stop
+  (function(){ const f=fig("f-sa",190); grid(f,14,170,4);
+    const X=xs(12,22,236), Y=scaler(45.8,58.6,14,170);
+    const c=[50.4,50.9,50.2,49.6,49.9,49.1,48.4,48.9,48.1,47.8,47.9,46.9];
+    const d=ohlc(c,0.8,50.0); d[11]=[47.9,48.1,46.6,46.9]; candles(f,d,X,Y,10);
+    [[57.5,"h-alvo","t-up","3R 57,50"],[50,"h-entry","t-acc","entrada 50,00"],[47.5,"h-stop","t-down","stop 47,50"]].forEach(([v,lc,tc,t])=>{
+      el("line",{x1:14,x2:252,y1:Y(v),y2:Y(v),class:lc},f.s); el("text",{x:256,y:Y(v)+4,class:tc},f.s,t); });
+    el("circle",{cx:X[11],cy:Y(47.5),r:6,class:"mark"},f.s);
+    el("text",{x:X[11]-60,y:Y(46.6)+16,class:"t-down"},f.s,"sai tudo: −1R");
+  })();
+
+  // Saidas B e C: mesmo trade
+  const SC=[50.9,51.8,53.0,54.1,55.3,56.2,57.6,58.7,59.6,60.9,61.8,62.6,63.7,64.4,65.2,64.6,63.5,62.0,60.3,58.4,57.9];
+  const SCD=ohlc(SC,0.9,50.0), SCE=ema(SC,20,48.4);
+  function saidaFig(id,final){ const f=fig(id,210); grid(f,14,192,4);
+    const n=final?SC.length:9, X=xs(SC.length,20,262), Y=scaler(45.8,67,14,192);
+    if(final) path(SCE.map((q,i)=>[X[i],Y(q)]),"l-e20",f.s);
+    candles(f,SCD.slice(0,n),X,Y,8);
+    el("line",{x1:14,x2:276,y1:Y(57.5),y2:Y(57.5),class:"h-alvo"},f.s); el("text",{x:280,y:Y(57.5)+4,class:"t-up"},f.s,"3R 57,50");
+    el("line",{x1:14,x2:276,y1:Y(50),y2:Y(50),class:"h-entry"},f.s); el("text",{x:280,y:Y(50)+4,class:"t-acc"},f.s,"entrada 50,00");
+    // stop em degrau: 47,50 ate a parcial, depois 50,00
+    const xp=X[6], xe=final?X[SC.length-1]:X[n-1]+10;
+    el("path",{d:`M14 ${Y(47.5)} L${xp} ${Y(47.5)} L${xp} ${Y(50)} L${xe} ${Y(50)}`,class:"h-stop"},f.s);
+    el("text",{x:280,y:Y(47.5)+4,class:"t-down"},f.s,"stop 47,50");
+    el("circle",{cx:xp,cy:Y(57.5),r:6,class:"mark"},f.s);
+    el("text",{x:16,y:Y(60.2),class:"t-up"},f.s,"vende metade (+3R)");
+    if(!final){ el("text",{x:xp+8,y:Y(50)+16,class:"t-down"},f.s,"stop sobe p/ 50,00"); }
+    else{
+      el("circle",{cx:X[19],cy:Y(SC[19]),r:5,class:"mark"},f.s);
+      el("text",{x:X[19]-148,y:Y(48.4),class:"t-warn"},f.s,"fechou abaixo da EMA20 ↗");
+      el("text",{x:X[19]-148,y:Y(48.4)+14,class:"t-warn"},f.s,"vende o resto amanhã");
+      el("text",{x:X[9]+4,y:Y(SCE[9])+16,class:"t-e20"},f.s,"EMA20");
+    }
+  }
+  saidaFig("f-sb",false); saidaFig("f-sc",true);
+
+  // ---- checklist ----
+  const fases={a:["s1","s2","s3","s4"],b:["s5","s6","s7","s8"],c:["s9","s10","s11"]};
+  const nomes={a:"Entrada",b:"Montagem",c:"Saída"};
+  function atualiza(){
+    for(const k in fases){ const ids=fases[k]; const n=ids.filter(id=>document.getElementById(id).checked).length;
+      const pill=document.getElementById("pg-"+k); pill.textContent=`${nomes[k]} ${n}/${ids.length}`; pill.classList.toggle("ok",n===ids.length); }
+    document.querySelectorAll(".chk").forEach(c=>c.closest(".step").classList.toggle("done",c.checked));
+  }
+  document.querySelectorAll(".chk").forEach(c=>c.addEventListener("change",atualiza));
+  document.getElementById("reset").addEventListener("click",()=>{ document.querySelectorAll(".chk").forEach(c=>c.checked=false); atualiza(); });
+  atualiza();
+})();
+</script>
