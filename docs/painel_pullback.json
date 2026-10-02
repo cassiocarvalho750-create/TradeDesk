@@ -1,28 +1,28 @@
 {
   "gerado": "2026-10-02",
-  "gerado_utc": "2026-10-02 19:39 UTC",
+  "gerado_utc": "2026-10-02 21:36 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 749.94,
-      "mm200": 667.24,
+      "close": 749.58,
+      "mm200": 667.23,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 192069.72,
-      "mm200": 178017.3,
+      "close": 192114.55,
+      "mm200": 178017.53,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
     "liquidos": 1079,
-    "sinais": 4
+    "sinais": 3
   },
-  "n": 4,
+  "n": 3,
   "ativos": [
     {
       "data_sinal": "2026-10-02",
@@ -30,20 +30,20 @@
       "stop": 40.13,
       "alvo_3r": 57.97,
       "r_pct": 10.0,
-      "preco": 43.65,
+      "preco": 43.69,
       "ema20": 40.32,
       "mom3": 61.0,
       "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "SMCI",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SMCI",
-      "forming": true
+      "forming": false
     },
     {
       "data_sinal": "2026-10-02",
@@ -51,41 +51,20 @@
       "stop": 520.18,
       "alvo_3r": 711.5,
       "r_pct": 8.42,
-      "preco": 565.44,
-      "ema20": 537.68,
-      "mom3": 38.0,
+      "preco": 562.52,
+      "ema20": 537.4,
+      "mom3": 37.0,
       "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-10-02",
-      "entrada": 149.79,
-      "stop": 132.0,
-      "alvo_3r": 203.16,
-      "r_pct": 11.88,
-      "preco": 140.83,
-      "ema20": 133.09,
-      "mom3": 7.0,
-      "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "DOCN",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=DOCN",
-      "forming": true
+      "forming": false
     },
     {
       "data_sinal": "2026-10-02",
@@ -93,20 +72,20 @@
       "stop": 68.52,
       "alvo_3r": 91.92,
       "r_pct": 7.87,
-      "preco": 73.65,
-      "ema20": 68.69,
+      "preco": 73.2,
+      "ema20": 68.64,
       "mom3": 6.0,
       "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "RAL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RAL",
-      "forming": true
+      "forming": false
     }
   ]
 }
