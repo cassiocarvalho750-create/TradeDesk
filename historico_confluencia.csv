@@ -100,3 +100,12 @@ data,ordem_geral,prioridade,ordem_subgrupo,ticker,market,entrada,stop,alvo,r_pct
 2026-10-03,41,4,3,MRVL,EUA,278.0,257.58,339.26,7.35,False,True,False,True,32.0,9.0,154.0,fraco,,,5,True
 2026-10-03,42,4,4,RBRK,EUA,117.05,113.57,127.49,2.97,False,True,False,True,36.0,36.0,131.0,forte,,,5,True
 2026-10-03,43,4,5,HPE,EUA,67.1,61.76,83.12,7.96,False,True,False,True,34.0,61.0,183.0,forte,,,7,True
+2026-10-03,7,3,5,NTNX,EUA,72.29,66.25,90.41,8.36,True,False,False,False,8.0,38.0,76.0,forte,ADXHOJE,67.2,,
+2026-10-03,9,3,7,DT,EUA,59.32,55.64,70.36,6.2,True,False,False,False,17.0,30.0,57.0,forte,ABERTURA,45.8,,
+2026-10-03,15,3,13,HYPE3,B3,25.16,23.7,29.54,5.8,True,False,False,False,13.0,21.0,11.0,medio,ABERTURA,64.9,,
+2026-10-03,17,3,15,FTNT,EUA,180.95,169.56,215.12,6.29,True,False,False,False,17.0,11.0,119.0,medio,ADXHOJE,43.1,,
+2026-10-03,19,3,17,TEL,EUA,220.36,200.43,280.15,9.04,True,False,False,False,9.0,11.0,6.0,medio,ABERTURA,57.0,,
+2026-10-03,36,3,34,SBSP3,B3,28.23,26.44,33.6,6.34,True,False,False,False,8.0,-5.0,-10.0,fraco,ABERTURA,83.8,,
+2026-10-03,39,3,37,HON,EUA,213.99,209.02,228.9,2.32,True,False,False,False,4.0,-7.0,-10.0,fraco,ABERTURA,53.3,,
+2026-10-03,45,3,43,LUV,EUA,42.47,40.45,48.53,4.76,True,False,False,False,11.0,-16.0,14.0,fraco,ABERTURA,47.1,,
+2026-10-03,47,3,45,CRUS,EUA,121.17,116.94,133.86,3.49,True,False,False,False,7.0,-19.0,-18.0,fraco,ADXHOJE,40.3,,
