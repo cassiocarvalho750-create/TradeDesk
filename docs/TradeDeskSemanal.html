@@ -286,11 +286,11 @@ function render(list, gerado, captura){
   window.__captura = captura || null;
   const capTxt = captura ? ` · capturado às <b>${captura}</b> (BRT, Yahoo ~15min de atraso)` : "";
   if(!list.length){
-    $("meta").innerHTML=`Nenhum ativo aprovado · dados de <b>${gerado||'—'}</b>${capTxt}`;
+    $("meta").innerHTML=`Nenhum ativo aprovado${window.__ocultos?` · <span title="Sinais com gatilho atrasado. Não aparecem nesta página; entram na Confluência quando o Qullamäggie também aparece.">${window.__ocultos} oculto(s)</span>`:""} · dados de <b>${gerado||'—'}</b>${capTxt}`;
     grid.innerHTML=`<div class="empty">Nenhum ativo disparou os critérios neste scan.<br>O scan rodou normalmente — só não houve sinal.</div>`;
     return;
   }
-  $("meta").innerHTML=`<b>${list.length}</b> ativo(s) · ${list.filter(a=>(!a.bb_primeira && !a.confluencia && a.adx_ago!==0)).length} com gatilho atrasado (no fim) · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
+  $("meta").innerHTML=`<b>${list.length}</b> ativo(s)${window.__ocultos?` · <span title="Sinais com gatilho atrasado. Não aparecem nesta página; entram na Confluência quando o Qullamäggie também aparece.">${window.__ocultos} oculto(s)</span>`:""} · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
   grid.innerHTML=list.map(card).join("");
 }
 
@@ -325,6 +325,11 @@ async function loadData(){
     if(ra!==rb) return ra-rb;
     return (b.quality==null?-1:b.quality)-(a.quality==null?-1:a.quality);
   });
+  // PAGINA LIMPA: gatilho atrasado nao aparecem aqui.
+  // Continuam no painel (JSON) e entram na Confluencia quando o Qullamaggie tambem aparece.
+  const visivel=(a)=>rank(a)!==9;
+  window.__ocultos=ativos.filter(a=>!visivel(a)).length;
+  ativos=ativos.filter(visivel);
   render(ativos, gerado, captura);
   return ativos.length;
 }
