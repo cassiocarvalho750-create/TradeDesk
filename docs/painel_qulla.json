@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-02",
+  "gerado": "2026-10-03",
   "n": 11,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HPE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HPE"
@@ -33,7 +33,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "RBRK",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RBRK"
@@ -51,7 +51,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "AMD",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AMD"
@@ -69,17 +69,17 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
     },
     {
-      "entrada": 278.18,
+      "entrada": 278.0,
       "stop": 257.58,
-      "alvo_3r": 339.98,
+      "alvo_3r": 339.26,
       "preco": 272.29,
-      "r_pct": 7.41,
+      "r_pct": 7.35,
       "mom1": 32.0,
       "mom3": 9.0,
       "mom6": 154.0,
@@ -87,17 +87,17 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MRVL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MRVL"
     },
     {
       "entrada": 595.51,
-      "stop": 548.04,
-      "alvo_3r": 737.92,
+      "stop": 548.01,
+      "alvo_3r": 738.01,
       "preco": 562.52,
-      "r_pct": 7.97,
+      "r_pct": 7.98,
       "mom1": 14.0,
       "mom3": 37.0,
       "mom6": 224.0,
@@ -105,7 +105,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
@@ -123,15 +123,15 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CORT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CORT"
     },
     {
       "entrada": 1108.72,
-      "stop": 1072.02,
-      "alvo_3r": 1218.82,
+      "stop": 1072.01,
+      "alvo_3r": 1218.85,
       "preco": 1074.89,
       "r_pct": 3.31,
       "mom1": 12.0,
@@ -141,7 +141,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MU",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MU"
@@ -159,7 +159,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DOCN",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DOCN"
@@ -177,7 +177,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "INTC",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=INTC"
@@ -195,7 +195,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "OSCR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=OSCR"
