@@ -571,7 +571,7 @@ def backtest_didi_exit(df, ticker,
 
 
 # ── Sinal com JANELAS e gatilho na BB (para o scanner) ───────────────────────
-def compute_signals_windowed(df, didi_window=5, adx_window=3):
+def compute_signals_windowed(df, didi_window=5, adx_window=3, vermelho_alta=False):
     """
     Versao do sinal onde os 3 criterios NAO precisam coincidir no mesmo candle.
     Gatilho = BB abrindo (primeira expansao) NO candle atual. Nesse candle:
@@ -580,6 +580,9 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
       - ADX : sinal do ADX (1a inclinacao + DI+>DI- + ADX>=100% DI-) ocorreu
               HOJE ou em ate `adx_window` candles anteriores.
     Adiciona coluna 'signal_win' (bool) e colunas auxiliares de diagnostico.
+    vermelho_alta=True: a COMPRA aceita tambem candle VERMELHO (fechou abaixo da abertura)
+    desde que feche ACIMA do fechamento anterior. No backtest (out/2026) esses sinais
+    renderam o mesmo que os de candle verde. O padrao (False) mantem so candle verde.
     """
     c, h, l = df["Close"], df["High"], df["Low"]
     ma3, ma8 = sma(c, 3), sma(c, 8)
@@ -674,7 +677,10 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3):
     df["adx_vendido"] = adx_vendido
     # sinal de COMPRA: BB abrindo HOJE (candle verde), DIDI na janela, ADX comprado
     # (virada na janela OU 3 condicoes hoje), E ADX subindo HOJE.
-    df["signal_win"] = (bb_trigger.fillna(False) & candle_verde.fillna(False)
+    verm_alta = (candle_vermelho & (c > c.shift(1))).fillna(False)
+    df["candle_vermelho_alta"] = verm_alta
+    cor_ok = (candle_verde.fillna(False) | verm_alta) if vermelho_alta else candle_verde.fillna(False)
+    df["signal_win"] = (bb_trigger.fillna(False) & cor_ok
                         & didi_recent & didi_ok_hoje.fillna(False)
                         & adx_comprado & adx_rising_today)
     # sinal de VENDA: espelho — BB abrindo (candle vermelho), DIDI de baixa na

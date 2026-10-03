@@ -192,7 +192,7 @@ def _liquidez_ok(tk, d, min_us_mi, min_b3_mi):
     except Exception:
         return False
 
-def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=None):
+def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=None, vermelho_alta=False):
     """Avalia UM ticker (DataFrame ja baixado) e retorna lista de hits.
     lado: 'compra' (padrao) usa signal_win; 'venda' usa signal_venda (espelho).
     Logica identica para download em lote e individual."""
@@ -207,7 +207,8 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
     # janela usada na busca: a normal, ou a ampliada (didi_ext) quando pedida (so compra)
     win_busca = max(didi_win, int(didi_ext)) if (didi_ext and lado == "compra") else didi_win
     try:
-        s = bt.compute_signals_windowed(d, didi_window=win_busca, adx_window=adx_win)
+        s = bt.compute_signals_windowed(d, didi_window=win_busca, adx_window=adx_win,
+                                        vermelho_alta=bool(vermelho_alta and lado == "compra"))
     except Exception:
         return res
     venda = (lado == "venda")
@@ -403,6 +404,8 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                 "confluencia": bool(confluencia_perfeita),
                 "bb_primeira": bool(row.get("bb_primeira_abertura", False)),
                 "cruz_antigo": cruz_antigo,
+                # candle do gatilho VERMELHO (fechou abaixo da abertura, mas acima do fechamento anterior)
+                "candle_vermelho": bool((lado == "compra") and float(row["Close"]) < float(row["Open"])),
                 "lado": lado,
                 "quality": quality,
                 "pe": None, "mktcap": None,
@@ -410,7 +413,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
     return res
 
 
-def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra", didi_ext=None):
+def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra", didi_ext=None, vermelho_alta=False):
     """Retorna lista de sinais nos ultimos `days_back` candles do timeframe dado.
 
     timeframe: '1d' (diario, padrao), '2h', '1h', '15m', '5m'.
@@ -442,7 +445,7 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
                 continue
             if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 continue
-            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext, vermelho_alta=vermelho_alta))
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
@@ -451,7 +454,7 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
                 time.sleep(0.02); continue
             if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 time.sleep(0.01); continue
-            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext, vermelho_alta=vermelho_alta))
             time.sleep(0.03)
     return hits
 
@@ -528,6 +531,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "adx_var_pct": h.get("adx_var_pct"), "confluencia": h.get("confluencia", False),
             "bb_primeira": h.get("bb_primeira", False),
             "cruz_antigo": bool(h.get("cruz_antigo", False)),
+            "candle_vermelho": bool(h.get("candle_vermelho", False)),
             "high": h.get("high"),
             "dates": dates,
             "price": tail(c),

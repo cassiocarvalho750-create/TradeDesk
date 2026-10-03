@@ -29,7 +29,8 @@ def main():
     print(f"Scanner EUA (DIDI+ADX+BB, gatilho BB) | {len(uni)} ativos | ultimos {a.days} candle(s)\n")
     # no diario, busca tambem os cruzamentos de 6-10 pregoes (saem marcados como cruz_antigo)
     hits=sc.scan(uni, days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf,
-                 didi_ext=(sc.DIDI_WIN_EXT if tf=='1d' else None))
+                 didi_ext=(sc.DIDI_WIN_EXT if tf=='1d' else None),
+                 vermelho_alta=(tf=='1d'))   # diario: aceita candle vermelho que fecha acima de ontem
     if hits:
         print(f"  buscando P/E e Market Cap de {len(hits)} ativo(s) com sinal...")
         sc.enrich_fundamentals(hits)
