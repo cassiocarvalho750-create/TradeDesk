@@ -1,28 +1,28 @@
 {
-  "gerado": "2026-10-03",
-  "gerado_utc": "2026-10-03 13:33 UTC",
+  "gerado": "2026-10-05",
+  "gerado_utc": "2026-10-05 13:49 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 749.58,
-      "mm200": 667.23,
+      "close": 752.3,
+      "mm200": 667.95,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 192115.0,
-      "mm200": 178017.53,
+      "close": 207024.12,
+      "mm200": 178248.82,
       "validado": false
     }
   },
   "funil": {
-    "total": 1135,
-    "liquidos": 1079,
-    "sinais": 3
+    "total": 1136,
+    "liquidos": 1080,
+    "sinais": 5
   },
-  "n": 3,
+  "n": 5,
   "ativos": [
     {
       "data_sinal": "2026-10-02",
@@ -30,12 +30,12 @@
       "stop": 40.13,
       "alvo_3r": 58.01,
       "r_pct": 10.02,
-      "preco": 43.69,
+      "preco": 43.22,
       "ema20": 40.32,
       "mom3": 61.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -43,7 +43,7 @@
       "ticker": "SMCI",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SMCI",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-10-02",
@@ -51,12 +51,12 @@
       "stop": 520.18,
       "alvo_3r": 711.5,
       "r_pct": 8.42,
-      "preco": 562.52,
+      "preco": 554.13,
       "ema20": 537.4,
       "mom3": 37.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -64,7 +64,7 @@
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-10-02",
@@ -72,12 +72,12 @@
       "stop": 68.52,
       "alvo_3r": 91.92,
       "r_pct": 7.87,
-      "preco": 73.2,
+      "preco": 73.72,
       "ema20": 68.64,
       "mom3": 6.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -85,7 +85,49 @@
       "ticker": "RAL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RAL",
-      "forming": false
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-05",
+      "entrada": 5.47,
+      "stop": 4.86,
+      "alvo_3r": 7.3,
+      "r_pct": 11.15,
+      "preco": 5.43,
+      "ema20": 4.92,
+      "mom3": 52.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "IBOV",
+      "ticker": "GMAT3.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:GMAT3",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-05",
+      "entrada": 80.0,
+      "stop": 63.15,
+      "alvo_3r": 130.55,
+      "r_pct": 21.06,
+      "preco": 78.99,
+      "ema20": 63.33,
+      "mom3": 47.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "IBOV",
+      "ticker": "BPAC11.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BPAC11",
+      "forming": true
     }
   ]
 }
