@@ -1,28 +1,28 @@
 {
   "gerado": "2026-10-05",
-  "gerado_utc": "2026-10-05 14:39 UTC",
+  "gerado_utc": "2026-10-05 14:47 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 753.09,
-      "mm200": 667.96,
+      "close": 752.97,
+      "mm200": 667.95,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206345.38,
-      "mm200": 178245.43,
+      "close": 206453.11,
+      "mm200": 178245.97,
       "validado": false
     }
   },
   "funil": {
     "total": 1136,
     "liquidos": 1080,
-    "sinais": 6
+    "sinais": 7
   },
-  "n": 6,
+  "n": 7,
   "ativos": [
     {
       "data_sinal": "2026-10-02",
@@ -30,7 +30,7 @@
       "stop": 40.13,
       "alvo_3r": 58.01,
       "r_pct": 10.02,
-      "preco": 43.55,
+      "preco": 43.64,
       "ema20": 40.32,
       "mom3": 61.0,
       "mom_fraco": false,
@@ -51,7 +51,7 @@
       "stop": 520.18,
       "alvo_3r": 711.5,
       "r_pct": 8.42,
-      "preco": 552.74,
+      "preco": 555.3,
       "ema20": 537.4,
       "mom3": 37.0,
       "mom_fraco": false,
@@ -93,9 +93,9 @@
       "stop": 27.09,
       "alvo_3r": 60.05,
       "r_pct": 23.32,
-      "preco": 34.19,
-      "ema20": 27.09,
-      "mom3": 51.0,
+      "preco": 34.3,
+      "ema20": 27.1,
+      "mom3": 52.0,
       "mom_fraco": false,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
@@ -114,9 +114,9 @@
       "stop": 63.15,
       "alvo_3r": 142.63,
       "r_pct": 23.93,
-      "preco": 80.36,
-      "ema20": 63.46,
-      "mom3": 49.0,
+      "preco": 80.76,
+      "ema20": 63.5,
+      "mom3": 50.0,
       "mom_fraco": false,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
@@ -148,6 +148,27 @@
       "ticker": "GMAT3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:GMAT3",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-05",
+      "entrada": 182.31,
+      "stop": 172.0,
+      "alvo_3r": 213.24,
+      "r_pct": 5.66,
+      "preco": 179.58,
+      "ema20": 174.02,
+      "mom3": 10.0,
+      "mom_fraco": true,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "GH",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=GH",
       "forming": true
     }
   ]
