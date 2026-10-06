@@ -1,28 +1,28 @@
 {
   "gerado": "2026-10-06",
-  "gerado_utc": "2026-10-06 14:20 UTC",
+  "gerado_utc": "2026-10-06 16:23 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 761.55,
+      "close": 761.2,
       "mm200": 668.79,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206799.48,
-      "mm200": 178469.85,
+      "close": 205696.75,
+      "mm200": 178464.33,
       "validado": false
     }
   },
   "funil": {
     "total": 1136,
-    "liquidos": 1082,
-    "sinais": 7
+    "liquidos": 1084,
+    "sinais": 6
   },
-  "n": 7,
+  "n": 6,
   "ativos": [
     {
       "data_sinal": "2026-10-05",
@@ -30,7 +30,7 @@
       "stop": 63.15,
       "alvo_3r": 148.91,
       "r_pct": 25.35,
-      "preco": 78.36,
+      "preco": 77.76,
       "ema20": 63.51,
       "mom3": 50.0,
       "mom_fraco": false,
@@ -51,9 +51,9 @@
       "stop": 4.86,
       "alvo_3r": 7.78,
       "r_pct": 13.06,
-      "preco": 5.49,
+      "preco": 5.45,
       "ema20": 4.91,
-      "mom3": 48.0,
+      "mom3": 45.0,
       "mom_fraco": false,
       "status": "ORDEM",
       "ordem_dia": "hoje",
@@ -72,7 +72,7 @@
       "stop": 648.04,
       "alvo_3r": 762.96,
       "r_pct": 4.25,
-      "preco": 666.02,
+      "preco": 660.96,
       "ema20": 652.86,
       "mom3": 31.0,
       "mom_fraco": false,
@@ -93,7 +93,7 @@
       "stop": 389.11,
       "alvo_3r": 463.23,
       "r_pct": 4.55,
-      "preco": 402.59,
+      "preco": 404.6,
       "ema20": 394.23,
       "mom3": -5.0,
       "mom_fraco": false,
@@ -114,7 +114,7 @@
       "stop": 423.03,
       "alvo_3r": 494.11,
       "r_pct": 4.03,
-      "preco": 436.07,
+      "preco": 436.79,
       "ema20": 425.94,
       "mom3": 17.0,
       "mom_fraco": true,
@@ -135,7 +135,7 @@
       "stop": 172.0,
       "alvo_3r": 234.8,
       "r_pct": 8.36,
-      "preco": 177.56,
+      "preco": 172.55,
       "ema20": 174.74,
       "mom3": 15.0,
       "mom_fraco": true,
@@ -148,27 +148,6 @@
       "ticker": "GH",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=GH",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-10-06",
-      "entrada": 45.4,
-      "stop": 42.24,
-      "alvo_3r": 54.88,
-      "r_pct": 6.96,
-      "preco": 44.42,
-      "ema20": 42.33,
-      "mom3": -1.0,
-      "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "IONQ",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=IONQ",
       "forming": true
     }
   ]
