@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-06",
-  "captura": "06/10/2026 13:20",
+  "captura": "06/10/2026 14:55",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 0.85,
       "stop": 0.85,
-      "r_pct": 0.11,
+      "r_pct": 0.12,
       "forming": true,
       "date": "2026-10-06",
       "ult_candle": "2026-10-06",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURGBP=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.02,
+      "var_dia_pct": -0.03,
       "mom1": -1.0,
       "mom3": -0.0,
       "mom6": -3.0,
@@ -31,15 +31,15 @@
       "acima_ema70": false,
       "ema70": 0.8574,
       "ema70_incl": "lado",
-      "quality": 60.0,
+      "quality": 61.3,
       "didi_dist": 0.008,
-      "pos_range": 0.433,
-      "dist_max_pct": 0.09,
+      "pos_range": 0.38,
+      "dist_max_pct": 0.08,
       "adx_var_pct": 41.3,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 15.9,
+      "bb_abre_pct": 16.3,
       "candle_vermelho": false,
       "high": 0.85,
       "dates": [
@@ -124,7 +124,7 @@
         0.8539,
         0.8522,
         0.8497,
-        0.8483
+        0.8482
       ],
       "o": [
         0.8545,
@@ -292,7 +292,7 @@
         0.8563,
         0.8544,
         0.8519,
-        0.8501
+        0.85
       ],
       "ma8": [
         0.8562,
@@ -418,7 +418,7 @@
         -0.2109,
         -0.3551,
         -0.5262,
-        -0.5794
+        -0.5821
       ],
       "didi_longa": [
         -0.2313,
@@ -460,7 +460,7 @@
         -0.0105,
         0.0223,
         0.0872,
-        0.1948
+        0.1958
       ],
       "adx": [
         24.7464,
@@ -712,7 +712,7 @@
         0.8537,
         0.8514,
         0.8483,
-        0.8456
+        0.8455
       ],
       "atrasado": true
     }
