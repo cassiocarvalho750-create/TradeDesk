@@ -175,6 +175,8 @@ def montar_confluencia(didi_ativos, qulla_ativos):
             "faixa_mom": _FAIXA_ROT[_faixa_mom(m3)],
             "didi_tipo": _didi_tipo(d) if d else "",
             "quality": d.get("quality") if d else None,
+            # vai para o fim do grupo: Bollinger quase nao abriu (<5%) ou candle vermelho no gatilho
+            "_no_fim": bool(d and (d.get("candle_vermelho") or (d.get("bb_abre_pct") is not None and d.get("bb_abre_pct") < 5))),
             "consol_dias": q.get("consol_dias") if q else None,
             "acima_ema20": (bool(q.get("acima_ema20")) if q else None),
             "forming": bool(q.get("forming")) if q else False,
@@ -194,9 +196,13 @@ def montar_confluencia(didi_ativos, qulla_ativos):
         return x["_fx"]
     # ranking (igual a pagina): 1 DIDI+rompeu, 2 DIDI+consolid, 3 so DIDI, 4 so rompeu
     # prio 3 (so DIDI): so pelo momentum 3M, do maior para o menor (igual a pagina)
+    # ORDEM (out/2026, igual a pagina): nas prioridades com DIDI (1, 2 e 3) vale a NOTA de qualidade,
+    # da maior para a menor, com "Bollinger quase nao abriu"/"candle vermelho" no fim do grupo.
+    # A prioridade 4 (so rompeu) segue como antes.
     linhas.sort(key=lambda x: (
         x["prioridade"],
-        (-(x["mom3"]) if x["mom3"] is not None else 1e9) if x["prioridade"] == 3 else 0,
+        (1 if x["_no_fim"] else 0) if x["prioridade"] <= 3 else 0,
+        (-(x["quality"]) if x["quality"] is not None else 1.0) if x["prioridade"] <= 3 else 0,
         _chave_mom(x),
         (1e9 if x["r_pct"] is None else x["r_pct"]),
         0 if x["elite"] else 1,

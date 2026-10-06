@@ -366,10 +366,20 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                 q_incl = max(0.0, min(100.0, 50.0 + (adx_var_pct/15.0)*50.0))
             except Exception:
                 adx_var_pct = np.nan; q_incl = 50.0
-            # score final: 25% compressao + 30% sincronia + 25% fechamento + 20% inclinacao ADX
-            # sincronia recebe o maior peso: a confluencia perfeita (DIDI 0 / ADX 0
-            # no candle do gatilho) e o melhor indicador de qualidade na pratica.
-            quality = 0.25*q_comp + 0.30*q_sinc + 0.25*q_fech + 0.20*q_incl
+            # nota de ABERTURA DA BOLLINGER (0-100): quanto a largura relativa da banda (8,2)
+            # cresceu do candle anterior para o candle do gatilho. 0% -> 0 ; +60% ou mais -> 100.
+            try:
+                _c = s["Close"]; _mid = _c.rolling(8).mean(); _sd = _c.rolling(8).std()
+                _w = (4.0*_sd)/_mid
+                _w1 = float(_w.iloc[pos]); _w0 = float(_w.iloc[pos-1]) if pos >= 1 else np.nan
+                bb_abre_pct = (_w1/_w0 - 1.0)*100.0 if (np.isfinite(_w0) and _w0 > 0 and np.isfinite(_w1)) else np.nan
+            except Exception:
+                bb_abre_pct = np.nan
+            q_bb = 0.0 if np.isnan(bb_abre_pct) else max(0.0, min(100.0, bb_abre_pct/60.0*100.0))
+            # score final (pesos definidos pelo usuario em out/2026):
+            #   25% inclinacao do ADX + 25% abertura da Bollinger + 20% fechamento
+            #   + 15% sincronia + 15% compressao  (+12 de bonus se os 3 dispararem juntos)
+            quality = 0.15*q_sinc + 0.15*q_comp + 0.20*q_fech + 0.25*q_incl + 0.25*q_bb
             # BONUS DE CONFLUENCIA PERFEITA: quando os TRES sinais coincidem no
             # mesmo candle (DIDI 0d + ADX 0d + BB, que e sempre 0d), o ativo ganha
             # +12 pontos e se destaca no topo do ranking. E o melhor setup na
@@ -404,6 +414,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                 "confluencia": bool(confluencia_perfeita),
                 "bb_primeira": bool(row.get("bb_primeira_abertura", False)),
                 "cruz_antigo": cruz_antigo,
+                "bb_abre_pct": round(float(bb_abre_pct),1) if not np.isnan(bb_abre_pct) else None,
                 # candle do gatilho VERMELHO (fechou abaixo da abertura, mas acima do fechamento anterior)
                 "candle_vermelho": bool((lado == "compra") and float(row["Close"]) < float(row["Open"])),
                 "lado": lado,
@@ -531,6 +542,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "adx_var_pct": h.get("adx_var_pct"), "confluencia": h.get("confluencia", False),
             "bb_primeira": h.get("bb_primeira", False),
             "cruz_antigo": bool(h.get("cruz_antigo", False)),
+            "bb_abre_pct": h.get("bb_abre_pct"),
             "candle_vermelho": bool(h.get("candle_vermelho", False)),
             "high": h.get("high"),
             "dates": dates,

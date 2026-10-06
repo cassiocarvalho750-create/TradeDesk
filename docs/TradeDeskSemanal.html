@@ -261,7 +261,7 @@ function drawCandles(a){
 function notaTag(q){
   if(q==null||isNaN(q)) return "";
   const cls = q>=75 ? "alta" : (q>=50 ? "media" : "baixa");
-  return `<span class="nota ${cls}" title="Qualidade: sincronia DIDI+ADX no gatilho 30% + compressão 25% + fechamento no topo 25% + inclinação do ADX 20%">${Math.round(q)}</span>`;
+  return `<span class="nota ${cls}" title="Qualidade: inclinação do ADX 25% + abertura da Bollinger 25% + fechamento no topo 20% + sincronia DIDI+ADX 15% + compressão das médias 15% (+12 se os três dispararem no mesmo candle)">${Math.round(q)}</span>`;
 }
 
 function fmtVol(v){
