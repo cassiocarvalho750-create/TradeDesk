@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-07",
-  "gerado_utc": "2026-10-07 21:33 UTC",
+  "gerado_utc": "2026-10-07 22:24 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
@@ -18,8 +18,8 @@
     }
   },
   "funil": {
-    "total": 1133,
-    "liquidos": 1081
+    "total": 1132,
+    "liquidos": 1080
   },
   "n": 0,
   "ativos": []
