@@ -1,19 +1,19 @@
 {
   "gerado": "2026-10-07",
-  "gerado_utc": "2026-10-07 15:24 UTC",
+  "gerado_utc": "2026-10-07 17:59 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 754.94,
-      "mm200": 669.52,
+      "close": 756.7,
+      "mm200": 669.53,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 204643.95,
-      "mm200": 178695.35,
+      "close": 205566.06,
+      "mm200": 178699.97,
       "validado": false
     }
   },
@@ -30,7 +30,7 @@
       "stop": 99.45,
       "alvo_3r": 101.73,
       "r_pct": 0.57,
-      "preco": 99.99,
+      "preco": 99.9,
       "ema20": 99.45,
       "mom3": 7.0,
       "mom_fraco": false,
