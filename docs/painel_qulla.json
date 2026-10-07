@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-06",
+  "gerado": "2026-10-07",
   "n": 6,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MRVL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MRVL"
@@ -33,7 +33,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
@@ -51,17 +51,17 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CIEN",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CIEN"
     },
     {
       "entrada": 595.51,
-      "stop": 561.78,
-      "alvo_3r": 696.71,
+      "stop": 560.96,
+      "alvo_3r": 699.16,
       "preco": 574.0,
-      "r_pct": 5.66,
+      "r_pct": 5.8,
       "mom1": 10.0,
       "mom3": 33.0,
       "mom6": 225.0,
@@ -69,7 +69,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
@@ -87,7 +87,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CORT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CORT"
@@ -105,7 +105,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MU",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MU"
