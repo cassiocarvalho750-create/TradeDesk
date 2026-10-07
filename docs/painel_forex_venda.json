@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-07",
-  "captura": "07/10/2026 14:54",
+  "captura": "07/10/2026 18:29",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 1.61,
       "stop": 1.61,
-      "r_pct": 0.36,
+      "r_pct": 0.39,
       "forming": true,
       "date": "2026-10-07",
       "ult_candle": "2026-10-07",
@@ -23,23 +23,23 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURAUD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.27,
+      "var_dia_pct": -0.3,
       "mom1": -0.0,
       "mom3": -2.0,
       "mom6": -3.0,
-      "alvo_2r": 1.6,
+      "alvo_2r": 1.59,
       "acima_ema70": false,
       "ema70": 1.6266,
       "ema70_incl": "lado",
-      "quality": 67.9,
+      "quality": 70.0,
       "didi_dist": 0.022,
-      "pos_range": 0.32,
-      "dist_max_pct": 0.17,
+      "pos_range": 0.26,
+      "dist_max_pct": 0.14,
       "adx_var_pct": 0.2,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 30.1,
+      "bb_abre_pct": 32.1,
       "candle_vermelho": false,
       "high": 1.61,
       "dates": [
@@ -124,7 +124,7 @@
         1.6234,
         1.6188,
         1.6099,
-        1.6074
+        1.6071
       ],
       "o": [
         1.632,
@@ -292,7 +292,7 @@
         1.6256,
         1.6244,
         1.6174,
-        1.6121
+        1.612
       ],
       "ma8": [
         1.6369,
@@ -418,7 +418,7 @@
         0.2569,
         0.108,
         -0.2623,
-        -0.4659
+        -0.4697
       ],
       "didi_longa": [
         -0.095,
@@ -460,7 +460,7 @@
         -0.2501,
         -0.299,
         -0.2399,
-        -0.124
+        -0.1226
       ],
       "adx": [
         19.2969,
@@ -712,7 +712,7 @@
         1.6093,
         1.6146,
         1.6099,
-        1.6044
+        1.6042
       ],
       "atrasado": false
     }

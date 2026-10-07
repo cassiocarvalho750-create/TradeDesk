@@ -1,49 +1,26 @@
 {
   "gerado": "2026-10-07",
-  "gerado_utc": "2026-10-07 17:59 UTC",
+  "gerado_utc": "2026-10-07 21:33 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 756.7,
-      "mm200": 669.53,
+      "close": 757.73,
+      "mm200": 669.54,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 205566.06,
-      "mm200": 178699.97,
+      "close": 204302.33,
+      "mm200": 178693.65,
       "validado": false
     }
   },
   "funil": {
-    "total": 1134,
-    "liquidos": 1082,
-    "sinais": 1
+    "total": 1133,
+    "liquidos": 1081
   },
-  "n": 1,
-  "ativos": [
-    {
-      "data_sinal": "2026-10-06",
-      "entrada": 100.02,
-      "stop": 99.45,
-      "alvo_3r": 101.73,
-      "r_pct": 0.57,
-      "preco": 99.9,
-      "ema20": 99.45,
-      "mom3": 7.0,
-      "mom_fraco": false,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "aguardando",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "SATA",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=SATA",
-      "forming": true
-    }
-  ]
+  "n": 0,
+  "ativos": []
 }
