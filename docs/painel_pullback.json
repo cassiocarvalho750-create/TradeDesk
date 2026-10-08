@@ -1,26 +1,70 @@
 {
   "gerado": "2026-10-08",
-  "gerado_utc": "2026-10-08 13:54 UTC",
+  "gerado_utc": "2026-10-08 14:28 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 753.51,
-      "mm200": 670.24,
+      "close": 756.21,
+      "mm200": 670.25,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 204987.52,
-      "mm200": 178931.95,
+      "close": 206244.55,
+      "mm200": 178938.23,
       "validado": false
     }
   },
   "funil": {
     "total": 1134,
-    "liquidos": 1082
+    "liquidos": 1084,
+    "sinais": 2
   },
-  "n": 0,
-  "ativos": []
+  "n": 2,
+  "ativos": [
+    {
+      "data_sinal": "2026-10-08",
+      "entrada": 279.87,
+      "stop": 272.05,
+      "alvo_3r": 303.33,
+      "r_pct": 2.79,
+      "preco": 279.63,
+      "ema20": 273.64,
+      "mom3": 30.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "TWLO",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=TWLO",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-08",
+      "entrada": 330.47,
+      "stop": 318.2,
+      "alvo_3r": 367.28,
+      "r_pct": 3.71,
+      "preco": 330.46,
+      "ema20": 319.92,
+      "mom3": -6.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "LRCX",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=LRCX",
+      "forming": true
+    }
+  ]
 }
