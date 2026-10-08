@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-07",
+  "gerado": "2026-10-08",
   "n": 6,
   "ativos": [
     {
@@ -15,17 +15,17 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "ZS",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=ZS"
     },
     {
       "entrada": 595.51,
-      "stop": 560.76,
-      "alvo_3r": 699.76,
+      "stop": 560.38,
+      "alvo_3r": 700.9,
       "preco": 578.96,
-      "r_pct": 5.84,
+      "r_pct": 5.9,
       "mom1": 8.0,
       "mom3": 29.0,
       "mom6": 214.0,
@@ -33,7 +33,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
@@ -51,7 +51,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CORT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CORT"
@@ -59,9 +59,9 @@
     {
       "entrada": 25.78,
       "stop": 24.41,
-      "alvo_3r": 29.88,
+      "alvo_3r": 29.89,
       "preco": 24.58,
-      "r_pct": 5.3,
+      "r_pct": 5.31,
       "mom1": 30.0,
       "mom3": 12.0,
       "mom6": 7.0,
@@ -69,7 +69,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "GME",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=GME"
@@ -87,7 +87,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MU",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MU"
@@ -105,7 +105,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
