@@ -1,26 +1,91 @@
 {
-  "gerado": "2026-10-08",
-  "gerado_utc": "2026-10-08 22:37 UTC",
+  "gerado": "2026-10-09",
+  "gerado_utc": "2026-10-09 13:44 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 747.58,
-      "mm200": 670.21,
+      "close": 750.34,
+      "mm200": 670.87,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206220.23,
-      "mm200": 178938.11,
+      "close": 208404.73,
+      "mm200": 179190.52,
       "validado": false
     }
   },
   "funil": {
-    "total": 1134,
-    "liquidos": 1086
+    "total": 1135,
+    "liquidos": 1086,
+    "sinais": 3
   },
-  "n": 0,
-  "ativos": []
+  "n": 3,
+  "ativos": [
+    {
+      "data_sinal": "2026-10-09",
+      "entrada": 270.43,
+      "stop": 254.0,
+      "alvo_3r": 319.72,
+      "r_pct": 6.08,
+      "preco": 269.64,
+      "ema20": 258.06,
+      "mom3": 42.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "ILMN",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=ILMN",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-09",
+      "entrada": 154.5,
+      "stop": 146.7,
+      "alvo_3r": 177.9,
+      "r_pct": 5.05,
+      "preco": 153.9,
+      "ema20": 147.14,
+      "mom3": 39.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "RVTY",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=RVTY",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-09",
+      "entrada": 171.22,
+      "stop": 163.32,
+      "alvo_3r": 194.92,
+      "r_pct": 4.61,
+      "preco": 170.71,
+      "ema20": 165.39,
+      "mom3": 28.0,
+      "mom_fraco": true,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "A",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=A",
+      "forming": true
+    }
+  ]
 }
