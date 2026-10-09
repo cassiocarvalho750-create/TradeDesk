@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-09",
-  "captura": "09/10/2026 16:48",
+  "captura": "09/10/2026 18:57",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,35 +11,35 @@
       "par": "Gas Natural (US Natural Gas)",
       "classe": "Commodity",
       "lado": "compra",
-      "close": 11.0,
+      "close": 11.01,
       "stop": 10.14,
-      "r_pct": 7.82,
+      "r_pct": 7.9,
       "forming": true,
       "date": "2026-10-09",
       "ult_candle": "2026-10-09",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": null,
-      "vol_fin_mi": 333.4,
+      "vol_fin_mi": 333.9,
       "tv": "https://www.tradingview.com/chart/?symbol=UNG",
-      "vol_qtd": 31321823.0,
-      "var_dia_pct": 0.55,
+      "vol_qtd": 32229698.0,
+      "var_dia_pct": 0.64,
       "mom1": 8.0,
       "mom3": 6.0,
       "mom6": 2.0,
-      "alvo_2r": 12.72,
+      "alvo_2r": 12.75,
       "acima_ema70": true,
       "ema70": 10.62,
       "ema70_incl": "sobe",
-      "quality": 49.7,
+      "quality": 50.7,
       "didi_dist": 0.574,
-      "pos_range": 0.345,
-      "dist_max_pct": 1.53,
+      "pos_range": 0.384,
+      "dist_max_pct": 1.43,
       "adx_var_pct": 28.6,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 7.4,
+      "bb_abre_pct": 8.0,
       "candle_vermelho": false,
       "high": 11.17,
       "dates": [
@@ -124,7 +124,7 @@
         10.74,
         11.03,
         10.81,
-        10.9997
+        11.01
       ],
       "o": [
         10.02,
@@ -292,7 +292,7 @@
         10.5867,
         10.7733,
         10.86,
-        10.9466
+        10.95
       ],
       "ma8": [
         9.9262,
@@ -334,7 +334,7 @@
         10.57,
         10.5575,
         10.56,
-        10.6412
+        10.6425
       ],
       "ma20": [
         10.0825,
@@ -376,7 +376,7 @@
         10.526,
         10.573,
         10.604,
-        10.6455
+        10.646
       ],
       "didi_curta": [
         1.0452,
@@ -418,7 +418,7 @@
         0.1577,
         2.0444,
         2.8409,
-        2.8695
+        2.8894
       ],
       "didi_longa": [
         1.5741,
@@ -460,7 +460,7 @@
         -0.4163,
         0.1468,
         0.4167,
-        0.0402
+        0.0329
       ],
       "adx": [
         27.3136,
@@ -628,7 +628,7 @@
         11.1831,
         11.1204,
         11.1278,
-        11.2556
+        11.2604
       ],
       "bb_mid": [
         9.9262,
@@ -670,7 +670,7 @@
         10.57,
         10.5575,
         10.56,
-        10.6412
+        10.6425
       ],
       "bb_inf": [
         9.5119,
@@ -712,7 +712,7 @@
         9.9569,
         9.9946,
         9.9922,
-        10.0268
+        10.0246
       ],
       "atrasado": true
     }
