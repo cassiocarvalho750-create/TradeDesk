@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-09",
-  "captura": "09/10/2026 18:57",
+  "gerado": "2026-10-10",
+  "captura": "10/10/2026 06:22",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 11.01,
       "stop": 10.14,
       "r_pct": 7.9,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-09",
       "ult_candle": "2026-10-09",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": null,
       "vol_fin_mi": 333.9,
       "tv": "https://www.tradingview.com/chart/?symbol=UNG",
-      "vol_qtd": 32229698.0,
+      "vol_qtd": 32260700.0,
       "var_dia_pct": 0.64,
       "mom1": 8.0,
       "mom3": 6.0,
@@ -33,7 +33,7 @@
       "ema70_incl": "sobe",
       "quality": 50.7,
       "didi_dist": 0.574,
-      "pos_range": 0.384,
+      "pos_range": 0.385,
       "dist_max_pct": 1.43,
       "adx_var_pct": 28.6,
       "confluencia": false,
@@ -208,7 +208,7 @@
         10.77,
         11.19,
         11.21,
-        11.1701
+        11.17
       ],
       "l": [
         9.9,
@@ -544,7 +544,7 @@
         29.6178,
         39.5151,
         32.6818,
-        28.8128
+        28.8137
       ],
       "dim": [
         33.4144,
@@ -586,7 +586,7 @@
         18.306,
         15.4624,
         18.3353,
-        16.1647
+        16.1653
       ],
       "bb_sup": [
         10.3406,

@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-09",
+  "gerado": "2026-10-10",
   "n": 11,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SNOW",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SNOW"
@@ -33,7 +33,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "FTNT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=FTNT"
@@ -51,7 +51,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "GME",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=GME"
@@ -69,7 +69,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
@@ -87,17 +87,17 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DDOG",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DDOG"
     },
     {
       "entrada": 127.9,
-      "stop": 119.4,
-      "alvo_3r": 153.39,
+      "stop": 119.36,
+      "alvo_3r": 153.52,
       "preco": 125.14,
-      "r_pct": 6.64,
+      "r_pct": 6.68,
       "mom1": 41.0,
       "mom3": 49.0,
       "mom6": 186.0,
@@ -105,17 +105,17 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "RBRK",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RBRK"
     },
     {
       "entrada": 286.99,
-      "stop": 262.44,
-      "alvo_3r": 360.64,
+      "stop": 262.4,
+      "alvo_3r": 360.76,
       "preco": 275.04,
-      "r_pct": 8.55,
+      "r_pct": 8.57,
       "mom1": 32.0,
       "mom3": 46.0,
       "mom6": 190.0,
@@ -123,17 +123,17 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CRWD",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CRWD"
     },
     {
       "entrada": 122.81,
-      "stop": 117.57,
-      "alvo_3r": 138.51,
+      "stop": 117.41,
+      "alvo_3r": 139.01,
       "preco": 121.19,
-      "r_pct": 4.26,
+      "r_pct": 4.4,
       "mom1": 5.0,
       "mom3": 41.0,
       "mom6": 189.0,
@@ -141,7 +141,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CORT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CORT"
@@ -159,7 +159,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
@@ -177,7 +177,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "PANW",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PANW"
@@ -185,7 +185,7 @@
     {
       "entrada": 331.0,
       "stop": 259.1,
-      "alvo_3r": 546.71,
+      "alvo_3r": 546.7,
       "preco": 266.07,
       "r_pct": 21.72,
       "mom1": 49.0,
@@ -195,7 +195,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "VICR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=VICR"
