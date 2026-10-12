@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-12",
-  "captura": "12/10/2026 17:25",
+  "captura": "12/10/2026 20:55",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -22,7 +22,7 @@
       "adx_ago": 1,
       "vol_fin_mi": 7.8,
       "tv": "https://www.tradingview.com/chart/?symbol=CORN",
-      "vol_qtd": 132311.0,
+      "vol_qtd": 132346.0,
       "var_dia_pct": -0.16,
       "mom1": -7.0,
       "mom3": 6.0,
@@ -734,7 +734,7 @@
       "adx_ago": 1,
       "vol_fin_mi": 10.6,
       "tv": "https://www.tradingview.com/chart/?symbol=WEAT",
-      "vol_qtd": 409526.0,
+      "vol_qtd": 409595.0,
       "var_dia_pct": -0.12,
       "mom1": -7.0,
       "mom3": 2.0,
