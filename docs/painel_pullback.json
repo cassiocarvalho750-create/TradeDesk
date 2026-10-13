@@ -1,26 +1,49 @@
 {
   "gerado": "2026-10-13",
-  "gerado_utc": "2026-10-13 14:55 UTC",
+  "gerado_utc": "2026-10-13 17:39 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 741.28,
-      "mm200": 672.1,
+      "close": 742.16,
+      "mm200": 672.11,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 207086.02,
-      "mm200": 179436.9,
+      "close": 207139.55,
+      "mm200": 179437.16,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
-    "liquidos": 1084
+    "liquidos": 1084,
+    "sinais": 1
   },
-  "n": 0,
-  "ativos": []
+  "n": 1,
+  "ativos": [
+    {
+      "data_sinal": "2026-10-13",
+      "entrada": 287.42,
+      "stop": 277.06,
+      "alvo_3r": 318.5,
+      "r_pct": 3.6,
+      "preco": 285.35,
+      "ema20": 280.75,
+      "mom3": -5.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "TXN",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=TXN",
+      "forming": true
+    }
+  ]
 }
