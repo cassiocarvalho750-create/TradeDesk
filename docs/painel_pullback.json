@@ -1,25 +1,25 @@
 {
   "gerado": "2026-10-13",
-  "gerado_utc": "2026-10-13 14:06 UTC",
+  "gerado_utc": "2026-10-13 14:55 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 744.07,
-      "mm200": 672.12,
+      "close": 741.28,
+      "mm200": 672.1,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 207288.66,
-      "mm200": 179437.91,
+      "close": 207086.02,
+      "mm200": 179436.9,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
-    "liquidos": 1083
+    "liquidos": 1084
   },
   "n": 0,
   "ativos": []
