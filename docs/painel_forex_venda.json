@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-13",
-  "captura": "13/10/2026 16:36",
+  "captura": "13/10/2026 19:03",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -22,7 +22,7 @@
       "adx_ago": 2,
       "vol_fin_mi": 9.7,
       "tv": "https://www.tradingview.com/chart/?symbol=WEAT",
-      "vol_qtd": 186363.0,
+      "vol_qtd": 202341.0,
       "var_dia_pct": -0.37,
       "mom1": -7.0,
       "mom3": -3.0,
@@ -723,9 +723,9 @@
       "par": "Milho (Teucrium Corn)",
       "classe": "Commodity",
       "lado": "venda",
-      "close": 18.49,
+      "close": 18.48,
       "stop": 18.66,
-      "r_pct": 0.92,
+      "r_pct": 0.97,
       "forming": true,
       "date": "2026-10-13",
       "ult_candle": "2026-10-13",
@@ -734,24 +734,24 @@
       "adx_ago": 2,
       "vol_fin_mi": 7.6,
       "tv": "https://www.tradingview.com/chart/?symbol=CORN",
-      "vol_qtd": 108768.0,
-      "var_dia_pct": -0.13,
+      "vol_qtd": 114441.0,
+      "var_dia_pct": -0.18,
       "mom1": -8.0,
       "mom3": 4.0,
       "mom6": 4.0,
-      "alvo_2r": 18.15,
+      "alvo_2r": 18.12,
       "acima_ema70": false,
-      "ema70": 18.8968,
+      "ema70": 18.8965,
       "ema70_incl": "desce",
-      "quality": 55.8,
+      "quality": 57.0,
       "didi_dist": 2.36,
-      "pos_range": 0.081,
-      "dist_max_pct": 0.08,
+      "pos_range": 0.027,
+      "dist_max_pct": 0.03,
       "adx_var_pct": 23.4,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 8.1,
+      "bb_abre_pct": 8.6,
       "candle_vermelho": false,
       "high": 18.66,
       "dates": [
@@ -836,7 +836,7 @@
         18.96,
         18.42,
         18.46,
-        18.49
+        18.48
       ],
       "o": [
         18.55,
@@ -1004,7 +1004,7 @@
         19.1,
         18.81,
         18.6133,
-        18.4567
+        18.4533
       ],
       "ma8": [
         18.0125,
@@ -1046,7 +1046,7 @@
         19.0712,
         18.9362,
         18.8637,
-        18.8025
+        18.8012
       ],
       "ma20": [
         17.9565,
@@ -1088,7 +1088,7 @@
         19.55,
         19.475,
         19.397,
-        19.3195
+        19.319
       ],
       "didi_curta": [
         2.0402,
@@ -1130,7 +1130,7 @@
         0.1507,
         -0.6667,
         -1.3275,
-        -1.8393
+        -1.8505
       ],
       "didi_longa": [
         -0.3109,
@@ -1172,7 +1172,7 @@
         2.5103,
         2.8451,
         2.8269,
-        2.7496
+        2.7538
       ],
       "adx": [
         31.5905,
@@ -1340,7 +1340,7 @@
         19.5069,
         19.43,
         19.4496,
-        19.4335
+        19.4351
       ],
       "bb_mid": [
         18.0125,
@@ -1382,7 +1382,7 @@
         19.0712,
         18.9362,
         18.8637,
-        18.8025
+        18.8012
       ],
       "bb_inf": [
         17.2771,
@@ -1424,7 +1424,7 @@
         18.6356,
         18.4425,
         18.2779,
-        18.1715
+        18.1674
       ],
       "atrasado": true
     }

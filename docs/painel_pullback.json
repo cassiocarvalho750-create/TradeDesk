@@ -1,28 +1,28 @@
 {
   "gerado": "2026-10-13",
-  "gerado_utc": "2026-10-13 19:40 UTC",
+  "gerado_utc": "2026-10-13 22:08 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 743.17,
-      "mm200": 672.11,
+      "close": 743.57,
+      "mm200": 672.12,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206828.05,
-      "mm200": 179435.61,
+      "close": 206887.52,
+      "mm200": 179435.9,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
     "liquidos": 1084,
-    "sinais": 1
+    "sinais": 2
   },
-  "n": 1,
+  "n": 2,
   "ativos": [
     {
       "data_sinal": "2026-10-13",
@@ -30,20 +30,41 @@
       "stop": 277.06,
       "alvo_3r": 324.46,
       "r_pct": 4.1,
-      "preco": 288.17,
-      "ema20": 281.02,
+      "preco": 287.85,
+      "ema20": 280.99,
       "mom3": -4.0,
       "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "TXN",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=TXN",
-      "forming": true
+      "forming": false
+    },
+    {
+      "data_sinal": "2026-10-13",
+      "entrada": 606.21,
+      "stop": 570.6,
+      "alvo_3r": 713.04,
+      "r_pct": 5.87,
+      "preco": 605.53,
+      "ema20": 597.82,
+      "mom3": 14.0,
+      "mom_fraco": true,
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "AMD",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=AMD",
+      "forming": false
     }
   ]
 }
