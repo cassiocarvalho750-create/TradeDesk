@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-12",
+  "gerado": "2026-10-13",
   "n": 6,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
@@ -33,17 +33,17 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CORT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CORT"
     },
     {
       "entrada": 595.06,
-      "stop": 565.35,
-      "alvo_3r": 684.19,
+      "stop": 565.0,
+      "alvo_3r": 685.24,
       "preco": 576.76,
-      "r_pct": 4.99,
+      "r_pct": 5.05,
       "mom1": 2.0,
       "mom3": 26.0,
       "mom6": 205.0,
@@ -51,7 +51,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
@@ -69,7 +69,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CRWD",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CRWD"
@@ -87,7 +87,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "VICR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=VICR"
@@ -105,7 +105,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "TTAN",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=TTAN"

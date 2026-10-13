@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-12",
-  "captura": "12/10/2026 20:54",
+  "gerado": "2026-10-13",
+  "captura": "13/10/2026 09:23",
   "timeframe": "1d",
   "n": 25,
   "ativos": [
@@ -8579,7 +8579,7 @@
       "didi_dist": 3.863,
       "pos_range": 0.898,
       "dist_max_pct": 0.95,
-      "adx_var_pct": 30.9,
+      "adx_var_pct": 30.8,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": true,
