@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-14",
-  "captura": "14/10/2026 07:24",
+  "captura": "14/10/2026 07:33",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.11,
       "stop": 1.09,
-      "r_pct": 1.53,
+      "r_pct": 1.52,
       "forming": true,
       "date": "2026-10-14",
       "ult_candle": "2026-10-14",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPCHF=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.28,
+      "var_dia_pct": 0.27,
       "mom1": 0.0,
       "mom3": 2.0,
       "mom6": 5.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.0925,
       "ema70_incl": "lado",
-      "quality": 72.2,
+      "quality": 71.1,
       "didi_dist": 0.016,
-      "pos_range": 0.989,
-      "dist_max_pct": 0.0,
+      "pos_range": 0.957,
+      "dist_max_pct": 0.01,
       "adx_var_pct": 14.0,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
-      "bb_abre_pct": 15.5,
+      "bb_abre_pct": 14.4,
       "candle_vermelho": false,
       "high": 1.11,
       "dates": [
@@ -124,7 +124,7 @@
         1.1,
         1.0987,
         1.1017,
-        1.106
+        1.1059
       ],
       "o": [
         1.0849,
@@ -418,7 +418,7 @@
         0.0537,
         -0.0544,
         0.0511,
-        0.119
+        0.1172
       ],
       "didi_longa": [
         -0.4218,
@@ -460,7 +460,7 @@
         -0.0674,
         -0.0381,
         0.03,
-        -0.0711
+        -0.0704
       ],
       "adx": [
         35.8743,
