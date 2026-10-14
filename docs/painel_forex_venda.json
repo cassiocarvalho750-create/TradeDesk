@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-13",
-  "captura": "13/10/2026 19:03",
+  "gerado": "2026-10-14",
+  "captura": "14/10/2026 07:24",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 24.28,
       "stop": 24.67,
       "r_pct": 1.61,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-13",
       "ult_candle": "2026-10-13",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": 2,
       "vol_fin_mi": 9.7,
       "tv": "https://www.tradingview.com/chart/?symbol=WEAT",
-      "vol_qtd": 202341.0,
+      "vol_qtd": 203600.0,
       "var_dia_pct": -0.37,
       "mom1": -7.0,
       "mom3": -3.0,
@@ -726,7 +726,7 @@
       "close": 18.48,
       "stop": 18.66,
       "r_pct": 0.97,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-13",
       "ult_candle": "2026-10-13",
       "timeframe": "1d",
@@ -734,8 +734,8 @@
       "adx_ago": 2,
       "vol_fin_mi": 7.6,
       "tv": "https://www.tradingview.com/chart/?symbol=CORN",
-      "vol_qtd": 114441.0,
-      "var_dia_pct": -0.18,
+      "vol_qtd": 114400.0,
+      "var_dia_pct": -0.16,
       "mom1": -8.0,
       "mom3": 4.0,
       "mom6": 4.0,
@@ -743,10 +743,10 @@
       "acima_ema70": false,
       "ema70": 18.8965,
       "ema70_incl": "desce",
-      "quality": 57.0,
+      "quality": 56.5,
       "didi_dist": 2.36,
-      "pos_range": 0.027,
-      "dist_max_pct": 0.03,
+      "pos_range": 0.053,
+      "dist_max_pct": 0.05,
       "adx_var_pct": 23.4,
       "confluencia": false,
       "bb_primeira": false,
@@ -878,7 +878,7 @@
         19.09,
         19.0,
         18.49,
-        18.514
+        18.51
       ],
       "h": [
         18.58,
@@ -962,7 +962,7 @@
         18.95,
         18.18,
         18.4,
-        18.475
+        18.47
       ],
       "ma3": [
         18.38,
