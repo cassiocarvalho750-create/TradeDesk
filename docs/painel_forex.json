@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-14",
-  "captura": "14/10/2026 15:38",
+  "captura": "14/10/2026 18:04",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 0.83,
       "stop": 0.82,
-      "r_pct": 1.32,
+      "r_pct": 1.36,
       "forming": true,
       "date": "2026-10-14",
       "ult_candle": "2026-10-14",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=USDCHF=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.22,
+      "var_dia_pct": 0.26,
       "mom1": 2.0,
       "mom3": 3.0,
       "mom6": 7.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 0.8165,
       "ema70_incl": "sobe",
-      "quality": 51.1,
+      "quality": 52.9,
       "didi_dist": 0.408,
-      "pos_range": 0.327,
-      "dist_max_pct": 0.63,
+      "pos_range": 0.362,
+      "dist_max_pct": 0.6,
       "adx_var_pct": 0.9,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
-      "bb_abre_pct": 12.3,
+      "bb_abre_pct": 14.9,
       "candle_vermelho": false,
       "high": 0.84,
       "dates": [
@@ -124,7 +124,7 @@
         0.8314,
         0.8299,
         0.8341,
-        0.8342
+        0.8345
       ],
       "o": [
         0.7977,
@@ -418,7 +418,7 @@
         0.0189,
         -0.0063,
         0.0619,
-        0.1202
+        0.1272
       ],
       "didi_longa": [
         0.1427,
@@ -460,7 +460,7 @@
         -0.6156,
         -0.4719,
         -0.3462,
-        -0.3103
+        -0.3129
       ],
       "adx": [
         29.017,
@@ -628,7 +628,7 @@
         0.8367,
         0.836,
         0.835,
-        0.8359
+        0.836
       ],
       "bb_mid": [
         0.8101,
@@ -712,7 +712,7 @@
         0.8274,
         0.827,
         0.8276,
-        0.8276
+        0.8275
       ],
       "atrasado": false
     }

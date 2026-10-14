@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-14",
-  "captura": "14/10/2026 15:39",
+  "captura": "14/10/2026 18:05",
   "timeframe": "1d",
   "n_entrar": 2,
   "n_radar": 3,
@@ -8,18 +8,18 @@
     {
       "ticker": "UHS",
       "market": "EUA",
-      "close": 185.14,
-      "entry": 185.14,
+      "close": 185.89,
+      "entry": 185.89,
       "stop": 173.39,
-      "parcial2r": 208.64,
-      "breakeven": 185.14,
-      "alvo_final": 220.39,
-      "r_pct": 6.35,
-      "ema20": 177.26,
+      "parcial2r": 210.89,
+      "breakeven": 185.89,
+      "alvo_final": 223.39,
+      "r_pct": 6.72,
+      "ema20": 177.33,
       "compress": 0.5,
       "cons_len": 3,
-      "var_dia_pct": 2.81,
-      "vol_qtd": 306181.0,
+      "var_dia_pct": 3.23,
+      "vol_qtd": 656067.0,
       "date": "2026-10-14",
       "rompeu": false,
       "_tk": "UHS",
@@ -148,7 +148,7 @@
         178.63,
         181.2,
         179.76,
-        185.51
+        186.885
       ],
       "l": [
         172.1277,
@@ -232,7 +232,7 @@
         177.35,
         178.83,
         179.01,
-        185.1475
+        185.89
       ],
       "ema20s": [
         167.1542,
@@ -274,24 +274,24 @@
         175.8788,
         176.1598,
         176.4313,
-        177.2614
+        177.3321
       ]
     },
     {
       "ticker": "AVTR",
       "market": "EUA",
-      "close": 15.8,
-      "entry": 15.8,
+      "close": 15.7,
+      "entry": 15.7,
       "stop": 14.96,
-      "parcial2r": 17.47,
-      "breakeven": 15.8,
-      "alvo_final": 18.3,
-      "r_pct": 5.29,
-      "ema20": 15.34,
+      "parcial2r": 17.18,
+      "breakeven": 15.7,
+      "alvo_final": 17.92,
+      "r_pct": 4.71,
+      "ema20": 15.33,
       "compress": 0.62,
       "cons_len": 3,
-      "var_dia_pct": 1.19,
-      "vol_qtd": 4199079.0,
+      "var_dia_pct": 0.58,
+      "vol_qtd": 8051743.0,
       "date": "2026-10-14",
       "rompeu": false,
       "_tk": "AVTR",
@@ -504,7 +504,7 @@
         15.67,
         15.49,
         15.55,
-        15.785
+        15.7
       ],
       "ema20s": [
         13.1244,
@@ -546,7 +546,7 @@
         15.2361,
         15.2603,
         15.2879,
-        15.3352
+        15.3271
       ]
     }
   ],
@@ -554,22 +554,22 @@
     {
       "ticker": "TW",
       "market": "EUA",
-      "close": 110.85,
+      "close": 110.68,
       "entry": 111.29,
       "stop": 99.42,
       "parcial2r": 135.03,
       "breakeven": 111.29,
       "alvo_final": 146.9,
       "r_pct": 10.67,
-      "ema20": 106.34,
-      "dist_ema": 4.24,
+      "ema20": 106.32,
+      "dist_ema": 4.1,
       "compress": 0.47,
       "cons_len": 3,
       "contr_vol": 0.82,
       "mae_high": 112.23,
       "mae_low": 109.91,
-      "var_dia_pct": 0.4,
-      "vol_qtd": 355527.0,
+      "var_dia_pct": 0.24,
+      "vol_qtd": 805302.0,
       "date": "2026-10-14",
       "_tk": "TW",
       "tv": "https://www.tradingview.com/chart/?symbol=TW",
@@ -781,7 +781,7 @@
         111.08,
         110.63,
         109.98,
-        110.835
+        110.68
       ],
       "ema20s": [
         103.0217,
@@ -823,28 +823,28 @@
         104.8861,
         105.4331,
         105.8661,
-        106.3394
+        106.3246
       ]
     },
     {
       "ticker": "CTVA",
       "market": "EUA",
-      "close": 13.38,
+      "close": 13.4,
       "entry": 13.55,
       "stop": 11.48,
       "parcial2r": 17.68,
       "breakeven": 13.55,
       "alvo_final": 19.75,
       "r_pct": 15.26,
-      "ema20": 12.86,
-      "dist_ema": 4.01,
+      "ema20": 12.87,
+      "dist_ema": 4.15,
       "compress": 0.54,
       "cons_len": 3,
       "contr_vol": 0.88,
       "mae_high": 13.62,
       "mae_low": 12.98,
-      "var_dia_pct": -0.45,
-      "vol_qtd": 7015492.0,
+      "var_dia_pct": -0.3,
+      "vol_qtd": 14439283.0,
       "date": "2026-10-14",
       "_tk": "CTVA",
       "tv": "https://www.tradingview.com/chart/?symbol=CTVA",
@@ -1104,22 +1104,22 @@
     {
       "ticker": "GGBR4",
       "market": "B3",
-      "close": 25.93,
-      "entry": 25.96,
+      "close": 25.94,
+      "entry": 25.97,
       "stop": 24.58,
-      "parcial2r": 28.72,
-      "breakeven": 25.96,
-      "alvo_final": 30.1,
-      "r_pct": 5.32,
+      "parcial2r": 28.75,
+      "breakeven": 25.97,
+      "alvo_final": 30.14,
+      "r_pct": 5.35,
       "ema20": 25.32,
-      "dist_ema": 2.42,
-      "compress": 0.69,
+      "dist_ema": 2.45,
+      "compress": 0.7,
       "cons_len": 3,
       "contr_vol": 0.9,
       "mae_high": 25.98,
       "mae_low": 25.28,
-      "var_dia_pct": 1.21,
-      "vol_qtd": 6806900.0,
+      "var_dia_pct": 1.25,
+      "vol_qtd": 9615000.0,
       "date": "2026-10-14",
       "_tk": "GGBR4.SA",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:GGBR4",
@@ -1247,7 +1247,7 @@
         25.48,
         25.69,
         25.98,
-        25.96
+        25.97
       ],
       "l": [
         23.9475,
@@ -1331,7 +1331,7 @@
         24.77,
         25.69,
         25.98,
-        25.93
+        25.94
       ],
       "ema20s": [
         24.364,
@@ -1373,7 +1373,7 @@
         25.1227,
         25.1768,
         25.2533,
-        25.3177
+        25.3187
       ]
     }
   ]
