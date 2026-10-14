@@ -1,28 +1,28 @@
 {
   "gerado": "2026-10-14",
-  "gerado_utc": "2026-10-14 17:08 UTC",
+  "gerado_utc": "2026-10-14 18:42 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 730.4,
-      "mm200": 672.66,
+      "close": 727.61,
+      "mm200": 672.64,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206442.94,
-      "mm200": 179677.41,
+      "close": 206892.53,
+      "mm200": 179679.66,
       "validado": false
     }
   },
   "funil": {
-    "total": 1134,
-    "liquidos": 1086,
-    "sinais": 3
+    "total": 1135,
+    "liquidos": 1087,
+    "sinais": 2
   },
-  "n": 3,
+  "n": 2,
   "ativos": [
     {
       "data_sinal": "2026-10-13",
@@ -30,7 +30,7 @@
       "stop": 277.06,
       "alvo_3r": 324.46,
       "r_pct": 4.1,
-      "preco": 281.43,
+      "preco": 280.26,
       "ema20": 280.99,
       "mom3": -4.0,
       "mom_fraco": false,
@@ -51,7 +51,7 @@
       "stop": 570.6,
       "alvo_3r": 713.04,
       "r_pct": 5.87,
-      "preco": 573.34,
+      "preco": 570.69,
       "ema20": 597.82,
       "mom3": 14.0,
       "mom_fraco": true,
@@ -64,27 +64,6 @@
       "ticker": "AMD",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AMD",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-10-14",
-      "entrada": 10.36,
-      "stop": 9.35,
-      "alvo_3r": 13.39,
-      "r_pct": 9.75,
-      "preco": 10.27,
-      "ema20": 9.46,
-      "mom3": 38.0,
-      "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "IBRX",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=IBRX",
       "forming": true
     }
   ]
