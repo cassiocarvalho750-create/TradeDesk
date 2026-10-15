@@ -1,38 +1,59 @@
 {
   "gerado": "2026-10-15",
-  "gerado_utc": "2026-10-15 14:52 UTC",
+  "gerado_utc": "2026-10-15 17:07 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 721.87,
-      "mm200": 673.17,
+      "close": 723.9,
+      "mm200": 673.18,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206139.38,
-      "mm200": 179906.14,
+      "close": 205865.55,
+      "mm200": 179904.77,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
     "liquidos": 1085,
-    "sinais": 1
+    "sinais": 2
   },
-  "n": 1,
+  "n": 2,
   "ativos": [
     {
       "data_sinal": "2026-10-15",
-      "entrada": 23.38,
+      "entrada": 26.22,
+      "stop": 25.18,
+      "alvo_3r": 29.34,
+      "r_pct": 3.97,
+      "preco": 26.11,
+      "ema20": 25.24,
+      "mom3": 25.0,
+      "mom_fraco": true,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "IBOV",
+      "ticker": "HYPE3.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:HYPE3",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-15",
+      "entrada": 23.6,
       "stop": 22.33,
-      "alvo_3r": 26.53,
-      "r_pct": 4.49,
-      "preco": 23.3,
-      "ema20": 22.55,
-      "mom3": 15.0,
+      "alvo_3r": 27.41,
+      "r_pct": 5.38,
+      "preco": 23.4,
+      "ema20": 22.56,
+      "mom3": 16.0,
       "mom_fraco": true,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
