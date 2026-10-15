@@ -421,13 +421,21 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
             q_bb = 0.0 if np.isnan(bb_abre_pct) else max(0.0, min(100.0, bb_abre_pct/60.0*100.0))
             # figura grafica rompida no candle do sinal (so diario, compra; etiqueta informativa)
             # so marca a figura se as MEDIAS estiverem alinhadas no candle do sinal:
-            # preco acima da EMA200 e EMA10 > EMA20 > EMA50 (mesma regra do backtest_didi_figuras)
+            #  - preco, EMA10 e EMA20 acima da EMA200
+            #  - EMA10 acima da EMA20 e EMA20 acima da EMA50, OU 'se alinhando': ate 0,5% abaixo
+            #    da media mais longa e SUBINDO (cruzando para cima no dia)
             figura = None; medias_alinhadas = None
             if (not venda) and timeframe == "1d":
                 try:
                     _cc = s["Close"].iloc[:pos+1]
-                    _e = {k: float(_cc.ewm(span=k, adjust=False).mean().iloc[-1]) for k in (10, 20, 50, 200)}
-                    medias_alinhadas = bool(pos >= 199 and float(_cc.iloc[-1]) > _e[200] and _e[10] > _e[20] > _e[50])
+                    _es = {k: _cc.ewm(span=k, adjust=False).mean() for k in (10, 20, 50, 200)}
+                    _e = {k: float(v.iloc[-1]) for k, v in _es.items()}
+                    _e0 = {k: float(v.iloc[-2]) for k, v in _es.items()}
+                    def _acima(a, b, tol=0.005):
+                        return _e[a] > _e[b] or (_e[a] >= _e[b]*(1-tol) and _e[a] > _e0[a])
+                    medias_alinhadas = bool(pos >= 199 and float(_cc.iloc[-1]) > _e[200]
+                                            and _e[10] > _e[200] and _e[20] > _e[200]
+                                            and _acima(10, 20) and _acima(20, 50))
                     if medias_alinhadas:
                         figura = detecta_figura(s["High"].values.astype(float), s["Close"].values.astype(float), pos)
                 except Exception:

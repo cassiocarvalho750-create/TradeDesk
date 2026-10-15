@@ -307,12 +307,12 @@ function tagsAdx(x){
 }
 // Figura grafica rompida no candle do sinal (detectada pelo scanner; so informa, nao muda a ordem).
 function tagFigura(a){
-  // so com as medias alinhadas: preco acima da EMA200 e EMA10 > EMA20 > EMA50 no candle do sinal
+  // so com as medias alinhadas (regra no scanner.py): preco, EMA10 e EMA20 acima da EMA200; EMA10 > EMA20 > EMA50 ou cruzando
   if(!a.figura || a.medias_alinhadas!==true) return "";
   const nome=a.figura==="LTB"?"ROMPENDO LTB":"ROMPENDO RESISTÊNCIA";
   const desc=a.figura==="LTB"?"linha de tendência de baixa (bandeira, flâmula, canal ou cunha de baixa, triângulo descendente)":"resistência horizontal (retângulo, triângulo ascendente, topo duplo ou W)";
   const det=[a.figura_dur!=null?`${a.figura_dur} pregões`:null,a.figura_toques!=null?`${a.figura_toques} toques`:null,a.figura_linha!=null?`linha em ${Number(a.figura_linha).toFixed(2)}`:null].filter(Boolean).join(", ");
-  return `<span class="figura" title="O candle do sinal fechou acima de uma ${desc}${det?` (${det})`:""}. Médias alinhadas: preço acima da EMA200 e EMA10 > EMA20 > EMA50. Detecção automática aproximada; confira no gráfico. No backtest, o rompimento de figura não mudou o resultado por trade, mas deixou o stop um pouco mais curto.">${nome}</span>`;
+  return `<span class="figura" title="O candle do sinal fechou acima de uma ${desc}${det?` (${det})`:""}. Médias alinhadas: preço, EMA10 e EMA20 acima da EMA200; EMA10 > EMA20 > EMA50 (ou cruzando para cima: até 0,5% abaixo e subindo). Detecção automática aproximada; confira no gráfico. No backtest, o rompimento de figura não mudou o resultado por trade, mas deixou o stop um pouco mais curto.">${nome}</span>`;
 }
 function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;
   const rpct=a.r_pct!=null?a.r_pct.toFixed(2)+"%":"—",da=a.didi_ago!=null?"há "+a.didi_ago+"d":"—",aa=a.adx_ago!=null?"há "+a.adx_ago+"d":"—";
@@ -335,7 +335,7 @@ function render(list, gerado, captura){
     return;
   }
   const normais=list.filter(a=>!a.cruz_antigo), antigos=list.filter(a=>a.cruz_antigo);
-  $("meta").innerHTML=`<b>${normais.length}</b> ativo(s)${window.__ocultos?` · <span title="Gatilho atrasado ou cruzamento do DIDI há 6–10 pregões. Não aparecem nesta página; entram na Confluência quando o Qullamäggie também aparece.">${window.__ocultos} oculto(s)</span>`:""} · ordenado pela nota · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
+  $("meta").innerHTML=`<b>${normais.length}</b> ativo(s)${window.__ocultos?` · <span title="Gatilho atrasado ou cruzamento do DIDI há 6–10 pregões. Não aparecem nesta página; entram na Confluência quando o Qullamäggie também aparece.">${window.__ocultos} oculto(s)</span>`:""} · rompendo figura primeiro, depois pela nota · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
   const secAntigo = antigos.length ? `<div class="sec-antigo"><b>Cruzamento do DIDI há 6 a 10 pregões · ${antigos.length} ativo(s)</b><br>Fora da janela normal de 5 pregões. No backtest, sozinhos renderam como os sinais normais; na confluência com o Qullamäggie renderam menos (+0,1 a +0,6R contra +0,7 a +0,85R). Eles entram na página Confluência só quando o Qullamäggie também aparece.</div>` : "";
   grid.innerHTML=(normais.length?normais.map(card).join(""):`<div class="empty">Nenhum sinal dentro da janela normal neste scan.</div>`)+secAntigo+antigos.map(card).join("");
 }
@@ -373,11 +373,14 @@ async function loadData(){
     if(m>=10) return 1;   // medio
     return 2;             // fraco
   };
-  // ORDEM (out/2026, definida pelo usuario): so a NOTA de qualidade, da maior para a menor.
-  // "Bollinger quase nao abriu" (abertura < 5%) e "candle vermelho" vao sempre para o fim.
+  // ORDEM (out/2026, definida pelo usuario):
+  //  1) ROMPENDO FIGURA (LTB ou resistencia, com medias alinhadas) na frente de todos
+  //  2) "Bollinger quase nao abriu" (abertura < 5%) e "candle vermelho" vao para o fim (dentro de cada grupo)
+  //  3) NOTA de qualidade, da maior para a menor
+  const rompe=(a)=>(a.figura && a.medias_alinhadas===true)?0:1;
   const noFim=(a)=>{ const b=adxInfo(a).bb; return ((b!=null&&b<5)||a.candle_vermelho)?1:0; };
   const nota=(a)=>(a.quality==null?-1:a.quality);
-  ativos.sort((a,b)=> (noFim(a)-noFim(b)) || (nota(b)-nota(a)));
+  ativos.sort((a,b)=> (rompe(a)-rompe(b)) || (noFim(a)-noFim(b)) || (nota(b)-nota(a)));
   // PAGINA LIMPA: gatilho atrasado e cruzamento antigo (6-10 pregoes) nao aparecem aqui.
   // Continuam no painel (JSON) e entram na Confluencia quando o Qullamaggie tambem aparece.
   const visivel=(a)=>rank(a)!==9 && !a.cruz_antigo;
