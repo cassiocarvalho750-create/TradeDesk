@@ -1,26 +1,49 @@
 {
   "gerado": "2026-10-15",
-  "gerado_utc": "2026-10-15 13:00 UTC",
+  "gerado_utc": "2026-10-15 14:22 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 728.95,
-      "mm200": 672.65,
+      "close": 720.26,
+      "mm200": 673.16,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206506.0,
-      "mm200": 179677.73,
+      "close": 205199.17,
+      "mm200": 179901.44,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
-    "liquidos": 1087
+    "liquidos": 1085,
+    "sinais": 1
   },
-  "n": 0,
-  "ativos": []
+  "n": 1,
+  "ativos": [
+    {
+      "data_sinal": "2026-10-15",
+      "entrada": 23.3,
+      "stop": 22.33,
+      "alvo_3r": 26.21,
+      "r_pct": 4.16,
+      "preco": 23.29,
+      "ema20": 22.55,
+      "mom3": 15.0,
+      "mom_fraco": true,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "GAP",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=GAP",
+      "forming": true
+    }
+  ]
 }
