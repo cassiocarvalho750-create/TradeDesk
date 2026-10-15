@@ -1,19 +1,19 @@
 {
   "gerado": "2026-10-15",
-  "gerado_utc": "2026-10-15 19:24 UTC",
+  "gerado_utc": "2026-10-15 20:40 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 728.59,
+      "close": 728.0,
       "mm200": 673.2,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 205582.98,
-      "mm200": 179903.36,
+      "close": 204324.27,
+      "mm200": 179897.07,
       "validado": false
     }
   },
@@ -26,12 +26,12 @@
   "ativos": [
     {
       "data_sinal": "2026-10-15",
-      "entrada": 383.54,
+      "entrada": 384.21,
       "stop": 369.71,
-      "alvo_3r": 425.03,
-      "r_pct": 3.61,
-      "preco": 383.29,
-      "ema20": 374.19,
+      "alvo_3r": 427.71,
+      "r_pct": 3.77,
+      "preco": 383.04,
+      "ema20": 374.17,
       "mom3": 4.0,
       "mom_fraco": false,
       "status": "FORMANDO",
@@ -51,9 +51,9 @@
       "stop": 22.33,
       "alvo_3r": 28.33,
       "r_pct": 6.29,
-      "preco": 23.72,
-      "ema20": 22.59,
-      "mom3": 17.0,
+      "preco": 23.46,
+      "ema20": 22.57,
+      "mom3": 16.0,
       "mom_fraco": true,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
