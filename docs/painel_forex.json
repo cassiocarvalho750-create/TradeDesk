@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-15",
-  "captura": "15/10/2026 20:21",
+  "captura": "15/10/2026 20:37",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.92,
       "stop": 1.87,
-      "r_pct": 2.34,
+      "r_pct": 2.35,
       "forming": false,
       "date": "2026-10-16",
       "ult_candle": "2026-10-16",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPAUD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.13,
+      "var_dia_pct": 0.14,
       "mom1": 2.0,
       "mom3": -0.0,
       "mom6": 2.0,
@@ -31,19 +31,20 @@
       "acima_ema70": true,
       "ema70": 1.8982,
       "ema70_incl": "lado",
-      "quality": 96.1,
+      "quality": 94.3,
       "didi_dist": 0.268,
-      "pos_range": 0.976,
-      "dist_max_pct": 0.0,
+      "pos_range": 0.886,
+      "dist_max_pct": 0.02,
       "adx_var_pct": 26.9,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
-      "bb_abre_pct": 268.1,
-      "figura": "HORIZ",
-      "figura_toques": 5,
-      "figura_dur": 48,
-      "figura_linha": 1.92,
+      "bb_abre_pct": 271.1,
+      "medias_alinhadas": false,
+      "figura": null,
+      "figura_toques": null,
+      "figura_dur": null,
+      "figura_linha": null,
       "candle_vermelho": false,
       "high": 1.92,
       "dates": [
@@ -128,7 +129,7 @@
         1.8989,
         1.8982,
         1.8958,
-        1.9181
+        1.9185
       ],
       "o": [
         1.9037,
@@ -212,7 +213,7 @@
         1.9007,
         1.8983,
         1.9225,
-        1.9183
+        1.9188
       ],
       "l": [
         1.9022,
@@ -296,7 +297,7 @@
         1.8983,
         1.8974,
         1.8976,
-        1.904
+        1.9042
       ],
       "ma8": [
         1.9099,
@@ -338,7 +339,7 @@
         1.8999,
         1.8991,
         1.898,
-        1.9006
+        1.9007
       ],
       "ma20": [
         1.9112,
@@ -422,7 +423,7 @@
         -0.0864,
         -0.091,
         -0.0205,
-        0.179
+        0.1828
       ],
       "didi_longa": [
         0.0669,
@@ -464,7 +465,7 @@
         -0.4313,
         -0.3689,
         -0.2889,
-        -0.3186
+        -0.3199
       ],
       "adx": [
         16.0324,
@@ -548,7 +549,7 @@
         15.7962,
         13.6058,
         36.8912,
-        28.5795
+        28.4371
       ],
       "dim": [
         18.7638,
@@ -590,7 +591,7 @@
         11.8814,
         19.8392,
         13.7827,
-        10.6774
+        10.6242
       ],
       "bb_sup": [
         1.9174,
@@ -632,7 +633,7 @@
         1.9068,
         1.905,
         1.902,
-        1.9153
+        1.9156
       ],
       "bb_mid": [
         1.9099,
@@ -674,7 +675,7 @@
         1.8999,
         1.8991,
         1.898,
-        1.9006
+        1.9007
       ],
       "bb_inf": [
         1.9023,
@@ -716,7 +717,7 @@
         1.8931,
         1.8933,
         1.894,
-        1.886
+        1.8858
       ],
       "atrasado": false
     },
@@ -756,6 +757,7 @@
       "bb_primeira": false,
       "cruz_antigo": false,
       "bb_abre_pct": 16.1,
+      "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
       "figura_dur": null,

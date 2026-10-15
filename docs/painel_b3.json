@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-15",
-  "captura": "15/10/2026 20:20",
+  "captura": "15/10/2026 20:37",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -40,6 +40,7 @@
       "bb_primeira": true,
       "cruz_antigo": true,
       "bb_abre_pct": 3.0,
+      "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
       "figura_dur": null,
@@ -756,6 +757,7 @@
       "bb_primeira": true,
       "cruz_antigo": true,
       "bb_abre_pct": 8.5,
+      "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
       "figura_dur": null,
@@ -1472,6 +1474,7 @@
       "bb_primeira": false,
       "cruz_antigo": true,
       "bb_abre_pct": 13.8,
+      "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
       "figura_dur": null,

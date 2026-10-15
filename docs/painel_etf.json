@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-15",
-  "captura": "15/10/2026 20:20",
+  "captura": "15/10/2026 20:37",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -40,6 +40,7 @@
       "bb_primeira": true,
       "cruz_antigo": false,
       "bb_abre_pct": 36.2,
+      "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
       "figura_dur": null,
@@ -756,6 +757,7 @@
       "bb_primeira": false,
       "cruz_antigo": false,
       "bb_abre_pct": 38.6,
+      "medias_alinhadas": true,
       "figura": "HORIZ",
       "figura_toques": 3,
       "figura_dur": 40,
