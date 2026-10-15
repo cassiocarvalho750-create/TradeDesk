@@ -307,11 +307,12 @@ function tagsAdx(x){
 }
 // Figura grafica rompida no candle do sinal (detectada pelo scanner; so informa, nao muda a ordem).
 function tagFigura(a){
-  if(!a.figura) return "";
+  // so com as medias alinhadas: preco acima da EMA200 e EMA10 > EMA20 > EMA50 no candle do sinal
+  if(!a.figura || a.medias_alinhadas!==true) return "";
   const nome=a.figura==="LTB"?"ROMPENDO LTB":"ROMPENDO RESISTÊNCIA";
   const desc=a.figura==="LTB"?"linha de tendência de baixa (bandeira, flâmula, canal ou cunha de baixa, triângulo descendente)":"resistência horizontal (retângulo, triângulo ascendente, topo duplo ou W)";
   const det=[a.figura_dur!=null?`${a.figura_dur} pregões`:null,a.figura_toques!=null?`${a.figura_toques} toques`:null,a.figura_linha!=null?`linha em ${Number(a.figura_linha).toFixed(2)}`:null].filter(Boolean).join(", ");
-  return `<span class="figura" title="O candle do sinal fechou acima de uma ${desc}${det?` (${det})`:""}. Detecção automática aproximada; confira no gráfico. No backtest, o rompimento de figura não mudou o resultado por trade, mas deixou o stop um pouco mais curto.">${nome}</span>`;
+  return `<span class="figura" title="O candle do sinal fechou acima de uma ${desc}${det?` (${det})`:""}. Médias alinhadas: preço acima da EMA200 e EMA10 > EMA20 > EMA50. Detecção automática aproximada; confira no gráfico. No backtest, o rompimento de figura não mudou o resultado por trade, mas deixou o stop um pouco mais curto.">${nome}</span>`;
 }
 function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;
   const rpct=a.r_pct!=null?a.r_pct.toFixed(2)+"%":"—",da=a.didi_ago!=null?"há "+a.didi_ago+"d":"—",aa=a.adx_ago!=null?"há "+a.adx_ago+"d":"—";

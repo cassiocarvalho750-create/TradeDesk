@@ -420,10 +420,16 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                 bb_abre_pct = np.nan
             q_bb = 0.0 if np.isnan(bb_abre_pct) else max(0.0, min(100.0, bb_abre_pct/60.0*100.0))
             # figura grafica rompida no candle do sinal (so diario, compra; etiqueta informativa)
-            figura = None
+            # so marca a figura se as MEDIAS estiverem alinhadas no candle do sinal:
+            # preco acima da EMA200 e EMA10 > EMA20 > EMA50 (mesma regra do backtest_didi_figuras)
+            figura = None; medias_alinhadas = None
             if (not venda) and timeframe == "1d":
                 try:
-                    figura = detecta_figura(s["High"].values.astype(float), s["Close"].values.astype(float), pos)
+                    _cc = s["Close"].iloc[:pos+1]
+                    _e = {k: float(_cc.ewm(span=k, adjust=False).mean().iloc[-1]) for k in (10, 20, 50, 200)}
+                    medias_alinhadas = bool(pos >= 199 and float(_cc.iloc[-1]) > _e[200] and _e[10] > _e[20] > _e[50])
+                    if medias_alinhadas:
+                        figura = detecta_figura(s["High"].values.astype(float), s["Close"].values.astype(float), pos)
                 except Exception:
                     figura = None
             # score final (pesos definidos pelo usuario em out/2026):
@@ -465,6 +471,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                 "bb_primeira": bool(row.get("bb_primeira_abertura", False)),
                 "cruz_antigo": cruz_antigo,
                 "bb_abre_pct": round(float(bb_abre_pct),1) if not np.isnan(bb_abre_pct) else None,
+                "medias_alinhadas": medias_alinhadas,
                 "figura": figura[0] if figura else None,
                 "figura_toques": figura[1] if figura else None,
                 "figura_dur": figura[2] if figura else None,
@@ -597,6 +604,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "bb_primeira": h.get("bb_primeira", False),
             "cruz_antigo": bool(h.get("cruz_antigo", False)),
             "bb_abre_pct": h.get("bb_abre_pct"),
+            "medias_alinhadas": h.get("medias_alinhadas"),
             "figura": h.get("figura"), "figura_toques": h.get("figura_toques"),
             "figura_dur": h.get("figura_dur"), "figura_linha": h.get("figura_linha"),
             "candle_vermelho": bool(h.get("candle_vermelho", False)),
