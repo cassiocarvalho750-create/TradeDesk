@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-15",
-  "captura": "15/10/2026 17:39",
+  "captura": "15/10/2026 20:10",
   "timeframe": "1d",
   "n_entrar": 1,
   "n_radar": 1,
@@ -19,7 +19,7 @@
       "compress": 0.47,
       "cons_len": 3,
       "var_dia_pct": 0.67,
-      "vol_qtd": 1063943.0,
+      "vol_qtd": 1063949.0,
       "date": "2026-10-15",
       "rompeu": false,
       "_tk": "TW",

@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-15",
-  "gerado_utc": "2026-10-15 20:40 UTC",
+  "gerado_utc": "2026-10-15 23:12 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
@@ -34,16 +34,16 @@
       "ema20": 374.17,
       "mom3": 4.0,
       "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "AMG",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AMG",
-      "forming": true
+      "forming": false
     },
     {
       "data_sinal": "2026-10-15",
@@ -55,16 +55,16 @@
       "ema20": 22.57,
       "mom3": 16.0,
       "mom_fraco": true,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "GAP",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=GAP",
-      "forming": true
+      "forming": false
     }
   ]
 }
