@@ -55,6 +55,49 @@ TF_WINDOWS = {"1wk": (3, 2), "4h": (4, 2)}
 # cruzamento ocorreu ha 6-10 pregoes saem MARCADOS (cruz_antigo), separados dos normais.
 # Backtest (out/2026): no DIDI sozinho rendem igual aos frescos; na Confluencia P1, menos.
 DIDI_WIN_EXT = 10
+
+# ---- FIGURA GRAFICA rompida no candle do sinal (etiqueta INFORMATIVA no card do DIDI) ----
+# Aproximacao algoritmica validada no backtest_didi_figuras.py (out/2026). Olha ate 60 pregoes para tras,
+# usando so pivos de alta 3x3 ja confirmados:
+#   LTB   : linha ligando um topo a um topo posterior MAIS BAIXO (bandeira, flamula, canal/cunha de baixa,
+#           triangulo descendente), sem nenhuma maxima entre eles e o dia do sinal acima da linha (+0,5%).
+#   HORIZ : 2+ topos dentro de 1,5% um do outro (retangulo, triangulo ascendente, topo duplo/W).
+# Rompimento: o candle do sinal FECHA acima da linha e o anterior fechava abaixo; figura com 10+ pregoes.
+# No backtest NAO melhorou o resultado por trade (so deixou o stop um pouco mais curto) -> so informa.
+FIG_LB, FIG_MIN_DUR, FIG_TOL, FIG_TOL_H = 60, 10, 0.005, 0.015
+def _piv_altos(h, K=3):
+    out = []
+    for k in range(K, len(h)-K):
+        w = h[k-K:k+K+1]
+        if h[k] == w.max() and w.argmax() == K: out.append(k)
+    return np.array(out, int)
+def detecta_figura(h, c, i):
+    """Figura rompida no candle i: (tipo 'LTB'/'HORIZ', toques, duracao_pregoes, valor_da_linha) ou None."""
+    if i < FIG_MIN_DUR + 3 or i >= len(c): return None
+    P = _piv_altos(h[:i+1])
+    Q = P[(P >= i-FIG_LB) & (P <= i-3)]
+    best = None
+    for a in range(len(Q)):
+        p1 = Q[a]
+        if i - p1 < FIG_MIN_DUR: break
+        seg = h[p1:i]
+        for b in range(a+1, len(Q)):
+            p2 = Q[b]
+            if p2 - p1 < 3: continue
+            if h[p2] < h[p1]:
+                sl = (h[p2]-h[p1])/(p2-p1); line = h[p1] + sl*(np.arange(p1, i)-p1)
+                Li = h[p1] + sl*(i-p1); Li1 = h[p1] + sl*(i-1-p1)
+                if np.all(seg <= line*(1+FIG_TOL)) and c[i] > Li and c[i-1] <= Li1:
+                    Qi = Q[Q >= p1]; toq = int(np.sum(np.abs(h[Qi]/(h[p1]+sl*(Qi-p1))-1) <= 0.01))
+                    cand = ("LTB", toq, int(i-p1), float(Li))
+                    if best is None or cand[1:3] > best[1:3]: best = cand
+            if abs(h[p2]/h[p1]-1) <= FIG_TOL_H:
+                lv = max(h[p1], h[p2])
+                if np.all(seg <= lv*(1+FIG_TOL)) and c[i] > lv and c[i-1] <= lv:
+                    Qi = Q[Q >= p1]; toq = int(np.sum(np.abs(h[Qi]/lv-1) <= FIG_TOL_H))
+                    cand = ("HORIZ", toq, int(i-p1), float(lv))
+                    if best is None or cand[1:3] > best[1:3]: best = cand
+    return best
 def tf_windows(timeframe):
     return TF_WINDOWS.get(timeframe, (5, 3))
 
@@ -376,6 +419,13 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
             except Exception:
                 bb_abre_pct = np.nan
             q_bb = 0.0 if np.isnan(bb_abre_pct) else max(0.0, min(100.0, bb_abre_pct/60.0*100.0))
+            # figura grafica rompida no candle do sinal (so diario, compra; etiqueta informativa)
+            figura = None
+            if (not venda) and timeframe == "1d":
+                try:
+                    figura = detecta_figura(s["High"].values.astype(float), s["Close"].values.astype(float), pos)
+                except Exception:
+                    figura = None
             # score final (pesos definidos pelo usuario em out/2026):
             #   25% inclinacao do ADX + 25% abertura da Bollinger + 20% fechamento
             #   + 15% sincronia + 15% compressao  (+12 de bonus se os 3 dispararem juntos)
@@ -415,6 +465,10 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                 "bb_primeira": bool(row.get("bb_primeira_abertura", False)),
                 "cruz_antigo": cruz_antigo,
                 "bb_abre_pct": round(float(bb_abre_pct),1) if not np.isnan(bb_abre_pct) else None,
+                "figura": figura[0] if figura else None,
+                "figura_toques": figura[1] if figura else None,
+                "figura_dur": figura[2] if figura else None,
+                "figura_linha": round(figura[3], 2) if figura else None,
                 # candle do gatilho VERMELHO (fechou abaixo da abertura, mas acima do fechamento anterior)
                 "candle_vermelho": bool((lado == "compra") and float(row["Close"]) < float(row["Open"])),
                 "lado": lado,
@@ -543,6 +597,8 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "bb_primeira": h.get("bb_primeira", False),
             "cruz_antigo": bool(h.get("cruz_antigo", False)),
             "bb_abre_pct": h.get("bb_abre_pct"),
+            "figura": h.get("figura"), "figura_toques": h.get("figura_toques"),
+            "figura_dur": h.get("figura_dur"), "figura_linha": h.get("figura_linha"),
             "candle_vermelho": bool(h.get("candle_vermelho", False)),
             "high": h.get("high"),
             "dates": dates,
