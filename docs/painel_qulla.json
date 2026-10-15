@@ -4,13 +4,13 @@
   "ativos": [
     {
       "entrada": 122.81,
-      "stop": 113.04,
-      "alvo_3r": 152.12,
-      "preco": 113.81,
-      "r_pct": 7.96,
+      "stop": 113.02,
+      "alvo_3r": 152.18,
+      "preco": 114.09,
+      "r_pct": 7.97,
       "mom1": 2.0,
       "mom3": 26.0,
-      "mom6": 159.0,
+      "mom6": 160.0,
       "consol_dias": 15,
       "rompendo": false,
       "acima_ema20": false,
