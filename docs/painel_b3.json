@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-14",
-  "captura": "14/10/2026 18:03",
+  "gerado": "2026-10-15",
+  "captura": "15/10/2026 09:56",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 68.29,
       "stop": 59.08,
       "r_pct": 13.49,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-14",
       "ult_candle": "2026-10-14",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": null,
       "vol_fin_mi": 569.7,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:PRIO3",
-      "vol_qtd": 11637200.0,
+      "vol_qtd": 11641500.0,
       "var_dia_pct": 1.17,
       "mom1": 7.0,
       "mom3": 19.0,

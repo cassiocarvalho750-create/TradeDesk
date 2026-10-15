@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-14",
+  "gerado": "2026-10-15",
   "n": 6,
   "ativos": [
     {
@@ -15,17 +15,17 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "TWST",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=TWST"
     },
     {
       "entrada": 73.56,
-      "stop": 62.63,
-      "alvo_3r": 106.35,
+      "stop": 62.62,
+      "alvo_3r": 106.38,
       "preco": 63.11,
-      "r_pct": 14.86,
+      "r_pct": 14.87,
       "mom1": 13.0,
       "mom3": 40.0,
       "mom6": 158.0,
@@ -33,7 +33,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HPE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HPE"
@@ -51,15 +51,15 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CORT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CORT"
     },
     {
       "entrada": 595.06,
-      "stop": 502.34,
-      "alvo_3r": 873.21,
+      "stop": 502.32,
+      "alvo_3r": 873.28,
       "preco": 507.93,
       "r_pct": 15.58,
       "mom1": -7.0,
@@ -69,7 +69,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "DELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=DELL"
@@ -87,15 +87,15 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
     },
     {
       "entrada": 512.49,
-      "stop": 476.74,
-      "alvo_3r": 619.74,
+      "stop": 476.73,
+      "alvo_3r": 619.77,
       "preco": 479.93,
       "r_pct": 6.98,
       "mom1": 31.0,
@@ -105,7 +105,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "SNPS",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=SNPS"

@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-14",
-  "captura": "14/10/2026 18:04",
+  "gerado": "2026-10-15",
+  "captura": "15/10/2026 09:56",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -14,15 +14,15 @@
       "close": 86.06,
       "stop": 80.1,
       "r_pct": 6.93,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-14",
       "ult_candle": "2026-10-14",
       "timeframe": "1d",
       "didi_ago": 5,
       "adx_ago": null,
-      "vol_fin_mi": 882.0,
+      "vol_fin_mi": 882.4,
       "tv": "https://www.tradingview.com/chart/?symbol=XLP",
-      "vol_qtd": 14183014.0,
+      "vol_qtd": 14289000.0,
       "var_dia_pct": 1.49,
       "mom1": 3.0,
       "mom3": 1.0,
@@ -31,9 +31,9 @@
       "acima_ema70": true,
       "ema70": 83.3226,
       "ema70_incl": "sobe",
-      "quality": 63.2,
+      "quality": 63.1,
       "didi_dist": 0.238,
-      "pos_range": 0.997,
+      "pos_range": 0.993,
       "dist_max_pct": 0.01,
       "adx_var_pct": 36.7,
       "confluencia": false,
@@ -208,7 +208,7 @@
         83.54,
         84.41,
         85.12,
-        86.065
+        86.07
       ],
       "l": [
         85.1599,
@@ -502,7 +502,7 @@
         28.3378,
         31.1984,
         34.6821,
-        38.7359
+        38.7402
       ],
       "dip": [
         33.6205,
@@ -544,7 +544,7 @@
         34.5366,
         41.1993,
         44.9627,
-        46.1334
+        46.1643
       ],
       "dim": [
         20.235,
@@ -586,7 +586,7 @@
         15.2969,
         13.2889,
         11.5702,
-        9.0789
+        9.0737
       ],
       "bb_sup": [
         86.2928,
@@ -726,15 +726,15 @@
       "close": 173.96,
       "stop": 165.19,
       "r_pct": 5.04,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-14",
       "ult_candle": "2026-10-14",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 0,
-      "vol_fin_mi": 1410.8,
+      "vol_fin_mi": 1411.0,
       "tv": "https://www.tradingview.com/chart/?symbol=XLV",
-      "vol_qtd": 11791788.0,
+      "vol_qtd": 11816900.0,
       "var_dia_pct": 1.77,
       "mom1": 4.0,
       "mom3": 8.0,
@@ -745,9 +745,9 @@
       "ema70_incl": "sobe",
       "quality": 63.0,
       "didi_dist": 0.119,
-      "pos_range": 0.992,
-      "dist_max_pct": 0.01,
-      "adx_var_pct": -2.1,
+      "pos_range": 0.991,
+      "dist_max_pct": 0.02,
+      "adx_var_pct": -2.0,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
@@ -920,7 +920,7 @@
         171.04,
         172.03,
         172.79,
-        173.985
+        173.99
       ],
       "l": [
         171.6331,
@@ -962,7 +962,7 @@
         167.52,
         170.85,
         169.48,
-        170.67
+        170.65
       ],
       "ma3": [
         170.1687,
@@ -1214,7 +1214,7 @@
         18.7083,
         19.5284,
         18.1753,
-        18.3205
+        18.3255
       ],
       "dip": [
         51.855,
@@ -1256,7 +1256,7 @@
         27.9583,
         31.0935,
         26.2887,
-        26.5403
+        26.5562
       ],
       "dim": [
         14.4456,
@@ -1298,7 +1298,7 @@
         19.7112,
         18.5493,
         22.0788,
-        17.9393
+        17.9354
       ],
       "bb_sup": [
         173.9984,

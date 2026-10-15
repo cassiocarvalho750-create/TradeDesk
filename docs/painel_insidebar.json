@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-14",
-  "captura": "14/10/2026 18:05",
+  "gerado": "2026-10-15",
+  "captura": "15/10/2026 09:58",
   "timeframe": "1d",
   "n_entrar": 2,
   "n_radar": 3,
@@ -19,7 +19,7 @@
       "compress": 0.5,
       "cons_len": 3,
       "var_dia_pct": 3.23,
-      "vol_qtd": 656067.0,
+      "vol_qtd": 656100.0,
       "date": "2026-10-14",
       "rompeu": false,
       "_tk": "UHS",
@@ -148,7 +148,7 @@
         178.63,
         181.2,
         179.76,
-        186.885
+        186.9
       ],
       "l": [
         172.1277,
@@ -190,7 +190,7 @@
         174.74,
         177.24,
         177.77,
-        179.9693
+        179.97
       ],
       "price": [
         172.1277,
@@ -291,7 +291,7 @@
       "compress": 0.62,
       "cons_len": 3,
       "var_dia_pct": 0.58,
-      "vol_qtd": 8051743.0,
+      "vol_qtd": 8051700.0,
       "date": "2026-10-14",
       "rompeu": false,
       "_tk": "AVTR",
@@ -462,7 +462,7 @@
         15.415,
         15.39,
         15.435,
-        15.62
+        15.61
       ],
       "price": [
         13.96,
@@ -569,7 +569,7 @@
       "mae_high": 112.23,
       "mae_low": 109.91,
       "var_dia_pct": 0.24,
-      "vol_qtd": 805302.0,
+      "vol_qtd": 805300.0,
       "date": "2026-10-14",
       "_tk": "TW",
       "tv": "https://www.tradingview.com/chart/?symbol=TW",
@@ -844,7 +844,7 @@
       "mae_high": 13.62,
       "mae_low": 12.98,
       "var_dia_pct": -0.3,
-      "vol_qtd": 14439283.0,
+      "vol_qtd": 14571600.0,
       "date": "2026-10-14",
       "_tk": "CTVA",
       "tv": "https://www.tradingview.com/chart/?symbol=CTVA",
@@ -1119,7 +1119,7 @@
       "mae_high": 25.98,
       "mae_low": 25.28,
       "var_dia_pct": 1.25,
-      "vol_qtd": 9615000.0,
+      "vol_qtd": 9616400.0,
       "date": "2026-10-14",
       "_tk": "GGBR4.SA",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:GGBR4",
