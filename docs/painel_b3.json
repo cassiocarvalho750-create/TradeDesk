@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-16",
-  "captura": "15/10/2026 21:02",
+  "captura": "16/10/2026 08:04",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -22,7 +22,7 @@
       "adx_ago": 2,
       "vol_fin_mi": 545.2,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:ABEV3",
-      "vol_qtd": 49288800.0,
+      "vol_qtd": 49345200.0,
       "var_dia_pct": 1.89,
       "mom1": 7.0,
       "mom3": 7.0,
@@ -739,7 +739,7 @@
       "adx_ago": 1,
       "vol_fin_mi": 295.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BBSE3",
-      "vol_qtd": 6563900.0,
+      "vol_qtd": 6571700.0,
       "var_dia_pct": 1.12,
       "mom1": 4.0,
       "mom3": 6.0,
@@ -1456,7 +1456,7 @@
       "adx_ago": null,
       "vol_fin_mi": 575.5,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:PRIO3",
-      "vol_qtd": 10149800.0,
+      "vol_qtd": 10155300.0,
       "var_dia_pct": 0.09,
       "mom1": 4.0,
       "mom3": 20.0,
@@ -1465,9 +1465,9 @@
       "acima_ema70": true,
       "ema70": 61.6844,
       "ema70_incl": "sobe",
-      "quality": 52.1,
+      "quality": 52.2,
       "didi_dist": 0.768,
-      "pos_range": 0.604,
+      "pos_range": 0.608,
       "dist_max_pct": 0.58,
       "adx_var_pct": 44.7,
       "confluencia": false,
@@ -1689,7 +1689,7 @@
         63.41,
         63.72,
         67.11,
-        67.74
+        67.73
       ],
       "ma3": [
         61.5367,
@@ -1983,7 +1983,7 @@
         30.097,
         35.0891,
         41.1856,
-        38.6836
+        38.6604
       ],
       "dim": [
         14.6594,
@@ -2025,7 +2025,7 @@
         12.0281,
         9.7546,
         8.5522,
-        8.0327
+        8.0278
       ],
       "bb_sup": [
         62.8827,
