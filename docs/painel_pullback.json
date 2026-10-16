@@ -1,24 +1,24 @@
 {
   "gerado": "2026-10-16",
-  "gerado_utc": "2026-10-16 11:07 UTC",
+  "gerado_utc": "2026-10-16 14:00 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 728.0,
-      "mm200": 673.2,
+      "close": 720.78,
+      "mm200": 673.71,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 204324.0,
-      "mm200": 179897.07,
+      "close": 205511.38,
+      "mm200": 180120.14,
       "validado": false
     }
   },
   "funil": {
-    "total": 1133,
+    "total": 1135,
     "liquidos": 1084,
     "sinais": 2
   },
@@ -30,20 +30,20 @@
       "stop": 369.71,
       "alvo_3r": 428.23,
       "r_pct": 3.81,
-      "preco": 383.04,
+      "preco": 389.62,
       "ema20": 374.17,
       "mom3": 4.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "abriu acima",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "AMG",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AMG",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-10-15",
@@ -51,12 +51,12 @@
       "stop": 22.33,
       "alvo_3r": 28.33,
       "r_pct": 6.29,
-      "preco": 23.46,
+      "preco": 23.77,
       "ema20": 22.57,
       "mom3": 16.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -64,7 +64,7 @@
       "ticker": "GAP",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=GAP",
-      "forming": false
+      "forming": true
     }
   ]
 }
