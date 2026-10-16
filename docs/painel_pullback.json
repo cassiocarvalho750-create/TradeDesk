@@ -1,25 +1,25 @@
 {
   "gerado": "2026-10-16",
-  "gerado_utc": "2026-10-16 14:52 UTC",
+  "gerado_utc": "2026-10-16 15:50 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 723.4,
-      "mm200": 673.73,
+      "close": 718.47,
+      "mm200": 673.7,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 204951.95,
-      "mm200": 180117.34,
+      "close": 204837.88,
+      "mm200": 180116.77,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
-    "liquidos": 1084,
+    "liquidos": 1085,
     "sinais": 3
   },
   "n": 3,
@@ -30,7 +30,7 @@
       "stop": 369.71,
       "alvo_3r": 428.23,
       "r_pct": 3.81,
-      "preco": 387.52,
+      "preco": 385.17,
       "ema20": 374.17,
       "mom3": 4.0,
       "mom_fraco": false,
@@ -51,7 +51,7 @@
       "stop": 22.33,
       "alvo_3r": 28.33,
       "r_pct": 6.29,
-      "preco": 23.73,
+      "preco": 23.57,
       "ema20": 22.57,
       "mom3": 16.0,
       "mom_fraco": true,
@@ -68,23 +68,23 @@
     },
     {
       "data_sinal": "2026-10-16",
-      "entrada": 410.42,
-      "stop": 394.18,
-      "alvo_3r": 459.14,
-      "r_pct": 3.96,
-      "preco": 410.06,
-      "ema20": 400.67,
-      "mom3": 10.0,
-      "mom_fraco": true,
+      "entrada": 358.89,
+      "stop": 337.99,
+      "alvo_3r": 421.59,
+      "r_pct": 5.82,
+      "preco": 357.79,
+      "ema20": 344.4,
+      "mom3": -1.0,
+      "mom_fraco": false,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
       "execucao": "—",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
-      "ticker": "ADI",
+      "ticker": "TLN",
       "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=ADI",
+      "tv": "https://www.tradingview.com/chart/?symbol=TLN",
       "forming": true
     }
   ]
