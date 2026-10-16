@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-16",
-  "captura": "16/10/2026 17:13",
+  "captura": "16/10/2026 17:30",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 1.23,
       "stop": 1.23,
-      "r_pct": 0.24,
+      "r_pct": 0.22,
       "forming": true,
       "date": "2026-10-16",
       "ult_candle": "2026-10-16",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=AUDNZD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.15,
+      "var_dia_pct": -0.14,
       "mom1": -1.0,
       "mom3": 3.0,
       "mom6": 1.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.2252,
       "ema70_incl": "sobe",
-      "quality": 83.4,
-      "didi_dist": 0.15,
-      "pos_range": 0.397,
-      "dist_max_pct": 0.16,
+      "quality": 82.7,
+      "didi_dist": 0.146,
+      "pos_range": 0.435,
+      "dist_max_pct": 0.17,
       "adx_var_pct": 17.7,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
-      "bb_abre_pct": 312.9,
+      "bb_abre_pct": 308.1,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -129,7 +129,7 @@
         1.245,
         1.2437,
         1.2438,
-        1.2286
+        1.2287
       ],
       "o": [
         1.1997,
@@ -297,7 +297,7 @@
         1.2432,
         1.244,
         1.2442,
-        1.2387
+        1.2388
       ],
       "ma8": [
         1.2024,
@@ -423,7 +423,7 @@
         0.1306,
         0.1181,
         0.0752,
-        -0.2058
+        -0.2035
       ],
       "didi_longa": [
         -0.1426,
@@ -465,7 +465,7 @@
         -0.0649,
         -0.1155,
         -0.16,
-        -0.0554
+        -0.0562
       ],
       "adx": [
         15.0856,
@@ -633,7 +633,7 @@
         1.2476,
         1.2472,
         1.2458,
-        1.2518
+        1.2517
       ],
       "bb_mid": [
         1.2024,
@@ -717,7 +717,7 @@
         1.2356,
         1.2378,
         1.2407,
-        1.2307
+        1.2309
       ],
       "atrasado": false
     }

@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-16",
-  "captura": "16/10/2026 17:15",
+  "captura": "16/10/2026 17:31",
   "timeframe": "1d",
   "n_entrar": 0,
   "n_radar": 7,
@@ -9,7 +9,7 @@
     {
       "ticker": "IRBR3",
       "market": "B3",
-      "close": 69.97,
+      "close": 70.0,
       "entry": 70.52,
       "stop": 58.49,
       "parcial2r": 94.58,
@@ -17,14 +17,14 @@
       "alvo_final": 106.61,
       "r_pct": 17.06,
       "ema20": 65.78,
-      "dist_ema": 6.37,
+      "dist_ema": 6.41,
       "compress": 0.46,
       "cons_len": 3,
       "contr_vol": 0.91,
       "mae_high": 70.94,
       "mae_low": 67.79,
-      "var_dia_pct": 0.32,
-      "vol_qtd": 602600.0,
+      "var_dia_pct": 0.36,
+      "vol_qtd": 650400.0,
       "date": "2026-10-16",
       "_tk": "IRBR3.SA",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:IRBR3",
@@ -236,7 +236,7 @@
         71.12,
         70.59,
         69.75,
-        69.97
+        70.0
       ],
       "ema20s": [
         51.8214,
@@ -278,13 +278,13 @@
         64.272,
         64.8737,
         65.3381,
-        65.7792
+        65.7821
       ]
     },
     {
       "ticker": "RVTY",
       "market": "EUA",
-      "close": 152.59,
+      "close": 152.64,
       "entry": 155.5,
       "stop": 146.7,
       "parcial2r": 173.1,
@@ -292,14 +292,14 @@
       "alvo_final": 181.9,
       "r_pct": 5.66,
       "ema20": 149.82,
-      "dist_ema": 1.85,
+      "dist_ema": 1.88,
       "compress": 0.48,
       "cons_len": 3,
       "contr_vol": 0.89,
       "mae_high": 156.86,
       "mae_low": 148.83,
-      "var_dia_pct": -1.2,
-      "vol_qtd": 1042133.0,
+      "var_dia_pct": -1.17,
+      "vol_qtd": 1334731.0,
       "date": "2026-10-16",
       "_tk": "RVTY",
       "tv": "https://www.tradingview.com/chart/?symbol=RVTY",
@@ -559,7 +559,7 @@
     {
       "ticker": "RADL3",
       "market": "B3",
-      "close": 20.61,
+      "close": 20.56,
       "entry": 20.92,
       "stop": 17.47,
       "parcial2r": 27.81,
@@ -567,14 +567,14 @@
       "alvo_final": 31.26,
       "r_pct": 16.47,
       "ema20": 20.13,
-      "dist_ema": 2.37,
+      "dist_ema": 2.15,
       "compress": 0.55,
       "cons_len": 3,
       "contr_vol": 0.81,
       "mae_high": 21.21,
       "mae_low": 20.36,
-      "var_dia_pct": -0.24,
-      "vol_qtd": 3376700.0,
+      "var_dia_pct": -0.48,
+      "vol_qtd": 4381600.0,
       "date": "2026-10-16",
       "_tk": "RADL3.SA",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:RADL3",
@@ -786,7 +786,7 @@
         20.68,
         20.86,
         20.59,
-        20.61
+        20.56
       ],
       "ema20s": [
         18.1201,
@@ -828,13 +828,13 @@
         19.941,
         20.0285,
         20.082,
-        20.1323
+        20.1275
       ]
     },
     {
       "ticker": "DHR",
       "market": "EUA",
-      "close": 229.03,
+      "close": 229.04,
       "entry": 231.92,
       "stop": 211.72,
       "parcial2r": 272.32,
@@ -848,8 +848,8 @@
       "contr_vol": 0.82,
       "mae_high": 233.02,
       "mae_low": 226.72,
-      "var_dia_pct": -0.64,
-      "vol_qtd": 3017487.0,
+      "var_dia_pct": -0.63,
+      "vol_qtd": 3514290.0,
       "date": "2026-10-16",
       "_tk": "DHR",
       "tv": "https://www.tradingview.com/chart/?symbol=DHR",
@@ -1109,7 +1109,7 @@
     {
       "ticker": "PSSA3",
       "market": "B3",
-      "close": 53.06,
+      "close": 53.07,
       "entry": 53.16,
       "stop": 46.58,
       "parcial2r": 66.32,
@@ -1117,14 +1117,14 @@
       "alvo_final": 72.9,
       "r_pct": 12.38,
       "ema20": 51.02,
-      "dist_ema": 4.0,
+      "dist_ema": 4.02,
       "compress": 0.62,
       "cons_len": 3,
       "contr_vol": 0.93,
       "mae_high": 53.52,
       "mae_low": 52.19,
-      "var_dia_pct": 0.68,
-      "vol_qtd": 796400.0,
+      "var_dia_pct": 0.7,
+      "vol_qtd": 1256300.0,
       "date": "2026-10-16",
       "_tk": "PSSA3.SA",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:PSSA3",
@@ -1336,7 +1336,7 @@
         52.76,
         53.05,
         52.74,
-        53.06
+        53.07
       ],
       "ema20s": [
         49.3357,
@@ -1378,13 +1378,13 @@
         50.3402,
         50.5983,
         50.8023,
-        51.0173
+        51.0182
       ]
     },
     {
       "ticker": "VLO",
       "market": "EUA",
-      "close": 444.74,
+      "close": 444.71,
       "entry": 451.98,
       "stop": 364.96,
       "parcial2r": 626.02,
@@ -1398,8 +1398,8 @@
       "contr_vol": 0.93,
       "mae_high": 456.5,
       "mae_low": 437.02,
-      "var_dia_pct": -0.58,
-      "vol_qtd": 1605942.0,
+      "var_dia_pct": -0.59,
+      "vol_qtd": 1899736.0,
       "date": "2026-10-16",
       "_tk": "VLO",
       "tv": "https://www.tradingview.com/chart/?symbol=VLO",
@@ -1659,22 +1659,22 @@
     {
       "ticker": "ITUB3",
       "market": "B3",
-      "close": 52.34,
+      "close": 52.21,
       "entry": 53.11,
       "stop": 45.58,
       "parcial2r": 68.16,
       "breakeven": 53.11,
       "alvo_final": 75.69,
       "r_pct": 14.17,
-      "ema20": 50.56,
-      "dist_ema": 3.52,
+      "ema20": 50.55,
+      "dist_ema": 3.29,
       "compress": 0.77,
       "cons_len": 3,
       "contr_vol": 0.84,
       "mae_high": 53.22,
       "mae_low": 51.8,
-      "var_dia_pct": -0.11,
-      "vol_qtd": 1508100.0,
+      "var_dia_pct": -0.36,
+      "vol_qtd": 1995300.0,
       "date": "2026-10-16",
       "_tk": "ITUB3.SA",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:ITUB3",
@@ -1886,7 +1886,7 @@
         53.66,
         52.94,
         52.44,
-        52.34
+        52.21
       ],
       "ema20s": [
         42.7707,
@@ -1928,7 +1928,7 @@
         49.8606,
         50.1539,
         50.3716,
-        50.5591
+        50.5467
       ]
     }
   ]
