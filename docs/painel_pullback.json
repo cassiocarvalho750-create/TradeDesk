@@ -1,12 +1,12 @@
 {
-  "gerado": "2026-10-15",
-  "gerado_utc": "2026-10-15 23:41 UTC",
+  "gerado": "2026-10-16",
+  "gerado_utc": "2026-10-16 00:06 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 728.0,
-      "mm200": 673.2,
+      "close": 728.95,
+      "mm200": 672.65,
       "validado": true
     },
     "B3": {
@@ -20,9 +20,9 @@
   "funil": {
     "total": 1135,
     "liquidos": 1086,
-    "sinais": 2
+    "sinais": 1
   },
-  "n": 2,
+  "n": 1,
   "ativos": [
     {
       "data_sinal": "2026-10-15",
@@ -43,27 +43,6 @@
       "ticker": "AMG",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AMG",
-      "forming": false
-    },
-    {
-      "data_sinal": "2026-10-15",
-      "entrada": 23.83,
-      "stop": 22.33,
-      "alvo_3r": 28.33,
-      "r_pct": 6.29,
-      "preco": 23.46,
-      "ema20": 22.57,
-      "mom3": 16.0,
-      "mom_fraco": true,
-      "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "GAP",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=GAP",
       "forming": false
     }
   ]

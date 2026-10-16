@@ -614,3 +614,4 @@ data,ticker,market,sistema,entrada,stop,alvo_2r,r_pct,tipo,mme70,confluencia,bb_
 2026-10-15,IHI,EUA,DIDI,54.01,50.19,61.65,7.07,ABERTURA,ACIMA_LAT,False,True,4,3,True,lado,71.8,2316893.0,0.97
 2026-10-15,GBPAUD=X,EUA,DIDI,1.92,1.87,2.01,2.33,ABERTURA,ACIMA_LAT,False,True,0,1,True,lado,95.6,0.0,0.12
 2026-10-15,AUDNZD=X,EUA,DIDI,1.23,1.23,1.23,0.11,ABERTURA,ACIMA_SUB,False,True,0,,True,sobe,84.1,0.0,-0.03
+2026-10-16,GBPAUD=X,EUA,DIDI,1.92,1.87,2.01,2.31,ABERTURA,ACIMA_LAT,False,True,0,1,True,lado,90.4,0.0,0.11

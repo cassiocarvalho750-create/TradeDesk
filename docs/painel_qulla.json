@@ -1,24 +1,5 @@
 {
-  "gerado": "2026-10-15",
-  "n": 1,
-  "ativos": [
-    {
-      "entrada": 122.81,
-      "stop": 113.02,
-      "alvo_3r": 152.18,
-      "preco": 113.37,
-      "r_pct": 7.97,
-      "mom1": 1.0,
-      "mom3": 25.0,
-      "mom6": 158.0,
-      "consol_dias": 15,
-      "rompendo": false,
-      "acima_ema20": false,
-      "puro": true,
-      "forming": true,
-      "ticker": "CORT",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=CORT"
-    }
-  ]
+  "gerado": "2026-10-16",
+  "n": 0,
+  "ativos": []
 }
