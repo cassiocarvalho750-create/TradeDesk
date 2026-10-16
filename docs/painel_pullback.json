@@ -1,28 +1,28 @@
 {
   "gerado": "2026-10-16",
-  "gerado_utc": "2026-10-16 15:50 UTC",
+  "gerado_utc": "2026-10-16 20:19 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 718.47,
-      "mm200": 673.7,
+      "close": 709.8,
+      "mm200": 673.66,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 204837.88,
-      "mm200": 180116.77,
+      "close": 205156.73,
+      "mm200": 180118.36,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
     "liquidos": 1085,
-    "sinais": 3
+    "sinais": 2
   },
-  "n": 3,
+  "n": 2,
   "ativos": [
     {
       "data_sinal": "2026-10-15",
@@ -30,7 +30,7 @@
       "stop": 369.71,
       "alvo_3r": 428.23,
       "r_pct": 3.81,
-      "preco": 385.17,
+      "preco": 383.76,
       "ema20": 374.17,
       "mom3": 4.0,
       "mom_fraco": false,
@@ -51,7 +51,7 @@
       "stop": 22.33,
       "alvo_3r": 28.33,
       "r_pct": 6.29,
-      "preco": 23.57,
+      "preco": 23.12,
       "ema20": 22.57,
       "mom3": 16.0,
       "mom_fraco": true,
@@ -64,27 +64,6 @@
       "ticker": "GAP",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=GAP",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-10-16",
-      "entrada": 358.89,
-      "stop": 337.99,
-      "alvo_3r": 421.59,
-      "r_pct": 5.82,
-      "preco": 357.79,
-      "ema20": 344.4,
-      "mom3": -1.0,
-      "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "TLN",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=TLN",
       "forming": true
     }
   ]
