@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-16",
-  "captura": "16/10/2026 17:29",
+  "gerado": "2026-10-17",
+  "captura": "17/10/2026 08:32",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 21.66,
       "stop": 20.51,
       "r_pct": 5.31,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-16",
       "ult_candle": "2026-10-16",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": 1,
       "vol_fin_mi": 175.2,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CXSE3",
-      "vol_qtd": 9009500.0,
+      "vol_qtd": 9021600.0,
       "var_dia_pct": 2.03,
       "mom1": 5.0,
       "mom3": -0.0,
@@ -731,7 +731,7 @@
       "close": 42.08,
       "stop": 38.24,
       "r_pct": 9.13,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-16",
       "ult_candle": "2026-10-16",
       "timeframe": "1d",
@@ -739,7 +739,7 @@
       "adx_ago": 2,
       "vol_fin_mi": 293.4,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BBSE3",
-      "vol_qtd": 3521100.0,
+      "vol_qtd": 3528400.0,
       "var_dia_pct": 1.2,
       "mom1": 4.0,
       "mom3": 8.0,
@@ -748,11 +748,11 @@
       "acima_ema70": true,
       "ema70": 39.1472,
       "ema70_incl": "sobe",
-      "quality": 48.2,
+      "quality": 48.4,
       "didi_dist": 1.998,
-      "pos_range": 0.725,
-      "dist_max_pct": 0.52,
-      "adx_var_pct": 9.7,
+      "pos_range": 0.734,
+      "dist_max_pct": 0.5,
+      "adx_var_pct": 9.6,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": true,
@@ -763,7 +763,7 @@
       "figura_dur": null,
       "figura_linha": null,
       "candle_vermelho": false,
-      "high": 42.3,
+      "high": 42.29,
       "dates": [
         "2026-08-20",
         "2026-08-21",
@@ -930,7 +930,7 @@
         41.29,
         41.83,
         41.92,
-        42.3
+        42.29
       ],
       "l": [
         36.36,
@@ -1224,7 +1224,7 @@
         26.4697,
         26.9595,
         27.5952,
-        29.0266
+        29.0059
       ],
       "dip": [
         10.1751,
@@ -1266,7 +1266,7 @@
         30.3461,
         32.1538,
         30.0986,
-        31.8265
+        31.7418
       ],
       "dim": [
         35.1938,
@@ -1308,7 +1308,7 @@
         20.1601,
         17.1664,
         15.4897,
-        13.9517
+        13.969
       ],
       "bb_sup": [
         37.751,
@@ -1448,7 +1448,7 @@
       "close": 16.84,
       "stop": 15.08,
       "r_pct": 10.45,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-16",
       "ult_candle": "2026-10-16",
       "timeframe": "1d",
@@ -1456,7 +1456,7 @@
       "adx_ago": 3,
       "vol_fin_mi": 559.6,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:ABEV3",
-      "vol_qtd": 33675500.0,
+      "vol_qtd": 33715700.0,
       "var_dia_pct": 0.84,
       "mom1": 8.0,
       "mom3": 8.0,
