@@ -1,19 +1,19 @@
 {
   "gerado": "2026-10-19",
-  "gerado_utc": "2026-10-19 14:45 UTC",
+  "gerado_utc": "2026-10-19 15:13 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 720.25,
-      "mm200": 674.2,
+      "close": 721.68,
+      "mm200": 674.21,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 205672.95,
-      "mm200": 180345.64,
+      "close": 205001.84,
+      "mm200": 180342.29,
       "validado": false
     }
   },
@@ -30,9 +30,9 @@
       "stop": 1.91,
       "alvo_3r": 3.07,
       "r_pct": 13.18,
-      "preco": 2.16,
+      "preco": 2.17,
       "ema20": 1.93,
-      "mom3": 44.0,
+      "mom3": 45.0,
       "mom_fraco": false,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
@@ -51,9 +51,9 @@
       "stop": 23.29,
       "alvo_3r": 27.53,
       "r_pct": 4.35,
-      "preco": 24.19,
-      "ema20": 23.52,
-      "mom3": 21.0,
+      "preco": 24.1,
+      "ema20": 23.51,
+      "mom3": 20.0,
       "mom_fraco": true,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
