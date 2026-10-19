@@ -1,12 +1,12 @@
 {
   "gerado": "2026-10-19",
-  "n": 2,
+  "n": 1,
   "ativos": [
     {
       "entrada": 76.9,
       "stop": 74.4,
       "alvo_3r": 84.4,
-      "preco": 78.42,
+      "preco": 78.26,
       "r_pct": 3.25,
       "mom1": 42.0,
       "mom3": 7.0,
@@ -19,24 +19,6 @@
       "ticker": "TTAN",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=TTAN"
-    },
-    {
-      "entrada": 23.53,
-      "stop": 22.25,
-      "alvo_3r": 27.37,
-      "preco": 22.6,
-      "r_pct": 5.44,
-      "mom1": 30.0,
-      "mom3": 50.0,
-      "mom6": 20.0,
-      "consol_dias": 5,
-      "rompendo": false,
-      "acima_ema20": true,
-      "puro": true,
-      "forming": true,
-      "ticker": "B3SA3.SA",
-      "market": "B3",
-      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:B3SA3"
     }
   ]
 }

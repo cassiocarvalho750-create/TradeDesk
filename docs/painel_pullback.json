@@ -1,28 +1,28 @@
 {
   "gerado": "2026-10-19",
-  "gerado_utc": "2026-10-19 19:22 UTC",
+  "gerado_utc": "2026-10-19 21:04 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 720.09,
-      "mm200": 674.2,
+      "close": 718.36,
+      "mm200": 674.19,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 205395.92,
-      "mm200": 180344.26,
+      "close": 205079.25,
+      "mm200": 180342.68,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
     "liquidos": 1086,
-    "sinais": 2
+    "sinais": 1
   },
-  "n": 2,
+  "n": 1,
   "ativos": [
     {
       "data_sinal": "2026-10-19",
@@ -30,9 +30,9 @@
       "stop": 1.91,
       "alvo_3r": 3.15,
       "r_pct": 13.96,
-      "preco": 2.14,
+      "preco": 2.09,
       "ema20": 1.92,
-      "mom3": 43.0,
+      "mom3": 39.0,
       "mom_fraco": false,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
@@ -43,27 +43,6 @@
       "ticker": "QUAL3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:QUAL3",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-10-19",
-      "entrada": 24.35,
-      "stop": 23.29,
-      "alvo_3r": 27.53,
-      "r_pct": 4.35,
-      "preco": 23.96,
-      "ema20": 23.5,
-      "mom3": 19.0,
-      "mom_fraco": true,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "IBOV",
-      "ticker": "BBAS3.SA",
-      "market": "B3",
-      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:BBAS3",
       "forming": true
     }
   ]
