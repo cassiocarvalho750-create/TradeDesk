@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-19",
-  "captura": "19/10/2026 12:10",
+  "captura": "19/10/2026 14:47",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 1.41,
       "stop": 1.41,
-      "r_pct": 0.36,
+      "r_pct": 0.37,
       "forming": true,
       "date": "2026-10-19",
       "ult_candle": "2026-10-19",
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.4043,
       "ema70_incl": "sobe",
-      "quality": 64.9,
+      "quality": 65.0,
       "didi_dist": 0.161,
-      "pos_range": 0.352,
-      "dist_max_pct": 0.2,
+      "pos_range": 0.347,
+      "dist_max_pct": 0.19,
       "adx_var_pct": -18.0,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 91.5,
+      "bb_abre_pct": 92.0,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -129,7 +129,7 @@
         1.4217,
         1.4213,
         1.4193,
-        1.4095
+        1.4094
       ],
       "o": [
         1.384,
@@ -423,7 +423,7 @@
         0.0429,
         -0.0292,
         -0.171,
-        -0.3541
+        -0.3546
       ],
       "didi_longa": [
         0.6708,
@@ -465,7 +465,7 @@
         -0.5791,
         -0.4644,
         -0.3315,
-        -0.1932
+        -0.193
       ],
       "adx": [
         46.6471,
@@ -717,7 +717,7 @@
         1.4196,
         1.4186,
         1.4172,
-        1.4103
+        1.4102
       ],
       "atrasado": false
     }
