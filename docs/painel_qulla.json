@@ -1,5 +1,42 @@
 {
-  "gerado": "2026-10-17",
-  "n": 0,
-  "ativos": []
+  "gerado": "2026-10-19",
+  "n": 2,
+  "ativos": [
+    {
+      "entrada": 23.53,
+      "stop": 22.28,
+      "alvo_3r": 27.28,
+      "preco": 22.6,
+      "r_pct": 5.31,
+      "mom1": 30.0,
+      "mom3": 50.0,
+      "mom6": 20.0,
+      "consol_dias": 5,
+      "rompendo": false,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "B3SA3.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:B3SA3"
+    },
+    {
+      "entrada": 76.9,
+      "stop": 73.64,
+      "alvo_3r": 86.67,
+      "preco": 75.96,
+      "r_pct": 4.24,
+      "mom1": 38.0,
+      "mom3": 4.0,
+      "mom6": 15.0,
+      "consol_dias": 12,
+      "rompendo": false,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "TTAN",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=TTAN"
+    }
+  ]
 }
