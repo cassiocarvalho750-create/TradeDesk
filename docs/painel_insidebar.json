@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-19",
-  "captura": "19/10/2026 18:02",
+  "captura": "19/10/2026 18:50",
   "timeframe": "1d",
   "n_entrar": 1,
   "n_radar": 8,
@@ -558,15 +558,15 @@
       "ticker": "VIVA3",
       "market": "B3",
       "close": 27.35,
-      "entry": 27.47,
+      "entry": 27.5,
       "stop": 21.21,
-      "parcial2r": 39.99,
-      "breakeven": 27.47,
-      "alvo_final": 46.25,
-      "r_pct": 22.79,
+      "parcial2r": 40.08,
+      "breakeven": 27.5,
+      "alvo_final": 46.37,
+      "r_pct": 22.87,
       "ema20": 26.08,
       "dist_ema": 4.86,
-      "compress": 0.38,
+      "compress": 0.4,
       "cons_len": 3,
       "contr_vol": 0.95,
       "mae_high": 27.96,
@@ -700,7 +700,7 @@
         28.68,
         28.11,
         27.96,
-        27.47
+        27.5
       ],
       "l": [
         21.31,

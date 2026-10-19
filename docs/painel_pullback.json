@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-19",
-  "gerado_utc": "2026-10-19 21:22 UTC",
+  "gerado_utc": "2026-10-19 21:52 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
@@ -34,16 +34,16 @@
       "ema20": 1.92,
       "mom3": 39.0,
       "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "IBOV",
       "ticker": "QUAL3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:QUAL3",
-      "forming": true
+      "forming": false
     }
   ]
 }
