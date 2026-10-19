@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-19",
-  "captura": "19/10/2026 11:32",
+  "captura": "19/10/2026 11:42",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 1.41,
       "stop": 1.41,
-      "r_pct": 0.31,
+      "r_pct": 0.34,
       "forming": true,
       "date": "2026-10-19",
       "ult_candle": "2026-10-19",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=USDCAD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.24,
+      "var_dia_pct": -0.27,
       "mom1": 1.0,
       "mom3": -0.0,
       "mom6": 3.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.4043,
       "ema70_incl": "sobe",
-      "quality": 63.0,
-      "didi_dist": 0.146,
-      "pos_range": 0.448,
-      "dist_max_pct": 0.25,
+      "quality": 64.0,
+      "didi_dist": 0.154,
+      "pos_range": 0.396,
+      "dist_max_pct": 0.22,
       "adx_var_pct": -18.0,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 83.8,
+      "bb_abre_pct": 88.0,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -129,7 +129,7 @@
         1.4217,
         1.4213,
         1.4193,
-        1.4103
+        1.4098
       ],
       "o": [
         1.384,
@@ -297,7 +297,7 @@
         1.4252,
         1.4237,
         1.4208,
-        1.417
+        1.4168
       ],
       "ma8": [
         1.3849,
@@ -423,7 +423,7 @@
         0.0429,
         -0.0292,
         -0.171,
-        -0.3424
+        -0.349
       ],
       "didi_longa": [
         0.6708,
@@ -465,7 +465,7 @@
         -0.5791,
         -0.4644,
         -0.3315,
-        -0.1974
+        -0.195
       ],
       "adx": [
         46.6471,
@@ -633,7 +633,7 @@
         1.4296,
         1.4295,
         1.4292,
-        1.4328
+        1.433
       ],
       "bb_mid": [
         1.3849,
@@ -717,7 +717,7 @@
         1.4196,
         1.4186,
         1.4172,
-        1.4108
+        1.4105
       ],
       "atrasado": false
     }
