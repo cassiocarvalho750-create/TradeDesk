@@ -1,19 +1,19 @@
 {
   "gerado": "2026-10-20",
-  "gerado_utc": "2026-10-20 12:16 UTC",
+  "gerado_utc": "2026-10-20 14:33 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 718.36,
-      "mm200": 674.19,
+      "close": 722.14,
+      "mm200": 674.75,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 205079.0,
-      "mm200": 180342.67,
+      "close": 207657.16,
+      "mm200": 180575.34,
       "validado": false
     }
   },
@@ -30,12 +30,12 @@
       "stop": 1.91,
       "alvo_3r": 3.15,
       "r_pct": 13.96,
-      "preco": 2.09,
+      "preco": 2.19,
       "ema20": 1.92,
       "mom3": 39.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -43,7 +43,7 @@
       "ticker": "QUAL3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:QUAL3",
-      "forming": false
+      "forming": true
     }
   ]
 }
