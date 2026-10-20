@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-20",
-  "captura": "20/10/2026 14:52",
+  "captura": "20/10/2026 15:45",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.34,
       "stop": 1.31,
-      "r_pct": 1.82,
+      "r_pct": 1.83,
       "forming": true,
       "date": "2026-10-20",
       "ult_candle": "2026-10-20",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPUSD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.56,
+      "var_dia_pct": 0.57,
       "mom1": -0.0,
       "mom3": 0.0,
       "mom6": -1.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.3375,
       "ema70_incl": "lado",
-      "quality": 65.5,
+      "quality": 66.1,
       "didi_dist": 0.018,
-      "pos_range": 0.739,
-      "dist_max_pct": 0.2,
+      "pos_range": 0.752,
+      "dist_max_pct": 0.19,
       "adx_var_pct": -10.2,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 45.1,
+      "bb_abre_pct": 46.0,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -129,7 +129,7 @@
         1.323,
         1.3273,
         1.3336,
-        1.3382
+        1.3383
       ],
       "o": [
         1.3646,
@@ -297,7 +297,7 @@
         1.3232,
         1.3254,
         1.328,
-        1.333
+        1.3331
       ],
       "ma8": [
         1.3602,
@@ -423,7 +423,7 @@
         -0.0084,
         0.0996,
         0.2317,
-        0.4549
+        0.4569
       ],
       "didi_longa": [
         -0.5884,
@@ -465,7 +465,7 @@
         0.2017,
         0.118,
         0.033,
-        -0.12
+        -0.1208
       ],
       "adx": [
         49.2595,
@@ -633,7 +633,7 @@
         1.3274,
         1.3287,
         1.3331,
-        1.3388
+        1.3389
       ],
       "bb_mid": [
         1.3602,
@@ -728,9 +728,9 @@
       "par": "NZD/JPY — Dólar Neozelandês / Iene",
       "classe": "Forex",
       "lado": "compra",
-      "close": 89.92,
+      "close": 89.88,
       "stop": 88.29,
-      "r_pct": 1.81,
+      "r_pct": 1.77,
       "forming": true,
       "date": "2026-10-20",
       "ult_candle": "2026-10-20",
@@ -740,23 +740,23 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=NZDJPY=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.24,
+      "var_dia_pct": 0.19,
       "mom1": 0.0,
       "mom3": -5.0,
       "mom6": -4.0,
-      "alvo_2r": 93.17,
+      "alvo_2r": 93.05,
       "acima_ema70": false,
-      "ema70": 90.9563,
+      "ema70": 90.9552,
       "ema70_incl": "desce",
-      "quality": 84.3,
+      "quality": 81.5,
       "didi_dist": 0.073,
-      "pos_range": 0.82,
-      "dist_max_pct": 0.06,
+      "pos_range": 0.683,
+      "dist_max_pct": 0.1,
       "adx_var_pct": 37.6,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 80.0,
+      "bb_abre_pct": 75.6,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -846,7 +846,7 @@
         88.603,
         88.873,
         89.28,
-        89.915
+        89.876
       ],
       "o": [
         95.14,
@@ -1014,7 +1014,7 @@
         88.6693,
         88.7753,
         88.9187,
-        89.356
+        89.343
       ],
       "ma8": [
         94.3833,
@@ -1056,7 +1056,7 @@
         88.6622,
         88.7187,
         88.755,
-        88.9297
+        88.9249
       ],
       "ma20": [
         93.7271,
@@ -1098,7 +1098,7 @@
         89.0385,
         89.0106,
         88.9833,
-        88.9867
+        88.9847
       ],
       "didi_curta": [
         0.6602,
@@ -1140,7 +1140,7 @@
         0.008,
         0.0638,
         0.1844,
-        0.4793
+        0.4702
       ],
       "didi_longa": [
         -0.6953,
@@ -1182,7 +1182,7 @@
         0.4244,
         0.329,
         0.2572,
-        0.064
+        0.0673
       ],
       "adx": [
         22.9395,
@@ -1350,7 +1350,7 @@
         89.0565,
         89.0834,
         89.2697,
-        89.8581
+        89.8297
       ],
       "bb_mid": [
         94.3833,
@@ -1392,7 +1392,7 @@
         88.6622,
         88.7187,
         88.755,
-        88.9297
+        88.9249
       ],
       "bb_inf": [
         93.2173,
@@ -1434,7 +1434,7 @@
         88.268,
         88.3541,
         88.2403,
-        88.0014
+        88.0201
       ],
       "atrasado": true
     },
@@ -1445,9 +1445,9 @@
       "par": "CHF/JPY — Franco Suíço / Iene",
       "classe": "Forex",
       "lado": "compra",
-      "close": 191.63,
+      "close": 191.78,
       "stop": 189.25,
-      "r_pct": 1.24,
+      "r_pct": 1.31,
       "forming": true,
       "date": "2026-10-20",
       "ult_candle": "2026-10-20",
@@ -1457,23 +1457,23 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=CHFJPY=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.09,
+      "var_dia_pct": 0.16,
       "mom1": 0.0,
       "mom3": -4.0,
-      "mom6": -6.0,
-      "alvo_2r": 196.39,
+      "mom6": -5.0,
+      "alvo_2r": 196.82,
       "acima_ema70": false,
-      "ema70": 193.6245,
+      "ema70": 193.6285,
       "ema70_incl": "desce",
-      "quality": 61.8,
+      "quality": 67.6,
       "didi_dist": 0.01,
-      "pos_range": 0.415,
-      "dist_max_pct": 0.22,
+      "pos_range": 0.608,
+      "dist_max_pct": 0.15,
       "adx_var_pct": 14.2,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 12.4,
+      "bb_abre_pct": 17.1,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -1563,7 +1563,7 @@
         189.9039,
         191.0302,
         191.5557,
-        191.641
+        191.769
       ],
       "o": [
         198.542,
@@ -1731,7 +1731,7 @@
         189.9803,
         190.3204,
         190.8299,
-        191.409
+        191.4516
       ],
       "ma8": [
         197.6571,
@@ -1773,7 +1773,7 @@
         190.0561,
         190.188,
         190.3648,
-        190.6032
+        190.6192
       ],
       "ma20": [
         196.7757,
@@ -1815,7 +1815,7 @@
         190.2153,
         190.3016,
         190.3338,
-        190.3349
+        190.3413
       ],
       "didi_curta": [
         0.402,
@@ -1857,7 +1857,7 @@
         -0.0399,
         0.0696,
         0.2444,
-        0.4227
+        0.4367
       ],
       "didi_longa": [
         -0.4459,
@@ -1899,7 +1899,7 @@
         0.0838,
         0.0597,
         -0.0163,
-        -0.1408
+        -0.1458
       ],
       "adx": [
         31.6557,
@@ -2067,7 +2067,7 @@
         190.5594,
         191.0319,
         191.6443,
-        192.0455
+        192.1159
       ],
       "bb_mid": [
         197.6571,
@@ -2109,7 +2109,7 @@
         190.0561,
         190.188,
         190.3648,
-        190.6032
+        190.6192
       ],
       "bb_inf": [
         195.3384,
@@ -2151,7 +2151,7 @@
         189.5528,
         189.3441,
         189.0853,
-        189.161
+        189.1225
       ],
       "atrasado": true
     }
