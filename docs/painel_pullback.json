@@ -1,19 +1,19 @@
 {
   "gerado": "2026-10-20",
-  "gerado_utc": "2026-10-20 14:33 UTC",
+  "gerado_utc": "2026-10-20 15:01 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 722.14,
-      "mm200": 674.75,
+      "close": 721.77,
+      "mm200": 674.74,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 207657.16,
-      "mm200": 180575.34,
+      "close": 208050.12,
+      "mm200": 180577.3,
       "validado": false
     }
   },
@@ -30,13 +30,13 @@
       "stop": 1.91,
       "alvo_3r": 3.15,
       "r_pct": 13.96,
-      "preco": 2.19,
+      "preco": 2.24,
       "ema20": 1.92,
       "mom3": 39.0,
       "mom_fraco": false,
       "status": "ORDEM",
       "ordem_dia": "hoje",
-      "execucao": "aguardando",
+      "execucao": "ativada",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "IBOV",
