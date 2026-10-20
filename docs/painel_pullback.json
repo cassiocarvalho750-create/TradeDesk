@@ -1,12 +1,12 @@
 {
   "gerado": "2026-10-20",
-  "gerado_utc": "2026-10-20 21:01 UTC",
+  "gerado_utc": "2026-10-20 21:11 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
-      "ok": true,
-      "close": 717.63,
-      "mm200": 674.72,
+      "ok": null,
+      "close": null,
+      "mm200": null,
       "validado": true
     },
     "B3": {
