@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-20",
-  "captura": "20/10/2026 15:45",
+  "captura": "20/10/2026 17:58",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 1.41,
       "stop": 1.41,
-      "r_pct": 0.39,
+      "r_pct": 0.36,
       "forming": true,
       "date": "2026-10-20",
       "ult_candle": "2026-10-20",
@@ -23,23 +23,23 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=USDCAD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.38,
+      "var_dia_pct": -0.35,
       "mom1": 0.0,
       "mom3": -0.0,
       "mom6": 3.0,
-      "alvo_2r": 1.39,
+      "alvo_2r": 1.4,
       "acima_ema70": true,
       "ema70": 1.4044,
       "ema70_incl": "lado",
-      "quality": 67.6,
+      "quality": 65.6,
       "didi_dist": 0.112,
-      "pos_range": 0.32,
-      "dist_max_pct": 0.19,
+      "pos_range": 0.373,
+      "dist_max_pct": 0.22,
       "adx_var_pct": -5.3,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 48.7,
+      "bb_abre_pct": 46.4,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -129,7 +129,7 @@
         1.4213,
         1.4193,
         1.4119,
-        1.4057
+        1.4059
       ],
       "o": [
         1.3836,
@@ -297,7 +297,7 @@
         1.4237,
         1.4208,
         1.4175,
-        1.4123
+        1.4124
       ],
       "ma8": [
         1.3838,
@@ -423,7 +423,7 @@
         -0.0292,
         -0.171,
         -0.3181,
-        -0.5073
+        -0.5055
       ],
       "didi_longa": [
         0.6559,
@@ -465,7 +465,7 @@
         -0.4644,
         -0.3315,
         -0.2061,
-        -0.0213
+        -0.0219
       ],
       "adx": [
         41.8825,
