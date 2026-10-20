@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-20",
-  "captura": "20/10/2026 11:57",
+  "captura": "20/10/2026 13:27",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -11,9 +11,9 @@
       "par": "USD/CAD — Dólar / Dólar Canadense",
       "classe": "Forex",
       "lado": "venda",
-      "close": 1.4,
+      "close": 1.41,
       "stop": 1.41,
-      "r_pct": 0.43,
+      "r_pct": 0.41,
       "forming": true,
       "date": "2026-10-20",
       "ult_candle": "2026-10-20",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=USDCAD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.41,
+      "var_dia_pct": -0.4,
       "mom1": 0.0,
       "mom3": -0.0,
       "mom6": 3.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.4044,
       "ema70_incl": "lado",
-      "quality": 69.8,
+      "quality": 68.9,
       "didi_dist": 0.112,
-      "pos_range": 0.263,
-      "dist_max_pct": 0.15,
+      "pos_range": 0.285,
+      "dist_max_pct": 0.17,
       "adx_var_pct": -5.3,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 51.2,
+      "bb_abre_pct": 50.2,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -129,7 +129,7 @@
         1.4213,
         1.4193,
         1.4119,
-        1.4049
+        1.4052
       ],
       "o": [
         1.3836,
@@ -297,7 +297,7 @@
         1.4237,
         1.4208,
         1.4175,
-        1.412
+        1.4121
       ],
       "ma8": [
         1.3838,
@@ -339,7 +339,7 @@
         1.4241,
         1.4232,
         1.422,
-        1.4194
+        1.4195
       ],
       "ma20": [
         1.3928,
@@ -423,7 +423,7 @@
         -0.0292,
         -0.171,
         -0.3181,
-        -0.5198
+        -0.5158
       ],
       "didi_longa": [
         0.6559,
@@ -465,7 +465,7 @@
         -0.4644,
         -0.3315,
         -0.2061,
-        -0.0168
+        -0.0182
       ],
       "adx": [
         41.8825,
@@ -633,7 +633,7 @@
         1.4295,
         1.4292,
         1.432,
-        1.4346
+        1.4344
       ],
       "bb_mid": [
         1.3838,
@@ -675,7 +675,7 @@
         1.4241,
         1.4232,
         1.422,
-        1.4194
+        1.4195
       ],
       "bb_inf": [
         1.3756,
@@ -717,7 +717,7 @@
         1.4186,
         1.4172,
         1.412,
-        1.4043
+        1.4045
       ],
       "atrasado": false
     },
@@ -728,35 +728,35 @@
       "par": "Gas Natural (US Natural Gas)",
       "classe": "Commodity",
       "lado": "venda",
-      "close": 10.33,
+      "close": 10.32,
       "stop": 10.4,
-      "r_pct": 0.68,
+      "r_pct": 0.73,
       "forming": true,
       "date": "2026-10-20",
       "ult_candle": "2026-10-20",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 0,
-      "vol_fin_mi": 337.5,
+      "vol_fin_mi": 340.0,
       "tv": "https://www.tradingview.com/chart/?symbol=UNG",
-      "vol_qtd": 6105980.0,
-      "var_dia_pct": -0.19,
+      "vol_qtd": 10761142.0,
+      "var_dia_pct": -0.24,
       "mom1": 1.0,
       "mom3": -3.0,
       "mom6": -6.0,
-      "alvo_2r": 10.19,
+      "alvo_2r": 10.18,
       "acima_ema70": false,
-      "ema70": 10.6626,
+      "ema70": 10.6625,
       "ema70_incl": "lado",
-      "quality": 49.8,
+      "quality": 50.9,
       "didi_dist": 0.784,
-      "pos_range": 0.3,
-      "dist_max_pct": 0.29,
+      "pos_range": 0.25,
+      "dist_max_pct": 0.24,
       "adx_var_pct": -10.5,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 23.6,
+      "bb_abre_pct": 24.0,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -846,7 +846,7 @@
         11.09,
         10.66,
         10.46,
-        10.3217
+        10.325
       ],
       "o": [
         9.92,
@@ -1014,7 +1014,7 @@
         11.24,
         10.99,
         10.7367,
-        10.4806
+        10.4817
       ],
       "ma8": [
         10.03,
@@ -1056,7 +1056,7 @@
         11.0288,
         11.0188,
         10.9475,
-        10.8865
+        10.8869
       ],
       "ma20": [
         9.9805,
@@ -1098,7 +1098,7 @@
         10.8,
         10.8125,
         10.8225,
-        10.7956
+        10.7958
       ],
       "didi_curta": [
         0.9305,
@@ -1140,7 +1140,7 @@
         1.9154,
         -0.2609,
         -1.9259,
-        -3.7284
+        -3.722
       ],
       "didi_longa": [
         -0.4935,
@@ -1182,7 +1182,7 @@
         -2.0741,
         -1.8718,
         -1.1418,
-        -0.8348
+        -0.837
       ],
       "adx": [
         16.7463,
@@ -1350,7 +1350,7 @@
         11.4624,
         11.4853,
         11.5581,
-        11.6406
+        11.6396
       ],
       "bb_mid": [
         10.03,
@@ -1392,7 +1392,7 @@
         11.0288,
         11.0188,
         10.9475,
-        10.8865
+        10.8869
       ],
       "bb_inf": [
         9.775,
@@ -1434,7 +1434,7 @@
         10.5951,
         10.5522,
         10.337,
-        10.1323
+        10.1341
       ],
       "atrasado": false
     }
