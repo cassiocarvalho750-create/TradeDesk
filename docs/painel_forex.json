@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-21",
-  "captura": "21/10/2026 11:31",
+  "captura": "21/10/2026 11:58",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.1,
       "stop": 1.1,
-      "r_pct": 0.73,
+      "r_pct": 0.75,
       "forming": true,
       "date": "2026-10-21",
       "ult_candle": "2026-10-21",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPCHF=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.08,
+      "var_dia_pct": 0.11,
       "mom1": 1.0,
       "mom3": 2.0,
       "mom6": 4.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.0935,
       "ema70_incl": "lado",
-      "quality": 62.6,
+      "quality": 65.7,
       "didi_dist": 0.034,
-      "pos_range": 0.453,
-      "dist_max_pct": 0.19,
+      "pos_range": 0.532,
+      "dist_max_pct": 0.16,
       "adx_var_pct": 9.9,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
-      "bb_abre_pct": 25.5,
+      "bb_abre_pct": 29.0,
       "medias_alinhadas": true,
       "figura": "LTB",
       "figura_toques": 4,
@@ -129,7 +129,7 @@
         1.0985,
         1.0984,
         1.1004,
-        1.1043
+        1.1046
       ],
       "o": [
         1.0945,
@@ -297,7 +297,7 @@
         1.1008,
         1.099,
         1.0991,
-        1.101
+        1.1012
       ],
       "ma8": [
         1.0936,
@@ -423,7 +423,7 @@
         -0.0106,
         -0.1118,
         -0.1025,
-        0.0262
+        0.0322
       ],
       "didi_longa": [
         -0.0831,
@@ -465,7 +465,7 @@
         -0.1283,
         -0.0775,
         -0.0599,
-        -0.067
+        -0.0692
       ],
       "adx": [
         25.2081,
@@ -633,7 +633,7 @@
         1.1052,
         1.104,
         1.104,
-        1.1055
+        1.1056
       ],
       "bb_mid": [
         1.0936,
@@ -717,7 +717,7 @@
         1.0967,
         1.0965,
         1.0965,
-        1.0961
+        1.0959
       ],
       "atrasado": false
     },
@@ -730,7 +730,7 @@
       "lado": "compra",
       "close": 1.34,
       "stop": 1.31,
-      "r_pct": 1.86,
+      "r_pct": 1.82,
       "forming": true,
       "date": "2026-10-21",
       "ult_candle": "2026-10-21",
@@ -740,7 +740,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPUSD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.07,
+      "var_dia_pct": 0.02,
       "mom1": 0.0,
       "mom3": 1.0,
       "mom6": -1.0,
@@ -748,15 +748,15 @@
       "acima_ema70": true,
       "ema70": 1.3373,
       "ema70_incl": "lado",
-      "quality": 64.9,
+      "quality": 60.1,
       "didi_dist": 0.018,
-      "pos_range": 0.59,
-      "dist_max_pct": 0.12,
+      "pos_range": 0.423,
+      "dist_max_pct": 0.16,
       "adx_var_pct": -0.5,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 38.7,
+      "bb_abre_pct": 35.0,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -846,7 +846,7 @@
         1.3273,
         1.3336,
         1.3308,
-        1.3388
+        1.3382
       ],
       "o": [
         1.36,
@@ -1014,7 +1014,7 @@
         1.3254,
         1.328,
         1.3306,
-        1.3344
+        1.3342
       ],
       "ma8": [
         1.3608,
@@ -1056,7 +1056,7 @@
         1.324,
         1.3249,
         1.3261,
-        1.3281
+        1.328
       ],
       "ma20": [
         1.3533,
@@ -1140,7 +1140,7 @@
         0.0996,
         0.2317,
         0.3403,
-        0.4783
+        0.4685
       ],
       "didi_longa": [
         -0.5499,
@@ -1182,7 +1182,7 @@
         0.118,
         0.033,
         -0.0787,
-        -0.2113
+        -0.2077
       ],
       "adx": [
         45.6795,
@@ -1350,7 +1350,7 @@
         1.3287,
         1.3331,
         1.3347,
-        1.34
+        1.3396
       ],
       "bb_mid": [
         1.3608,
@@ -1392,7 +1392,7 @@
         1.324,
         1.3249,
         1.3261,
-        1.3281
+        1.328
       ],
       "bb_inf": [
         1.3518,
@@ -1434,7 +1434,7 @@
         1.3193,
         1.3167,
         1.3175,
-        1.3161
+        1.3163
       ],
       "atrasado": true
     }
