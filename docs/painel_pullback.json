@@ -1,49 +1,26 @@
 {
   "gerado": "2026-10-21",
-  "gerado_utc": "2026-10-21 17:00 UTC",
+  "gerado_utc": "2026-10-21 19:52 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 727.08,
+      "close": 726.22,
       "mm200": 675.28,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206984.17,
-      "mm200": 180810.76,
+      "close": 206563.34,
+      "mm200": 180808.65,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
-    "liquidos": 1086,
-    "sinais": 1
+    "liquidos": 1086
   },
-  "n": 1,
-  "ativos": [
-    {
-      "data_sinal": "2026-10-21",
-      "entrada": 26.87,
-      "stop": 25.3,
-      "alvo_3r": 31.58,
-      "r_pct": 5.84,
-      "preco": 26.63,
-      "ema20": 25.51,
-      "mom3": 25.0,
-      "mom_fraco": true,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "GME",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=GME",
-      "forming": true
-    }
-  ]
+  "n": 0,
+  "ativos": []
 }
