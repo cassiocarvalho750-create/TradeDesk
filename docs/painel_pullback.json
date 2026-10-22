@@ -1,37 +1,37 @@
 {
   "gerado": "2026-10-22",
-  "gerado_utc": "2026-10-22 15:11 UTC",
+  "gerado_utc": "2026-10-22 16:20 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 707.13,
-      "mm200": 675.7,
+      "close": 709.9,
+      "mm200": 675.71,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 203590.97,
-      "mm200": 181016.91,
+      "close": 203231.94,
+      "mm200": 181015.12,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
     "liquidos": 1086,
-    "sinais": 2
+    "sinais": 3
   },
-  "n": 2,
+  "n": 3,
   "ativos": [
     {
       "data_sinal": "2026-10-22",
-      "entrada": 441.02,
+      "entrada": 441.71,
       "stop": 398.99,
-      "alvo_3r": 567.11,
-      "r_pct": 9.53,
-      "preco": 439.96,
-      "ema20": 418.62,
+      "alvo_3r": 569.87,
+      "r_pct": 9.67,
+      "preco": 439.63,
+      "ema20": 418.59,
       "mom3": 30.0,
       "mom_fraco": false,
       "status": "FORMANDO",
@@ -47,12 +47,12 @@
     },
     {
       "data_sinal": "2026-10-22",
-      "entrada": 201.13,
+      "entrada": 201.83,
       "stop": 184.0,
-      "alvo_3r": 252.52,
-      "r_pct": 8.52,
-      "preco": 201.0,
-      "ema20": 197.1,
+      "alvo_3r": 255.32,
+      "r_pct": 8.83,
+      "preco": 200.92,
+      "ema20": 197.09,
       "mom3": 5.0,
       "mom_fraco": false,
       "status": "FORMANDO",
@@ -64,6 +64,27 @@
       "ticker": "PM",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PM",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-22",
+      "entrada": 14.99,
+      "stop": 14.93,
+      "alvo_3r": 15.17,
+      "r_pct": 0.4,
+      "preco": 14.98,
+      "ema20": 14.93,
+      "mom3": 2.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "AES",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=AES",
       "forming": true
     }
   ]
