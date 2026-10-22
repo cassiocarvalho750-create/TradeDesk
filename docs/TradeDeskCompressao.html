@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeDesk Compressão DIDI</title>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#111823; --panel-2:#0d141d; --line:#1e2a38;
+    --ink:#e6edf3; --muted:#6b7d92; --up:#3fb950; --down:#f0603a;
+    --accent:#58a6ff; --gold:#e3b341; --curta:#58a6ff; --longa:#e3b341;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"SFMono-Regular",Consolas,"Courier New",monospace}
+  header{padding:16px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0c121b,transparent)}
+  .toprow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  header h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  header .sub{font-size:12px;color:var(--muted)}
+  .spacer{flex:1}
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  select,.btn{font-size:12px;font-family:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 12px;border-radius:6px;cursor:pointer;}
+  select:hover,.btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);color:#04121f;border-color:var(--accent);font-weight:700}
+  .btn.primary:disabled{opacity:.5;cursor:not-allowed}
+  .btn.ghost{color:var(--muted)}
+  .statusbar{margin-top:12px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);min-height:20px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+  .dot.run{background:var(--gold);animation:blink 1s infinite}
+  .dot.ok{background:var(--up)} .dot.err{background:var(--down)}
+  @keyframes blink{50%{opacity:.3}}
+  .regras{max-width:1400px;margin:0 auto;padding:12px 24px 0;font-size:12px;color:var(--muted);line-height:1.6}
+  .regras b{color:var(--ink)}
+  .meta{max-width:1400px;margin:0 auto;padding:10px 24px;font-size:12px;color:var(--muted)}
+  .meta b{color:var(--ink)}
+  .blocos{max-width:1400px;margin:0 auto;padding:6px 24px 24px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media (max-width:900px){.blocos{grid-template-columns:1fr;padding:6px 16px 20px}.regras,.meta{padding-left:16px;padding-right:16px}header{padding:14px 16px}}
+  .bloco{border:1px solid var(--line);border-radius:12px;background:var(--panel-2);overflow:hidden;min-width:0}
+  .bh{padding:12px 16px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+  .bh h2{margin:0;font-size:14px;letter-spacing:.1em;text-transform:uppercase}
+  .bh .cnt{font-size:12px;color:var(--muted)}
+  .bh .crit{font-size:11px;color:var(--muted);width:100%}
+  .bloco.compra .bh{background:linear-gradient(90deg,rgba(63,185,80,.14),transparent)} .bloco.compra h2{color:var(--up)}
+  .bloco.venda .bh{background:linear-gradient(90deg,rgba(240,96,58,.14),transparent)} .bloco.venda h2{color:var(--down)}
+  .grupo{padding:8px 16px 2px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;border-top:1px solid var(--line);background:rgba(255,255,255,.015)}
+  .grupo:first-of-type{border-top:0}
+  .card{display:grid;grid-template-columns:minmax(0,1fr) 168px;gap:10px;padding:10px 16px;border-top:1px solid var(--line);align-items:center}
+  .card:hover{background:var(--panel)}
+  .tk a{color:#fff;text-decoration:none;font-weight:700;font-size:15px}
+  .tk a:hover{color:var(--accent)}
+  .mkt{font-size:10px;color:var(--muted);border:1px solid var(--line);padding:1px 5px;border-radius:4px;margin-left:6px;vertical-align:middle}
+  .badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:5px;margin-left:6px;vertical-align:middle}
+  .b-agu{background:linear-gradient(135deg,#e6a817,#d29922);color:#1a1200}
+  .b-cru{background:rgba(88,166,255,.18);color:var(--accent);border:1px solid rgba(88,166,255,.45)}
+  .b-pre{background:rgba(107,125,146,.16);color:#aab7c6;border:1px solid rgba(107,125,146,.35)}
+  .det{font-size:12px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 12px}
+  .det b{color:var(--ink);font-weight:600}
+  .sub2{font-size:11px;color:var(--muted);margin-top:3px}
+  .up{color:var(--up)} .down{color:var(--down)}
+  svg.sp{display:block;width:168px;height:46px}
+  .legenda{font-size:10px;color:var(--muted);text-align:right;margin-top:1px}
+  .legenda i{display:inline-block;width:10px;height:2px;vertical-align:middle;margin:0 3px 0 6px}
+  @media (max-width:520px){.card{grid-template-columns:1fr}svg.sp{width:100%}.legenda{text-align:left}}
+  .vazio{padding:28px 16px;text-align:center;color:var(--muted);font-size:13px;line-height:1.6}
+  .forming{color:var(--gold)}
+  footer{padding:16px 24px;color:var(--muted);font-size:11px;border-top:1px solid var(--line);text-align:center;line-height:1.6}
+  dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:0;max-width:460px;width:92%}
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  .dlg-h{padding:16px 18px;border-bottom:1px solid var(--line);font-weight:700}
+  .dlg-b{padding:16px 18px;font-size:13px;line-height:1.6;color:var(--muted)}
+  .dlg-b input{width:100%;margin-top:10px;padding:9px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:6px;font-family:monospace}
+  .dlg-f{padding:12px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="toprow">
+    <h1>TradeDesk · Compressão DIDI</h1>
+    <span class="sub">Médias do DIDI comprimidas a favor da tendência da EMA200 e EMA70 · <b style="color:#e3b341">lista de observação</b></span>
+    <span class="spacer"></span>
+    <div class="controls">
+      <select id="mercado" title="Mercado">
+        <option value="all">Ambos</option>
+        <option value="us">EUA</option>
+        <option value="b3">B3</option>
+      </select>
+      <select id="filtro" title="Status">
+        <option value="all">Todos os status</option>
+        <option value="AGULHADA">Só agulhada</option>
+        <option value="CRUZANDO">Só cruzando</option>
+        <option value="PRESTES">Só prestes a cruzar</option>
+      </select>
+      <button class="btn primary" id="runBtn">Rodar scanner agora</button>
+      <button class="btn ghost" id="reloadBtn" title="Recarregar dados já publicados">Recarregar</button>
+      <a href="TradeDesk.html" class="btn ghost" style="text-decoration:none">← Ações (Agulhada)</a>
+      <a href="TradeDeskConfluencia.html" class="btn ghost" style="text-decoration:none">⭐ Confluência</a>
+      <a href="TradeDeskPullback.html" class="btn ghost" style="text-decoration:none">↩ Pullback</a>
+      <button class="btn ghost" id="cfgBtn" title="Configurar repositório e token">⚙</button>
+    </div>
+  </div>
+  <div class="statusbar"><span class="dot" id="dot"></span><span id="status">Pronto.</span></div>
+</header>
+<!-- [humor_sp500_web] painel de humor do S&P 500 -->
+<div id="humorSP" style="max-width:1200px;margin:14px auto 0 auto;padding:0 16px"></div>
+<script>
+(function(){
+  fetch('painel_humor.json?'+Date.now()).then(r=>r.ok?r.json():null).then(function(h){
+    var el=document.getElementById('humorSP'); if(!el||!h) return;
+    var linhas=h.tabela.map(function(t){
+      var bg=t.hoje?t.cor2:'transparent';
+      var txt=t.hoje?'#222':'inherit';       // linha de hoje tem fundo claro -> texto escuro
+      var marca=t.hoje?('<span style="background:'+t.cor+';color:#fff;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:700;margin-left:6px">HOJE</span>'):'';
+      var peso=t.hoje?'700':'500';
+      return '<tr style="background:'+bg+';color:'+txt+'">'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:'+t.cor+';margin-right:7px"></span><b style="color:'+t.cor+';font-weight:'+peso+'">'+t.nome+'</b>'+marca+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);font-family:monospace">'+t.faixa+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);font-weight:'+peso+'">'+t.risco+'</td>'
+        +'<td style="padding:6px 10px;border-bottom:1px solid rgba(128,128,128,.2);opacity:.8">'+t.exp+'</td></tr>';
+    }).join('');
+    var d3=(h.didi3!=null)?((h.didi3>=0?'+':'')+h.didi3.toFixed(2)):'—';
+    var quando=h.data_sp?(' · '+h.data_sp):'';
+    var dirtxt=h.dir_txt||'';
+    var comboCor=h.combo_cor||h.cor, comboTit=h.combo_titulo||'', comboMsg=h.combo_msg||'';
+    var combo=(comboTit? '  <div style="background:'+comboCor+';color:#fff;padding:9px 18px;font-size:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+      +'<span style="background:rgba(255,255,255,.22);border-radius:6px;padding:2px 9px;font-size:12px;font-weight:800;letter-spacing:.5px">'+comboTit+'</span>'
+      +'<span>'+comboMsg+'</span></div>' : '');
+    el.innerHTML=''
+      +'<div style="border:1px solid rgba(128,128,128,.28);border-radius:12px;overflow:hidden;font-family:inherit">'
+      +'  <div style="background:'+h.cor+';color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">'
+      +'    <div style="display:flex;align-items:center;gap:12px"><span style="font-size:24px;line-height:1">'+h.emoji+'</span>'
+      +'      <div><div style="font-size:11px;opacity:.85;letter-spacing:.5px">HUMOR DO S&amp;P 500 HOJE'+quando+'</div><div style="font-size:19px;font-weight:800">'+h.nome+'</div></div></div>'
+      +'    <div style="text-align:right"><div style="font-size:11px;opacity:.85">DIDI do S&amp;P (média 3 vs 8) · '+dirtxt+'</div><div style="font-size:21px;font-weight:800;font-family:monospace">'+d3+'</div></div>'
+      +'  </div>'
+      +combo
+      +'  <div style="background:'+h.cor2+';color:#222;padding:9px 18px;font-size:13px;border-bottom:1px solid rgba(128,128,128,.2)"><b>Posição:</b> '+h.nome+' — '+h.risco+'</div>'
+      +'  <table style="width:100%;border-collapse:collapse;font-size:13px">'
+      +'    <thead><tr style="text-align:left;opacity:.65">'
+      +'      <th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Zona</th><th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">didi3 S&amp;P</th>'
+      +'      <th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Tamanho da posição</th><th style="padding:6px 10px;border-bottom:2px solid rgba(128,128,128,.3)">Expectância</th></tr></thead>'
+      +'    <tbody>'+linhas+'</tbody></table>'
+      +'  <div style="padding:7px 18px;font-size:11px;opacity:.6">Termômetro validado em 3 cestas. Não é filtro de entrada; é acelerador de tamanho: entre em todo sinal válido, pise fundo no risco só na maré cheia.</div>'
+      +'</div>';
+  }).catch(function(){});
+})();
+</script>
+<!-- [/humor_sp500_web] -->
+
+<div class="regras"><b>DIDI:</b> linha curta = MM3 vs MM8, linha longa = MM20 vs MM8 (a MM8 é o zero).
+<b>Comprimido:</b> distância entre as três médias entre as 20% menores dos últimos 120 pregões do próprio ativo.
+<b>Agulhada:</b> as duas linhas cruzaram o zero em até 5 pregões, a última hoje ou ontem ·
+<b>Cruzando:</b> uma já cruzou (hoje ou ontem) e a outra vem atrás ·
+<b>Prestes:</b> comprimido, MM3 ainda do lado errado da MM8 mas virando, e a MM20 ainda do outro lado.
+<b>Tendência:</b> inclinação da EMA200 e da EMA70 comparada com 10 pregões atrás (mínimo de 0,10% para não pegar média praticamente reta).</div>
+<div class="meta" id="meta">Carregando dados publicados…</div>
+
+<div class="blocos">
+  <section class="bloco compra">
+    <div class="bh"><h2>▲ Compra</h2><span class="cnt" id="cntC"></span>
+      <span class="crit">Fechamento acima da EMA200 · EMA200 e EMA70 subindo · MM3 cruzando a MM8 para cima e MM20 cruzando para baixo</span></div>
+    <div id="listaC"><div class="vazio">Carregando…</div></div>
+  </section>
+  <section class="bloco venda">
+    <div class="bh"><h2>▼ Venda</h2><span class="cnt" id="cntV"></span>
+      <span class="crit">Fechamento abaixo da EMA200 · EMA200 e EMA70 caindo · MM3 cruzando a MM8 para baixo e MM20 cruzando para cima</span></div>
+    <div id="listaV"><div class="vazio">Carregando…</div></div>
+  </section>
+</div>
+
+<footer>
+  Lista de observação, não é sinal de entrada: esta regra não foi testada em backtest. Use para acompanhar os ativos e entrar pelo seu setup (DIDI completo, Pullback, rompimento).<br>
+  Mini-gráfico: últimos 40 pregões das duas linhas do DIDI em torno do zero (MM8). Não é recomendação de investimento.
+</footer>
+
+<dialog id="cfg">
+  <div class="dlg-h">Configuração</div>
+  <div class="dlg-b">
+    Para <b>rodar o scanner na nuvem</b>, informe seu repositório e um token fine-grained com permissão de <b>Actions: write</b>.
+    <input id="repo" placeholder="usuario/repositorio (ex.: cassio/tradedesk)">
+    <input id="token" type="password" placeholder="token fine-grained (github_pat_...)">
+  </div>
+  <div class="dlg-f">
+    <button class="btn ghost" id="cfgCancel">Cancelar</button>
+    <button class="btn primary" id="cfgSave">Salvar</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+const LS_REPO="td_repo", LS_TOK="td_token";
+const WORKFLOW_FILE="scan.yml";
+const $=id=>document.getElementById(id);
+function setStatus(msg, kind){ $("status").textContent=msg; const d=$("dot"); d.className="dot"+(kind?(" "+kind):""); }
+function fmt(v,d){return v==null?"—":Number(v).toFixed(d==null?2:d);}
+function sinal(v,d){ if(v==null) return "—"; return (v>0?"+":"")+Number(v).toFixed(d==null?1:d); }
+
+function spark(cu, lo){
+  const W=168,H=46,P=3;
+  const vals=[...(cu||[]),...(lo||[])].filter(v=>v!=null);
+  if(!vals.length) return "";
+  const m=Math.max(0.3,...vals.map(Math.abs));
+  const n=Math.max((cu||[]).length,(lo||[]).length);
+  const x=i=>P+(W-2*P)*(n<=1?1:i/(n-1));
+  const y=v=>H/2-(H/2-P)*(v/m);
+  const path=s=>{let d="",pen=false;(s||[]).forEach((v,i)=>{ if(v==null){pen=false;return;} d+=(pen?"L":"M")+x(i).toFixed(1)+" "+y(v).toFixed(1)+" "; pen=true;}); return d;};
+  const last=(s,c)=>{ if(!s||!s.length||s[s.length-1]==null) return ""; return `<circle cx="${x(s.length-1).toFixed(1)}" cy="${y(s[s.length-1]).toFixed(1)}" r="2.4" fill="${c}"/>`; };
+  return `<svg class="sp" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-label="Linhas do DIDI">
+    <line x1="0" x2="${W}" y1="${H/2}" y2="${H/2}" stroke="#3a4a5e" stroke-dasharray="3 3" stroke-width="1"/>
+    <path d="${path(lo)}" fill="none" stroke="var(--longa)" stroke-width="1.6" opacity=".9"/>
+    <path d="${path(cu)}" fill="none" stroke="var(--curta)" stroke-width="1.8"/>
+    ${last(lo,"var(--longa)")}${last(cu,"var(--curta)")}
+  </svg>`;
+}
+
+function badge(a){
+  const comp=a.lado==="compra";
+  if(a.status==="AGULHADA") return `<span class="badge b-agu" title="As duas linhas cruzaram o zero">agulhada ${a.dias===0?"hoje":"ontem"}</span>`;
+  if(a.status==="CRUZANDO"){
+    const q=a.qual==="curta"?(comp?"MM3 cruzou p/ cima":"MM3 cruzou p/ baixo"):(comp?"MM20 cruzou p/ baixo":"MM20 cruzou p/ cima");
+    return `<span class="badge b-cru" title="${q} ${a.dias===0?"hoje":"ontem"}; falta a outra">cruzando</span>`;
+  }
+  return `<span class="badge b-pre" title="Comprimido, MM3 virando em direção à MM8">prestes</span>`;
+}
+function falta(a){
+  const comp=a.lado==="compra";
+  if(a.status==="AGULHADA") return (a.dias===0?"Cruzamento duplo hoje":"Cruzamento duplo ontem");
+  if(a.status==="CRUZANDO"){
+    if(a.qual==="curta") return (comp?"MM3 já cruzou a MM8 para cima":"MM3 já cruzou a MM8 para baixo")+` (${a.dias===0?"hoje":"ontem"}) · falta a MM20 (${sinal(a.longa,2)}%)`;
+    return (comp?"MM20 já cruzou a MM8 para baixo":"MM20 já cruzou a MM8 para cima")+` (${a.dias===0?"hoje":"ontem"}) · falta a MM3 (${sinal(a.curta,2)}%)`;
+  }
+  return `MM3 a ${sinal(a.curta,2)}% da MM8 e virando · MM20 a ${sinal(a.longa,2)}%`;
+}
+
+function card(a){
+  const comp=a.lado==="compra";
+  const cls=v=>v==null?"":((comp?v>0:v<0)?"up":"down");
+  const ab=a.status==="PRESTES"?a.abertura_pct:a.abertura_min5_pct;
+  return `<div class="card">
+    <div style="min-width:0">
+      <div><span class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${(a.ticker||"").replace(".SA","")} ↗</a></span><span class="mkt">${a.market||""}</span>${badge(a)}</div>
+      <div class="sub2">${falta(a)}</div>
+      <div class="det">
+        <span title="Percentil da distância entre MM3, MM8 e MM20 nos últimos 120 pregões (0 = a mais apertada)">compressão <b>p${ab}</b></span>
+        <span>preço <b class="mono">${fmt(a.close)}</b>${a.forming?' <span class="forming" title="Candle de hoje ainda aberto">●</span>':""}</span>
+        <span title="Distância do preço até a EMA200">EMA200 <b class="${cls(a.dist_ema200)}">${sinal(a.dist_ema200)}%</b></span>
+        <span title="Inclinação em 10 pregões">incl. 200 <b class="${cls(a.incl_ema200)}">${sinal(a.incl_ema200,2)}%</b> · 70 <b class="${cls(a.incl_ema70)}">${sinal(a.incl_ema70,2)}%</b></span>
+        <span title="Variação em 3 meses">3M <b class="${cls(a.mom3)}">${a.mom3==null?"—":sinal(a.mom3,0)+"%"}</b></span>
+      </div>
+    </div>
+    <div>${spark(a.spark_curta,a.spark_longa)}<div class="legenda"><i style="background:var(--curta)"></i>MM3<i style="background:var(--longa)"></i>MM20</div></div>
+  </div>`;
+}
+
+const ORD={AGULHADA:0,CRUZANDO:1,PRESTES:2};
+const NOME={AGULHADA:"Agulhada (cruzou)",CRUZANDO:"Cruzando",PRESTES:"Prestes a cruzar"};
+function bloco(list, el, cnt, lado){
+  list.sort((a,b)=>(ORD[a.status]-ORD[b.status]) ||
+    ((a.status==="PRESTES"?a.abertura_pct:a.abertura_min5_pct)-(b.status==="PRESTES"?b.abertura_pct:b.abertura_min5_pct)) ||
+    (Math.abs(b.dist_ema200||0)-Math.abs(a.dist_ema200||0)));
+  const por={AGULHADA:0,CRUZANDO:0,PRESTES:0}; list.forEach(a=>por[a.status]++);
+  $(cnt).textContent=`${list.length} ativo(s) · ${por.AGULHADA} agulhada · ${por.CRUZANDO} cruzando · ${por.PRESTES} prestes`;
+  if(!list.length){ $(el).innerHTML=`<div class="vazio">Nenhum ativo ${lado==="compra"?"em alta":"em baixa"} com as médias do DIDI comprimidas hoje.</div>`; return; }
+  let html="", g=null;
+  list.forEach(a=>{ if(a.status!==g){ g=a.status; html+=`<div class="grupo">${NOME[g]}</div>`; } html+=card(a); });
+  $(el).innerHTML=html;
+}
+
+async function loadData(){
+  const sel=$("mercado").value, fs=$("filtro").value;
+  let ativos=[], gerado=null;
+  try{
+    const r=await fetch("painel_compressao.json?t="+Date.now(),{cache:"no-store"});
+    if(r.ok){const d=await r.json(); gerado=d.gerado_utc||d.gerado||null; (d.ativos||[]).forEach(x=>ativos.push(x));}
+  }catch(e){}
+  if(sel==="us") ativos=ativos.filter(a=>a.market!=="B3");
+  else if(sel==="b3") ativos=ativos.filter(a=>a.market==="B3");
+  if(fs!=="all") ativos=ativos.filter(a=>a.status===fs);
+  const C=ativos.filter(a=>a.lado==="compra"), V=ativos.filter(a=>a.lado==="venda");
+  bloco(C,"listaC","cntC","compra"); bloco(V,"listaV","cntV","venda");
+  $("meta").innerHTML=gerado?`<b>${C.length}</b> na compra · <b>${V.length}</b> na venda · dados de <b>${gerado}</b> · ordem: agulhada, cruzando, prestes; dentro de cada grupo, o mais comprimido primeiro`
+                            :`Sem dados publicados ainda. Rode o scanner (opção <b>compressao</b> no workflow).`;
+  return ativos.length;
+}
+
+function cfg(){return {repo:localStorage.getItem(LS_REPO)||"", token:localStorage.getItem(LS_TOK)||""};}
+async function ghDispatch(){
+  const {repo,token}=cfg();
+  if(!repo||!token){ openCfg(); setStatus("Configure repositório e token primeiro.","err"); return; }
+  setStatus("Disparando scan na nuvem…","run"); $("runBtn").disabled=true;
+  try{
+    const url=`https://api.github.com/repos/${repo}/actions/workflows/${WORKFLOW_FILE}/dispatches`;
+    const res=await fetch(url,{method:"POST",headers:{
+      "Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"},
+      body:JSON.stringify({ref:"main",inputs:{mercado:"compressao",quick:false}})});
+    if(res.status===204){ setStatus("Scan disparado. Rodando na nuvem — isso leva alguns minutos.","run"); pollRun(repo,token); }
+    else{ const t=await res.text(); setStatus("Falha ao disparar ("+res.status+"). Verifique repo/token/branch.","err"); console.error(t); $("runBtn").disabled=false; }
+  }catch(e){ setStatus("Erro de rede ao disparar: "+e.message,"err"); $("runBtn").disabled=false; }
+}
+async function pollRun(repo,token){
+  const headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"};
+  let tries=0;
+  const timer=setInterval(async()=>{
+    tries++;
+    try{
+      const r=await fetch(`https://api.github.com/repos/${repo}/actions/runs?per_page=1`,{headers,cache:"no-store"});
+      const d=await r.json(); const run=(d.workflow_runs||[])[0];
+      if(run){
+        if(run.status==="completed"){
+          clearInterval(timer); $("runBtn").disabled=false;
+          if(run.conclusion==="success"){ setStatus("Scan concluído. Atualizando painel…","ok"); setTimeout(loadData,4000); }
+          else setStatus("Scan terminou com status: "+run.conclusion,"err");
+        }else setStatus("Rodando na nuvem… ("+run.status+", "+tries+")","run");
+      }
+    }catch(e){}
+    if(tries>60){ clearInterval(timer); $("runBtn").disabled=false; setStatus("Tempo excedido acompanhando o scan. Use Recarregar em alguns minutos.","err"); }
+  },10000);
+}
+
+function openCfg(){const c=cfg();$("repo").value=c.repo;$("token").value=c.token;$("cfg").showModal();}
+$("cfgBtn").onclick=openCfg;
+$("cfgCancel").onclick=()=>$("cfg").close();
+$("cfgSave").onclick=()=>{localStorage.setItem(LS_REPO,$("repo").value.trim());localStorage.setItem(LS_TOK,$("token").value.trim());$("cfg").close();setStatus("Configuração salva.","ok");};
+$("runBtn").onclick=ghDispatch;
+$("reloadBtn").onclick=()=>{setStatus("Recarregando…","run");loadData().then(n=>setStatus(n?"Atualizado.":"Sem dados publicados ainda.","ok"));};
+$("mercado").onchange=loadData; $("filtro").onchange=loadData;
+
+loadData().then(n=>setStatus(n?"Dados carregados.":"Sem dados ainda — rode o scanner.","ok"));
+</script>
+</body>
+</html>

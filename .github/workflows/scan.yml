@@ -8,7 +8,7 @@ on:
         required: false
         default: "ambos"
         type: choice
-        options: ["ambos", "us", "b3", "etf", "forex", "insidebar", "qulla", "pullback"]
+        options: ["ambos", "us", "b3", "etf", "forex", "insidebar", "qulla", "pullback", "compressao"]
       quick:
         description: "Teste rápido (~40 ativos)"
         required: false
@@ -79,13 +79,16 @@ jobs:
           if [ "$TF" = "1d" ] && { [ "$MERCADO" = "pullback" ] || [ "$MERCADO" = "ambos" ]; }; then
             python scanner_pullback.py || echo "scanner_pullback falhou (seguindo)"
           fi
+          if [ "$TF" = "1d" ] && { [ "$MERCADO" = "compressao" ] || [ "$MERCADO" = "ambos" ]; }; then
+            python scanner_compressao.py || echo "scanner_compressao falhou (seguindo)"
+          fi
           python humor_sp500.py --json || echo "humor_sp500 falhou (seguindo)"
 
       - name: Carimbar horario e copiar resultados p/ docs/
         run: |
           mkdir -p docs
           date -u +"%Y-%m-%dT%H:%M:%SZ" > docs/ultimo_scan.txt
-          for f in painel_humor.json painel_qulla.json painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json painel_us_1wk.json painel_b3_1wk.json painel_us_4h.json painel_b3_4h.json painel_forex.json painel_forex_venda.json painel_insidebar.json painel_pullback.json \
+          for f in painel_humor.json painel_qulla.json painel_us.json painel_b3.json painel_us_2h.json painel_b3_2h.json painel_etf.json painel_etf_2h.json painel_us_1wk.json painel_b3_1wk.json painel_us_4h.json painel_b3_4h.json painel_forex.json painel_forex_venda.json painel_insidebar.json painel_pullback.json painel_compressao.json \
                    scanner_us.json scanner_b3.json \
                    scanner_us_tradedesk_USA.json scanner_b3_tradedesk_BRL.json \
                    scanner_us.html scanner_b3.html \
