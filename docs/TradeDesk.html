@@ -336,7 +336,7 @@ function render(list, gerado, captura){
     return;
   }
   const normais=list.filter(a=>!a.cruz_antigo), antigos=list.filter(a=>a.cruz_antigo);
-  $("meta").innerHTML=`<b>${normais.length}</b> ativo(s)${window.__ocultos?` · <span title="Gatilho atrasado ou cruzamento do DIDI há 6–10 pregões. Não aparecem nesta página; entram na Confluência quando o Qullamäggie também aparece.">${window.__ocultos} oculto(s)</span>`:""} · rompendo figura primeiro, depois pela nota · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
+  $("meta").innerHTML=`<b>${normais.length}</b> ativo(s)${window.__ocultos?` · <span title="Gatilho atrasado ou cruzamento do DIDI há 6–10 pregões. Não aparecem nesta página; entram na Confluência quando o Qullamäggie também aparece.">${window.__ocultos} oculto(s)</span>`:""} · rompendo figura primeiro, depois pela nota; abaixo da MME70 ou MME70 caindo vão para o fim · dados de <b>${gerado||'—'}</b>${capTxt} · verde = Didi curta (3/8) · vermelho = Didi longa (20/8) · faixa = compressão`;
   const secAntigo = antigos.length ? `<div class="sec-antigo"><b>Cruzamento do DIDI há 6 a 10 pregões · ${antigos.length} ativo(s)</b><br>Fora da janela normal de 5 pregões. No backtest, sozinhos renderam como os sinais normais; na confluência com o Qullamäggie renderam menos (+0,1 a +0,6R contra +0,7 a +0,85R). Eles entram na página Confluência só quando o Qullamäggie também aparece.</div>` : "";
   grid.innerHTML=(normais.length?normais.map(card).join(""):`<div class="empty">Nenhum sinal dentro da janela normal neste scan.</div>`)+secAntigo+antigos.map(card).join("");
 }
@@ -375,13 +375,15 @@ async function loadData(){
     return 2;             // fraco
   };
   // ORDEM (out/2026, definida pelo usuario):
+  //  0) ABAIXO DA MME70 ou MME70 VIRADA PARA BAIXO vao para o fim da fila (abaixo de todos)
   //  1) ROMPENDO FIGURA (LTB ou resistencia, com medias alinhadas) na frente de todos
   //  2) "Bollinger quase nao abriu" (abertura < 5%) e "candle vermelho" vao para o fim (dentro de cada grupo)
   //  3) NOTA de qualidade, da maior para a menor
+  const ema70Fim=(a)=>(a.acima_ema70===false || a.ema70_incl==="desce")?1:0;
   const rompe=(a)=>(a.figura && a.medias_alinhadas===true)?0:1;
   const noFim=(a)=>{ const b=adxInfo(a).bb; return ((b!=null&&b<5)||a.candle_vermelho)?1:0; };
   const nota=(a)=>(a.quality==null?-1:a.quality);
-  ativos.sort((a,b)=> (rompe(a)-rompe(b)) || (noFim(a)-noFim(b)) || (nota(b)-nota(a)));
+  ativos.sort((a,b)=> (ema70Fim(a)-ema70Fim(b)) || (rompe(a)-rompe(b)) || (noFim(a)-noFim(b)) || (nota(b)-nota(a)));
   // PAGINA LIMPA: gatilho atrasado e cruzamento antigo (6-10 pregoes) nao aparecem aqui.
   // Continuam no painel (JSON) e entram na Confluencia quando o Qullamaggie tambem aparece.
   const visivel=(a)=>rank(a)!==9 && !a.cruz_antigo;
