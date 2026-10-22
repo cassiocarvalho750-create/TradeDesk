@@ -1,26 +1,70 @@
 {
   "gerado": "2026-10-22",
-  "gerado_utc": "2026-10-22 11:54 UTC",
+  "gerado_utc": "2026-10-22 13:55 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 725.2,
-      "mm200": 675.27,
+      "close": 712.99,
+      "mm200": 675.73,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 206495.0,
-      "mm200": 180808.31,
+      "close": 205697.69,
+      "mm200": 181027.45,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
-    "liquidos": 1086
+    "liquidos": 1086,
+    "sinais": 2
   },
-  "n": 0,
-  "ativos": []
+  "n": 2,
+  "ativos": [
+    {
+      "data_sinal": "2026-10-22",
+      "entrada": 200.28,
+      "stop": 184.0,
+      "alvo_3r": 249.12,
+      "r_pct": 8.13,
+      "preco": 199.2,
+      "ema20": 196.93,
+      "mom3": 4.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "PM",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=PM",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-22",
+      "entrada": 435.68,
+      "stop": 398.99,
+      "alvo_3r": 545.75,
+      "r_pct": 8.42,
+      "preco": 432.77,
+      "ema20": 417.93,
+      "mom3": 28.0,
+      "mom_fraco": true,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "ISRG",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=ISRG",
+      "forming": true
+    }
+  ]
 }
