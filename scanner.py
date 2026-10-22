@@ -235,10 +235,13 @@ def _liquidez_ok(tk, d, min_us_mi, min_b3_mi):
     except Exception:
         return False
 
-def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=None, vermelho_alta=False):
+def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=None, vermelho_alta=False, radar=False):
     """Avalia UM ticker (DataFrame ja baixado) e retorna lista de hits.
     lado: 'compra' (padrao) usa signal_win; 'venda' usa signal_venda (espelho).
-    Logica identica para download em lote e individual."""
+    Logica identica para download em lote e individual.
+    radar=True (so compra): devolve TAMBEM os ativos do RADAR, marcados com radar=True:
+    DIDI cruzou para cima em ate 5 pregoes + BB abrindo hoje, mas o ADX ainda nao deu
+    sinal; so os que estao ACIMA da MME70 com a MME70 inclinada para CIMA."""
     res=[]
     if d is None or len(d) < 60:
         return res
@@ -263,7 +266,8 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
     last_idx = s.index[-1]
     tail = s.iloc[-days_back:]
     for idx, row in tail.iterrows():
-        if bool(row[sig_col]):
+        is_radar = bool(radar and (not venda) and (not bool(row[sig_col])) and bool(row.get("radar", False)))
+        if bool(row[sig_col]) or is_radar:
             # intraday: "em formacao" = ultimo candle. Diario/semanal: candle corrente.
             if intraday:
                 is_forming = (idx == last_idx)
@@ -343,6 +347,20 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                     evt = bool(s["adx_event"].iloc[pos-k])
                 if evt: adx_ago=k; break
 
+            # RADAR: so cruzamento dentro da janela normal e so acima da MME70 inclinada p/ cima
+            adx_falta = None
+            if is_radar:
+                if didi_ago is None or didi_ago > didi_win: continue
+                if not (acima_ema70 is True and ema70_incl == "sobe"): continue
+                try:
+                    _a1 = float(s["adx"].iloc[pos]); _a0 = float(s["adx"].iloc[pos-1])
+                    _dp = float(s["dip"].iloc[pos]); _dm = float(s["dim"].iloc[pos])
+                    adx_falta = []
+                    if not (_dp > _dm): adx_falta.append("DI+ abaixo do DI-")
+                    if not (_a1 >= bt.ADX_DIM_RATIO*_dm): adx_falta.append("ADX abaixo do DI-")
+                    if not (_a1 > _a0): adx_falta.append("ADX caindo")
+                except Exception:
+                    adx_falta = None
             # ---- QUALIDADE: compressao do Didi + sincronia dos gatilhos ----
             # Compressao: menor distancia entre a Didi curta (3/8) e longa (20/8)
             # nos candles em torno do gatilho. Quanto menor, melhor a agulhada.
@@ -487,13 +505,15 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                 # candle do gatilho VERMELHO (fechou abaixo da abertura, mas acima do fechamento anterior)
                 "candle_vermelho": bool((lado == "compra") and float(row["Close"]) < float(row["Open"])),
                 "lado": lado,
+                "radar": is_radar,
+                "adx_falta": adx_falta,
                 "quality": quality,
                 "pe": None, "mktcap": None,
             })
     return res
 
 
-def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra", didi_ext=None, vermelho_alta=False):
+def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra", didi_ext=None, vermelho_alta=False, radar=False):
     """Retorna lista de sinais nos ultimos `days_back` candles do timeframe dado.
 
     timeframe: '1d' (diario, padrao), '2h', '1h', '15m', '5m'.
@@ -525,7 +545,7 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
                 continue
             if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 continue
-            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext, vermelho_alta=vermelho_alta))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext, vermelho_alta=vermelho_alta, radar=radar))
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
@@ -534,12 +554,12 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
                 time.sleep(0.02); continue
             if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 time.sleep(0.01); continue
-            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext, vermelho_alta=vermelho_alta))
+            hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext, vermelho_alta=vermelho_alta, radar=radar))
             time.sleep(0.03)
     return hits
 
 
-def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d"):
+def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d", registrar=True):
     """Para cada ativo com sinal, recalcula as series dos 3 indicadores
     (DIDI, ADX, BB) nos ultimos n_bars candles e grava um JSON que o painel
     HTML consome. Reusa fetch (individual) so para os POUCOS ativos com sinal.
@@ -616,6 +636,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
             "figura": h.get("figura"), "figura_toques": h.get("figura_toques"),
             "figura_dur": h.get("figura_dur"), "figura_linha": h.get("figura_linha"),
             "candle_vermelho": bool(h.get("candle_vermelho", False)),
+            "radar": bool(h.get("radar", False)), "adx_falta": h.get("adx_falta"),
             "high": h.get("high"),
             "dates": dates,
             "price": tail(c),
@@ -663,7 +684,7 @@ def build_panel_data(hits, n_bars=40, out_path="painel_didi.json", timeframe="1d
     open(out_path,"w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False,indent=2))
     print(f"  Painel JSON: {out_path} ({len(ativos)} ativo(s))")
     # registrar sinais do dia (forward testing) — SO no diario (1d)
-    if timeframe=="1d":
+    if timeframe=="1d" and registrar:
         try:
             import registro_sinais
             registro_sinais.registrar_didi([a for a in ativos if not a.get("atrasado") and not a.get("cruz_antigo")])  # historico DIDI segue so com os frescos

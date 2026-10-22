@@ -687,6 +687,12 @@ def compute_signals_windowed(df, didi_window=5, adx_window=3, vermelho_alta=Fals
     # janela, ADX vendido (DI- dominando), E ADX subindo HOJE (forca crescente,
     # da tendencia de BAIXA). A banda abrindo e o ADX subindo sao iguais aos da
     # compra (volatilidade e forca nao tem direcao; a direcao vem do DIDI e DI).
+    # RADAR (out/2026): DIDI comprado na janela + BB abrindo hoje (mesma cor de candle do
+    # sinal), mas o ADX AINDA NAO confirmou (nao esta comprado e subindo hoje). E a lista de
+    # "pre-sinal": nao entra no sinal principal nem no historico. Coluna so informativa.
+    df["radar"] = (bb_trigger.fillna(False) & cor_ok
+                   & didi_recent & didi_ok_hoje.fillna(False)
+                   & ~(adx_comprado & adx_rising_today))
     df["signal_venda"] = (bb_trigger.fillna(False) & candle_vermelho.fillna(False)
                           & didi_recent_venda & didi_ok_hoje_venda.fillna(False)
                           & adx_vendido & adx_rising_today)

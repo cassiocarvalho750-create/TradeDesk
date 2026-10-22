@@ -56,6 +56,11 @@
   .cruzantigo{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:middle;background:rgba(227,179,65,.14);color:#e3b341;border:1px dashed #e3b341}
   .sec-antigo{grid-column:1/-1;margin-top:10px;padding:12px 14px;border:1px dashed #e3b341;border-radius:8px;color:var(--muted);font-size:13px;line-height:1.5}
   .sec-antigo b{color:#e3b341}
+  .sec-radar{margin:26px max(24px, calc((100% - 1452px)/2)) 0;padding:14px 18px;border:1px solid rgba(88,166,255,.45);border-left:4px solid #58a6ff;border-radius:10px;background:rgba(88,166,255,.06);color:var(--muted);font-size:13px;line-height:1.55}
+  .sec-radar h2{margin:0 0 4px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:#58a6ff}
+  .sec-radar b{color:var(--ink)}
+  .card.radar{border-style:dashed;border-color:rgba(88,166,255,.5)}
+  .radartag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:middle;background:rgba(88,166,255,.16);color:#58a6ff;border:1px solid rgba(88,166,255,.5)}
   .atrasado{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:middle;background:rgba(107,125,146,.18);color:var(--muted);border:1px dashed var(--muted)}
   .mom{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.03em;padding:2px 7px;border-radius:5px;margin-left:8px;vertical-align:middle}
   .mom.forte{background:linear-gradient(135deg,#f0603a,#d23e1c);color:#fff;box-shadow:0 0 8px rgba(240,96,58,.4)}
@@ -186,6 +191,9 @@
     Cada ativo aprovado aparece com Didi (faixa de compressão destacada), ADX e Bollinger.
   </div>
 </div>
+
+<div class="sec-radar" id="radarHead" style="display:none"></div>
+<div class="grid" id="radarGrid"></div>
 
 <footer>Leitura técnica para análise própria. O scanner é ferramenta de garimpo, não sinal de compra automática.</footer>
 
@@ -318,9 +326,9 @@ function tagFigura(a){
 function card(a){const badge=a.forming?`<span class="badge formando">em formação${window.__captura?` · ${window.__captura.split(' ')[1]}`:""}</span>`:`<span class="badge fechado">fechado</span>`;
   const rpct=a.r_pct!=null?a.r_pct.toFixed(2)+"%":"—",da=a.didi_ago!=null?"há "+a.didi_ago+"d":"—",aa=a.adx_ago!=null?"há "+a.adx_ago+"d":"—";
   const ax=adxInfo(a);
-  const adxTxt=(ax.nivel!=null?`${num1(ax.nivel)}`:"ADX")+(ax.pts!=null?` · ${ax.pts>=0?"+":""}${num1(ax.pts)} pts`:"")+` · virou ${aa}`;
+  const adxTxt=(ax.nivel!=null?`${num1(ax.nivel)}`:"ADX")+(ax.pts!=null?` · ${ax.pts>=0?"+":""}${num1(ax.pts)} pts`:"")+(a.radar?` · ${(a.adx_falta&&a.adx_falta.length)?a.adx_falta.join(", "):"sem sinal"}`:` · virou ${aa}`);
   const bbTxt=(ax.bb!=null?`BB 8,2 · abriu ${ax.bb>=0?"+":""}${Math.round(ax.bb)}%`:"3/8/20 · 8,2");
-  return `<div class="card ${a.forming?'':'alert'}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${momBadge(a)}${notaTag(a.quality)}${a.candle_vermelho?`<span class="candleverm" title="O candle do gatilho fechou abaixo da abertura, mas acima do fechamento de ontem. No backtest, esses sinais renderam o mesmo que os de candle verde (+0,42 a +0,45R, acerto 40–41%).">CANDLE VERMELHO</span>`:``}${tagFigura(a)}${tagsAdx(ax)}${a.bb_primeira?`<span class="abertura" title="A Bollinger esta INICIANDO a abertura hoje (estava comprimida/estavel) — o melhor gatilho">ABERTURA HOJE</span>`:``}${a.confluencia?'<span class="confluencia" title="DIDI, ADX e Bollinger dispararam no mesmo candle — confluência perfeita">3 JUNTOS</span>':''}${(a.adx_ago===0 && !a.bb_primeira && !a.confluencia)?`<span class="adxhoje" title="O ADX virou HOJE (a Bollinger ja vinha aberta) — gatilho fresco do ADX">ADX HOJE</span>`:``}${a.acima_ema70===true?`<span class="ema70up" title="Cotacao ACIMA da media movel exponencial de 70 periodos (tendencia de fundo compradora)">\u25B2 MME70</span>`:a.acima_ema70===false?`<span class="ema70dn" title="Cotacao ABAIXO da media movel exponencial de 70 periodos (tendencia de fundo vendedora)">\u25BC MME70</span>`:``}${a.ema70_incl==="sobe"?`<span class="emaup" title="MME70 inclinada para CIMA (tendencia de fundo ganhando forca)">MME70 \u2197</span>`:a.ema70_incl==="desce"?`<span class="emadn" title="MME70 inclinada para BAIXO (tendencia de fundo perdendo forca)">MME70 \u2198</span>`:a.ema70_incl==="lado"?`<span class="emafl" title="MME70 horizontal (tendencia de fundo indefinida/lateral)">MME70 \u2192</span>`:``}${badge}${a.cruz_antigo?`<span class="cruzantigo" title="O cruzamento da média 3 na 8 aconteceu há ${a.didi_ago} pregões (fora da janela normal de 5). Considere só se houver confluência com o Qullamäggie.">CRUZAMENTO HÁ ${a.didi_ago}D</span>`:``}${(!a.bb_primeira && !a.confluencia && a.adx_ago!==0)?`<span class="atrasado" title="Nenhum gatilho novo hoje: o DIDI e o ADX dispararam em dias anteriores. Considere só se houver confluência com o Qullamäggie.">GATILHO ATRASADO</span>`:``}</div>
+  return `<div class="card ${a.forming?'':'alert'}${a.radar?' radar':''}"><div class="card-head"><div class="tk"><a href="${a.tv}" target="_blank" rel="noopener">${a.ticker}</a><span class="mkt">${a.market}</span></div>${momBadge(a)}${notaTag(a.quality)}${a.candle_vermelho?`<span class="candleverm" title="O candle do gatilho fechou abaixo da abertura, mas acima do fechamento de ontem. No backtest, esses sinais renderam o mesmo que os de candle verde (+0,42 a +0,45R, acerto 40–41%).">CANDLE VERMELHO</span>`:``}${tagFigura(a)}${tagsAdx(ax)}${a.bb_primeira?`<span class="abertura" title="A Bollinger esta INICIANDO a abertura hoje (estava comprimida/estavel) — o melhor gatilho">ABERTURA HOJE</span>`:``}${a.confluencia?'<span class="confluencia" title="DIDI, ADX e Bollinger dispararam no mesmo candle — confluência perfeita">3 JUNTOS</span>':''}${(a.adx_ago===0 && !a.bb_primeira && !a.confluencia)?`<span class="adxhoje" title="O ADX virou HOJE (a Bollinger ja vinha aberta) — gatilho fresco do ADX">ADX HOJE</span>`:``}${a.acima_ema70===true?`<span class="ema70up" title="Cotacao ACIMA da media movel exponencial de 70 periodos (tendencia de fundo compradora)">\u25B2 MME70</span>`:a.acima_ema70===false?`<span class="ema70dn" title="Cotacao ABAIXO da media movel exponencial de 70 periodos (tendencia de fundo vendedora)">\u25BC MME70</span>`:``}${a.ema70_incl==="sobe"?`<span class="emaup" title="MME70 inclinada para CIMA (tendencia de fundo ganhando forca)">MME70 \u2197</span>`:a.ema70_incl==="desce"?`<span class="emadn" title="MME70 inclinada para BAIXO (tendencia de fundo perdendo forca)">MME70 \u2198</span>`:a.ema70_incl==="lado"?`<span class="emafl" title="MME70 horizontal (tendencia de fundo indefinida/lateral)">MME70 \u2192</span>`:``}${badge}${a.cruz_antigo?`<span class="cruzantigo" title="O cruzamento da média 3 na 8 aconteceu há ${a.didi_ago} pregões (fora da janela normal de 5). Considere só se houver confluência com o Qullamäggie.">CRUZAMENTO HÁ ${a.didi_ago}D</span>`:``}${a.radar?`<span class="radartag" title="DIDI cruzou para cima e a Bollinger está abrindo, mas o ADX ainda não deu sinal${(a.adx_falta&&a.adx_falta.length)?": "+a.adx_falta.join(", "):""}. Acima da MME70 com ela subindo. Fica no radar; não é sinal.">RADAR · ADX AINDA NÃO</span>`:``}${(!a.radar && !a.bb_primeira && !a.confluencia && a.adx_ago!==0)?`<span class="atrasado" title="Nenhum gatilho novo hoje: o DIDI e o ADX dispararam em dias anteriores. Considere só se houver confluência com o Qullamäggie.">GATILHO ATRASADO</span>`:``}</div>
   <div class="stats"><div class="stat"><div class="k">Preço</div><div class="v mono">${fmt(a.close)}</div></div><div class="stat"><div class="k">Valorização hoje</div><div class="v mono">${a.var_dia_pct==null?"—":(a.var_dia_pct>0?"+":"")+a.var_dia_pct.toFixed(2)+"%"}</div></div><div class="stat"><div class="k">Volume</div><div class="v mono">${fmtVol(a.vol_qtd)}</div></div></div><div class="stats" style="margin-top:1px"><div class="stat"><div class="k">Stop (pivô)</div><div class="v mono down">${fmt(a.stop)}</div></div><div class="stat"><div class="k">Alvo 2R</div><div class="v mono up">${a.alvo_2r==null?"—":fmt(a.alvo_2r)}</div></div><div class="stat"><div class="k">R%</div><div class="v mono">${a.r_pct==null?"—":a.r_pct.toFixed(1)+"%"}</div></div></div>
   <div class="panes"><div class="pane"><div class="pane-title"><span>Candles + médias + BB</span><span class="mono">${bbTxt}</span></div>${drawCandles(a)}</div>
   <div class="pane"><div class="pane-title"><span>Didi Index</span><span class="mono">DIDI ${da}</span></div>${drawDidi(a)}</div>
@@ -390,7 +398,31 @@ async function loadData(){
   window.__ocultos=ativos.filter(a=>!visivel(a)).length;
   ativos=ativos.filter(visivel);
   render(ativos, gerado, captura);
+  await loadRadar(sel, rompe, noFim, nota);
   return ativos.length;
+}
+
+// ---------- RADAR: DIDI + BB abrindo, ADX ainda nao deu sinal (so acima da MME70 subindo) ----------
+async function loadRadar(sel, rompe, noFim, nota){
+  const files = sel==="us"?["painel_us_radar.json"] : sel==="b3"?["painel_b3_radar.json"] : ["painel_us_radar.json","painel_b3_radar.json"];
+  let lista=[], achou=false, gerado=null;
+  for(const f of files){
+    try{const r=await fetch(f+"?t="+Date.now(),{cache:"no-store"});
+      if(r.ok){const d=await r.json(); achou=true; if(d.gerado&&(!gerado||d.gerado>gerado)) gerado=d.gerado;
+        (d.ativos||[]).forEach(x=>{ x.radar=true; lista.push(x); });}}catch(e){}
+  }
+  // garantia: so acima da MME70 com ela subindo (o scanner ja filtra)
+  lista=lista.filter(a=>a.acima_ema70===true && a.ema70_incl==="sobe");
+  lista.sort((a,b)=> (rompe(a)-rompe(b)) || (noFim(a)-noFim(b)) || (nota(b)-nota(a)));
+  const head=$("radarHead"), grid=$("radarGrid");
+  head.style.display="";
+  head.innerHTML=`<h2>📡 Radar · ADX ainda não confirmou${achou?` · ${lista.length} ativo(s)`:""}</h2>`+
+    `DIDI cruzou para cima nos últimos 5 pregões e a Bollinger está abrindo hoje, mas o ADX <b>ainda não deu sinal</b>. `+
+    `Só ativos <b>acima da MME70</b> com a <b>MME70 inclinada para cima</b>. Lista para acompanhar antes do sinal completo: `+
+    `<b>não é sinal</b>, não entra no histórico nem na Confluência, e entrar antes do ADX não foi testado em backtest.`+
+    (gerado?` · dados de <b>${gerado}</b>`:"");
+  grid.innerHTML = !achou ? `<div class="empty">O radar ainda não foi publicado. Ele aparece depois da próxima rodada do scan diário.</div>`
+                 : lista.length ? lista.map(card).join("") : `<div class="empty">Nenhum ativo no radar hoje.</div>`;
 }
 
 // ---------- disparar workflow_dispatch ----------

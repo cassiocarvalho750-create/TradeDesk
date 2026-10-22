@@ -30,7 +30,17 @@ def main():
     # no diario, busca tambem os cruzamentos de 6-10 pregoes (saem marcados como cruz_antigo)
     hits=sc.scan(uni, days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf,
                  didi_ext=(sc.DIDI_WIN_EXT if tf=='1d' else None),
-                 vermelho_alta=(tf=='1d'))   # diario: aceita candle vermelho que fecha acima de ontem
+                 vermelho_alta=(tf=='1d'),   # diario: aceita candle vermelho que fecha acima de ontem
+                 radar=(tf=='1d'))           # diario: devolve tambem o RADAR (DIDI+BB, ADX ainda nao)
+    # RADAR: painel separado (painel_b3_radar.json), fora do sinal, do historico e da Confluencia
+    radar_hits=[h for h in hits if h.get("radar")]
+    hits=[h for h in hits if not h.get("radar")]
+    if tf=='1d':
+        print(f"  [radar] {len(radar_hits)} ativo(s): DIDI+BB sem o ADX, acima da MME70 subindo")
+        try:
+            sc.build_panel_data(radar_hits, out_path="painel_b3_radar.json", timeframe=tf, registrar=False)
+        except Exception as e:
+            print(f"  [radar] falhou: {e}")
     if hits:
         print(f"  buscando P/E e Market Cap de {len(hits)} ativo(s) com sinal...")
         sc.enrich_fundamentals(hits)
