@@ -1,38 +1,38 @@
 {
   "gerado": "2026-10-22",
-  "gerado_utc": "2026-10-22 18:45 UTC",
+  "gerado_utc": "2026-10-22 20:33 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 703.73,
-      "mm200": 675.68,
+      "close": 704.47,
+      "mm200": 675.69,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 204191.23,
-      "mm200": 181019.92,
+      "close": 204120.12,
+      "mm200": 181019.56,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
     "liquidos": 1086,
-    "sinais": 3
+    "sinais": 2
   },
-  "n": 3,
+  "n": 2,
   "ativos": [
     {
       "data_sinal": "2026-10-22",
-      "entrada": 443.76,
+      "entrada": 444.16,
       "stop": 398.99,
-      "alvo_3r": 578.07,
-      "r_pct": 10.09,
-      "preco": 440.79,
-      "ema20": 418.7,
-      "mom3": 31.0,
+      "alvo_3r": 579.67,
+      "r_pct": 10.17,
+      "preco": 443.85,
+      "ema20": 418.99,
+      "mom3": 32.0,
       "mom_fraco": false,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
@@ -51,8 +51,8 @@
       "stop": 184.0,
       "alvo_3r": 255.56,
       "r_pct": 8.86,
-      "preco": 200.58,
-      "ema20": 197.06,
+      "preco": 201.74,
+      "ema20": 197.17,
       "mom3": 5.0,
       "mom_fraco": false,
       "status": "FORMANDO",
@@ -64,27 +64,6 @@
       "ticker": "PM",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PM",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-10-22",
-      "entrada": 14.99,
-      "stop": 14.93,
-      "alvo_3r": 15.17,
-      "r_pct": 0.4,
-      "preco": 14.98,
-      "ema20": 14.93,
-      "mom3": 2.0,
-      "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "AES",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=AES",
       "forming": true
     }
   ]
