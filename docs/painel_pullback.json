@@ -1,19 +1,19 @@
 {
   "gerado": "2026-10-22",
-  "gerado_utc": "2026-10-22 13:55 UTC",
+  "gerado_utc": "2026-10-22 15:11 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 712.99,
-      "mm200": 675.73,
+      "close": 707.13,
+      "mm200": 675.7,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 205697.69,
-      "mm200": 181027.45,
+      "close": 203590.97,
+      "mm200": 181016.91,
       "validado": false
     }
   },
@@ -26,13 +26,34 @@
   "ativos": [
     {
       "data_sinal": "2026-10-22",
-      "entrada": 200.28,
+      "entrada": 441.02,
+      "stop": 398.99,
+      "alvo_3r": 567.11,
+      "r_pct": 9.53,
+      "preco": 439.96,
+      "ema20": 418.62,
+      "mom3": 30.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "ISRG",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=ISRG",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-22",
+      "entrada": 201.13,
       "stop": 184.0,
-      "alvo_3r": 249.12,
-      "r_pct": 8.13,
-      "preco": 199.2,
-      "ema20": 196.93,
-      "mom3": 4.0,
+      "alvo_3r": 252.52,
+      "r_pct": 8.52,
+      "preco": 201.0,
+      "ema20": 197.1,
+      "mom3": 5.0,
       "mom_fraco": false,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
@@ -43,27 +64,6 @@
       "ticker": "PM",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PM",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-10-22",
-      "entrada": 435.68,
-      "stop": 398.99,
-      "alvo_3r": 545.75,
-      "r_pct": 8.42,
-      "preco": 432.77,
-      "ema20": 417.93,
-      "mom3": 28.0,
-      "mom_fraco": true,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "ISRG",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=ISRG",
       "forming": true
     }
   ]
