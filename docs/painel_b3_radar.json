@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-22",
-  "captura": "22/10/2026 17:29",
+  "captura": "22/10/2026 17:56",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -743,7 +743,7 @@
       "adx_ago": null,
       "vol_fin_mi": 535.8,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:VBBR3",
-      "vol_qtd": 14553200.0,
+      "vol_qtd": 14553100.0,
       "var_dia_pct": 0.9,
       "mom1": -7.0,
       "mom3": 5.0,
