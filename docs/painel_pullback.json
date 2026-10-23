@@ -1,19 +1,19 @@
 {
   "gerado": "2026-10-23",
-  "gerado_utc": "2026-10-23 14:48 UTC",
+  "gerado_utc": "2026-10-23 16:04 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 707.93,
+      "close": 708.42,
       "mm200": 676.12,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": true,
-      "close": 203559.77,
-      "mm200": 181219.04,
+      "close": 204160.94,
+      "mm200": 181222.04,
       "validado": false
     }
   },
@@ -30,7 +30,7 @@
       "stop": 398.99,
       "alvo_3r": 579.67,
       "r_pct": 10.17,
-      "preco": 454.21,
+      "preco": 455.35,
       "ema20": 418.99,
       "mom3": 32.0,
       "mom_fraco": false,
@@ -51,7 +51,7 @@
       "stop": 184.0,
       "alvo_3r": 255.6,
       "r_pct": 8.87,
-      "preco": 201.06,
+      "preco": 200.55,
       "ema20": 197.17,
       "mom3": 5.0,
       "mom_fraco": false,
@@ -68,13 +68,13 @@
     },
     {
       "data_sinal": "2026-10-23",
-      "entrada": 51.27,
+      "entrada": 51.64,
       "stop": 48.4,
-      "alvo_3r": 59.88,
-      "r_pct": 5.6,
-      "preco": 51.16,
-      "ema20": 49.29,
-      "mom3": 19.0,
+      "alvo_3r": 61.36,
+      "r_pct": 6.27,
+      "preco": 51.58,
+      "ema20": 49.34,
+      "mom3": 20.0,
       "mom_fraco": true,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
