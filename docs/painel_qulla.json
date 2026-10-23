@@ -1,5 +1,24 @@
 {
   "gerado": "2026-10-23",
-  "n": 0,
-  "ativos": []
+  "n": 1,
+  "ativos": [
+    {
+      "entrada": 194.61,
+      "stop": 193.84,
+      "alvo_3r": 196.92,
+      "preco": 194.21,
+      "r_pct": 0.4,
+      "mom1": 41.0,
+      "mom3": 55.0,
+      "mom6": 42.0,
+      "consol_dias": 6,
+      "rompendo": false,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "PTC",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=PTC"
+    }
+  ]
 }
