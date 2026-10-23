@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-22",
-  "captura": "22/10/2026 17:56",
+  "gerado": "2026-10-23",
+  "captura": "23/10/2026 07:28",
   "timeframe": "1d",
   "n": 4,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 81.92,
       "stop": 78.71,
       "r_pct": 3.92,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-22",
       "ult_candle": "2026-10-22",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 69.6,
       "tv": "https://www.tradingview.com/chart/?symbol=IYT",
-      "vol_qtd": 1679068.0,
+      "vol_qtd": 1685100.0,
       "var_dia_pct": 3.3,
       "mom1": 3.0,
       "mom3": -7.0,
@@ -33,9 +33,9 @@
       "ema70_incl": "desce",
       "quality": 100.0,
       "didi_dist": 0.127,
-      "pos_range": 0.964,
-      "dist_max_pct": 0.12,
-      "adx_var_pct": 4.6,
+      "pos_range": 0.953,
+      "dist_max_pct": 0.16,
+      "adx_var_pct": 4.8,
       "confluencia": true,
       "bb_primeira": true,
       "cruz_antigo": false,
@@ -48,7 +48,7 @@
       "candle_vermelho": false,
       "radar": false,
       "adx_falta": null,
-      "high": 82.02,
+      "high": 82.05,
       "dates": [
         "2026-08-27",
         "2026-08-28",
@@ -215,7 +215,7 @@
         80.33,
         80.83,
         80.65,
-        82.02
+        82.05
       ],
       "l": [
         85.986,
@@ -509,7 +509,7 @@
         27.6122,
         26.9312,
         26.3354,
-        28.8801
+        28.9258
       ],
       "dip": [
         18.1968,
@@ -551,7 +551,7 @@
         22.6591,
         24.0265,
         21.3379,
-        28.3105
+        28.501
       ],
       "dim": [
         28.1973,
@@ -593,7 +593,7 @@
         18.2859,
         15.3081,
         13.5951,
-        10.2878
+        10.2605
       ],
       "bb_sup": [
         87.3947,
@@ -733,15 +733,15 @@
       "close": 42.87,
       "stop": 39.03,
       "r_pct": 8.96,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-22",
       "ult_candle": "2026-10-22",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 1,
-      "vol_fin_mi": 1503.0,
+      "vol_fin_mi": 1503.2,
       "tv": "https://www.tradingview.com/chart/?symbol=XLU",
-      "vol_qtd": 29867765.0,
+      "vol_qtd": 29957000.0,
       "var_dia_pct": 1.8,
       "mom1": 8.0,
       "mom3": -7.0,
@@ -752,7 +752,7 @@
       "ema70_incl": "lado",
       "quality": 73.2,
       "didi_dist": 2.282,
-      "pos_range": 0.988,
+      "pos_range": 0.989,
       "dist_max_pct": 0.02,
       "adx_var_pct": 2.8,
       "confluencia": false,
@@ -976,7 +976,7 @@
         41.28,
         41.44,
         41.87,
-        42.02
+        42.01
       ],
       "ma3": [
         43.017,
@@ -1452,15 +1452,15 @@
       "close": 99.2,
       "stop": 91.87,
       "r_pct": 7.39,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-22",
       "ult_candle": "2026-10-22",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": 0,
-      "vol_fin_mi": 195.9,
+      "vol_fin_mi": 196.0,
       "tv": "https://www.tradingview.com/chart/?symbol=XHB",
-      "vol_qtd": 2458992.0,
+      "vol_qtd": 2491600.0,
       "var_dia_pct": 4.58,
       "mom1": 2.0,
       "mom3": -8.0,
@@ -1471,7 +1471,7 @@
       "ema70_incl": "desce",
       "quality": 82.9,
       "didi_dist": 0.512,
-      "pos_range": 0.98,
+      "pos_range": 0.982,
       "dist_max_pct": 0.08,
       "adx_var_pct": 3.7,
       "confluencia": false,
@@ -1695,7 +1695,7 @@
         94.05,
         94.23,
         94.81,
-        95.33
+        94.86
       ],
       "ma3": [
         105.0459,
@@ -1989,7 +1989,7 @@
         24.6044,
         26.3877,
         24.0094,
-        32.2238
+        31.4606
       ],
       "dim": [
         27.0961,
@@ -2031,7 +2031,7 @@
         24.5264,
         21.0818,
         18.7739,
-        14.9467
+        14.5927
       ],
       "bb_sup": [
         107.656,
@@ -2171,15 +2171,15 @@
       "close": 72.41,
       "stop": 67.79,
       "r_pct": 6.38,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-22",
       "ult_candle": "2026-10-22",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 0,
-      "vol_fin_mi": 1125.2,
+      "vol_fin_mi": 1125.6,
       "tv": "https://www.tradingview.com/chart/?symbol=KRE",
-      "vol_qtd": 18422265.0,
+      "vol_qtd": 18516300.0,
       "var_dia_pct": 2.94,
       "mom1": 3.0,
       "mom3": -4.0,

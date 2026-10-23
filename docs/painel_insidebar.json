@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-22",
-  "captura": "22/10/2026 17:57",
+  "gerado": "2026-10-23",
+  "captura": "23/10/2026 07:30",
   "timeframe": "1d",
   "n_entrar": 2,
   "n_radar": 1,
@@ -18,8 +18,8 @@
       "ema20": 32.95,
       "compress": 0.61,
       "cons_len": 3,
-      "var_dia_pct": 1.02,
-      "vol_qtd": 28529540.0,
+      "var_dia_pct": 1.68,
+      "vol_qtd": 28532300.0,
       "date": "2026-10-22",
       "rompeu": false,
       "_tk": "KDP",
@@ -106,7 +106,7 @@
         34.33,
         34.56,
         34.59,
-        34.835
+        34.61
       ],
       "h": [
         31.8987,
@@ -190,7 +190,7 @@
         34.14,
         34.25,
         34.33,
-        34.65
+        34.61
       ],
       "price": [
         31.6505,
@@ -290,8 +290,8 @@
       "ema20": 28.93,
       "compress": 0.61,
       "cons_len": 3,
-      "var_dia_pct": 1.25,
-      "vol_qtd": 27518705.0,
+      "var_dia_pct": 1.23,
+      "vol_qtd": 28682300.0,
       "date": "2026-10-22",
       "rompeu": false,
       "_tk": "PFE",
@@ -378,7 +378,7 @@
         29.31,
         29.67,
         30.0,
-        30.045
+        30.05
       ],
       "h": [
         28.18,
@@ -555,21 +555,21 @@
       "ticker": "RDOR3",
       "market": "B3",
       "close": 44.03,
-      "entry": 44.47,
+      "entry": 44.5,
       "stop": 42.27,
-      "parcial2r": 48.87,
-      "breakeven": 44.47,
-      "alvo_final": 51.07,
-      "r_pct": 4.95,
+      "parcial2r": 48.96,
+      "breakeven": 44.5,
+      "alvo_final": 51.19,
+      "r_pct": 5.01,
       "ema20": 42.18,
       "dist_ema": 4.39,
-      "compress": 0.77,
+      "compress": 0.79,
       "cons_len": 3,
       "contr_vol": 0.93,
       "mae_high": 44.79,
       "mae_low": 43.3,
       "var_dia_pct": 1.24,
-      "vol_qtd": 8212400.0,
+      "vol_qtd": 8214000.0,
       "date": "2026-10-22",
       "_tk": "RDOR3.SA",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:RDOR3",
@@ -697,7 +697,7 @@
         43.78,
         44.98,
         44.79,
-        44.47
+        44.5
       ],
       "l": [
         35.1274,
