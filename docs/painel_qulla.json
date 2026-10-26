@@ -4,11 +4,11 @@
   "ativos": [
     {
       "entrada": 194.61,
-      "stop": 193.8,
-      "alvo_3r": 197.04,
-      "preco": 193.9,
+      "stop": 193.79,
+      "alvo_3r": 197.07,
+      "preco": 194.25,
       "r_pct": 0.42,
-      "mom1": 40.0,
+      "mom1": 41.0,
       "mom3": 52.0,
       "mom6": 42.0,
       "consol_dias": 8,

@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-26",
-  "captura": "26/10/2026 15:40",
+  "captura": "26/10/2026 17:26",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,35 +11,35 @@
       "par": "Acucar (Teucrium Sugar)",
       "classe": "Commodity",
       "lado": "venda",
-      "close": 11.49,
+      "close": 11.47,
       "stop": 11.68,
-      "r_pct": 1.61,
+      "r_pct": 1.79,
       "forming": true,
       "date": "2026-10-26",
       "ult_candle": "2026-10-26",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 0,
-      "vol_fin_mi": 5.9,
+      "vol_fin_mi": 6.1,
       "tv": "https://www.tradingview.com/chart/?symbol=CANE",
-      "vol_qtd": 705625.0,
-      "var_dia_pct": -1.37,
+      "vol_qtd": 920615.0,
+      "var_dia_pct": -1.55,
       "mom1": 2.0,
       "mom3": 20.0,
       "mom6": 22.0,
-      "alvo_2r": 11.12,
+      "alvo_2r": 11.06,
       "acima_ema70": true,
-      "ema70": 11.3008,
+      "ema70": 11.3002,
       "ema70_incl": "sobe",
-      "quality": 57.9,
+      "quality": 59.1,
       "didi_dist": 0.985,
-      "pos_range": 0.431,
-      "dist_max_pct": 1.22,
+      "pos_range": 0.369,
+      "dist_max_pct": 1.05,
       "adx_var_pct": -9.9,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 142.6,
+      "bb_abre_pct": 148.0,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         12.25,
         12.06,
         12.15,
-        11.49
+        11.47
       ],
       "o": [
         11.26,
@@ -299,7 +299,7 @@
         12.2533,
         12.19,
         12.1533,
-        11.9
+        11.8933
       ],
       "ma8": [
         11.2487,
@@ -341,7 +341,7 @@
         12.32,
         12.29,
         12.2613,
-        12.1562
+        12.1538
       ],
       "ma20": [
         10.8945,
@@ -383,7 +383,7 @@
         11.946,
         11.9855,
         12.0325,
-        12.0455
+        12.0445
       ],
       "didi_curta": [
         0.7519,
@@ -425,7 +425,7 @@
         -0.5411,
         -0.8137,
         -0.8801,
-        -2.108
+        -2.1427
       ],
       "didi_longa": [
         -3.1492,
@@ -467,7 +467,7 @@
         -3.0357,
         -2.4776,
         -1.8656,
-        -0.9111
+        -0.8989
       ],
       "adx": [
         59.1499,
@@ -635,7 +635,7 @@
         12.4712,
         12.529,
         12.5061,
-        12.7451
+        12.7556
       ],
       "bb_mid": [
         11.2487,
@@ -677,7 +677,7 @@
         12.32,
         12.29,
         12.2613,
-        12.1562
+        12.1538
       ],
       "bb_inf": [
         11.0348,
@@ -719,7 +719,7 @@
         12.1688,
         12.051,
         12.0164,
-        11.5674
+        11.5519
       ],
       "atrasado": false
     }
