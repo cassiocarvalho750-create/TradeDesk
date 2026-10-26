@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-26",
-  "captura": "26/10/2026 17:25",
+  "captura": "26/10/2026 18:59",
   "timeframe": "1d",
   "n": 10,
   "ativos": [
@@ -22,7 +22,7 @@
       "adx_ago": null,
       "vol_fin_mi": 176.1,
       "tv": "https://www.tradingview.com/chart/?symbol=NTNX",
-      "vol_qtd": 1832016.0,
+      "vol_qtd": 1833746.0,
       "var_dia_pct": 1.82,
       "mom1": 7.0,
       "mom3": 23.0,
@@ -743,8 +743,8 @@
       "adx_ago": null,
       "vol_fin_mi": 246.5,
       "tv": "https://www.tradingview.com/chart/?symbol=FFIV",
-      "vol_qtd": 553137.0,
-      "var_dia_pct": 0.71,
+      "vol_qtd": 553227.0,
+      "var_dia_pct": 0.43,
       "mom1": 4.0,
       "mom3": 14.0,
       "mom6": 55.0,
@@ -897,7 +897,7 @@
         459.7,
         457.7,
         449.04,
-        458.33
+        459.61
       ],
       "h": [
         408.91,
@@ -1465,7 +1465,7 @@
       "adx_ago": null,
       "vol_fin_mi": 670.4,
       "tv": "https://www.tradingview.com/chart/?symbol=OKTA",
-      "vol_qtd": 2614664.0,
+      "vol_qtd": 2615561.0,
       "var_dia_pct": 2.56,
       "mom1": 13.0,
       "mom3": 62.0,
@@ -2186,8 +2186,8 @@
       "adx_ago": null,
       "vol_fin_mi": 735.2,
       "tv": "https://www.tradingview.com/chart/?symbol=DDOG",
-      "vol_qtd": 2651793.0,
-      "var_dia_pct": 3.2,
+      "vol_qtd": 2653812.0,
+      "var_dia_pct": 3.41,
       "mom1": 5.0,
       "mom3": 12.0,
       "mom6": 111.0,
@@ -2339,7 +2339,7 @@
         259.77,
         271.49,
         259.34,
-        271.55
+        271.01
       ],
       "h": [
         239.7,
@@ -2905,9 +2905,9 @@
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": null,
-      "vol_fin_mi": 2189.0,
+      "vol_fin_mi": 2194.0,
       "tv": "https://www.tradingview.com/chart/?symbol=CRWD",
-      "vol_qtd": 7804709.0,
+      "vol_qtd": 8196419.0,
       "var_dia_pct": 1.28,
       "mom1": 4.0,
       "mom3": 44.0,
@@ -3628,7 +3628,7 @@
       "adx_ago": null,
       "vol_fin_mi": 998.8,
       "tv": "https://www.tradingview.com/chart/?symbol=NET",
-      "vol_qtd": 2747732.0,
+      "vol_qtd": 2749833.0,
       "var_dia_pct": 1.2,
       "mom1": -5.0,
       "mom3": 26.0,
@@ -3637,11 +3637,11 @@
       "acima_ema70": true,
       "ema70": 308.4119,
       "ema70_incl": "sobe",
-      "quality": 30.1,
+      "quality": 30.2,
       "didi_dist": 3.969,
-      "pos_range": 0.92,
-      "dist_max_pct": 0.44,
-      "adx_var_pct": -26.8,
+      "pos_range": 0.928,
+      "dist_max_pct": 0.39,
+      "adx_var_pct": -26.9,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
@@ -3656,7 +3656,7 @@
       "adx_falta": [
         "ADX caindo"
       ],
-      "high": 333.31,
+      "high": 333.15,
       "dates": [
         "2026-08-31",
         "2026-09-01",
@@ -3823,7 +3823,7 @@
         315.46,
         324.33,
         328.0,
-        333.31
+        333.15
       ],
       "l": [
         296.44,
@@ -4117,7 +4117,7 @@
         34.449,
         31.6692,
         28.5042,
-        25.2046
+        25.1752
       ],
       "dip": [
         23.0469,
@@ -4159,7 +4159,7 @@
         19.6335,
         22.8125,
         20.9738,
-        21.9355
+        21.8551
       ],
       "dim": [
         15.9913,
@@ -4201,7 +4201,7 @@
         34.1688,
         29.1585,
         23.8175,
-        21.0301
+        21.0518
       ],
       "bb_sup": [
         315.5676,
@@ -4349,7 +4349,7 @@
       "adx_ago": null,
       "vol_fin_mi": 2041.1,
       "tv": "https://www.tradingview.com/chart/?symbol=PANW",
-      "vol_qtd": 5106229.0,
+      "vol_qtd": 5107673.0,
       "var_dia_pct": 1.67,
       "mom1": 4.0,
       "mom3": 22.0,
@@ -5070,7 +5070,7 @@
       "adx_ago": null,
       "vol_fin_mi": 100.2,
       "tv": "https://www.tradingview.com/chart/?symbol=JXN",
-      "vol_qtd": 634899.0,
+      "vol_qtd": 634991.0,
       "var_dia_pct": 1.89,
       "mom1": -0.0,
       "mom3": 9.0,
@@ -5792,7 +5792,7 @@
       "adx_ago": null,
       "vol_fin_mi": 83.3,
       "tv": "https://www.tradingview.com/chart/?symbol=BIO",
-      "vol_qtd": 177818.0,
+      "vol_qtd": 179098.0,
       "var_dia_pct": 0.17,
       "mom1": -2.0,
       "mom3": 13.0,
@@ -6514,7 +6514,7 @@
       "adx_ago": null,
       "vol_fin_mi": 62.4,
       "tv": "https://www.tradingview.com/chart/?symbol=KNTK",
-      "vol_qtd": 597873.0,
+      "vol_qtd": 597874.0,
       "var_dia_pct": 0.83,
       "mom1": 11.0,
       "mom3": 15.0,
