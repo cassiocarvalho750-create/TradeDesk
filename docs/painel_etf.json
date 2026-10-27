@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-26",
-  "captura": "26/10/2026 19:00",
+  "gerado": "2026-10-27",
+  "captura": "27/10/2026 09:36",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 111.39,
       "stop": 103.73,
       "r_pct": 6.88,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-26",
       "ult_candle": "2026-10-26",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 798.2,
       "tv": "https://www.tradingview.com/chart/?symbol=IGV",
-      "vol_qtd": 5435235.0,
+      "vol_qtd": 5439100.0,
       "var_dia_pct": 0.53,
       "mom1": 5.0,
       "mom3": 21.0,
@@ -733,7 +733,7 @@
       "close": 131.41,
       "stop": 115.81,
       "r_pct": 11.87,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-26",
       "ult_candle": "2026-10-26",
       "timeframe": "1d",
@@ -741,7 +741,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 50.0,
       "tv": "https://www.tradingview.com/chart/?symbol=HACK",
-      "vol_qtd": 550600.0,
+      "vol_qtd": 550900.0,
       "var_dia_pct": 1.88,
       "mom1": 11.0,
       "mom3": 24.0,
@@ -1452,15 +1452,15 @@
       "close": 42.55,
       "stop": 39.03,
       "r_pct": 8.27,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-26",
       "ult_candle": "2026-10-26",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 3,
-      "vol_fin_mi": 1451.4,
+      "vol_fin_mi": 1451.5,
       "tv": "https://www.tradingview.com/chart/?symbol=XLU",
-      "vol_qtd": 13958620.0,
+      "vol_qtd": 13968200.0,
       "var_dia_pct": 0.05,
       "mom1": 8.0,
       "mom3": -6.0,
@@ -1469,10 +1469,10 @@
       "acima_ema70": true,
       "ema70": 42.2188,
       "ema70_incl": "lado",
-      "quality": 36.2,
+      "quality": 36.1,
       "didi_dist": 2.282,
-      "pos_range": 0.232,
-      "dist_max_pct": 0.62,
+      "pos_range": 0.229,
+      "dist_max_pct": 0.63,
       "adx_var_pct": 20.1,
       "confluencia": false,
       "bb_primeira": false,
@@ -1486,7 +1486,7 @@
       "candle_vermelho": false,
       "radar": false,
       "adx_falta": null,
-      "high": 42.81,
+      "high": 42.82,
       "dates": [
         "2026-08-31",
         "2026-09-01",
@@ -1653,7 +1653,7 @@
         42.26,
         42.88,
         42.81,
-        42.815
+        42.82
       ],
       "l": [
         41.5545,
@@ -1695,7 +1695,7 @@
         41.87,
         42.01,
         42.39,
-        42.4701
+        42.47
       ],
       "ma3": [
         42.4016,
@@ -1947,7 +1947,7 @@
         32.5626,
         35.0336,
         37.1957,
-        39.1054
+        39.1231
       ],
       "dip": [
         12.4427,
@@ -1989,7 +1989,7 @@
         23.031,
         30.7552,
         27.9203,
-        26.0576
+        26.1325
       ],
       "dim": [
         39.2507,
@@ -2031,7 +2031,7 @@
         11.4968,
         9.6243,
         8.7372,
-        8.1224
+        8.1139
       ],
       "bb_sup": [
         43.7492,

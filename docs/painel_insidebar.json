@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-26",
-  "captura": "26/10/2026 19:01",
+  "gerado": "2026-10-27",
+  "captura": "27/10/2026 09:37",
   "timeframe": "1d",
   "n_entrar": 2,
   "n_radar": 8,
@@ -19,7 +19,7 @@
       "compress": 0.56,
       "cons_len": 3,
       "var_dia_pct": 1.26,
-      "vol_qtd": 649635.0,
+      "vol_qtd": 649600.0,
       "date": "2026-10-26",
       "rompeu": false,
       "_tk": "WST",
@@ -148,7 +148,7 @@
         396.0,
         397.16,
         394.18,
-        395.09
+        395.28
       ],
       "l": [
         335.51,
@@ -291,7 +291,7 @@
       "compress": 0.6,
       "cons_len": 3,
       "var_dia_pct": 2.8,
-      "vol_qtd": 518376.0,
+      "vol_qtd": 518400.0,
       "date": "2026-10-26",
       "rompeu": false,
       "_tk": "RHP",
@@ -555,11 +555,11 @@
       "ticker": "LIN",
       "market": "EUA",
       "close": 507.56,
-      "entry": 510.92,
+      "entry": 510.93,
       "stop": 479.0,
-      "parcial2r": 574.77,
-      "breakeven": 510.92,
-      "alvo_final": 606.7,
+      "parcial2r": 574.79,
+      "breakeven": 510.93,
+      "alvo_final": 606.72,
       "r_pct": 6.25,
       "ema20": 493.39,
       "dist_ema": 2.87,
@@ -568,8 +568,8 @@
       "contr_vol": 0.93,
       "mae_high": 512.49,
       "mae_low": 505.29,
-      "var_dia_pct": -0.21,
-      "vol_qtd": 1663518.0,
+      "var_dia_pct": -0.24,
+      "vol_qtd": 1663500.0,
       "date": "2026-10-26",
       "_tk": "LIN",
       "tv": "https://www.tradingview.com/chart/?symbol=LIN",
@@ -655,7 +655,7 @@
         497.25,
         500.85,
         509.7,
-        508.61
+        508.76
       ],
       "h": [
         490.8734,
@@ -697,7 +697,7 @@
         502.18,
         510.84,
         512.49,
-        510.925
+        510.93
       ],
       "l": [
         484.8533,
@@ -830,21 +830,21 @@
       "ticker": "FAST",
       "market": "EUA",
       "close": 52.47,
-      "entry": 52.65,
+      "entry": 52.66,
       "stop": 47.3,
-      "parcial2r": 63.35,
-      "breakeven": 52.65,
-      "alvo_final": 68.7,
-      "r_pct": 10.16,
+      "parcial2r": 63.38,
+      "breakeven": 52.66,
+      "alvo_final": 68.74,
+      "r_pct": 10.18,
       "ema20": 51.28,
       "dist_ema": 2.32,
-      "compress": 0.57,
+      "compress": 0.58,
       "cons_len": 3,
       "contr_vol": 0.88,
       "mae_high": 52.91,
       "mae_low": 51.86,
-      "var_dia_pct": 0.69,
-      "vol_qtd": 5049714.0,
+      "var_dia_pct": 0.77,
+      "vol_qtd": 5049700.0,
       "date": "2026-10-26",
       "_tk": "FAST",
       "tv": "https://www.tradingview.com/chart/?symbol=FAST",
@@ -930,7 +930,7 @@
         51.89,
         52.35,
         52.71,
-        52.11
+        52.07
       ],
       "h": [
         49.79,
@@ -972,7 +972,7 @@
         52.87,
         52.78,
         52.91,
-        52.65
+        52.66
       ],
       "l": [
         49.13,
@@ -1119,7 +1119,7 @@
       "mae_high": 43.81,
       "mae_low": 43.13,
       "var_dia_pct": 0.37,
-      "vol_qtd": 5706433.0,
+      "vol_qtd": 5706400.0,
       "date": "2026-10-26",
       "_tk": "NI",
       "tv": "https://www.tradingview.com/chart/?symbol=NI",
@@ -1394,7 +1394,7 @@
       "mae_high": 408.28,
       "mae_low": 395.33,
       "var_dia_pct": 0.05,
-      "vol_qtd": 1429360.0,
+      "vol_qtd": 1429400.0,
       "date": "2026-10-26",
       "_tk": "NTRA",
       "tv": "https://www.tradingview.com/chart/?symbol=NTRA",
@@ -1669,7 +1669,7 @@
       "mae_high": 230.28,
       "mae_low": 226.36,
       "var_dia_pct": 0.25,
-      "vol_qtd": 2127822.0,
+      "vol_qtd": 2127800.0,
       "date": "2026-10-26",
       "_tk": "PGR",
       "tv": "https://www.tradingview.com/chart/?symbol=PGR",
@@ -1944,7 +1944,7 @@
       "mae_high": 292.28,
       "mae_low": 286.57,
       "var_dia_pct": -0.02,
-      "vol_qtd": 1361496.0,
+      "vol_qtd": 1361600.0,
       "date": "2026-10-26",
       "_tk": "ECL",
       "tv": "https://www.tradingview.com/chart/?symbol=ECL",
@@ -2219,7 +2219,7 @@
       "mae_high": 289.58,
       "mae_low": 283.85,
       "var_dia_pct": 0.28,
-      "vol_qtd": 548065.0,
+      "vol_qtd": 548100.0,
       "date": "2026-10-26",
       "_tk": "AIZ",
       "tv": "https://www.tradingview.com/chart/?symbol=AIZ",
@@ -2389,7 +2389,7 @@
         283.11,
         284.43,
         283.85,
-        285.635
+        285.64
       ],
       "price": [
         281.86,
@@ -2494,7 +2494,7 @@
       "mae_high": 255.64,
       "mae_low": 249.24,
       "var_dia_pct": 0.42,
-      "vol_qtd": 1679671.0,
+      "vol_qtd": 1690600.0,
       "date": "2026-10-26",
       "_tk": "CAH",
       "tv": "https://www.tradingview.com/chart/?symbol=CAH",
@@ -2664,7 +2664,7 @@
         254.74,
         254.82,
         249.24,
-        249.955
+        249.96
       ],
       "price": [
         234.0759,
