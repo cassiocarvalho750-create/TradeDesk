@@ -1,28 +1,28 @@
 {
   "gerado": "2026-10-27",
-  "gerado_utc": "2026-10-27 12:40 UTC",
+  "gerado_utc": "2026-10-27 14:20 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 712.2,
-      "mm200": 676.57,
+      "close": 714.34,
+      "mm200": 677.02,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 176608.0,
-      "mm200": 181299.82,
+      "close": 176092.91,
+      "mm200": 181365.6,
       "validado": false
     }
   },
   "funil": {
-    "total": 1135,
-    "liquidos": 1088,
-    "sinais": 5
+    "total": 1134,
+    "liquidos": 1085,
+    "sinais": 7
   },
-  "n": 5,
+  "n": 7,
   "ativos": [
     {
       "data_sinal": "2026-10-26",
@@ -30,12 +30,12 @@
       "stop": 14.94,
       "alvo_3r": 15.38,
       "r_pct": 0.73,
-      "preco": 15.03,
+      "preco": 15.02,
       "ema20": 14.95,
       "mom3": 3.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -43,7 +43,7 @@
       "ticker": "AES",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AES",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-10-26",
@@ -51,20 +51,20 @@
       "stop": 370.97,
       "alvo_3r": 446.09,
       "r_pct": 4.82,
-      "preco": 386.95,
+      "preco": 389.15,
       "ema20": 373.33,
       "mom3": 3.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "ativada",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "RL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RL",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-10-26",
@@ -72,20 +72,20 @@
       "stop": 25.86,
       "alvo_3r": 31.02,
       "r_pct": 4.75,
-      "preco": 26.86,
+      "preco": 27.34,
       "ema20": 25.97,
       "mom3": -4.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "abriu acima",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "CCL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CCL",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-10-26",
@@ -93,20 +93,20 @@
       "stop": 274.2,
       "alvo_3r": 324.2,
       "r_pct": 4.36,
-      "preco": 280.6,
+      "preco": 298.88,
       "ema20": 277.18,
       "mom3": -12.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "abriu acima",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "RCL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RCL",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-10-26",
@@ -114,20 +114,62 @@
       "stop": 169.89,
       "alvo_3r": 197.53,
       "r_pct": 3.91,
-      "preco": 175.96,
+      "preco": 176.35,
       "ema20": 171.03,
       "mom3": 25.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "ativada",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "A",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=A",
-      "forming": false
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-27",
+      "entrada": 292.28,
+      "stop": 284.0,
+      "alvo_3r": 317.12,
+      "r_pct": 2.83,
+      "preco": 291.18,
+      "ema20": 285.41,
+      "mom3": 3.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "ECL",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=ECL",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-10-27",
+      "entrada": 21.84,
+      "stop": 19.5,
+      "alvo_3r": 28.86,
+      "r_pct": 10.71,
+      "preco": 21.49,
+      "ema20": 20.99,
+      "mom3": 7.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": false,
+      "indice": "IBOV",
+      "ticker": "CXSE3.SA",
+      "market": "B3",
+      "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CXSE3",
+      "forming": true
     }
   ]
 }
