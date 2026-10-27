@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-27",
-  "captura": "27/10/2026 16:18",
+  "captura": "27/10/2026 18:33",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,35 +11,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 21.57,
+      "close": 21.59,
       "stop": 20.51,
-      "r_pct": 4.91,
+      "r_pct": 5.0,
       "forming": true,
       "date": "2026-10-27",
       "ult_candle": "2026-10-27",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": null,
-      "vol_fin_mi": 231.7,
+      "vol_fin_mi": 235.1,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CXSE3",
-      "vol_qtd": 8846500.0,
-      "var_dia_pct": 2.23,
+      "vol_qtd": 12087500.0,
+      "var_dia_pct": 2.32,
       "mom1": 5.0,
       "mom3": 7.0,
       "mom6": 23.0,
-      "alvo_2r": 23.69,
+      "alvo_2r": 23.75,
       "acima_ema70": true,
-      "ema70": 20.1806,
+      "ema70": 20.1811,
       "ema70_incl": "sobe",
-      "quality": 25.4,
+      "quality": 26.6,
       "didi_dist": 1.862,
-      "pos_range": 0.662,
-      "dist_max_pct": 1.19,
+      "pos_range": 0.688,
+      "dist_max_pct": 1.1,
       "adx_var_pct": -15.1,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
-      "bb_abre_pct": 8.8,
+      "bb_abre_pct": 10.3,
       "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
@@ -134,7 +134,7 @@
         21.3,
         21.41,
         21.05,
-        21.58
+        21.59
       ],
       "o": [
         19.5,
@@ -302,7 +302,7 @@
         21.3233,
         21.3633,
         21.2533,
-        21.3467
+        21.35
       ],
       "ma8": [
         18.9287,
@@ -344,7 +344,7 @@
         21.1937,
         21.265,
         21.29,
-        21.3362
+        21.3375
       ],
       "ma20": [
         18.769,
@@ -386,7 +386,7 @@
         20.7835,
         20.834,
         20.857,
-        20.9305
+        20.931
       ],
       "didi_curta": [
         2.0494,
@@ -428,7 +428,7 @@
         0.6114,
         0.4624,
         -0.1722,
-        0.0488
+        0.0586
       ],
       "didi_longa": [
         -0.844,
@@ -470,7 +470,7 @@
         -1.9357,
         -2.0268,
         -2.0338,
-        -1.9017
+        -1.9051
       ],
       "adx": [
         38.7125,
@@ -638,7 +638,7 @@
         21.7525,
         21.7592,
         21.7015,
-        21.7879
+        21.7923
       ],
       "bb_mid": [
         18.9287,
@@ -680,7 +680,7 @@
         21.1937,
         21.265,
         21.29,
-        21.3362
+        21.3375
       ],
       "bb_inf": [
         17.9578,
@@ -722,7 +722,7 @@
         20.635,
         20.7708,
         20.8785,
-        20.8846
+        20.8827
       ],
       "atrasado": false
     }

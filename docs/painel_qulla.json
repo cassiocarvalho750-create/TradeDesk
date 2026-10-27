@@ -6,7 +6,7 @@
       "entrada": 113.48,
       "stop": 110.49,
       "alvo_3r": 122.45,
-      "preco": 114.01,
+      "preco": 113.9,
       "r_pct": 2.63,
       "mom1": 23.0,
       "mom3": 54.0,
@@ -21,13 +21,31 @@
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
     },
     {
+      "entrada": 194.61,
+      "stop": 193.79,
+      "alvo_3r": 197.07,
+      "preco": 194.62,
+      "r_pct": 0.42,
+      "mom1": 39.0,
+      "mom3": 47.0,
+      "mom6": 42.0,
+      "consol_dias": 9,
+      "rompendo": true,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "PTC",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=PTC"
+    },
+    {
       "entrada": 157.57,
       "stop": 133.0,
       "alvo_3r": 231.28,
-      "preco": 139.07,
+      "preco": 138.73,
       "r_pct": 15.59,
       "mom1": 7.0,
-      "mom3": 101.0,
+      "mom3": 100.0,
       "mom6": 96.0,
       "consol_dias": 15,
       "rompendo": false,
@@ -37,24 +55,6 @@
       "ticker": "P",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=P"
-    },
-    {
-      "entrada": 194.61,
-      "stop": 193.8,
-      "alvo_3r": 197.04,
-      "preco": 194.47,
-      "r_pct": 0.42,
-      "mom1": 39.0,
-      "mom3": 47.0,
-      "mom6": 42.0,
-      "consol_dias": 9,
-      "rompendo": false,
-      "acima_ema20": true,
-      "puro": true,
-      "forming": true,
-      "ticker": "PTC",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=PTC"
     }
   ]
 }
