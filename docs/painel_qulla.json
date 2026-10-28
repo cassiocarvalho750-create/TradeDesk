@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-27",
+  "gerado": "2026-10-28",
   "n": 3,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HNGE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HNGE"
@@ -33,7 +33,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "PTC",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PTC"
@@ -51,7 +51,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "P",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=P"

@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-27",
-  "captura": "27/10/2026 18:33",
+  "gerado": "2026-10-28",
+  "captura": "28/10/2026 10:17",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 47.53,
       "stop": 41.85,
       "r_pct": 11.95,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-27",
       "ult_candle": "2026-10-27",
       "timeframe": "1d",
@@ -22,19 +22,19 @@
       "adx_ago": 1,
       "vol_fin_mi": 400.1,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SUZB3",
-      "vol_qtd": 13959400.0,
+      "vol_qtd": 13965000.0,
       "var_dia_pct": 3.06,
       "mom1": 6.0,
       "mom3": 10.0,
       "mom6": 5.0,
       "alvo_2r": 58.89,
       "acima_ema70": true,
-      "ema70": 44.2496,
+      "ema70": 44.2498,
       "ema70_incl": "sobe",
-      "quality": 73.0,
+      "quality": 72.9,
       "didi_dist": 0.558,
-      "pos_range": 0.827,
-      "dist_max_pct": 0.63,
+      "pos_range": 0.822,
+      "dist_max_pct": 0.65,
       "adx_var_pct": 11.8,
       "confluencia": false,
       "bb_primeira": false,
@@ -48,7 +48,7 @@
       "candle_vermelho": false,
       "radar": false,
       "adx_falta": null,
-      "high": 47.83,
+      "high": 47.84,
       "dates": [
         "2026-08-31",
         "2026-09-01",
@@ -215,7 +215,7 @@
         43.14,
         43.89,
         48.42,
-        47.83
+        47.84
       ],
       "l": [
         45.24,
@@ -551,7 +551,7 @@
         15.1164,
         21.3078,
         47.0085,
-        40.8774
+        40.8466
       ],
       "dim": [
         15.8955,
@@ -593,7 +593,7 @@
         21.1534,
         18.0772,
         10.7268,
-        9.3278
+        9.3208
       ],
       "bb_sup": [
         47.3312,
@@ -733,7 +733,7 @@
       "close": 18.68,
       "stop": 17.98,
       "r_pct": 3.75,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-27",
       "ult_candle": "2026-10-27",
       "timeframe": "1d",
@@ -741,18 +741,18 @@
       "adx_ago": 2,
       "vol_fin_mi": 135.5,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:KLBN11",
-      "vol_qtd": 14314100.0,
+      "vol_qtd": 14314300.0,
       "var_dia_pct": 0.21,
       "mom1": 3.0,
       "mom3": 4.0,
       "mom6": 5.0,
       "alvo_2r": 20.08,
       "acima_ema70": true,
-      "ema70": 18.3562,
+      "ema70": 18.3564,
       "ema70_incl": "lado",
-      "quality": 62.1,
+      "quality": 61.5,
       "didi_dist": 0.074,
-      "pos_range": 0.39,
+      "pos_range": 0.357,
       "dist_max_pct": 1.89,
       "adx_var_pct": 47.5,
       "confluencia": false,
@@ -976,7 +976,7 @@
         18.0,
         18.01,
         17.58,
-        18.45
+        18.48
       ],
       "ma3": [
         18.8533,
@@ -1270,7 +1270,7 @@
         21.201,
         22.0034,
         30.4341,
-        26.2852
+        26.4686
       ],
       "dim": [
         5.8658,
@@ -1312,7 +1312,7 @@
         16.2283,
         13.8456,
         8.6922,
-        7.5072
+        7.5596
       ],
       "bb_sup": [
         19.0735,
