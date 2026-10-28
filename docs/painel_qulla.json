@@ -1,15 +1,15 @@
 {
   "gerado": "2026-10-28",
-  "n": 2,
+  "n": 1,
   "ativos": [
     {
       "entrada": 194.68,
-      "stop": 194.16,
-      "alvo_3r": 196.24,
-      "preco": 194.52,
-      "r_pct": 0.27,
+      "stop": 194.04,
+      "alvo_3r": 196.6,
+      "preco": 194.12,
+      "r_pct": 0.33,
       "mom1": 41.0,
-      "mom3": 43.0,
+      "mom3": 42.0,
       "mom6": 41.0,
       "consol_dias": 10,
       "rompendo": false,
@@ -19,24 +19,6 @@
       "ticker": "PTC",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PTC"
-    },
-    {
-      "entrada": 87.75,
-      "stop": 80.0,
-      "alvo_3r": 111.0,
-      "preco": 83.0,
-      "r_pct": 8.83,
-      "mom1": 31.0,
-      "mom3": 4.0,
-      "mom6": 39.0,
-      "consol_dias": 6,
-      "rompendo": false,
-      "acima_ema20": true,
-      "puro": true,
-      "forming": true,
-      "ticker": "TTAN",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=TTAN"
     }
   ]
 }
