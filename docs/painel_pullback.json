@@ -1,25 +1,25 @@
 {
   "gerado": "2026-10-28",
-  "gerado_utc": "2026-10-28 13:22 UTC",
+  "gerado_utc": "2026-10-28 13:51 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 721.25,
-      "mm200": 677.05,
+      "close": 720.85,
+      "mm200": 677.53,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 175463.45,
-      "mm200": 181424.15,
+      "close": 173261.2,
+      "mm200": 181413.14,
       "validado": false
     }
   },
   "funil": {
     "total": 1135,
-    "liquidos": 1087,
+    "liquidos": 1085,
     "sinais": 2
   },
   "n": 2,
@@ -30,12 +30,12 @@
       "stop": 283.99,
       "alvo_3r": 327.07,
       "r_pct": 3.65,
-      "preco": 291.27,
+      "preco": 290.6,
       "ema20": 285.42,
       "mom3": 3.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -43,7 +43,7 @@
       "ticker": "ECL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=ECL",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-10-27",
@@ -51,12 +51,12 @@
       "stop": 19.5,
       "alvo_3r": 28.86,
       "r_pct": 10.71,
-      "preco": 21.59,
+      "preco": 21.62,
       "ema20": 21.0,
       "mom3": 7.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -64,7 +64,7 @@
       "ticker": "CXSE3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CXSE3",
-      "forming": false
+      "forming": true
     }
   ]
 }
