@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-28",
+  "gerado": "2026-10-29",
   "n": 1,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "PTC",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PTC"

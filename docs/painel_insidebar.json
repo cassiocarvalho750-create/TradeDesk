@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-28",
-  "captura": "28/10/2026 19:00",
+  "gerado": "2026-10-29",
+  "captura": "29/10/2026 09:02",
   "timeframe": "1d",
   "n_entrar": 1,
   "n_radar": 4,
@@ -19,7 +19,7 @@
       "compress": 0.67,
       "cons_len": 3,
       "var_dia_pct": 2.42,
-      "vol_qtd": 2218268.0,
+      "vol_qtd": 2218800.0,
       "date": "2026-10-28",
       "rompeu": false,
       "_tk": "TRMB",
@@ -291,13 +291,13 @@
       "r_pct": 11.3,
       "ema20": 220.72,
       "dist_ema": 2.24,
-      "compress": 0.43,
+      "compress": 0.47,
       "cons_len": 3,
       "contr_vol": 0.85,
       "mae_high": 228.83,
       "mae_low": 223.83,
       "var_dia_pct": 0.54,
-      "vol_qtd": 1663161.0,
+      "vol_qtd": 1694200.0,
       "date": "2026-10-28",
       "_tk": "PGR",
       "tv": "https://www.tradingview.com/chart/?symbol=PGR",
@@ -467,7 +467,7 @@
         226.36,
         227.35,
         223.83,
-        224.47
+        224.3
       ],
       "price": [
         221.2732,
@@ -571,8 +571,8 @@
       "contr_vol": 0.95,
       "mae_high": 80.68,
       "mae_low": 76.63,
-      "var_dia_pct": -0.05,
-      "vol_qtd": 9308922.0,
+      "var_dia_pct": 0.39,
+      "vol_qtd": 9313800.0,
       "date": "2026-10-28",
       "_tk": "MCHP",
       "tv": "https://www.tradingview.com/chart/?symbol=MCHP",
@@ -658,7 +658,7 @@
         74.21,
         74.45,
         76.97,
-        79.67
+        79.32
       ],
       "h": [
         73.19,
@@ -742,7 +742,7 @@
         73.67,
         74.11,
         76.63,
-        78.035
+        78.04
       ],
       "price": [
         72.76,
@@ -846,8 +846,8 @@
       "contr_vol": 0.94,
       "mae_high": 347.78,
       "mae_low": 342.39,
-      "var_dia_pct": -0.88,
-      "vol_qtd": 34405006.0,
+      "var_dia_pct": -0.89,
+      "vol_qtd": 35595700.0,
       "date": "2026-10-28",
       "_tk": "AAPL",
       "tv": "https://www.tradingview.com/chart/?symbol=AAPL",
@@ -933,7 +933,7 @@
         349.12,
         343.92,
         343.17,
-        346.885
+        346.92
       ],
       "h": [
         328.4,
@@ -1017,7 +1017,7 @@
         345.75,
         341.03,
         342.39,
-        343.53
+        343.52
       ],
       "price": [
         324.96,
@@ -1122,7 +1122,7 @@
       "mae_high": 222.14,
       "mae_low": 221.27,
       "var_dia_pct": -0.03,
-      "vol_qtd": 221412.0,
+      "vol_qtd": 233400.0,
       "date": "2026-10-28",
       "_tk": "SLAB",
       "tv": "https://www.tradingview.com/chart/?symbol=SLAB",

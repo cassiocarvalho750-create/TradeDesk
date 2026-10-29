@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-28",
-  "captura": "28/10/2026 18:58",
+  "gerado": "2026-10-29",
+  "captura": "29/10/2026 09:00",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 48.1,
       "stop": 41.85,
       "r_pct": 12.99,
-      "forming": true,
+      "forming": false,
       "date": "2026-10-28",
       "ult_candle": "2026-10-28",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": 2,
       "vol_fin_mi": 448.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SUZB3",
-      "vol_qtd": 24926000.0,
+      "vol_qtd": 24934800.0,
       "var_dia_pct": 2.04,
       "mom1": 8.0,
       "mom3": 14.0,
@@ -33,7 +33,7 @@
       "ema70_incl": "sobe",
       "quality": 62.0,
       "didi_dist": 0.558,
-      "pos_range": 0.598,
+      "pos_range": 0.597,
       "dist_max_pct": 1.92,
       "adx_var_pct": 35.7,
       "confluencia": false,
@@ -257,7 +257,7 @@
         42.59,
         45.8,
         46.1,
-        46.7
+        46.71
       ],
       "ma3": [
         45.6833,
@@ -551,7 +551,7 @@
         21.3078,
         47.0085,
         40.8466,
-        42.5964
+        42.627
       ],
       "dim": [
         14.7597,
@@ -593,7 +593,7 @@
         18.0772,
         10.7268,
         9.3208,
-        7.7579
+        7.7634
       ],
       "bb_sup": [
         46.9553,
