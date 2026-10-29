@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-29",
-  "captura": "29/10/2026 17:50",
+  "captura": "29/10/2026 19:07",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -22,7 +22,7 @@
       "adx_ago": 0,
       "vol_fin_mi": 182.9,
       "tv": "https://www.tradingview.com/chart/?symbol=ITA",
-      "vol_qtd": 1146174.0,
+      "vol_qtd": 1146786.0,
       "var_dia_pct": 2.47,
       "mom1": 3.0,
       "mom3": -10.0,
@@ -739,9 +739,9 @@
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 799.6,
+      "vol_fin_mi": 799.7,
       "tv": "https://www.tradingview.com/chart/?symbol=XLY",
-      "vol_qtd": 6369563.0,
+      "vol_qtd": 6372541.0,
       "var_dia_pct": 0.38,
       "mom1": 7.0,
       "mom3": 0.0,
