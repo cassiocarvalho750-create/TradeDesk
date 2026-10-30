@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-30",
-  "captura": "30/10/2026 17:51",
+  "captura": "30/10/2026 18:45",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.25,
       "stop": 1.23,
-      "r_pct": 1.75,
+      "r_pct": 1.74,
       "forming": true,
       "date": "2026-10-30",
       "ult_candle": "2026-10-30",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=AUDNZD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.12,
+      "var_dia_pct": 0.1,
       "mom1": 1.0,
       "mom3": 5.0,
       "mom6": 3.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.2283,
       "ema70_incl": "sobe",
-      "quality": 68.1,
+      "quality": 67.3,
       "didi_dist": 0.221,
-      "pos_range": 0.844,
-      "dist_max_pct": 0.08,
+      "pos_range": 0.816,
+      "dist_max_pct": 0.1,
       "adx_var_pct": 65.8,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 13.0,
+      "bb_abre_pct": 12.6,
       "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         1.2341,
         1.2376,
         1.2537,
-        1.2487
+        1.2485
       ],
       "o": [
         1.2249,
@@ -299,7 +299,7 @@
         1.2337,
         1.2349,
         1.2418,
-        1.2467
+        1.2466
       ],
       "ma8": [
         1.2151,
@@ -425,7 +425,7 @@
         0.0821,
         0.1007,
         0.4415,
-        0.6679
+        0.6644
       ],
       "didi_longa": [
         -0.6753,
@@ -467,7 +467,7 @@
         0.407,
         0.3215,
         0.1872,
-        0.0696
+        0.0709
       ],
       "adx": [
         42.9265,
@@ -635,7 +635,7 @@
         1.2355,
         1.2373,
         1.2507,
-        1.2547
+        1.2546
       ],
       "bb_mid": [
         1.2151,

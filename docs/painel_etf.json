@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-30",
-  "captura": "30/10/2026 17:51",
+  "captura": "30/10/2026 18:45",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -20,9 +20,9 @@
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 2108.3,
+      "vol_fin_mi": 2108.5,
       "tv": "https://www.tradingview.com/chart/?symbol=XLE",
-      "vol_qtd": 31020087.0,
+      "vol_qtd": 31087568.0,
       "var_dia_pct": 0.72,
       "mom1": 12.0,
       "mom3": 20.0,
