@@ -1,6 +1,6 @@
 {
   "gerado": "2026-10-30",
-  "captura": "30/10/2026 11:23",
+  "captura": "30/10/2026 13:25",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.25,
       "stop": 1.23,
-      "r_pct": 1.69,
+      "r_pct": 1.7,
       "forming": true,
       "date": "2026-10-30",
       "ult_candle": "2026-10-30",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=AUDNZD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.06,
+      "var_dia_pct": 0.07,
       "mom1": 1.0,
       "mom3": 5.0,
       "mom6": 3.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.2283,
       "ema70_incl": "sobe",
-      "quality": 64.9,
+      "quality": 65.5,
       "didi_dist": 0.221,
-      "pos_range": 0.725,
-      "dist_max_pct": 0.14,
+      "pos_range": 0.745,
+      "dist_max_pct": 0.13,
       "adx_var_pct": 65.8,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 11.2,
+      "bb_abre_pct": 11.5,
       "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         1.2341,
         1.2376,
         1.2537,
-        1.2477
+        1.248
       ],
       "o": [
         1.2249,
@@ -299,7 +299,7 @@
         1.2337,
         1.2349,
         1.2418,
-        1.2463
+        1.2464
       ],
       "ma8": [
         1.2151,
@@ -425,7 +425,7 @@
         0.0821,
         0.1007,
         0.4415,
-        0.6515
+        0.657
       ],
       "didi_longa": [
         -0.6753,
@@ -467,7 +467,7 @@
         0.407,
         0.3215,
         0.1872,
-        0.0755
+        0.0735
       ],
       "adx": [
         42.9265,
@@ -635,7 +635,7 @@
         1.2355,
         1.2373,
         1.2507,
-        1.2542
+        1.2544
       ],
       "bb_mid": [
         1.2151,
@@ -719,7 +719,7 @@
         1.2298,
         1.23,
         1.2219,
-        1.2223
+        1.2222
       ],
       "atrasado": true
     }
