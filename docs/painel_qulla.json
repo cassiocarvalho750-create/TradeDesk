@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-10-30",
+  "gerado": "2026-11-02",
   "n": 3,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "PTC",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PTC"
@@ -33,17 +33,17 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "OKTA",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=OKTA"
     },
     {
       "entrada": 188.29,
-      "stop": 182.3,
-      "alvo_3r": 206.26,
+      "stop": 181.98,
+      "alvo_3r": 207.22,
       "preco": 184.6,
-      "r_pct": 3.18,
+      "r_pct": 3.35,
       "mom1": 32.0,
       "mom3": 6.0,
       "mom6": 7.0,
@@ -51,7 +51,7 @@
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "EFX",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=EFX"

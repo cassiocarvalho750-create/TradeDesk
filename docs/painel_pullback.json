@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-10-30",
-  "gerado_utc": "2026-10-30 21:49 UTC",
+  "gerado": "2026-11-02",
+  "gerado_utc": "2026-11-02 11:53 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
@@ -12,14 +12,14 @@
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 167921.8,
+      "close": 167922.0,
       "mm200": 181461.79,
       "validado": false
     }
   },
   "funil": {
-    "total": 1134,
-    "liquidos": 1086,
+    "total": 1133,
+    "liquidos": 1085,
     "sinais": 7
   },
   "n": 7,
@@ -89,10 +89,10 @@
     },
     {
       "data_sinal": "2026-10-30",
-      "entrada": 242.51,
+      "entrada": 242.55,
       "stop": 228.0,
-      "alvo_3r": 286.04,
-      "r_pct": 5.98,
+      "alvo_3r": 286.2,
+      "r_pct": 6.0,
       "preco": 242.09,
       "ema20": 231.45,
       "mom3": 5.0,
@@ -110,13 +110,13 @@
     },
     {
       "data_sinal": "2026-10-30",
-      "entrada": 135.34,
-      "stop": 129.08,
-      "alvo_3r": 154.12,
-      "r_pct": 4.63,
+      "entrada": 135.36,
+      "stop": 128.06,
+      "alvo_3r": 157.26,
+      "r_pct": 5.39,
       "preco": 135.33,
-      "ema20": 129.45,
-      "mom3": 3.0,
+      "ema20": 128.53,
+      "mom3": 4.0,
       "mom_fraco": false,
       "status": "ORDEM",
       "ordem_dia": "próximo pregão",
