@@ -1,25 +1,25 @@
 {
   "gerado": "2026-11-03",
-  "gerado_utc": "2026-11-03 00:12 UTC",
+  "gerado_utc": "2026-11-03 15:19 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 681.09,
-      "mm200": 678.68,
+      "close": 686.06,
+      "mm200": 679.02,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 167922.0,
-      "mm200": 181461.79,
+      "close": 164813.67,
+      "mm200": 181460.13,
       "validado": false
     }
   },
   "funil": {
-    "total": 1133,
-    "liquidos": 1085,
+    "total": 1132,
+    "liquidos": 1081,
     "sinais": 5
   },
   "n": 5,
@@ -30,20 +30,20 @@
       "stop": 41.48,
       "alvo_3r": 59.2,
       "r_pct": 9.65,
-      "preco": 45.48,
+      "preco": 45.89,
       "ema20": 41.89,
       "mom3": 2.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "ativada",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "RYAN",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RYAN",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-02",
@@ -51,20 +51,20 @@
       "stop": 94.38,
       "alvo_3r": 106.3,
       "r_pct": 3.06,
-      "preco": 97.35,
+      "preco": 96.78,
       "ema20": 95.1,
       "mom3": 2.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "ativada",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "ZBH",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=ZBH",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-02",
@@ -72,12 +72,12 @@
       "stop": 90.28,
       "alvo_3r": 110.28,
       "r_pct": 5.25,
-      "preco": 94.63,
+      "preco": 92.81,
       "ema20": 90.46,
       "mom3": 18.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -85,7 +85,7 @@
       "ticker": "IFF",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=IFF",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-02",
@@ -93,12 +93,12 @@
       "stop": 540.61,
       "alvo_3r": 1070.97,
       "r_pct": 19.7,
-      "preco": 671.64,
+      "preco": 667.48,
       "ema20": 561.0,
       "mom3": 14.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -106,7 +106,7 @@
       "ticker": "IDXX",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=IDXX",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-02",
@@ -114,12 +114,12 @@
       "stop": 174.8,
       "alvo_3r": 213.4,
       "r_pct": 5.23,
-      "preco": 184.22,
+      "preco": 180.15,
       "ema20": 175.57,
       "mom3": 10.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
@@ -127,7 +127,7 @@
       "ticker": "BR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=BR",
-      "forming": false
+      "forming": true
     }
   ]
 }
