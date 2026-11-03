@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-03",
-  "captura": "03/11/2026 18:24",
+  "captura": "03/11/2026 19:40",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -22,7 +22,7 @@
       "adx_ago": null,
       "vol_fin_mi": 49.0,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SMTO3",
-      "vol_qtd": 2577800.0,
+      "vol_qtd": 2577400.0,
       "var_dia_pct": 1.3,
       "mom1": 14.0,
       "mom3": 46.0,
