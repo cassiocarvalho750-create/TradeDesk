@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-04",
-  "captura": "04/11/2026 14:52",
+  "captura": "04/11/2026 18:51",
   "timeframe": "1d",
   "n": 6,
   "ativos": [
@@ -11,35 +11,35 @@
       "par": "Petroleo Brent (US Brent Oil)",
       "classe": "Commodity",
       "lado": "venda",
-      "close": 59.94,
+      "close": 60.4,
       "stop": 64.42,
-      "r_pct": 7.47,
+      "r_pct": 6.66,
       "forming": true,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 0,
-      "vol_fin_mi": 121.3,
+      "vol_fin_mi": 126.0,
       "tv": "https://www.tradingview.com/chart/?symbol=BNO",
-      "vol_qtd": 3025971.0,
-      "var_dia_pct": -6.2,
-      "mom1": -3.0,
-      "mom3": 27.0,
-      "mom6": 12.0,
-      "alvo_2r": 51.0,
-      "acima_ema70": false,
-      "ema70": 60.2532,
+      "vol_qtd": 4394223.0,
+      "var_dia_pct": -5.49,
+      "mom1": -2.0,
+      "mom3": 28.0,
+      "mom6": 13.0,
+      "alvo_2r": 52.36,
+      "acima_ema70": true,
+      "ema70": 60.2657,
       "ema70_incl": "sobe",
-      "quality": 70.5,
+      "quality": 68.8,
       "didi_dist": 1.041,
-      "pos_range": 0.126,
-      "dist_max_pct": 1.08,
+      "pos_range": 0.215,
+      "dist_max_pct": 1.82,
       "adx_var_pct": -5.7,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 83.0,
+      "bb_abre_pct": 76.5,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         71.39,
         65.95,
         66.11,
-        59.94
+        60.4
       ],
       "o": [
         61.5,
@@ -299,7 +299,7 @@
         70.7633,
         69.3667,
         67.8167,
-        64.0
+        64.1533
       ],
       "ma8": [
         57.0413,
@@ -341,7 +341,7 @@
         69.8725,
         69.735,
         69.385,
-        68.0037
+        68.0612
       ],
       "ma20": [
         53.8585,
@@ -383,7 +383,7 @@
         66.6605,
         66.8855,
         67.0945,
-        66.9965
+        67.0195
       ],
       "didi_curta": [
         5.2922,
@@ -425,7 +425,7 @@
         1.2749,
         -0.5282,
         -2.2603,
-        -5.8875
+        -5.7418
       ],
       "didi_longa": [
         -5.5797,
@@ -467,7 +467,7 @@
         -4.5969,
         -4.0862,
         -3.3011,
-        -1.4812
+        -1.5306
       ],
       "adx": [
         35.1065,
@@ -635,7 +635,7 @@
         72.638,
         73.1703,
         73.67,
-        75.6942
+        75.4781
       ],
       "bb_mid": [
         57.0413,
@@ -677,7 +677,7 @@
         69.8725,
         69.735,
         69.385,
-        68.0037
+        68.0612
       ],
       "bb_inf": [
         50.8793,
@@ -719,7 +719,7 @@
         67.107,
         66.2997,
         65.1,
-        60.3133
+        60.6444
       ],
       "atrasado": false
     },
@@ -730,35 +730,35 @@
       "par": "Petroleo WTI (US Oil)",
       "classe": "Commodity",
       "lado": "venda",
-      "close": 144.35,
+      "close": 145.41,
       "stop": 154.49,
-      "r_pct": 7.02,
+      "r_pct": 6.24,
       "forming": true,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 0,
-      "vol_fin_mi": 806.3,
+      "vol_fin_mi": 839.7,
       "tv": "https://www.tradingview.com/chart/?symbol=USO",
-      "vol_qtd": 7636293.0,
-      "var_dia_pct": -5.79,
-      "mom1": -0.0,
-      "mom3": 21.0,
-      "mom6": 8.0,
-      "alvo_2r": 124.07,
+      "vol_qtd": 11731512.0,
+      "var_dia_pct": -5.1,
+      "mom1": 0.0,
+      "mom3": 22.0,
+      "mom6": 9.0,
+      "alvo_2r": 127.25,
       "acima_ema70": false,
-      "ema70": 146.8326,
+      "ema70": 146.8618,
       "ema70_incl": "sobe",
-      "quality": 67.1,
+      "quality": 65.3,
       "didi_dist": 1.437,
-      "pos_range": 0.121,
-      "dist_max_pct": 0.96,
+      "pos_range": 0.212,
+      "dist_max_pct": 1.68,
       "adx_var_pct": -6.3,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 74.7,
+      "bb_abre_pct": 68.0,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -850,7 +850,7 @@
         168.83,
         156.87,
         158.17,
-        144.35
+        145.41
       ],
       "o": [
         154.78,
@@ -1018,7 +1018,7 @@
         167.8633,
         164.63,
         161.29,
-        153.13
+        153.4833
       ],
       "ma8": [
         144.285,
@@ -1060,7 +1060,7 @@
         165.6925,
         165.3263,
         164.7838,
-        161.6363
+        161.7688
       ],
       "ma20": [
         135.6185,
@@ -1102,7 +1102,7 @@
         157.615,
         158.259,
         158.922,
-        158.944
+        158.997
       ],
       "didi_curta": [
         4.9728,
@@ -1144,7 +1144,7 @@
         1.3102,
         -0.4211,
         -2.1202,
-        -5.2626
+        -5.1218
       ],
       "didi_longa": [
         -6.0065,
@@ -1186,7 +1186,7 @@
         -4.875,
         -4.2747,
         -3.5572,
-        -1.6656
+        -1.7134
       ],
       "adx": [
         35.4449,
@@ -1354,7 +1354,7 @@
         172.4538,
         173.6773,
         174.4339,
-        178.1758
+        177.6804
       ],
       "bb_mid": [
         144.285,
@@ -1396,7 +1396,7 @@
         165.6925,
         165.3263,
         164.7838,
-        161.6363
+        161.7688
       ],
       "bb_inf": [
         129.6091,
@@ -1438,7 +1438,7 @@
         158.9312,
         156.9752,
         155.1336,
-        145.0967
+        145.8572
       ],
       "atrasado": false
     },
@@ -1449,35 +1449,35 @@
       "par": "Gasolina (US Gasoline)",
       "classe": "Commodity",
       "lado": "venda",
-      "close": 125.89,
+      "close": 126.86,
       "stop": 133.64,
-      "r_pct": 6.16,
+      "r_pct": 5.34,
       "forming": true,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 2,
-      "vol_fin_mi": 6.3,
+      "vol_fin_mi": 6.5,
       "tv": "https://www.tradingview.com/chart/?symbol=UGA",
-      "vol_qtd": 26273.0,
-      "var_dia_pct": -5.09,
+      "vol_qtd": 49165.0,
+      "var_dia_pct": -4.36,
       "mom1": -15.0,
-      "mom3": 13.0,
-      "mom6": 10.0,
-      "alvo_2r": 110.39,
+      "mom3": 14.0,
+      "mom6": 11.0,
+      "alvo_2r": 113.3,
       "acima_ema70": false,
-      "ema70": 134.7657,
+      "ema70": 134.7928,
       "ema70_incl": "sobe",
-      "quality": 89.5,
+      "quality": 84.8,
       "didi_dist": 0.542,
-      "pos_range": 0.023,
-      "dist_max_pct": 0.14,
+      "pos_range": 0.145,
+      "dist_max_pct": 0.91,
       "adx_var_pct": 65.0,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 61.1,
+      "bb_abre_pct": 54.5,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -1569,7 +1569,7 @@
         144.6,
         133.76,
         136.5,
-        125.8901
+        126.86
       ],
       "o": [
         138.05,
@@ -1737,7 +1737,7 @@
         143.8333,
         140.69,
         138.2867,
-        132.05
+        132.3733
       ],
       "ma8": [
         133.19,
@@ -1779,7 +1779,7 @@
         143.2725,
         142.3588,
         141.6225,
-        139.2438
+        139.365
       ],
       "ma20": [
         127.104,
@@ -1821,7 +1821,7 @@
         144.6095,
         144.0385,
         143.418,
-        142.4235
+        142.472
       ],
       "didi_curta": [
         2.9281,
@@ -1863,7 +1863,7 @@
         0.3914,
         -1.1722,
         -2.3554,
-        -5.1663
+        -5.0168
       ],
       "didi_longa": [
         -4.5694,
@@ -1905,7 +1905,7 @@
         0.9332,
         1.1799,
         1.2678,
-        2.2836
+        2.2294
       ],
       "adx": [
         44.7281,
@@ -2073,7 +2073,7 @@
         146.4742,
         149.7998,
         150.1375,
-        152.7293
+        152.3082
       ],
       "bb_mid": [
         133.19,
@@ -2115,7 +2115,7 @@
         143.2725,
         142.3588,
         141.6225,
-        139.2438
+        139.365
       ],
       "bb_inf": [
         125.1382,
@@ -2157,7 +2157,7 @@
         140.0708,
         134.9177,
         133.1075,
-        125.7583
+        126.4218
       ],
       "atrasado": true
     },
@@ -2168,35 +2168,35 @@
       "par": "Cesta de Commodities (Invesco DB)",
       "classe": "Commodity",
       "lado": "venda",
-      "close": 31.2,
+      "close": 31.29,
       "stop": 32.18,
-      "r_pct": 3.14,
+      "r_pct": 2.84,
       "forming": true,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 2,
-      "vol_fin_mi": 22.7,
+      "vol_fin_mi": 24.1,
       "tv": "https://www.tradingview.com/chart/?symbol=DBC",
-      "vol_qtd": 1106842.0,
-      "var_dia_pct": -2.77,
-      "mom1": -5.0,
+      "vol_qtd": 1919604.0,
+      "var_dia_pct": -2.49,
+      "mom1": -4.0,
       "mom3": 8.0,
-      "mom6": 3.0,
-      "alvo_2r": 29.24,
+      "mom6": 4.0,
+      "alvo_2r": 29.51,
       "acima_ema70": false,
-      "ema70": 32.0294,
+      "ema70": 32.0319,
       "ema70_incl": "sobe",
-      "quality": 82.3,
+      "quality": 79.0,
       "didi_dist": 0.349,
-      "pos_range": 0.121,
-      "dist_max_pct": 0.43,
+      "pos_range": 0.202,
+      "dist_max_pct": 0.72,
       "adx_var_pct": 39.8,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 52.3,
+      "bb_abre_pct": 48.2,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -2288,7 +2288,7 @@
         33.61,
         32.46,
         32.44,
-        31.2
+        31.29
       ],
       "o": [
         33.19,
@@ -2456,7 +2456,7 @@
         33.7067,
         33.2633,
         32.8367,
-        32.0333
+        32.0633
       ],
       "ma8": [
         32.2362,
@@ -2498,7 +2498,7 @@
         33.7087,
         33.5787,
         33.4375,
-        33.075
+        33.0862
       ],
       "ma20": [
         31.268,
@@ -2540,7 +2540,7 @@
         33.377,
         33.3805,
         33.368,
-        33.3025
+        33.307
       ],
       "didi_curta": [
         2.2348,
@@ -2582,7 +2582,7 @@
         -0.0062,
         -0.9393,
         -1.7969,
-        -3.1494
+        -3.0917
       ],
       "didi_longa": [
         -3.0036,
@@ -2624,7 +2624,7 @@
         -0.9842,
         -0.5904,
         -0.2078,
-        0.6878
+        0.6672
       ],
       "adx": [
         40.3305,
@@ -2792,7 +2792,7 @@
         34.0862,
         34.5438,
         34.6949,
-        34.9698
+        34.9306
       ],
       "bb_mid": [
         32.2362,
@@ -2834,7 +2834,7 @@
         33.7087,
         33.5787,
         33.4375,
-        33.075
+        33.0862
       ],
       "bb_inf": [
         30.8076,
@@ -2876,7 +2876,7 @@
         33.3313,
         32.6137,
         32.1801,
-        31.1802
+        31.2419
       ],
       "atrasado": true
     },
@@ -2887,35 +2887,35 @@
       "par": "Cesta Ampla (iShares S&P GSCI)",
       "classe": "Commodity",
       "lado": "venda",
-      "close": 34.07,
+      "close": 34.2,
       "stop": 35.25,
-      "r_pct": 3.46,
+      "r_pct": 3.07,
       "forming": true,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": 2,
-      "vol_fin_mi": 66.3,
+      "vol_fin_mi": 67.9,
       "tv": "https://www.tradingview.com/chart/?symbol=GSG",
-      "vol_qtd": 683443.0,
-      "var_dia_pct": -2.96,
-      "mom1": -5.0,
+      "vol_qtd": 1572315.0,
+      "var_dia_pct": -2.59,
+      "mom1": -4.0,
       "mom3": 10.0,
       "mom6": 4.0,
-      "alvo_2r": 31.71,
+      "alvo_2r": 32.1,
       "acima_ema70": false,
-      "ema70": 35.0529,
+      "ema70": 35.0564,
       "ema70_incl": "sobe",
-      "quality": 81.8,
+      "quality": 77.8,
       "didi_dist": 0.334,
-      "pos_range": 0.113,
-      "dist_max_pct": 0.44,
+      "pos_range": 0.211,
+      "dist_max_pct": 0.82,
       "adx_var_pct": 47.0,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 50.5,
+      "bb_abre_pct": 45.6,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -3007,7 +3007,7 @@
         37.02,
         35.56,
         35.66,
-        34.07
+        34.2
       ],
       "o": [
         36.39,
@@ -3175,7 +3175,7 @@
         37.0933,
         36.5633,
         36.08,
-        35.0967
+        35.14
       ],
       "ma8": [
         35.2212,
@@ -3217,7 +3217,7 @@
         37.1338,
         36.9788,
         36.8125,
-        36.3588
+        36.375
       ],
       "ma20": [
         33.9725,
@@ -3259,7 +3259,7 @@
         36.6815,
         36.687,
         36.681,
-        36.6025
+        36.609
       ],
       "didi_curta": [
         2.4098,
@@ -3301,7 +3301,7 @@
         -0.1088,
         -1.1234,
         -1.9898,
-        -3.4712
+        -3.3952
       ],
       "didi_longa": [
         -3.5454,
@@ -3343,7 +3343,7 @@
         -1.2179,
         -0.789,
         -0.3572,
-        0.6704
+        0.6433
       ],
       "adx": [
         32.5384,
@@ -3511,7 +3511,7 @@
         37.6779,
         38.2189,
         38.3634,
-        38.6635
+        38.6066
       ],
       "bb_mid": [
         35.2212,
@@ -3553,7 +3553,7 @@
         37.1338,
         36.9788,
         36.8125,
-        36.3588
+        36.375
       ],
       "bb_inf": [
         33.4786,
@@ -3595,7 +3595,7 @@
         36.5896,
         35.7386,
         35.2616,
-        34.054
+        34.1434
       ],
       "atrasado": true
     },
@@ -3608,7 +3608,7 @@
       "lado": "venda",
       "close": 0.82,
       "stop": 0.82,
-      "r_pct": 0.55,
+      "r_pct": 0.5,
       "forming": true,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
@@ -3618,23 +3618,23 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=USDCHF=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.43,
+      "var_dia_pct": -0.38,
       "mom1": -2.0,
       "mom3": 1.0,
       "mom6": 5.0,
       "alvo_2r": 0.81,
       "acima_ema70": false,
-      "ema70": 0.8192,
+      "ema70": 0.8193,
       "ema70_incl": "lado",
-      "quality": 64.4,
+      "quality": 62.4,
       "didi_dist": 0.051,
-      "pos_range": 0.467,
-      "dist_max_pct": 0.48,
+      "pos_range": 0.513,
+      "dist_max_pct": 0.53,
       "adx_var_pct": 41.1,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 17.4,
+      "bb_abre_pct": 15.0,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -3726,7 +3726,7 @@
         0.8236,
         0.8248,
         0.8184,
-        0.8166
+        0.817
       ],
       "o": [
         0.81,
@@ -3894,7 +3894,7 @@
         0.8268,
         0.8254,
         0.8223,
-        0.8199
+        0.8201
       ],
       "ma8": [
         0.8098,
@@ -3936,7 +3936,7 @@
         0.8251,
         0.825,
         0.8243,
-        0.8239
+        0.824
       ],
       "ma20": [
         0.8074,
@@ -4020,7 +4020,7 @@
         0.1987,
         0.0489,
         -0.2523,
-        -0.4863
+        -0.4767
       ],
       "didi_longa": [
         -0.3006,
@@ -4062,7 +4062,7 @@
         0.3671,
         0.36,
         0.3681,
-        0.322
+        0.3185
       ],
       "adx": [
         14.9349,
@@ -4230,7 +4230,7 @@
         0.8311,
         0.8309,
         0.8319,
-        0.8328
+        0.8327
       ],
       "bb_mid": [
         0.8098,
@@ -4272,7 +4272,7 @@
         0.8251,
         0.825,
         0.8243,
-        0.8239
+        0.824
       ],
       "bb_inf": [
         0.8062,
@@ -4314,7 +4314,7 @@
         0.8192,
         0.8191,
         0.8168,
-        0.8151
+        0.8153
       ],
       "atrasado": true
     }
