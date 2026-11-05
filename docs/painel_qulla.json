@@ -1,16 +1,16 @@
 {
   "gerado": "2026-11-05",
-  "n": 2,
+  "n": 1,
   "ativos": [
     {
       "entrada": 82.95,
       "stop": 80.0,
       "alvo_3r": 91.8,
-      "preco": 83.5,
+      "preco": 82.43,
       "r_pct": 3.56,
-      "mom1": 33.0,
-      "mom3": 5.0,
-      "mom6": 15.0,
+      "mom1": 31.0,
+      "mom3": 3.0,
+      "mom6": 13.0,
       "consol_dias": 5,
       "rompendo": true,
       "acima_ema20": true,
@@ -19,24 +19,6 @@
       "ticker": "TRU",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=TRU"
-    },
-    {
-      "entrada": 56.0,
-      "stop": 52.27,
-      "alvo_3r": 67.19,
-      "preco": 52.27,
-      "r_pct": 6.66,
-      "mom1": 31.0,
-      "mom3": 37.0,
-      "mom6": 29.0,
-      "consol_dias": 5,
-      "rompendo": false,
-      "acima_ema20": true,
-      "puro": true,
-      "forming": true,
-      "ticker": "RRC",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=RRC"
     }
   ]
 }
