@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-04",
-  "captura": "04/11/2026 20:01",
+  "gerado": "2026-11-05",
+  "captura": "05/11/2026 09:21",
   "timeframe": "1d",
   "n": 4,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 93.72,
       "stop": 86.22,
       "r_pct": 8.0,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": null,
       "vol_fin_mi": 380.2,
       "tv": "https://www.tradingview.com/chart/?symbol=XRT",
-      "vol_qtd": 8173182.0,
+      "vol_qtd": 8173600.0,
       "var_dia_pct": 3.4,
       "mom1": 13.0,
       "mom3": 5.0,
@@ -33,8 +33,8 @@
       "ema70_incl": "sobe",
       "quality": 70.1,
       "didi_dist": 2.163,
-      "pos_range": 0.926,
-      "dist_max_pct": 0.28,
+      "pos_range": 0.924,
+      "dist_max_pct": 0.29,
       "adx_var_pct": 12.1,
       "confluencia": false,
       "bb_primeira": true,
@@ -215,7 +215,7 @@
         89.94,
         91.07,
         90.57,
-        93.985
+        93.99
       ],
       "l": [
         82.9447,
@@ -257,7 +257,7 @@
         88.08,
         89.36,
         88.75,
-        90.415
+        90.42
       ],
       "ma3": [
         84.365,
@@ -509,7 +509,7 @@
         45.6262,
         48.2369,
         48.5233,
-        51.1268
+        51.129
       ],
       "dip": [
         10.895,
@@ -551,7 +551,7 @@
         35.9081,
         37.8916,
         33.1168,
-        42.6434
+        42.6595
       ],
       "dim": [
         40.8644,
@@ -593,7 +593,7 @@
         9.1036,
         7.6206,
         10.8838,
-        7.7175
+        7.7153
       ],
       "bb_sup": [
         88.1685,
@@ -733,15 +733,15 @@
       "close": 91.94,
       "stop": 86.36,
       "r_pct": 6.07,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": 0,
-      "vol_fin_mi": 1489.4,
+      "vol_fin_mi": 1489.5,
       "tv": "https://www.tradingview.com/chart/?symbol=XLP",
-      "vol_qtd": 23796927.0,
+      "vol_qtd": 23831300.0,
       "var_dia_pct": 1.57,
       "mom1": 12.0,
       "mom3": 9.0,
@@ -1452,15 +1452,15 @@
       "close": 24.32,
       "stop": 22.54,
       "r_pct": 7.32,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 428.0,
+      "vol_fin_mi": 428.1,
       "tv": "https://www.tradingview.com/chart/?symbol=KWEB",
-      "vol_qtd": 33931874.0,
+      "vol_qtd": 33989700.0,
       "var_dia_pct": 1.04,
       "mom1": -1.0,
       "mom3": -14.0,
@@ -2171,15 +2171,15 @@
       "close": 122.33,
       "stop": 112.83,
       "r_pct": 7.77,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-04",
       "ult_candle": "2026-11-04",
       "timeframe": "1d",
       "didi_ago": 5,
       "adx_ago": 2,
-      "vol_fin_mi": 936.7,
+      "vol_fin_mi": 937.3,
       "tv": "https://www.tradingview.com/chart/?symbol=XLY",
-      "vol_qtd": 18206782.0,
+      "vol_qtd": 18310800.0,
       "var_dia_pct": 2.13,
       "mom1": 9.0,
       "mom3": 4.0,
@@ -2190,7 +2190,7 @@
       "ema70_incl": "sobe",
       "quality": 69.8,
       "didi_dist": 1.845,
-      "pos_range": 0.82,
+      "pos_range": 0.822,
       "dist_max_pct": 0.48,
       "adx_var_pct": 42.3,
       "confluencia": false,
@@ -2372,7 +2372,7 @@
         115.83,
         119.21,
         118.39,
-        122.9246
+        122.92
       ],
       "l": [
         110.776,
@@ -2414,7 +2414,7 @@
         114.47,
         116.81,
         116.83,
-        119.62
+        119.61
       ],
       "ma3": [
         112.5554,
@@ -2666,7 +2666,7 @@
         26.5191,
         29.8615,
         32.7862,
-        37.7465
+        37.745
       ],
       "dip": [
         18.272,
@@ -2708,7 +2708,7 @@
         27.2989,
         42.5794,
         38.1297,
-        51.0015
+        50.9894
       ],
       "dim": [
         48.0621,
@@ -2750,7 +2750,7 @@
         17.3307,
         12.9859,
         11.6288,
-        8.1416
+        8.1436
       ],
       "bb_sup": [
         117.5468,

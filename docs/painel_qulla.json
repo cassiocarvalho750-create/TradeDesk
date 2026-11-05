@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-11-04",
+  "gerado": "2026-11-05",
   "n": 5,
   "ativos": [
     {
@@ -15,7 +15,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MRNA",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MRNA"
@@ -33,7 +33,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "PCOR",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PCOR"
@@ -51,7 +51,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "HAS",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HAS"
@@ -69,7 +69,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "CCI",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CCI"
@@ -87,7 +87,7 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "LQDA",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=LQDA"

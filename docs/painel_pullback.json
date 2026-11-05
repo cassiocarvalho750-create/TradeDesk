@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-04",
-  "gerado_utc": "2026-11-04 23:04 UTC",
+  "gerado": "2026-11-05",
+  "gerado_utc": "2026-11-05 12:23 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
@@ -12,7 +12,7 @@
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 167563.47,
+      "close": 167564.0,
       "mm200": 181473.68,
       "validado": false
     }
@@ -26,9 +26,9 @@
   "ativos": [
     {
       "data_sinal": "2026-11-04",
-      "entrada": 312.87,
+      "entrada": 312.89,
       "stop": 299.02,
-      "alvo_3r": 354.42,
+      "alvo_3r": 354.5,
       "r_pct": 4.43,
       "preco": 310.63,
       "ema20": 306.32,
@@ -89,10 +89,10 @@
     },
     {
       "data_sinal": "2026-11-04",
-      "entrada": 270.84,
+      "entrada": 271.9,
       "stop": 250.73,
-      "alvo_3r": 331.17,
-      "r_pct": 7.43,
+      "alvo_3r": 335.41,
+      "r_pct": 7.79,
       "preco": 270.08,
       "ema20": 251.21,
       "mom3": 10.0,
@@ -132,9 +132,9 @@
     {
       "data_sinal": "2026-11-04",
       "entrada": 86.45,
-      "stop": 83.25,
-      "alvo_3r": 96.05,
-      "r_pct": 3.7,
+      "stop": 83.24,
+      "alvo_3r": 96.08,
+      "r_pct": 3.71,
       "preco": 86.21,
       "ema20": 83.93,
       "mom3": 5.0,
@@ -215,10 +215,10 @@
     },
     {
       "data_sinal": "2026-11-04",
-      "entrada": 37.32,
+      "entrada": 37.33,
       "stop": 34.37,
-      "alvo_3r": 46.17,
-      "r_pct": 7.9,
+      "alvo_3r": 46.21,
+      "r_pct": 7.93,
       "preco": 36.79,
       "ema20": 34.51,
       "mom3": 22.0,
@@ -236,10 +236,10 @@
     },
     {
       "data_sinal": "2026-11-04",
-      "entrada": 127.93,
+      "entrada": 128.0,
       "stop": 110.0,
-      "alvo_3r": 181.72,
-      "r_pct": 14.02,
+      "alvo_3r": 182.0,
+      "r_pct": 14.06,
       "preco": 123.56,
       "ema20": 112.34,
       "mom3": 19.0,
