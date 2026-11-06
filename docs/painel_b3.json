@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-06",
-  "captura": "06/11/2026 13:07",
+  "captura": "06/11/2026 14:15",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,35 +11,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 5.0,
+      "close": 5.01,
       "stop": 4.34,
-      "r_pct": 13.2,
+      "r_pct": 13.37,
       "forming": true,
       "date": "2026-11-06",
       "ult_candle": "2026-11-06",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 2,
-      "vol_fin_mi": 44.7,
+      "vol_fin_mi": 44.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CMIN3",
-      "vol_qtd": 2406000.0,
-      "var_dia_pct": 1.63,
+      "vol_qtd": 3083300.0,
+      "var_dia_pct": 1.83,
       "mom1": 1.0,
       "mom3": -13.0,
       "mom6": 4.0,
-      "alvo_2r": 6.32,
+      "alvo_2r": 6.35,
       "acima_ema70": false,
-      "ema70": 5.1962,
+      "ema70": 5.1965,
       "ema70_incl": "desce",
-      "quality": 62.7,
+      "quality": 64.1,
       "didi_dist": 0.661,
-      "pos_range": 0.824,
-      "dist_max_pct": 0.6,
+      "pos_range": 0.882,
+      "dist_max_pct": 0.4,
       "adx_var_pct": 30.9,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
-      "bb_abre_pct": 5.2,
+      "bb_abre_pct": 5.6,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         4.61,
         5.24,
         4.9,
-        5.0
+        5.01
       ],
       "o": [
         6.85,
@@ -299,7 +299,7 @@
         4.6567,
         4.9033,
         4.9167,
-        5.0467
+        5.05
       ],
       "ma8": [
         6.54,
@@ -341,7 +341,7 @@
         4.7012,
         4.7387,
         4.7275,
-        4.7675
+        4.7688
       ],
       "ma20": [
         6.11,
@@ -383,7 +383,7 @@
         4.862,
         4.872,
         4.87,
-        4.8715
+        4.872
       ],
       "didi_curta": [
         5.3517,
@@ -425,7 +425,7 @@
         -0.9483,
         3.4731,
         4.0014,
-        5.8556
+        5.8978
       ],
       "didi_longa": [
         -6.5749,
@@ -467,7 +467,7 @@
         3.4193,
         2.8119,
         3.0143,
-        2.1814
+        2.1651
       ],
       "adx": [
         54.8796,
@@ -635,7 +635,7 @@
         5.1071,
         5.2787,
         5.2469,
-        5.3185
+        5.3222
       ],
       "bb_mid": [
         6.54,
@@ -677,7 +677,7 @@
         4.7012,
         4.7387,
         4.7275,
-        4.7675
+        4.7688
       ],
       "bb_inf": [
         5.7677,
@@ -719,7 +719,7 @@
         4.2954,
         4.1988,
         4.2081,
-        4.2165
+        4.2153
       ],
       "atrasado": false
     }
