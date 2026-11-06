@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-06",
-  "captura": "06/11/2026 14:15",
+  "captura": "06/11/2026 15:56",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.62,
       "stop": 1.58,
-      "r_pct": 2.8,
+      "r_pct": 2.78,
       "forming": true,
       "date": "2026-11-06",
       "ult_candle": "2026-11-06",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURAUD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.3,
+      "var_dia_pct": 0.28,
       "mom1": 1.0,
       "mom3": -1.0,
       "mom6": 0.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.6148,
       "ema70_incl": "lado",
-      "quality": 77.0,
+      "quality": 76.3,
       "didi_dist": 0.145,
-      "pos_range": 0.566,
-      "dist_max_pct": 0.34,
+      "pos_range": 0.546,
+      "dist_max_pct": 0.35,
       "adx_var_pct": 22.7,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 46.3,
+      "bb_abre_pct": 45.6,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         1.5988,
         1.6082,
         1.604,
-        1.6228
+        1.6229
       ],
       "o": [
         1.6211,
@@ -299,7 +299,7 @@
         1.5925,
         1.5981,
         1.6037,
-        1.6116
+        1.6117
       ],
       "ma8": [
         1.6148,
@@ -425,7 +425,7 @@
         0.1021,
         0.3789,
         0.6634,
-        0.9193
+        0.9206
       ],
       "didi_longa": [
         0.4937,
@@ -467,7 +467,7 @@
         0.6122,
         0.5236,
         0.4438,
-        0.236
+        0.2356
       ],
       "adx": [
         24.5204,
@@ -635,7 +635,7 @@
         1.6045,
         1.6099,
         1.6128,
-        1.6256
+        1.6257
       ],
       "bb_mid": [
         1.6148,
@@ -730,9 +730,9 @@
       "par": "GBP/AUD — Libra / Dólar Australiano",
       "classe": "Forex",
       "lado": "compra",
-      "close": 1.95,
+      "close": 1.94,
       "stop": 1.89,
-      "r_pct": 3.1,
+      "r_pct": 3.03,
       "forming": true,
       "date": "2026-11-06",
       "ult_candle": "2026-11-06",
@@ -742,23 +742,23 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPAUD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.34,
-      "mom1": 3.0,
+      "var_dia_pct": 0.26,
+      "mom1": 2.0,
       "mom3": 2.0,
       "mom6": 4.0,
-      "alvo_2r": 2.07,
+      "alvo_2r": 2.06,
       "acima_ema70": true,
       "ema70": 1.9026,
       "ema70_incl": "sobe",
-      "quality": 69.4,
+      "quality": 66.3,
       "didi_dist": 0.158,
-      "pos_range": 0.563,
-      "dist_max_pct": 0.34,
+      "pos_range": 0.463,
+      "dist_max_pct": 0.41,
       "adx_var_pct": 46.8,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 36.7,
+      "bb_abre_pct": 34.2,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -850,7 +850,7 @@
         1.9155,
         1.9278,
         1.9239,
-        1.9461
+        1.9447
       ],
       "o": [
         1.8911,
@@ -1018,7 +1018,7 @@
         1.9079,
         1.9159,
         1.9224,
-        1.9326
+        1.9321
       ],
       "ma8": [
         1.8803,
@@ -1060,7 +1060,7 @@
         1.9022,
         1.9045,
         1.9072,
-        1.9128
+        1.9126
       ],
       "ma20": [
         1.8927,
@@ -1102,7 +1102,7 @@
         1.9028,
         1.9042,
         1.9055,
-        1.9077
+        1.9076
       ],
       "didi_curta": [
         0.2476,
@@ -1144,7 +1144,7 @@
         0.2965,
         0.595,
         0.8003,
-        1.0364
+        1.0205
       ],
       "didi_longa": [
         0.6573,
@@ -1186,7 +1186,7 @@
         0.029,
         -0.0201,
         -0.0896,
-        -0.2663
+        -0.2605
       ],
       "adx": [
         28.65,
@@ -1354,7 +1354,7 @@
         1.9194,
         1.9294,
         1.9354,
-        1.9515
+        1.9506
       ],
       "bb_mid": [
         1.8803,
@@ -1396,7 +1396,7 @@
         1.9022,
         1.9045,
         1.9072,
-        1.9128
+        1.9126
       ],
       "bb_inf": [
         1.8683,
@@ -1438,7 +1438,7 @@
         1.885,
         1.8797,
         1.8789,
-        1.8741
+        1.8746
       ],
       "atrasado": true
     }

@@ -1,12 +1,30 @@
 {
   "gerado": "2026-11-06",
-  "n": 1,
+  "n": 2,
   "ativos": [
+    {
+      "entrada": 124.0,
+      "stop": 117.13,
+      "alvo_3r": 144.61,
+      "preco": 120.25,
+      "r_pct": 5.54,
+      "mom1": 30.0,
+      "mom3": 28.0,
+      "mom6": 25.0,
+      "consol_dias": 6,
+      "rompendo": false,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "HAS",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=HAS"
+    },
     {
       "entrada": 93.5,
       "stop": 88.82,
       "alvo_3r": 107.54,
-      "preco": 90.24,
+      "preco": 90.28,
       "r_pct": 5.01,
       "mom1": 31.0,
       "mom3": 24.0,
