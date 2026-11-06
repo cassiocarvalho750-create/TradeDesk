@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-06",
-  "captura": "06/11/2026 12:28",
+  "captura": "06/11/2026 13:07",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.62,
       "stop": 1.58,
-      "r_pct": 2.64,
+      "r_pct": 2.68,
       "forming": true,
       "date": "2026-11-06",
       "ult_candle": "2026-11-06",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURAUD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.13,
+      "var_dia_pct": 0.18,
       "mom1": 1.0,
       "mom3": -1.0,
       "mom6": 0.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.6147,
       "ema70_incl": "lado",
-      "quality": 70.0,
+      "quality": 72.0,
       "didi_dist": 0.145,
-      "pos_range": 0.358,
-      "dist_max_pct": 0.5,
+      "pos_range": 0.418,
+      "dist_max_pct": 0.45,
       "adx_var_pct": 22.7,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 39.5,
+      "bb_abre_pct": 41.4,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         1.5988,
         1.6082,
         1.604,
-        1.6207
+        1.6212
       ],
       "o": [
         1.6211,
@@ -299,7 +299,7 @@
         1.5925,
         1.5981,
         1.6037,
-        1.6109
+        1.6111
       ],
       "ma8": [
         1.6148,
@@ -341,7 +341,7 @@
         1.5908,
         1.5921,
         1.5931,
-        1.5967
+        1.5968
       ],
       "ma20": [
         1.6227,
@@ -383,7 +383,7 @@
         1.6006,
         1.6004,
         1.6002,
-        1.6006
+        1.6007
       ],
       "didi_curta": [
         0.207,
@@ -425,7 +425,7 @@
         0.1021,
         0.3789,
         0.6634,
-        0.8918
+        0.8993
       ],
       "didi_longa": [
         0.4937,
@@ -467,7 +467,7 @@
         0.6122,
         0.5236,
         0.4438,
-        0.246
+        0.2433
       ],
       "adx": [
         24.5204,
@@ -635,7 +635,7 @@
         1.6045,
         1.6099,
         1.6128,
-        1.6243
+        1.6247
       ],
       "bb_mid": [
         1.6148,
@@ -677,7 +677,7 @@
         1.5908,
         1.5921,
         1.5931,
-        1.5967
+        1.5968
       ],
       "bb_inf": [
         1.605,
@@ -719,7 +719,7 @@
         1.5772,
         1.5742,
         1.5734,
-        1.5691
+        1.5689
       ],
       "atrasado": true
     },
@@ -732,7 +732,7 @@
       "lado": "compra",
       "close": 1.94,
       "stop": 1.89,
-      "r_pct": 2.91,
+      "r_pct": 2.94,
       "forming": true,
       "date": "2026-11-06",
       "ult_candle": "2026-11-06",
@@ -742,7 +742,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPAUD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.14,
+      "var_dia_pct": 0.17,
       "mom1": 2.0,
       "mom3": 1.0,
       "mom6": 4.0,
@@ -750,15 +750,15 @@
       "acima_ema70": true,
       "ema70": 1.9025,
       "ema70_incl": "sobe",
-      "quality": 61.5,
+      "quality": 62.7,
       "didi_dist": 0.158,
-      "pos_range": 0.305,
-      "dist_max_pct": 0.54,
+      "pos_range": 0.345,
+      "dist_max_pct": 0.5,
       "adx_var_pct": 46.8,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 30.2,
+      "bb_abre_pct": 31.2,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -850,7 +850,7 @@
         1.9155,
         1.9278,
         1.9239,
-        1.9425
+        1.9429
       ],
       "o": [
         1.8911,
@@ -1018,7 +1018,7 @@
         1.9079,
         1.9159,
         1.9224,
-        1.9314
+        1.9316
       ],
       "ma8": [
         1.8803,
@@ -1102,7 +1102,7 @@
         1.9028,
         1.9042,
         1.9055,
-        1.9075
+        1.9076
       ],
       "didi_curta": [
         0.2476,
@@ -1144,7 +1144,7 @@
         0.2965,
         0.595,
         0.8003,
-        0.9969
+        1.0012
       ],
       "didi_longa": [
         0.6573,
@@ -1186,7 +1186,7 @@
         0.029,
         -0.0201,
         -0.0896,
-        -0.252
+        -0.2536
       ],
       "adx": [
         28.65,
@@ -1354,7 +1354,7 @@
         1.9194,
         1.9294,
         1.9354,
-        1.9493
+        1.9496
       ],
       "bb_mid": [
         1.8803,
@@ -1438,7 +1438,7 @@
         1.885,
         1.8797,
         1.8789,
-        1.8754
+        1.8752
       ],
       "atrasado": true
     }

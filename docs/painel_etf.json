@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-06",
-  "captura": "06/11/2026 12:28",
+  "captura": "06/11/2026 13:07",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,35 +11,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 24.97,
+      "close": 24.96,
       "stop": 22.54,
-      "r_pct": 9.73,
+      "r_pct": 9.7,
       "forming": true,
       "date": "2026-11-06",
       "ult_candle": "2026-11-06",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": 2,
-      "vol_fin_mi": 477.1,
+      "vol_fin_mi": 479.9,
       "tv": "https://www.tradingview.com/chart/?symbol=KWEB",
-      "vol_qtd": 9236000.0,
-      "var_dia_pct": 1.63,
+      "vol_qtd": 11592690.0,
+      "var_dia_pct": 1.59,
       "mom1": 4.0,
       "mom3": -14.0,
-      "mom6": -15.0,
-      "alvo_2r": 29.83,
-      "acima_ema70": true,
-      "ema70": 24.9656,
+      "mom6": -16.0,
+      "alvo_2r": 29.81,
+      "acima_ema70": false,
+      "ema70": 24.9654,
       "ema70_incl": "desce",
-      "quality": 66.4,
+      "quality": 65.9,
       "didi_dist": 0.747,
-      "pos_range": 0.891,
-      "dist_max_pct": 0.22,
+      "pos_range": 0.875,
+      "dist_max_pct": 0.25,
       "adx_var_pct": 12.3,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 21.5,
+      "bb_abre_pct": 21.2,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         23.28,
         24.32,
         24.76,
-        24.975
+        24.9617
       ],
       "o": [
         24.61,
@@ -299,7 +299,7 @@
         23.1233,
         23.65,
         24.12,
-        24.685
+        24.6806
       ],
       "ma8": [
         25.15,
@@ -341,7 +341,7 @@
         23.0775,
         23.225,
         23.42,
-        23.6506
+        23.649
       ],
       "ma20": [
         25.918,
@@ -383,7 +383,7 @@
         23.824,
         23.8235,
         23.8605,
-        23.8628
+        23.8621
       ],
       "didi_curta": [
         -2.2266,
@@ -425,7 +425,7 @@
         0.1986,
         1.8299,
         2.9889,
-        4.3736
+        4.3622
       ],
       "didi_longa": [
         3.0537,
@@ -467,7 +467,7 @@
         3.2348,
         2.577,
         1.8809,
-        0.8969
+        0.9012
       ],
       "adx": [
         38.5026,
@@ -635,7 +635,7 @@
         23.519,
         24.2126,
         24.8855,
-        25.4501
+        25.4429
       ],
       "bb_mid": [
         25.15,
@@ -677,7 +677,7 @@
         23.0775,
         23.225,
         23.42,
-        23.6506
+        23.649
       ],
       "bb_inf": [
         23.972,
@@ -719,7 +719,7 @@
         22.636,
         22.2374,
         21.9545,
-        21.8511
+        21.855
       ],
       "atrasado": true
     }
