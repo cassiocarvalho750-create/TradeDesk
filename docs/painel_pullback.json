@@ -1,19 +1,19 @@
 {
-  "gerado": "2026-11-05",
-  "gerado_utc": "2026-11-05 23:01 UTC",
+  "gerado": "2026-11-06",
+  "gerado_utc": "2026-11-06 15:05 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 647.05,
-      "mm200": 679.61,
+      "close": 660.7,
+      "mm200": 679.82,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 166191.45,
-      "mm200": 181480.64,
+      "close": 167918.48,
+      "mm200": 181495.99,
       "validado": false
     }
   },
@@ -26,16 +26,16 @@
   "ativos": [
     {
       "data_sinal": "2026-11-05",
-      "entrada": 159.47,
+      "entrada": 159.62,
       "stop": 148.88,
-      "alvo_3r": 191.24,
-      "r_pct": 6.64,
-      "preco": 156.35,
+      "alvo_3r": 191.84,
+      "r_pct": 6.73,
+      "preco": 153.7,
       "ema20": 150.18,
       "mom3": 8.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -43,7 +43,7 @@
       "ticker": "AFG",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AFG",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-05",
@@ -51,12 +51,12 @@
       "stop": 83.24,
       "alvo_3r": 108.96,
       "r_pct": 7.17,
-      "preco": 87.41,
+      "preco": 86.77,
       "ema20": 84.26,
       "mom3": 6.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -64,7 +64,7 @@
       "ticker": "EVRG",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=EVRG",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-05",
@@ -72,20 +72,20 @@
       "stop": 34.91,
       "alvo_3r": 40.19,
       "r_pct": 3.64,
-      "preco": 36.0,
+      "preco": 36.09,
       "ema20": 35.08,
       "mom3": 2.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "abriu acima",
       "stop_tocado": false,
       "mercado_ok": false,
       "indice": "QQQ",
       "ticker": "PPL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=PPL",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-05",
@@ -93,12 +93,12 @@
       "stop": 160.8,
       "alvo_3r": 257.72,
       "r_pct": 13.1,
-      "preco": 180.26,
+      "preco": 174.2,
       "ema20": 161.39,
       "mom3": 16.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -106,7 +106,7 @@
       "ticker": "JKHY",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=JKHY",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-05",
@@ -114,12 +114,12 @@
       "stop": 200.96,
       "alvo_3r": 277.12,
       "r_pct": 8.65,
-      "preco": 212.5,
+      "preco": 209.31,
       "ema20": 205.64,
       "mom3": 10.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -127,7 +127,7 @@
       "ticker": "COKE",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=COKE",
-      "forming": false
+      "forming": true
     }
   ]
 }

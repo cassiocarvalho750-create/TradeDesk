@@ -1,24 +1,24 @@
 {
-  "gerado": "2026-11-05",
+  "gerado": "2026-11-06",
   "n": 1,
   "ativos": [
     {
-      "entrada": 82.95,
-      "stop": 80.0,
-      "alvo_3r": 91.8,
-      "preco": 82.91,
-      "r_pct": 3.56,
-      "mom1": 32.0,
-      "mom3": 4.0,
-      "mom6": 14.0,
+      "entrada": 93.5,
+      "stop": 88.82,
+      "alvo_3r": 107.54,
+      "preco": 89.79,
+      "r_pct": 5.01,
+      "mom1": 30.0,
+      "mom3": 24.0,
+      "mom6": 2.0,
       "consol_dias": 5,
-      "rompendo": true,
+      "rompendo": false,
       "acima_ema20": true,
       "puro": true,
       "forming": true,
-      "ticker": "TRU",
+      "ticker": "CCI",
       "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=TRU"
+      "tv": "https://www.tradingview.com/chart/?symbol=CCI"
     }
   ]
 }
