@@ -1,14 +1,14 @@
 {
   "gerado": "2026-11-09",
-  "n": 1,
+  "n": 2,
   "ativos": [
     {
       "entrada": 124.0,
       "stop": 119.93,
       "alvo_3r": 136.22,
-      "preco": 121.79,
+      "preco": 121.75,
       "r_pct": 3.29,
-      "mom1": 31.0,
+      "mom1": 30.0,
       "mom3": 26.0,
       "mom6": 30.0,
       "consol_dias": 9,
@@ -19,6 +19,24 @@
       "ticker": "HAS",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=HAS"
+    },
+    {
+      "entrada": 197.0,
+      "stop": 188.3,
+      "alvo_3r": 223.1,
+      "preco": 189.58,
+      "r_pct": 4.42,
+      "mom1": 30.0,
+      "mom3": 4.0,
+      "mom6": 14.0,
+      "consol_dias": 7,
+      "rompendo": false,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "EFX",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=EFX"
     }
   ]
 }
