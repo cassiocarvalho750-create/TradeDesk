@@ -3,22 +3,22 @@
   "n": 1,
   "ativos": [
     {
-      "entrada": 197.0,
-      "stop": 188.42,
-      "alvo_3r": 222.73,
-      "preco": 189.87,
-      "r_pct": 4.35,
+      "entrada": 124.0,
+      "stop": 119.93,
+      "alvo_3r": 136.22,
+      "preco": 121.38,
+      "r_pct": 3.29,
       "mom1": 30.0,
-      "mom3": 5.0,
-      "mom6": 14.0,
-      "consol_dias": 7,
+      "mom3": 26.0,
+      "mom6": 30.0,
+      "consol_dias": 9,
       "rompendo": false,
       "acima_ema20": true,
       "puro": true,
       "forming": true,
-      "ticker": "EFX",
+      "ticker": "HAS",
       "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=EFX"
+      "tv": "https://www.tradingview.com/chart/?symbol=HAS"
     }
   ]
 }
