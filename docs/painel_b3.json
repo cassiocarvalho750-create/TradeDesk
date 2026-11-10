@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-10",
-  "captura": "10/11/2026 17:37",
+  "captura": "10/11/2026 19:37",
   "timeframe": "1d",
   "n": 6,
   "ativos": [
@@ -11,35 +11,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 25.93,
+      "close": 25.83,
       "stop": 23.75,
-      "r_pct": 8.41,
+      "r_pct": 8.05,
       "forming": true,
       "date": "2026-11-10",
       "ult_candle": "2026-11-10",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 377.5,
+      "vol_fin_mi": 379.8,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:GGBR4",
-      "vol_qtd": 7821100.0,
-      "var_dia_pct": 2.65,
-      "mom1": 5.0,
-      "mom3": 4.0,
-      "mom6": 12.0,
-      "alvo_2r": 30.29,
+      "vol_qtd": 9678400.0,
+      "var_dia_pct": 2.26,
+      "mom1": 4.0,
+      "mom3": 3.0,
+      "mom6": 11.0,
+      "alvo_2r": 29.99,
       "acima_ema70": true,
-      "ema70": 24.749,
+      "ema70": 24.7462,
       "ema70_incl": "lado",
-      "quality": 61.7,
-      "didi_dist": 0.921,
-      "pos_range": 1.0,
-      "dist_max_pct": 0.0,
+      "quality": 57.2,
+      "didi_dist": 1.035,
+      "pos_range": 0.873,
+      "dist_max_pct": 0.39,
       "adx_var_pct": -9.4,
       "confluencia": true,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 4.7,
+      "bb_abre_pct": 1.8,
       "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         23.99,
         24.15,
         25.26,
-        25.93
+        25.83
       ],
       "o": [
         25.37,
@@ -299,7 +299,7 @@
         24.7867,
         24.34,
         24.4667,
-        25.1133
+        25.08
       ],
       "ma8": [
         25.5225,
@@ -341,7 +341,7 @@
         24.905,
         24.7425,
         24.8062,
-        25.0362
+        25.0237
       ],
       "ma20": [
         24.1404,
@@ -383,7 +383,7 @@
         25.3605,
         25.3075,
         25.332,
-        25.344
+        25.339
       ],
       "didi_curta": [
         0.7869,
@@ -425,7 +425,7 @@
         -0.4751,
         -1.6268,
         -1.3689,
-        0.3079
+        0.2248
       ],
       "didi_longa": [
         -5.415,
@@ -467,7 +467,7 @@
         1.829,
         2.2835,
         2.1194,
-        1.2292
+        1.2598
       ],
       "adx": [
         36.5031,
@@ -635,7 +635,7 @@
         26.106,
         25.9581,
         26.0759,
-        26.3774
+        26.3282
       ],
       "bb_mid": [
         25.5225,
@@ -677,7 +677,7 @@
         24.905,
         24.7425,
         24.8062,
-        25.0362
+        25.0237
       ],
       "bb_inf": [
         24.7593,
@@ -719,7 +719,7 @@
         23.704,
         23.5269,
         23.5366,
-        23.6951
+        23.7193
       ],
       "atrasado": false
     },
@@ -730,35 +730,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 11.46,
+      "close": 11.4,
       "stop": 10.55,
-      "r_pct": 7.94,
+      "r_pct": 7.46,
       "forming": true,
       "date": "2026-11-10",
       "ult_candle": "2026-11-10",
       "timeframe": "1d",
       "didi_ago": 0,
       "adx_ago": 0,
-      "vol_fin_mi": 194.2,
+      "vol_fin_mi": 194.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:GOAU4",
-      "vol_qtd": 11393900.0,
-      "var_dia_pct": 2.69,
+      "vol_qtd": 12702400.0,
+      "var_dia_pct": 2.15,
       "mom1": 2.0,
-      "mom3": 4.0,
+      "mom3": 3.0,
       "mom6": 12.0,
-      "alvo_2r": 13.28,
+      "alvo_2r": 13.1,
       "acima_ema70": true,
-      "ema70": 11.0263,
+      "ema70": 11.0246,
       "ema70_incl": "lado",
-      "quality": 54.9,
-      "didi_dist": 2.058,
-      "pos_range": 1.0,
-      "dist_max_pct": 0.0,
+      "quality": 50.4,
+      "didi_dist": 2.213,
+      "pos_range": 0.854,
+      "dist_max_pct": 0.52,
       "adx_var_pct": -7.4,
       "confluencia": true,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 3.7,
+      "bb_abre_pct": -0.6,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -850,7 +850,7 @@
         10.69,
         10.68,
         11.19,
-        11.45
+        11.4
       ],
       "o": [
         11.35,
@@ -1018,7 +1018,7 @@
         10.9933,
         10.8,
         10.8533,
-        11.1067
+        11.09
       ],
       "ma8": [
         11.2713,
@@ -1060,7 +1060,7 @@
         11.0575,
         10.9525,
         10.9762,
-        11.0762
+        11.07
       ],
       "ma20": [
         10.6634,
@@ -1102,7 +1102,7 @@
         11.3825,
         11.3445,
         11.344,
-        11.3375
+        11.335
       ],
       "didi_curta": [
         1.5859,
@@ -1144,7 +1144,7 @@
         -0.5803,
         -1.3924,
         -1.1198,
-        0.2746
+        0.1807
       ],
       "didi_longa": [
         -5.3932,
@@ -1186,7 +1186,7 @@
         2.9392,
         3.5791,
         3.3504,
-        2.3587
+        2.3939
       ],
       "adx": [
         36.5886,
@@ -1354,7 +1354,7 @@
         11.6348,
         11.4445,
         11.4962,
-        11.6167
+        11.5915
       ],
       "bb_mid": [
         11.2713,
@@ -1396,7 +1396,7 @@
         11.0575,
         10.9525,
         10.9762,
-        11.0762
+        11.07
       ],
       "bb_inf": [
         10.8871,
@@ -1438,7 +1438,7 @@
         10.4802,
         10.4605,
         10.4563,
-        10.5358
+        10.5485
       ],
       "atrasado": false
     },
@@ -1449,35 +1449,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 22.0,
+      "close": 21.98,
       "stop": 20.18,
-      "r_pct": 8.27,
+      "r_pct": 8.19,
       "forming": true,
       "date": "2026-11-10",
       "ult_candle": "2026-11-10",
       "timeframe": "1d",
       "didi_ago": 1,
       "adx_ago": 0,
-      "vol_fin_mi": 210.9,
+      "vol_fin_mi": 212.7,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CXSE3",
-      "vol_qtd": 6777800.0,
-      "var_dia_pct": 3.77,
+      "vol_qtd": 8534000.0,
+      "var_dia_pct": 3.68,
       "mom1": 4.0,
       "mom3": 18.0,
       "mom6": 32.0,
-      "alvo_2r": 25.64,
+      "alvo_2r": 25.58,
       "acima_ema70": true,
-      "ema70": 20.1034,
+      "ema70": 20.1028,
       "ema70_incl": "sobe",
-      "quality": 81.2,
+      "quality": 80.8,
       "didi_dist": 0.075,
-      "pos_range": 0.802,
-      "dist_max_pct": 0.95,
+      "pos_range": 0.783,
+      "dist_max_pct": 1.04,
       "adx_var_pct": -1.4,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": false,
-      "bb_abre_pct": 77.4,
+      "bb_abre_pct": 75.3,
       "medias_alinhadas": true,
       "figura": "LTB",
       "figura_toques": 2,
@@ -1908,7 +1908,7 @@
         -0.3123
       ],
       "adx": [
-        45.4845,
+        45.4844,
         44.1965,
         44.4666,
         45.5764,
@@ -2168,35 +2168,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 32.52,
+      "close": 32.5,
       "stop": 30.08,
-      "r_pct": 7.5,
+      "r_pct": 7.45,
       "forming": true,
       "date": "2026-11-10",
       "ult_candle": "2026-11-10",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 0,
-      "vol_fin_mi": 226.8,
+      "vol_fin_mi": 228.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:VIVT3",
-      "vol_qtd": 4922000.0,
-      "var_dia_pct": 0.77,
+      "vol_qtd": 6280100.0,
+      "var_dia_pct": 0.71,
       "mom1": 2.0,
       "mom3": 8.0,
       "mom6": -5.0,
-      "alvo_2r": 37.4,
+      "alvo_2r": 37.34,
       "acima_ema70": true,
-      "ema70": 31.2607,
+      "ema70": 31.2601,
       "ema70_incl": "sobe",
-      "quality": 51.9,
+      "quality": 51.0,
       "didi_dist": 0.134,
-      "pos_range": 0.563,
-      "dist_max_pct": 0.85,
+      "pos_range": 0.531,
+      "dist_max_pct": 0.91,
       "adx_var_pct": -12.6,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 27.7,
+      "bb_abre_pct": 27.0,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -2288,7 +2288,7 @@
         31.12,
         31.58,
         32.15,
-        32.51
+        32.5
       ],
       "o": [
         29.5982,
@@ -2456,7 +2456,7 @@
         30.7333,
         31.2333,
         31.6167,
-        32.08
+        32.0767
       ],
       "ma8": [
         29.9597,
@@ -2498,7 +2498,7 @@
         30.7524,
         30.8813,
         31.015,
-        31.2363
+        31.235
       ],
       "ma20": [
         29.5629,
@@ -2540,7 +2540,7 @@
         31.2825,
         31.2748,
         31.2881,
-        31.4031
+        31.4026
       ],
       "didi_curta": [
         0.5233,
@@ -2582,7 +2582,7 @@
         -0.062,
         1.1401,
         1.9399,
-        2.7012
+        2.6946
       ],
       "didi_longa": [
         -1.3244,
@@ -2624,7 +2624,7 @@
         1.7237,
         1.2743,
         0.8806,
-        0.5341
+        0.5365
       ],
       "adx": [
         19.8845,
@@ -2792,7 +2792,7 @@
         31.4286,
         31.7467,
         32.2658,
-        32.8408
+        32.8351
       ],
       "bb_mid": [
         29.9597,
@@ -2834,7 +2834,7 @@
         30.7524,
         30.8813,
         31.015,
-        31.2363
+        31.235
       ],
       "bb_inf": [
         29.6208,
@@ -2876,7 +2876,7 @@
         30.0762,
         30.0158,
         29.7642,
-        29.6317
+        29.6349
       ],
       "atrasado": false
     },
@@ -2887,35 +2887,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 27.56,
+      "close": 27.69,
       "stop": 23.77,
-      "r_pct": 13.75,
+      "r_pct": 14.16,
       "forming": true,
       "date": "2026-11-10",
       "ult_candle": "2026-11-10",
       "timeframe": "1d",
       "didi_ago": 3,
       "adx_ago": 0,
-      "vol_fin_mi": 152.3,
+      "vol_fin_mi": 152.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SANB11",
-      "vol_qtd": 3224700.0,
-      "var_dia_pct": 0.22,
-      "mom1": -4.0,
+      "vol_qtd": 3670900.0,
+      "var_dia_pct": 0.69,
+      "mom1": -3.0,
       "mom3": -4.0,
-      "mom6": 3.0,
-      "alvo_2r": 35.14,
-      "acima_ema70": false,
-      "ema70": 27.6429,
+      "mom6": 4.0,
+      "alvo_2r": 35.53,
+      "acima_ema70": true,
+      "ema70": 27.6466,
       "ema70_incl": "desce",
-      "quality": 42.1,
-      "didi_dist": 0.427,
-      "pos_range": 0.451,
-      "dist_max_pct": 1.01,
+      "quality": 47.2,
+      "didi_dist": 0.57,
+      "pos_range": 0.706,
+      "dist_max_pct": 0.54,
       "adx_var_pct": -12.6,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 18.6,
+      "bb_abre_pct": 21.3,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -3007,7 +3007,7 @@
         25.94,
         25.66,
         27.0,
-        27.56
+        27.69
       ],
       "o": [
         29.4651,
@@ -3175,7 +3175,7 @@
         25.41,
         25.8033,
         26.2,
-        26.74
+        26.7833
       ],
       "ma8": [
         29.8262,
@@ -3217,7 +3217,7 @@
         25.1662,
         25.0863,
         25.2275,
-        25.6287
+        25.645
       ],
       "ma20": [
         29.3552,
@@ -3259,7 +3259,7 @@
         26.926,
         26.757,
         26.6736,
-        26.6306
+        26.6371
       ],
       "didi_curta": [
         0.1556,
@@ -3301,7 +3301,7 @@
         0.9686,
         2.8585,
         3.8549,
-        4.336
+        4.4388
       ],
       "didi_longa": [
         -1.579,
@@ -3343,7 +3343,7 @@
         6.9926,
         6.6599,
         5.7324,
-        3.9092
+        3.8687
       ],
       "adx": [
         26.7783,
@@ -3511,7 +3511,7 @@
         26.9728,
         26.7108,
         27.2987,
-        28.1233
+        28.1981
       ],
       "bb_mid": [
         29.8262,
@@ -3553,7 +3553,7 @@
         25.1662,
         25.0863,
         25.2275,
-        25.6287
+        25.645
       ],
       "bb_inf": [
         29.2781,
@@ -3595,7 +3595,7 @@
         23.3597,
         23.4617,
         23.1563,
-        23.1342
+        23.0919
       ],
       "atrasado": false
     },
@@ -3606,35 +3606,35 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 20.88,
+      "close": 20.96,
       "stop": 16.7,
-      "r_pct": 20.02,
+      "r_pct": 20.32,
       "forming": true,
       "date": "2026-11-10",
       "ult_candle": "2026-11-10",
       "timeframe": "1d",
       "didi_ago": 7,
       "adx_ago": 0,
-      "vol_fin_mi": 210.0,
+      "vol_fin_mi": 212.5,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:TIMS3",
-      "vol_qtd": 14774100.0,
-      "var_dia_pct": 2.6,
+      "vol_qtd": 17396600.0,
+      "var_dia_pct": 3.0,
       "mom1": 11.0,
-      "mom3": 12.0,
+      "mom3": 13.0,
       "mom6": -6.0,
-      "alvo_2r": 29.24,
+      "alvo_2r": 29.48,
       "acima_ema70": true,
-      "ema70": 19.4935,
+      "ema70": 19.4957,
       "ema70_incl": "sobe",
-      "quality": 59.4,
+      "quality": 62.9,
       "didi_dist": 2.605,
-      "pos_range": 0.414,
-      "dist_max_pct": 3.47,
+      "pos_range": 0.477,
+      "dist_max_pct": 3.1,
       "adx_var_pct": 19.7,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": true,
-      "bb_abre_pct": 44.6,
+      "bb_abre_pct": 50.2,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
@@ -3726,7 +3726,7 @@
         19.96,
         19.88,
         20.33,
-        20.9
+        20.96
       ],
       "o": [
         18.9354,
@@ -3894,7 +3894,7 @@
         19.7367,
         19.88,
         20.0567,
-        20.37
+        20.39
       ],
       "ma8": [
         19.0059,
@@ -3936,7 +3936,7 @@
         19.295,
         19.5175,
         19.6825,
-        19.865
+        19.8725
       ],
       "ma20": [
         18.538,
@@ -3978,7 +3978,7 @@
         19.0215,
         19.058,
         19.13,
-        19.27
+        19.273
       ],
       "didi_curta": [
         1.4676,
@@ -4020,7 +4020,7 @@
         2.289,
         1.8573,
         1.901,
-        2.5422
+        2.6041
       ],
       "didi_longa": [
         -2.4621,
@@ -4062,7 +4062,7 @@
         -1.4175,
         -2.3543,
         -2.8071,
-        -2.9952
+        -3.0167
       ],
       "adx": [
         33.8427,
@@ -4230,7 +4230,7 @@
         20.4378,
         20.1951,
         20.434,
-        20.9722
+        21.0121
       ],
       "bb_mid": [
         19.0059,
@@ -4272,7 +4272,7 @@
         19.295,
         19.5175,
         19.6825,
-        19.865
+        19.8725
       ],
       "bb_inf": [
         18.4259,
@@ -4314,7 +4314,7 @@
         18.1522,
         18.8399,
         18.931,
-        18.7578
+        18.7329
       ],
       "atrasado": false
     }
