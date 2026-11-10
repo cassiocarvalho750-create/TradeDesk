@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-10",
-  "captura": "10/11/2026 11:35",
+  "captura": "10/11/2026 11:53",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.42,
       "stop": 1.39,
-      "r_pct": 1.67,
+      "r_pct": 1.69,
       "forming": true,
       "date": "2026-11-10",
       "ult_candle": "2026-11-10",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=USDCAD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.34,
+      "var_dia_pct": 0.37,
       "mom1": -1.0,
       "mom3": 2.0,
       "mom6": 3.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.404,
       "ema70_incl": "lado",
-      "quality": 71.4,
+      "quality": 73.2,
       "didi_dist": 0.226,
-      "pos_range": 0.862,
-      "dist_max_pct": 0.07,
+      "pos_range": 0.91,
+      "dist_max_pct": 0.05,
       "adx_var_pct": -7.6,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 51.8,
+      "bb_abre_pct": 53.8,
       "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         1.3972,
         1.4017,
         1.4119,
-        1.4167
+        1.4169
       ],
       "o": [
         1.3925,
@@ -299,7 +299,7 @@
         1.3987,
         1.3998,
         1.4036,
-        1.4101
+        1.4102
       ],
       "ma8": [
         1.3843,
@@ -341,7 +341,7 @@
         1.3996,
         1.3996,
         1.4005,
-        1.4027
+        1.4028
       ],
       "ma20": [
         1.3841,
@@ -425,7 +425,7 @@
         -0.0659,
         0.012,
         0.2217,
-        0.5239
+        0.5277
       ],
       "didi_longa": [
         -0.0194,
@@ -467,7 +467,7 @@
         0.6376,
         0.5597,
         0.4481,
-        0.2468
+        0.2454
       ],
       "adx": [
         23.4314,
@@ -635,7 +635,7 @@
         1.4049,
         1.405,
         1.4102,
-        1.4175
+        1.4177
       ],
       "bb_mid": [
         1.3843,
@@ -677,7 +677,7 @@
         1.3996,
         1.3996,
         1.4005,
-        1.4027
+        1.4028
       ],
       "bb_inf": [
         1.3743,
@@ -719,7 +719,7 @@
         1.3943,
         1.3943,
         1.3908,
-        1.3879
+        1.3878
       ],
       "atrasado": false
     }
