@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-11",
-  "gerado_utc": "2026-11-11 21:04 UTC",
+  "gerado_utc": "2026-11-11 23:49 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
@@ -12,17 +12,17 @@
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 172212.92,
-      "mm200": 181509.41,
+      "close": 172060.44,
+      "mm200": 181508.65,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
     "liquidos": 1088,
-    "sinais": 4
+    "sinais": 2
   },
-  "n": 4,
+  "n": 2,
   "ativos": [
     {
       "data_sinal": "2026-11-11",
@@ -30,20 +30,20 @@
       "stop": 312.45,
       "alvo_3r": 406.97,
       "r_pct": 7.03,
-      "preco": 334.74,
-      "ema20": 321.65,
+      "preco": 334.88,
+      "ema20": 321.66,
       "mom3": 17.0,
       "mom_fraco": true,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "FDS",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=FDS",
-      "forming": true
+      "forming": false
     },
     {
       "data_sinal": "2026-11-11",
@@ -55,58 +55,16 @@
       "ema20": 196.04,
       "mom3": 11.0,
       "mom_fraco": true,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "VRSK",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=VRSK",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-11-10",
-      "entrada": 370.06,
-      "stop": 360.48,
-      "alvo_3r": 398.8,
-      "r_pct": 2.59,
-      "preco": 370.29,
-      "ema20": 360.49,
-      "mom3": 8.0,
-      "mom_fraco": false,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "ativada",
-      "stop_tocado": false,
-      "mercado_ok": false,
-      "indice": "QQQ",
-      "ticker": "CB",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=CB",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-11-10",
-      "entrada": 261.83,
-      "stop": 251.04,
-      "alvo_3r": 294.2,
-      "r_pct": 4.12,
-      "preco": 262.19,
-      "ema20": 254.18,
-      "mom3": 2.0,
-      "mom_fraco": false,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "ativada",
-      "stop_tocado": false,
-      "mercado_ok": false,
-      "indice": "QQQ",
-      "ticker": "ALL",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=ALL",
-      "forming": true
+      "forming": false
     }
   ]
 }
