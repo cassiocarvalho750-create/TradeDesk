@@ -1,41 +1,62 @@
 {
-  "gerado": "2026-11-10",
-  "gerado_utc": "2026-11-10 23:06 UTC",
+  "gerado": "2026-11-11",
+  "gerado_utc": "2026-11-11 15:40 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
-      "ok": false,
-      "close": 674.76,
-      "mm200": 680.35,
+      "ok": true,
+      "close": 688.4,
+      "mm200": 680.64,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 171336.98,
-      "mm200": 181526.29,
+      "close": 172903.84,
+      "mm200": 181512.86,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
-    "liquidos": 1086,
-    "sinais": 2
+    "liquidos": 1087,
+    "sinais": 3
   },
-  "n": 2,
+  "n": 3,
   "ativos": [
+    {
+      "data_sinal": "2026-11-11",
+      "entrada": 332.61,
+      "stop": 312.45,
+      "alvo_3r": 393.09,
+      "r_pct": 6.06,
+      "preco": 331.4,
+      "ema20": 321.33,
+      "mom3": 16.0,
+      "mom_fraco": true,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": true,
+      "indice": "QQQ",
+      "ticker": "FDS",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=FDS",
+      "forming": true
+    },
     {
       "data_sinal": "2026-11-10",
       "entrada": 370.06,
       "stop": 360.48,
       "alvo_3r": 398.8,
       "r_pct": 2.59,
-      "preco": 369.11,
+      "preco": 366.95,
       "ema20": 360.49,
       "mom3": 8.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -43,7 +64,7 @@
       "ticker": "CB",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CB",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-10",
@@ -51,12 +72,12 @@
       "stop": 251.04,
       "alvo_3r": 294.2,
       "r_pct": 4.12,
-      "preco": 261.12,
+      "preco": 258.34,
       "ema20": 254.18,
       "mom3": 2.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -64,7 +85,7 @@
       "ticker": "ALL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=ALL",
-      "forming": false
+      "forming": true
     }
   ]
 }
