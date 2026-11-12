@@ -1,91 +1,49 @@
 {
   "gerado": "2026-11-12",
-  "gerado_utc": "2026-11-12 19:23 UTC",
+  "gerado_utc": "2026-11-12 22:59 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 689.15,
+      "close": 688.17,
       "mm200": 680.94,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 170999.94,
-      "mm200": 181469.35,
+      "close": 171324.31,
+      "mm200": 181470.97,
       "validado": false
     }
   },
   "funil": {
-    "total": 1132,
-    "liquidos": 1087,
-    "sinais": 3
+    "total": 1133,
+    "liquidos": 1088,
+    "sinais": 1
   },
-  "n": 3,
+  "n": 1,
   "ativos": [
-    {
-      "data_sinal": "2026-11-11",
-      "entrada": 336.08,
-      "stop": 312.45,
-      "alvo_3r": 406.97,
-      "r_pct": 7.03,
-      "preco": 335.8,
-      "ema20": 321.66,
-      "mom3": 17.0,
-      "mom_fraco": true,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "abriu acima",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "FDS",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=FDS",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-11-11",
-      "entrada": 206.05,
-      "stop": 195.95,
-      "alvo_3r": 236.35,
-      "r_pct": 4.9,
-      "preco": 207.65,
-      "ema20": 196.04,
-      "mom3": 11.0,
-      "mom_fraco": true,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "abriu acima",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "VRSK",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=VRSK",
-      "forming": true
-    },
     {
       "data_sinal": "2026-11-12",
       "entrada": 3284.2,
       "stop": 3175.0,
       "alvo_3r": 3611.8,
       "r_pct": 3.33,
-      "preco": 3264.52,
-      "ema20": 3180.95,
+      "preco": 3252.19,
+      "ema20": 3179.78,
       "mom3": 8.0,
       "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
+      "status": "ORDEM",
+      "ordem_dia": "próximo pregão",
+      "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": true,
       "indice": "QQQ",
       "ticker": "AZO",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AZO",
-      "forming": true
+      "forming": false
     }
   ]
 }
