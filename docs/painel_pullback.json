@@ -1,19 +1,19 @@
 {
   "gerado": "2026-11-12",
-  "gerado_utc": "2026-11-12 17:38 UTC",
+  "gerado_utc": "2026-11-12 19:23 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 691.2,
-      "mm200": 680.95,
+      "close": 689.15,
+      "mm200": 680.94,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 171132.19,
-      "mm200": 181470.01,
+      "close": 170999.94,
+      "mm200": 181469.35,
       "validado": false
     }
   },
@@ -30,7 +30,7 @@
       "stop": 312.45,
       "alvo_3r": 406.97,
       "r_pct": 7.03,
-      "preco": 337.28,
+      "preco": 335.8,
       "ema20": 321.66,
       "mom3": 17.0,
       "mom_fraco": true,
@@ -51,7 +51,7 @@
       "stop": 195.95,
       "alvo_3r": 236.35,
       "r_pct": 4.9,
-      "preco": 207.44,
+      "preco": 207.65,
       "ema20": 196.04,
       "mom3": 11.0,
       "mom_fraco": true,
@@ -72,8 +72,8 @@
       "stop": 3175.0,
       "alvo_3r": 3611.8,
       "r_pct": 3.33,
-      "preco": 3277.0,
-      "ema20": 3182.14,
+      "preco": 3264.52,
+      "ema20": 3180.95,
       "mom3": 8.0,
       "mom_fraco": false,
       "status": "FORMANDO",
