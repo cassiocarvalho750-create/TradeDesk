@@ -1,25 +1,25 @@
 {
   "gerado": "2026-11-12",
-  "gerado_utc": "2026-11-12 15:55 UTC",
+  "gerado_utc": "2026-11-12 16:16 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 689.48,
-      "mm200": 680.94,
+      "close": 693.0,
+      "mm200": 680.96,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 170962.52,
-      "mm200": 181469.16,
+      "close": 171221.97,
+      "mm200": 181470.46,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
-    "liquidos": 1086,
+    "liquidos": 1087,
     "sinais": 3
   },
   "n": 3,
@@ -30,7 +30,7 @@
       "stop": 312.45,
       "alvo_3r": 406.97,
       "r_pct": 7.03,
-      "preco": 336.49,
+      "preco": 335.41,
       "ema20": 321.66,
       "mom3": 17.0,
       "mom_fraco": true,
@@ -51,7 +51,7 @@
       "stop": 195.95,
       "alvo_3r": 236.35,
       "r_pct": 4.9,
-      "preco": 208.1,
+      "preco": 207.0,
       "ema20": 196.04,
       "mom3": 11.0,
       "mom_fraco": true,
@@ -72,8 +72,8 @@
       "stop": 3175.0,
       "alvo_3r": 3595.0,
       "r_pct": 3.2,
-      "preco": 3265.0,
-      "ema20": 3181.0,
+      "preco": 3266.29,
+      "ema20": 3181.12,
       "mom3": 8.0,
       "mom_fraco": false,
       "status": "FORMANDO",
