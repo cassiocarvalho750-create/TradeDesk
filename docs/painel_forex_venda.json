@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-12",
-  "captura": "12/11/2026 13:14",
+  "captura": "12/11/2026 14:35",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 1.32,
       "stop": 1.33,
-      "r_pct": 0.31,
+      "r_pct": 0.37,
       "forming": true,
       "date": "2026-11-12",
       "ult_candle": "2026-11-12",
@@ -23,23 +23,23 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPUSD=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.26,
+      "var_dia_pct": -0.32,
       "mom1": -0.0,
       "mom3": -2.0,
       "mom6": -1.0,
-      "alvo_2r": 1.32,
+      "alvo_2r": 1.31,
       "acima_ema70": false,
       "ema70": 1.3375,
       "ema70_incl": "lado",
-      "quality": 80.9,
+      "quality": 83.9,
       "didi_dist": 0.113,
-      "pos_range": 0.317,
-      "dist_max_pct": 0.14,
+      "pos_range": 0.166,
+      "dist_max_pct": 0.07,
       "adx_var_pct": 3.2,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 66.3,
+      "bb_abre_pct": 71.9,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         1.336,
         1.3442,
         1.3349,
-        1.3242
+        1.3233
       ],
       "o": [
         1.3356,
@@ -299,7 +299,7 @@
         1.3431,
         1.3419,
         1.3384,
-        1.3344
+        1.3341
       ],
       "ma8": [
         1.3481,
@@ -341,7 +341,7 @@
         1.3404,
         1.3418,
         1.3414,
-        1.3396
+        1.3395
       ],
       "ma20": [
         1.3533,
@@ -425,7 +425,7 @@
         0.2048,
         0.0108,
         -0.2281,
-        -0.3887
+        -0.4026
       ],
       "didi_longa": [
         0.3886,
@@ -467,7 +467,7 @@
         -0.3836,
         -0.4027,
         -0.3408,
-        -0.203
+        -0.198
       ],
       "adx": [
         36.9047,
@@ -635,7 +635,7 @@
         1.3504,
         1.35,
         1.3506,
-        1.3549
+        1.3554
       ],
       "bb_mid": [
         1.3481,
@@ -677,7 +677,7 @@
         1.3404,
         1.3418,
         1.3414,
-        1.3396
+        1.3395
       ],
       "bb_inf": [
         1.3335,
@@ -719,7 +719,7 @@
         1.3303,
         1.3336,
         1.3322,
-        1.3243
+        1.3237
       ],
       "atrasado": true
     }
