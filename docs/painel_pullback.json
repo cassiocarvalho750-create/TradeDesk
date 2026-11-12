@@ -1,28 +1,28 @@
 {
   "gerado": "2026-11-12",
-  "gerado_utc": "2026-11-12 14:55 UTC",
+  "gerado_utc": "2026-11-12 15:32 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": true,
-      "close": 686.75,
+      "close": 685.64,
       "mm200": 680.93,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 170877.2,
-      "mm200": 181468.74,
+      "close": 170784.98,
+      "mm200": 181468.27,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
     "liquidos": 1086,
-    "sinais": 4
+    "sinais": 3
   },
-  "n": 4,
+  "n": 3,
   "ativos": [
     {
       "data_sinal": "2026-11-11",
@@ -30,7 +30,7 @@
       "stop": 312.45,
       "alvo_3r": 406.97,
       "r_pct": 7.03,
-      "preco": 335.69,
+      "preco": 336.09,
       "ema20": 321.66,
       "mom3": 17.0,
       "mom_fraco": true,
@@ -51,7 +51,7 @@
       "stop": 195.95,
       "alvo_3r": 236.35,
       "r_pct": 4.9,
-      "preco": 208.64,
+      "preco": 208.6,
       "ema20": 196.04,
       "mom3": 11.0,
       "mom_fraco": true,
@@ -68,12 +68,12 @@
     },
     {
       "data_sinal": "2026-11-12",
-      "entrada": 3275.43,
+      "entrada": 3280.0,
       "stop": 3175.0,
-      "alvo_3r": 3576.72,
-      "r_pct": 3.07,
-      "preco": 3263.65,
-      "ema20": 3180.87,
+      "alvo_3r": 3595.0,
+      "r_pct": 3.2,
+      "preco": 3279.99,
+      "ema20": 3182.42,
       "mom3": 8.0,
       "mom_fraco": false,
       "status": "FORMANDO",
@@ -85,27 +85,6 @@
       "ticker": "AZO",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AZO",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-11-12",
-      "entrada": 87.48,
-      "stop": 84.0,
-      "alvo_3r": 97.92,
-      "r_pct": 3.98,
-      "preco": 86.52,
-      "ema20": 85.68,
-      "mom3": 0.0,
-      "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "LEN",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=LEN",
       "forming": true
     }
   ]
