@@ -1,5 +1,60 @@
 {
-  "gerado": "2026-11-11",
-  "n": 0,
-  "ativos": []
+  "gerado": "2026-11-12",
+  "n": 3,
+  "ativos": [
+    {
+      "entrada": 280.8,
+      "stop": 233.01,
+      "alvo_3r": 424.17,
+      "preco": 240.65,
+      "r_pct": 17.02,
+      "mom1": 6.0,
+      "mom3": 280.0,
+      "mom6": 381.0,
+      "consol_dias": 5,
+      "rompendo": false,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "MRNA",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=MRNA"
+    },
+    {
+      "entrada": 221.49,
+      "stop": 215.66,
+      "alvo_3r": 238.98,
+      "preco": 216.84,
+      "r_pct": 2.63,
+      "mom1": 38.0,
+      "mom3": 12.0,
+      "mom6": 25.0,
+      "consol_dias": 5,
+      "rompendo": false,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "POOL",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=POOL"
+    },
+    {
+      "entrada": 72.87,
+      "stop": 69.12,
+      "alvo_3r": 84.12,
+      "preco": 69.12,
+      "r_pct": 5.15,
+      "mom1": 33.0,
+      "mom3": 5.0,
+      "mom6": -7.0,
+      "consol_dias": 5,
+      "rompendo": false,
+      "acima_ema20": true,
+      "puro": true,
+      "forming": true,
+      "ticker": "PNR",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=PNR"
+    }
+  ]
 }
