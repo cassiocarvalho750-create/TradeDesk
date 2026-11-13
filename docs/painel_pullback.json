@@ -1,49 +1,26 @@
 {
   "gerado": "2026-11-13",
-  "gerado_utc": "2026-11-13 20:31 UTC",
+  "gerado_utc": "2026-11-13 23:01 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 678.85,
+      "close": 679.89,
       "mm200": 681.2,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 172460.48,
-      "mm200": 181439.67,
+      "close": 172457.77,
+      "mm200": 181439.65,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
-    "liquidos": 1087,
-    "sinais": 1
+    "liquidos": 1087
   },
-  "n": 1,
-  "ativos": [
-    {
-      "data_sinal": "2026-11-12",
-      "entrada": 3284.2,
-      "stop": 3175.0,
-      "alvo_3r": 3611.8,
-      "r_pct": 3.33,
-      "preco": 3262.11,
-      "ema20": 3179.78,
-      "mom3": 8.0,
-      "mom_fraco": false,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "ativada",
-      "stop_tocado": false,
-      "mercado_ok": true,
-      "indice": "QQQ",
-      "ticker": "AZO",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=AZO",
-      "forming": true
-    }
-  ]
+  "n": 0,
+  "ativos": []
 }
