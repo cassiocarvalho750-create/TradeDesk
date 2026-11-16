@@ -1,49 +1,26 @@
 {
   "gerado": "2026-11-16",
-  "gerado_utc": "2026-11-16 17:33 UTC",
+  "gerado_utc": "2026-11-16 20:05 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 664.93,
-      "mm200": 681.43,
+      "close": 663.21,
+      "mm200": 681.42,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 169269.7,
-      "mm200": 181376.41,
+      "close": 168820.16,
+      "mm200": 181374.16,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
-    "liquidos": 1087,
-    "sinais": 1
+    "liquidos": 1087
   },
-  "n": 1,
-  "ativos": [
-    {
-      "data_sinal": "2026-11-16",
-      "entrada": 137.78,
-      "stop": 133.0,
-      "alvo_3r": 152.12,
-      "r_pct": 3.47,
-      "preco": 135.52,
-      "ema20": 133.61,
-      "mom3": 13.0,
-      "mom_fraco": true,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": false,
-      "indice": "QQQ",
-      "ticker": "DG",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=DG",
-      "forming": true
-    }
-  ]
+  "n": 0,
+  "ativos": []
 }
