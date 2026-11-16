@@ -31,7 +31,17 @@ def main():
     hits=sc.scan(uni, days, batch=getattr(a,"batch",True), chunk=a.chunk, timeframe=tf,
                  didi_ext=(sc.DIDI_WIN_EXT if tf=='1d' else None),
                  vermelho_alta=(tf=='1d'),   # diario: aceita candle vermelho que fecha acima de ontem
-                 radar=(tf=='1d'))           # diario: devolve tambem o RADAR (DIDI+BB, ADX ainda nao)
+                 radar=(tf=='1d'),           # diario: devolve tambem o RADAR (DIDI+BB, ADX ainda nao)
+                 venda_tambem=(tf=='1d'))    # diario: avalia tambem a VENDA (short) nos mesmos dados
+    # VENDA: painel separado (painel_b3_venda.json), fora do historico, da Confluencia e do e-mail
+    venda_hits=[h for h in hits if h.get("lado")=="venda"]
+    hits=[h for h in hits if h.get("lado")!="venda"]
+    if tf=='1d':
+        print(f"  [venda] {len(venda_hits)} ativo(s): DIDI + ADX + BB para o lado vendido")
+        try:
+            sc.build_panel_data(venda_hits, out_path="painel_b3_venda.json", timeframe=tf, registrar=False)
+        except Exception as e:
+            print(f"  [venda] falhou: {e}")
     # RADAR: painel separado (painel_b3_radar.json), fora do sinal, do historico e da Confluencia
     radar_hits=[h for h in hits if h.get("radar")]
     hits=[h for h in hits if not h.get("radar")]

@@ -98,6 +98,44 @@ def detecta_figura(h, c, i):
                     cand = ("HORIZ", toq, int(i-p1), float(lv))
                     if best is None or cand[1:3] > best[1:3]: best = cand
     return best
+def _piv_baixos(l, K=3):
+    out = []
+    for k in range(K, len(l)-K):
+        w = l[k-K:k+K+1]
+        if l[k] == w.min() and w.argmin() == K: out.append(k)
+    return np.array(out, int)
+
+def detecta_figura_baixa(l, c, i):
+    """ESPELHO de detecta_figura para a VENDA. Figura perdida (rompida para BAIXO) no candle i:
+    ('LTA' = linha de tendencia de alta ligando fundos ascendentes; 'SUPORTE' = fundos no mesmo nivel),
+    toques, duracao em pregoes e valor da linha; ou None. Rompe quando o fechamento de hoje fica
+    ABAIXO da linha e o de ontem estava nela ou acima."""
+    if i < FIG_MIN_DUR + 3 or i >= len(c): return None
+    P = _piv_baixos(l[:i+1])
+    Q = P[(P >= i-FIG_LB) & (P <= i-3)]
+    best = None
+    for a in range(len(Q)):
+        p1 = Q[a]
+        if i - p1 < FIG_MIN_DUR: break
+        seg = l[p1:i]
+        for b in range(a+1, len(Q)):
+            p2 = Q[b]
+            if p2 - p1 < 3: continue
+            if l[p2] > l[p1]:
+                sl = (l[p2]-l[p1])/(p2-p1); line = l[p1] + sl*(np.arange(p1, i)-p1)
+                Li = l[p1] + sl*(i-p1); Li1 = l[p1] + sl*(i-1-p1)
+                if np.all(seg >= line*(1-FIG_TOL)) and c[i] < Li and c[i-1] >= Li1:
+                    Qi = Q[Q >= p1]; toq = int(np.sum(np.abs(l[Qi]/(l[p1]+sl*(Qi-p1))-1) <= 0.01))
+                    cand = ("LTA", toq, int(i-p1), float(Li))
+                    if best is None or cand[1:3] > best[1:3]: best = cand
+            if abs(l[p2]/l[p1]-1) <= FIG_TOL_H:
+                lv = min(l[p1], l[p2])
+                if np.all(seg >= lv*(1-FIG_TOL)) and c[i] < lv and c[i-1] >= lv:
+                    Qi = Q[Q >= p1]; toq = int(np.sum(np.abs(l[Qi]/lv-1) <= FIG_TOL_H))
+                    cand = ("SUPORTE", toq, int(i-p1), float(lv))
+                    if best is None or cand[1:3] > best[1:3]: best = cand
+    return best
+
 def tf_windows(timeframe):
     return TF_WINDOWS.get(timeframe, (5, 3))
 
@@ -458,6 +496,12 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
                         figura = detecta_figura(s["High"].values.astype(float), s["Close"].values.astype(float), pos)
                 except Exception:
                     figura = None
+            # VENDA (diario): figura perdida para baixo (LTA ou suporte). So informa e ordena a pagina.
+            if venda and timeframe == "1d":
+                try:
+                    figura = detecta_figura_baixa(s["Low"].values.astype(float), s["Close"].values.astype(float), pos)
+                except Exception:
+                    figura = None
             # score final (pesos definidos pelo usuario em out/2026):
             #   25% inclinacao do ADX + 25% abertura da Bollinger + 20% fechamento
             #   + 15% sincronia + 15% compressao  (+12 de bonus se os 3 dispararem juntos)
@@ -513,7 +557,7 @@ def _evaluate(tk, d, days_back, today, timeframe="1d", lado="compra", didi_ext=N
     return res
 
 
-def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra", didi_ext=None, vermelho_alta=False, radar=False):
+def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liquidez=False, lado="compra", didi_ext=None, vermelho_alta=False, radar=False, venda_tambem=False):
     """Retorna lista de sinais nos ultimos `days_back` candles do timeframe dado.
 
     timeframe: '1d' (diario, padrao), '2h', '1h', '15m', '5m'.
@@ -524,6 +568,8 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
     B3 >= rb.B3_MIN_VOL_FIN_MI (BRL).
     skip_liquidez=True -> ignora o piso de liquidez (usado no Forex, que nao tem
     volume real confiavel e e liquido por natureza).
+    venda_tambem=True -> alem do `lado` pedido, avalia tambem a VENDA (espelho) nos MESMOS
+    dados ja baixados (sem novo download). Os sinais de venda saem com lado="venda".
     """
     hits=[]
     today = pd.Timestamp(datetime.date.today())
@@ -546,6 +592,8 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
             if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 continue
             hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext, vermelho_alta=vermelho_alta, radar=radar))
+            if venda_tambem and lado != "venda":
+                hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado="venda"))
     else:
         for i,tk in enumerate(tickers,1):
             if i%50==1: print(f"  varrendo {i}/{len(tickers)}...")
@@ -555,6 +603,8 @@ def scan(tickers, days_back=1, batch=True, chunk=100, timeframe="1d", skip_liqui
             if not skip_liquidez and not _liquidez_ok(tk, d, US_MIN, B3_MIN):
                 time.sleep(0.01); continue
             hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado=lado, didi_ext=didi_ext, vermelho_alta=vermelho_alta, radar=radar))
+            if venda_tambem and lado != "venda":
+                hits.extend(_evaluate(tk, d, days_back, today, timeframe=timeframe, lado="venda"))
             time.sleep(0.03)
     return hits
 
