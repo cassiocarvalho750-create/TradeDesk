@@ -1,69 +1,48 @@
 {
   "gerado": "2026-11-16",
-  "gerado_utc": "2026-11-16 15:37 UTC",
+  "gerado_utc": "2026-11-16 17:33 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 664.7,
+      "close": 664.93,
       "mm200": 681.43,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 170015.36,
-      "mm200": 181380.14,
+      "close": 169269.7,
+      "mm200": 181376.41,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
     "liquidos": 1087,
-    "sinais": 2
+    "sinais": 1
   },
-  "n": 2,
+  "n": 1,
   "ativos": [
     {
       "data_sinal": "2026-11-16",
-      "entrada": 149.64,
-      "stop": 145.69,
-      "alvo_3r": 161.49,
-      "r_pct": 2.64,
-      "preco": 149.08,
-      "ema20": 147.14,
-      "mom3": 5.0,
-      "mom_fraco": false,
+      "entrada": 137.78,
+      "stop": 133.0,
+      "alvo_3r": 152.12,
+      "r_pct": 3.47,
+      "preco": 135.52,
+      "ema20": 133.61,
+      "mom3": 13.0,
+      "mom_fraco": true,
       "status": "FORMANDO",
       "ordem_dia": "amanhã, se confirmar",
       "execucao": "—",
       "stop_tocado": false,
       "mercado_ok": false,
       "indice": "QQQ",
-      "ticker": "TOL",
+      "ticker": "DG",
       "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=TOL",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-11-16",
-      "entrada": 128.99,
-      "stop": 125.54,
-      "alvo_3r": 139.34,
-      "r_pct": 2.67,
-      "preco": 128.29,
-      "ema20": 126.34,
-      "mom3": 2.0,
-      "mom_fraco": false,
-      "status": "FORMANDO",
-      "ordem_dia": "amanhã, se confirmar",
-      "execucao": "—",
-      "stop_tocado": false,
-      "mercado_ok": false,
-      "indice": "QQQ",
-      "ticker": "PHM",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=PHM",
+      "tv": "https://www.tradingview.com/chart/?symbol=DG",
       "forming": true
     }
   ]

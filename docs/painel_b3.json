@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-16",
-  "captura": "16/11/2026 12:33",
+  "captura": "16/11/2026 14:29",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -11,41 +11,41 @@
       "par": "",
       "classe": "",
       "lado": "compra",
-      "close": 28.87,
+      "close": 28.77,
       "stop": 23.77,
-      "r_pct": 17.67,
+      "r_pct": 17.38,
       "forming": true,
       "date": "2026-11-16",
       "ult_candle": "2026-11-16",
       "timeframe": "1d",
       "didi_ago": 7,
       "adx_ago": 2,
-      "vol_fin_mi": 147.5,
+      "vol_fin_mi": 150.1,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SANB11",
-      "vol_qtd": 1459600.0,
-      "var_dia_pct": 0.03,
+      "vol_qtd": 3377300.0,
+      "var_dia_pct": -0.31,
       "mom1": 3.0,
       "mom3": -2.0,
       "mom6": 11.0,
-      "alvo_2r": 39.07,
+      "alvo_2r": 38.77,
       "acima_ema70": true,
-      "ema70": 27.7156,
+      "ema70": 27.7128,
       "ema70_incl": "sobe",
-      "quality": 56.2,
+      "quality": 52.5,
       "didi_dist": 0.57,
-      "pos_range": 0.803,
-      "dist_max_pct": 0.45,
+      "pos_range": 0.652,
+      "dist_max_pct": 0.79,
       "adx_var_pct": 15.8,
       "confluencia": false,
       "bb_primeira": true,
       "cruz_antigo": true,
-      "bb_abre_pct": 2.4,
+      "bb_abre_pct": 0.9,
       "medias_alinhadas": false,
       "figura": null,
       "figura_toques": null,
       "figura_dur": null,
       "figura_linha": null,
-      "candle_vermelho": false,
+      "candle_vermelho": true,
       "radar": false,
       "adx_falta": null,
       "high": 29.0,
@@ -131,7 +131,7 @@
         27.4,
         28.39,
         28.4,
-        28.87
+        28.77
       ],
       "o": [
         29.7411,
@@ -299,7 +299,7 @@
         27.3633,
         27.8267,
         28.0633,
-        28.5533
+        28.52
       ],
       "ma8": [
         29.6623,
@@ -341,7 +341,7 @@
         25.99,
         26.5462,
         27.0362,
-        27.4188
+        27.4062
       ],
       "ma20": [
         29.5193,
@@ -383,7 +383,7 @@
         26.5836,
         26.6092,
         26.627,
-        26.6721
+        26.6671
       ],
       "didi_curta": [
         -0.5428,
@@ -425,7 +425,7 @@
         5.2841,
         4.8233,
         3.7989,
-        4.138
+        4.0639
       ],
       "didi_longa": [
         -0.4819,
@@ -467,7 +467,7 @@
         2.2841,
         0.2373,
         -1.5138,
-        -2.723
+        -2.6969
       ],
       "adx": [
         23.1489,
@@ -635,7 +635,7 @@
         28.6652,
         29.1216,
         29.2854,
-        29.7538
+        29.7066
       ],
       "bb_mid": [
         29.6623,
@@ -677,7 +677,7 @@
         25.99,
         26.5462,
         27.0362,
-        27.4188
+        27.4062
       ],
       "bb_inf": [
         28.888,
@@ -719,7 +719,7 @@
         23.3148,
         23.9709,
         24.7871,
-        25.0837
+        25.1059
       ],
       "atrasado": false
     }
