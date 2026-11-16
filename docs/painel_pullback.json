@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-13",
-  "gerado_utc": "2026-11-13 23:01 UTC",
+  "gerado": "2026-11-16",
+  "gerado_utc": "2026-11-16 00:10 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
@@ -12,14 +12,14 @@
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 172457.77,
+      "close": 172458.0,
       "mm200": 181439.65,
       "validado": false
     }
   },
   "funil": {
-    "total": 1132,
-    "liquidos": 1087
+    "total": 1133,
+    "liquidos": 1088
   },
   "n": 0,
   "ativos": []

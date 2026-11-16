@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-13",
-  "captura": "13/11/2026 19:58",
+  "gerado": "2026-11-16",
+  "captura": "15/11/2026 21:08",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 44.04,
       "stop": 42.63,
       "r_pct": 3.2,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-13",
       "ult_candle": "2026-11-13",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": 1,
       "vol_fin_mi": 1078.3,
       "tv": "https://www.tradingview.com/chart/?symbol=XLU",
-      "vol_qtd": 14257128.0,
+      "vol_qtd": 14272500.0,
       "var_dia_pct": 0.2,
       "mom1": 6.0,
       "mom3": 0.0,
