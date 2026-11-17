@@ -1,28 +1,28 @@
 {
   "gerado": "2026-11-17",
-  "gerado_utc": "2026-11-17 15:02 UTC",
+  "gerado_utc": "2026-11-17 15:34 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 661.19,
-      "mm200": 681.6,
+      "close": 656.2,
+      "mm200": 681.57,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 171526.02,
-      "mm200": 181310.71,
+      "close": 171524.16,
+      "mm200": 181310.7,
       "validado": false
     }
   },
   "funil": {
-    "total": 1132,
-    "liquidos": 1087,
-    "sinais": 2
+    "total": 1133,
+    "liquidos": 1088,
+    "sinais": 3
   },
-  "n": 2,
+  "n": 3,
   "ativos": [
     {
       "data_sinal": "2026-11-16",
@@ -30,7 +30,7 @@
       "stop": 133.0,
       "alvo_3r": 152.12,
       "r_pct": 3.47,
-      "preco": 135.61,
+      "preco": 135.25,
       "ema20": 133.67,
       "mom3": 13.0,
       "mom_fraco": true,
@@ -51,7 +51,7 @@
       "stop": 77.75,
       "alvo_3r": 88.63,
       "r_pct": 3.38,
-      "preco": 80.47,
+      "preco": 80.69,
       "ema20": 77.76,
       "mom3": 10.0,
       "mom_fraco": true,
@@ -64,6 +64,27 @@
       "ticker": "WH",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=WH",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-11-17",
+      "entrada": 107.64,
+      "stop": 104.5,
+      "alvo_3r": 117.06,
+      "r_pct": 2.92,
+      "preco": 107.39,
+      "ema20": 105.06,
+      "mom3": 1.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": false,
+      "indice": "QQQ",
+      "ticker": "LLYVK",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=LLYVK",
       "forming": true
     }
   ]
