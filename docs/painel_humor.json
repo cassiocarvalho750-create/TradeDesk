@@ -1,22 +1,22 @@
 {
-  "gerado_em": "2026-11-17T01:15:25Z",
-  "data_sp": "2026-11-16",
-  "didi3": 0.328,
-  "incl": -67.5967,
+  "gerado_em": "2026-11-17T15:03:26Z",
+  "data_sp": "2026-11-17",
+  "didi3": -0.618,
+  "incl": -65.8566,
   "direcao": "desce",
   "dir_txt": "MA3 descendo ▼",
-  "combo": "virando",
-  "combo_titulo": "VIRANDO",
-  "combo_msg": "Ainda em bom humor, MAS a MA3 já virou p/ baixo — o grupo mais fraco. Alivie o risco.",
-  "combo_cor": "#f9a825",
-  "zona": "bom_fraco",
-  "nome": "BOM HUMOR FRACO",
-  "risco": "Risco padrão",
-  "acao": "Maré morna — opera normal, sem acelerar.",
-  "exp": "≈ +0.26R/trade",
-  "emoji": "▲",
-  "cor": "#7cb342",
-  "cor2": "#f1f8e9",
+  "combo": "seca",
+  "combo_titulo": "MARÉ SECA",
+  "combo_msg": "Mau humor e MA3 descendo — pé no freio, risco mínimo.",
+  "combo_cor": "#e53935",
+  "zona": "mau_forte",
+  "nome": "MAU HUMOR FORTE",
+  "risco": "Risco MÍNIMO",
+  "acao": "Maré seca — sobrevive, não empolga. Pé no freio.",
+  "exp": "≈ +0.24R/trade",
+  "emoji": "▼▼",
+  "cor": "#e53935",
+  "cor2": "#ffebee",
   "fonte": "yfinance (^GSPC)",
   "tabela": [
     {
@@ -39,7 +39,7 @@
       "cor": "#7cb342",
       "cor2": "#f1f8e9",
       "emoji": "▲",
-      "hoje": true
+      "hoje": false
     },
     {
       "zona": "mau_fraco",
@@ -61,7 +61,7 @@
       "cor": "#e53935",
       "cor2": "#ffebee",
       "emoji": "▼▼",
-      "hoje": false
+      "hoje": true
     }
   ]
 }
