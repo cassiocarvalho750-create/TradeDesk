@@ -1,24 +1,5 @@
 {
-  "gerado": "2026-11-16",
-  "n": 1,
-  "ativos": [
-    {
-      "entrada": 280.8,
-      "stop": 212.5,
-      "alvo_3r": 485.7,
-      "preco": 216.22,
-      "r_pct": 24.32,
-      "mom1": -1.0,
-      "mom3": 243.0,
-      "mom6": 349.0,
-      "consol_dias": 13,
-      "rompendo": false,
-      "acima_ema20": false,
-      "puro": true,
-      "forming": true,
-      "ticker": "MRNA",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=MRNA"
-    }
-  ]
+  "gerado": "2026-11-17",
+  "n": 0,
+  "ativos": []
 }
