@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-17",
-  "captura": "17/11/2026 12:32",
+  "captura": "17/11/2026 17:21",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "compra",
       "close": 1.11,
       "stop": 1.09,
-      "r_pct": 1.35,
+      "r_pct": 1.38,
       "forming": true,
       "date": "2026-11-17",
       "ult_candle": "2026-11-17",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPCHF=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": 0.18,
+      "var_dia_pct": 0.21,
       "mom1": 1.0,
       "mom3": 2.0,
       "mom6": 5.0,
@@ -31,15 +31,15 @@
       "acima_ema70": true,
       "ema70": 1.0972,
       "ema70_incl": "lado",
-      "quality": 68.3,
+      "quality": 70.2,
       "didi_dist": 0.132,
-      "pos_range": 0.832,
-      "dist_max_pct": 0.07,
+      "pos_range": 0.899,
+      "dist_max_pct": 0.05,
       "adx_var_pct": 35.9,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 12.5,
+      "bb_abre_pct": 13.8,
       "medias_alinhadas": true,
       "figura": null,
       "figura_toques": null,
@@ -131,7 +131,7 @@
         1.1048,
         1.106,
         1.1089,
-        1.109
+        1.1094
       ],
       "o": [
         1.0952,
@@ -299,7 +299,7 @@
         1.1024,
         1.104,
         1.1066,
-        1.108
+        1.1081
       ],
       "ma8": [
         1.1014,
@@ -341,7 +341,7 @@
         1.0997,
         1.1008,
         1.1018,
-        1.1029
+        1.103
       ],
       "ma20": [
         1.0978,
@@ -425,7 +425,7 @@
         0.2463,
         0.2873,
         0.4305,
-        0.4587
+        0.4649
       ],
       "didi_longa": [
         -0.3253,
@@ -467,7 +467,7 @@
         0.1147,
         0.0523,
         0.0067,
-        -0.0537
+        -0.0559
       ],
       "adx": [
         25.3122,
@@ -635,7 +635,7 @@
         1.1059,
         1.108,
         1.111,
-        1.1133
+        1.1135
       ],
       "bb_mid": [
         1.1014,
@@ -677,7 +677,7 @@
         1.0997,
         1.1008,
         1.1018,
-        1.1029
+        1.103
       ],
       "bb_inf": [
         1.0945,
