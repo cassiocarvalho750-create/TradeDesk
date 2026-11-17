@@ -1,70 +1,26 @@
 {
   "gerado": "2026-11-17",
-  "gerado_utc": "2026-11-17 20:23 UTC",
+  "gerado_utc": "2026-11-17 23:32 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 653.8,
-      "mm200": 681.56,
+      "close": 656.95,
+      "mm200": 681.58,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 169592.8,
-      "mm200": 181301.04,
+      "close": 169816.64,
+      "mm200": 181302.16,
       "validado": false
     }
   },
   "funil": {
     "total": 1132,
-    "liquidos": 1087,
-    "sinais": 2
+    "liquidos": 1087
   },
-  "n": 2,
-  "ativos": [
-    {
-      "data_sinal": "2026-11-16",
-      "entrada": 137.78,
-      "stop": 133.0,
-      "alvo_3r": 152.12,
-      "r_pct": 3.47,
-      "preco": 134.12,
-      "ema20": 133.67,
-      "mom3": 13.0,
-      "mom_fraco": true,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "aguardando",
-      "stop_tocado": false,
-      "mercado_ok": false,
-      "indice": "QQQ",
-      "ticker": "DG",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=DG",
-      "forming": true
-    },
-    {
-      "data_sinal": "2026-11-16",
-      "entrada": 80.47,
-      "stop": 77.75,
-      "alvo_3r": 88.63,
-      "r_pct": 3.38,
-      "preco": 80.04,
-      "ema20": 77.76,
-      "mom3": 10.0,
-      "mom_fraco": true,
-      "status": "ORDEM",
-      "ordem_dia": "hoje",
-      "execucao": "ativada",
-      "stop_tocado": false,
-      "mercado_ok": false,
-      "indice": "QQQ",
-      "ticker": "WH",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=WH",
-      "forming": true
-    }
-  ]
+  "n": 0,
+  "ativos": []
 }
