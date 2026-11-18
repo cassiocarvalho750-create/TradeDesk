@@ -1,26 +1,112 @@
 {
   "gerado": "2026-11-18",
-  "gerado_utc": "2026-11-18 00:08 UTC",
+  "gerado_utc": "2026-11-18 15:08 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 656.95,
-      "mm200": 681.58,
+      "close": 660.03,
+      "mm200": 681.8,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 169816.64,
-      "mm200": 181302.16,
+      "close": 169407.69,
+      "mm200": 181233.53,
       "validado": false
     }
   },
   "funil": {
     "total": 1133,
-    "liquidos": 1088
+    "liquidos": 1087,
+    "sinais": 4
   },
-  "n": 0,
-  "ativos": []
+  "n": 4,
+  "ativos": [
+    {
+      "data_sinal": "2026-11-18",
+      "entrada": 248.03,
+      "stop": 241.52,
+      "alvo_3r": 267.56,
+      "r_pct": 2.62,
+      "preco": 247.88,
+      "ema20": 241.7,
+      "mom3": 5.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": false,
+      "indice": "QQQ",
+      "ticker": "WELL",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=WELL",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-11-18",
+      "entrada": 73.77,
+      "stop": 69.17,
+      "alvo_3r": 87.57,
+      "r_pct": 6.24,
+      "preco": 73.13,
+      "ema20": 69.74,
+      "mom3": 2.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": false,
+      "indice": "QQQ",
+      "ticker": "CVNA",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=CVNA",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-11-18",
+      "entrada": 78.06,
+      "stop": 74.75,
+      "alvo_3r": 87.99,
+      "r_pct": 4.24,
+      "preco": 78.03,
+      "ema20": 75.0,
+      "mom3": -6.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": false,
+      "indice": "QQQ",
+      "ticker": "BBIO",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=BBIO",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-11-18",
+      "entrada": 27.99,
+      "stop": 27.41,
+      "alvo_3r": 29.73,
+      "r_pct": 2.07,
+      "preco": 27.92,
+      "ema20": 27.45,
+      "mom3": -9.0,
+      "mom_fraco": false,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": false,
+      "indice": "QQQ",
+      "ticker": "EPRT",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=EPRT",
+      "forming": true
+    }
+  ]
 }
