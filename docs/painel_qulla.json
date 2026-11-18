@@ -1,5 +1,5 @@
 {
-  "gerado": "2026-11-17",
+  "gerado": "2026-11-18",
   "n": 2,
   "ativos": [
     {
@@ -15,15 +15,15 @@
       "rompendo": true,
       "acima_ema20": true,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "RYTM",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RYTM"
     },
     {
       "entrada": 280.8,
-      "stop": 203.89,
-      "alvo_3r": 511.53,
+      "stop": 203.9,
+      "alvo_3r": 511.5,
       "preco": 206.8,
       "r_pct": 27.39,
       "mom1": -9.0,
@@ -33,7 +33,7 @@
       "rompendo": false,
       "acima_ema20": false,
       "puro": true,
-      "forming": true,
+      "forming": false,
       "ticker": "MRNA",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=MRNA"

@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-17",
-  "captura": "17/11/2026 20:30",
+  "gerado": "2026-11-18",
+  "captura": "17/11/2026 21:06",
   "timeframe": "1d",
   "n_entrar": 0,
   "n_radar": 9,
@@ -24,7 +24,7 @@
       "mae_high": 447.35,
       "mae_low": 434.97,
       "var_dia_pct": 1.05,
-      "vol_qtd": 677.0,
+      "vol_qtd": 665.0,
       "date": "2026-11-17",
       "_tk": "BRKRP",
       "tv": "https://www.tradingview.com/chart/?symbol=BRKRP",
