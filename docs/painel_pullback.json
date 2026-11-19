@@ -1,41 +1,41 @@
 {
-  "gerado": "2026-11-18",
-  "gerado_utc": "2026-11-18 23:43 UTC",
+  "gerado": "2026-11-19",
+  "gerado_utc": "2026-11-19 14:47 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 659.51,
-      "mm200": 681.8,
+      "close": 673.07,
+      "mm200": 682.15,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 167537.95,
-      "mm200": 181224.18,
+      "close": 168093.56,
+      "mm200": 181157.83,
       "validado": false
     }
   },
   "funil": {
-    "total": 1133,
-    "liquidos": 1088,
-    "sinais": 6
+    "total": 1132,
+    "liquidos": 1086,
+    "sinais": 8
   },
-  "n": 6,
+  "n": 8,
   "ativos": [
     {
       "data_sinal": "2026-11-18",
-      "entrada": 248.27,
+      "entrada": 248.3,
       "stop": 241.52,
-      "alvo_3r": 268.52,
-      "r_pct": 2.72,
-      "preco": 247.25,
+      "alvo_3r": 268.64,
+      "r_pct": 2.73,
+      "preco": 245.98,
       "ema20": 241.64,
       "mom3": 5.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -43,7 +43,7 @@
       "ticker": "WELL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=WELL",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-18",
@@ -51,12 +51,12 @@
       "stop": 35.52,
       "alvo_3r": 40.16,
       "r_pct": 3.16,
-      "preco": 36.46,
+      "preco": 35.41,
       "ema20": 35.78,
       "mom3": 3.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -64,7 +64,7 @@
       "ticker": "AXTA",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=AXTA",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-18",
@@ -72,20 +72,20 @@
       "stop": 74.75,
       "alvo_3r": 88.79,
       "r_pct": 4.49,
-      "preco": 78.01,
+      "preco": 79.05,
       "ema20": 74.99,
       "mom3": -6.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
-      "execucao": "aguardando",
+      "ordem_dia": "hoje",
+      "execucao": "abriu acima",
       "stop_tocado": false,
       "mercado_ok": false,
       "indice": "QQQ",
       "ticker": "BBIO",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=BBIO",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-18",
@@ -93,12 +93,12 @@
       "stop": 27.41,
       "alvo_3r": 30.37,
       "r_pct": 2.63,
-      "preco": 28.07,
+      "preco": 27.69,
       "ema20": 27.46,
       "mom3": -9.0,
       "mom_fraco": false,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -106,7 +106,7 @@
       "ticker": "EPRT",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=EPRT",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-18",
@@ -114,12 +114,12 @@
       "stop": 45.28,
       "alvo_3r": 59.08,
       "r_pct": 7.08,
-      "preco": 48.38,
+      "preco": 47.12,
       "ema20": 45.62,
       "mom3": 13.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -127,7 +127,7 @@
       "ticker": "RYAN",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RYAN",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-18",
@@ -135,12 +135,12 @@
       "stop": 306.4,
       "alvo_3r": 374.8,
       "r_pct": 5.29,
-      "preco": 320.65,
+      "preco": 315.24,
       "ema20": 313.28,
       "mom3": 12.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -148,7 +148,49 @@
       "ticker": "RCL",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=RCL",
-      "forming": false
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-11-19",
+      "entrada": 33.27,
+      "stop": 30.9,
+      "alvo_3r": 40.38,
+      "r_pct": 7.12,
+      "preco": 33.22,
+      "ema20": 31.66,
+      "mom3": 22.0,
+      "mom_fraco": true,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": false,
+      "indice": "QQQ",
+      "ticker": "WMG",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=WMG",
+      "forming": true
+    },
+    {
+      "data_sinal": "2026-11-19",
+      "entrada": 27.5,
+      "stop": 25.31,
+      "alvo_3r": 34.07,
+      "r_pct": 7.96,
+      "preco": 27.25,
+      "ema20": 25.39,
+      "mom3": 14.0,
+      "mom_fraco": true,
+      "status": "FORMANDO",
+      "ordem_dia": "amanhã, se confirmar",
+      "execucao": "—",
+      "stop_tocado": false,
+      "mercado_ok": false,
+      "indice": "QQQ",
+      "ticker": "ELAN",
+      "market": "EUA",
+      "tv": "https://www.tradingview.com/chart/?symbol=ELAN",
+      "forming": true
     }
   ]
 }
