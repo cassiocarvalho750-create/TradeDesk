@@ -488,3 +488,9 @@ data,ordem_geral,prioridade,ordem_subgrupo,ticker,market,entrada,stop,alvo,r_pct
 2026-11-18,1,3,1,OMF,EUA,56.84,54.35,64.31,4.38,True,False,False,False,4.0,-10.0,11.0,fraco,3JUNTOS_ABERTURA,94.2,,
 2026-11-18,2,3,2,VIK,EUA,94.28,84.35,124.07,10.53,True,False,False,False,12.0,4.0,15.0,fraco,ABERTURA,62.8,,
 2026-11-18,3,4,1,RYTM,EUA,117.84,107.2,149.76,9.03,False,True,False,True,32.0,1.0,34.0,fraco,,,8,True
+2026-11-20,1,3,1,GOAU4,B3,11.5,10.75,13.75,6.52,True,False,False,False,-2.0,14.0,15.0,medio,ABERTURA,78.7,,
+2026-11-20,2,3,2,GGBR4,B3,25.86,24.3,30.54,6.03,True,False,False,False,-0.0,15.0,13.0,medio,ABERTURA,68.4,,
+2026-11-20,3,3,3,ADC,EUA,70.91,68.72,77.48,3.09,True,False,False,False,6.0,-4.0,-4.0,fraco,ABERTURA,63.7,,
+2026-11-20,4,3,4,GIS,EUA,35.74,33.5,42.46,6.27,True,False,False,False,2.0,-11.0,10.0,fraco,ABERTURA,54.8,,
+2026-11-20,5,3,5,WRB,EUA,78.31,71.36,99.16,8.87,True,False,False,False,4.0,13.0,17.0,medio,3JUNTOS_ABERTURA,36.9,,
+2026-11-20,6,3,6,BRO,EUA,73.07,70.0,82.28,4.2,True,False,False,False,-2.0,-2.0,27.0,fraco,ABERTURA,32.1,,

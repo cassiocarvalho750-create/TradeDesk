@@ -1,16 +1,16 @@
 {
   "gerado": "2026-11-20",
-  "n": 3,
+  "n": 2,
   "ativos": [
     {
       "entrada": 250.61,
       "stop": 233.4,
       "alvo_3r": 302.24,
-      "preco": 244.38,
+      "preco": 237.31,
       "r_pct": 6.87,
-      "mom1": 38.0,
-      "mom3": 32.0,
-      "mom6": 103.0,
+      "mom1": 34.0,
+      "mom3": 28.0,
+      "mom6": 97.0,
       "consol_dias": 9,
       "rompendo": false,
       "acima_ema20": true,
@@ -37,24 +37,6 @@
       "ticker": "SUZB3.SA",
       "market": "B3",
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:SUZB3"
-    },
-    {
-      "entrada": 19.79,
-      "stop": 16.68,
-      "alvo_3r": 29.12,
-      "preco": 16.88,
-      "r_pct": 15.72,
-      "mom1": 31.0,
-      "mom3": -16.0,
-      "mom6": -31.0,
-      "consol_dias": 8,
-      "rompendo": false,
-      "acima_ema20": true,
-      "puro": true,
-      "forming": true,
-      "ticker": "RIOT",
-      "market": "EUA",
-      "tv": "https://www.tradingview.com/chart/?symbol=RIOT"
     }
   ]
 }
