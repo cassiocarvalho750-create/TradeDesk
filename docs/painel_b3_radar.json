@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-19",
-  "captura": "19/11/2026 20:58",
+  "gerado": "2026-11-20",
+  "captura": "20/11/2026 12:09",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 11.37,
       "stop": 11.2,
       "r_pct": 1.5,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-19",
       "ult_candle": "2026-11-19",
       "timeframe": "1d",
@@ -22,7 +22,7 @@
       "adx_ago": null,
       "vol_fin_mi": 50.9,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:CBAV3",
-      "vol_qtd": 4489800.0,
+      "vol_qtd": 4490000.0,
       "var_dia_pct": 0.53,
       "mom1": 1.0,
       "mom3": 2.0,
