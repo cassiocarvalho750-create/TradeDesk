@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-25",
-  "captura": "25/11/2026 16:59",
+  "captura": "25/11/2026 17:44",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -13,7 +13,7 @@
       "lado": "venda",
       "close": 0.91,
       "stop": 0.92,
-      "r_pct": 0.47,
+      "r_pct": 0.51,
       "forming": true,
       "date": "2026-11-25",
       "ult_candle": "2026-11-25",
@@ -23,7 +23,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=EURCHF=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.41,
+      "var_dia_pct": -0.44,
       "mom1": -1.0,
       "mom3": -3.0,
       "mom6": -0.0,
@@ -31,15 +31,15 @@
       "acima_ema70": false,
       "ema70": 0.9273,
       "ema70_incl": "lado",
-      "quality": 83.3,
+      "quality": 84.0,
       "didi_dist": 0.115,
-      "pos_range": 0.554,
-      "dist_max_pct": 0.58,
+      "pos_range": 0.521,
+      "dist_max_pct": 0.55,
       "adx_var_pct": 28.5,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 87.3,
+      "bb_abre_pct": 91.0,
       "medias_alinhadas": null,
       "figura": "SUPORTE",
       "figura_toques": 3,
@@ -131,7 +131,7 @@
         0.9259,
         0.9226,
         0.9179,
-        0.9122
+        0.9118
       ],
       "o": [
         0.9465,
@@ -299,7 +299,7 @@
         0.9254,
         0.9246,
         0.9221,
-        0.9176
+        0.9174
       ],
       "ma8": [
         0.943,
@@ -383,7 +383,7 @@
         0.9215,
         0.9214,
         0.9211,
-        0.9206
+        0.9205
       ],
       "didi_curta": [
         0.33,
@@ -425,7 +425,7 @@
         0.1295,
         0.0331,
         -0.1645,
-        -0.5047
+        -0.5131
       ],
       "didi_longa": [
         0.0205,
@@ -467,7 +467,7 @@
         -0.2922,
         -0.3161,
         -0.2794,
-        -0.1789
+        -0.1759
       ],
       "adx": [
         29.3989,
@@ -635,7 +635,7 @@
         0.9271,
         0.9266,
         0.9288,
-        0.9318
+        0.932
       ],
       "bb_mid": [
         0.943,
@@ -719,7 +719,7 @@
         0.9213,
         0.9221,
         0.9185,
-        0.9126
+        0.9124
       ],
       "atrasado": true
     },
@@ -732,7 +732,7 @@
       "lado": "venda",
       "close": 1.09,
       "stop": 1.1,
-      "r_pct": 0.57,
+      "r_pct": 0.58,
       "forming": true,
       "date": "2026-11-25",
       "ult_candle": "2026-11-25",
@@ -742,7 +742,7 @@
       "vol_fin_mi": 0.0,
       "tv": "https://www.tradingview.com/chart/?symbol=GBPCHF=X",
       "vol_qtd": 0.0,
-      "var_dia_pct": -0.49,
+      "var_dia_pct": -0.51,
       "mom1": -1.0,
       "mom3": -0.0,
       "mom6": 3.0,
@@ -750,15 +750,15 @@
       "acima_ema70": false,
       "ema70": 1.0979,
       "ema70_incl": "lado",
-      "quality": 79.4,
+      "quality": 79.9,
       "didi_dist": 0.155,
-      "pos_range": 0.555,
-      "dist_max_pct": 0.71,
+      "pos_range": 0.547,
+      "dist_max_pct": 0.7,
       "adx_var_pct": 24.6,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 54.4,
+      "bb_abre_pct": 55.1,
       "medias_alinhadas": null,
       "figura": "LTA",
       "figura_toques": 5,
@@ -850,7 +850,7 @@
         1.1045,
         1.1011,
         1.0968,
-        1.0901
+        1.09
       ],
       "o": [
         1.1083,
@@ -1144,7 +1144,7 @@
         0.1385,
         -0.1565,
         -0.4266,
-        -0.6819
+        -0.6846
       ],
       "didi_longa": [
         0.0328,
@@ -1186,7 +1186,7 @@
         -0.3068,
         -0.3111,
         -0.2556,
-        -0.134
+        -0.1331
       ],
       "adx": [
         22.0543,
@@ -1438,7 +1438,7 @@
         1.1003,
         1.1003,
         1.0963,
-        1.0893
+        1.0892
       ],
       "atrasado": true
     }
