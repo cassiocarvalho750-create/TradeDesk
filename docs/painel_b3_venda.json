@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-25",
-  "captura": "25/11/2026 17:44",
+  "gerado": "2026-11-26",
+  "captura": "25/11/2026 22:14",
   "timeframe": "1d",
   "n": 2,
   "ativos": [
@@ -11,35 +11,35 @@
       "par": "",
       "classe": "",
       "lado": "venda",
-      "close": 49.67,
+      "close": 49.65,
       "stop": 50.36,
-      "r_pct": 1.39,
-      "forming": true,
+      "r_pct": 1.43,
+      "forming": false,
       "date": "2026-11-25",
       "ult_candle": "2026-11-25",
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 1,
-      "vol_fin_mi": 656.5,
+      "vol_fin_mi": 659.8,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:WEGE3",
-      "vol_qtd": 10203600.0,
-      "var_dia_pct": -0.84,
+      "vol_qtd": 11543400.0,
+      "var_dia_pct": -0.88,
       "mom1": 16.0,
       "mom3": 1.0,
       "mom6": 15.0,
-      "alvo_2r": 48.29,
+      "alvo_2r": 48.23,
       "acima_ema70": true,
-      "ema70": 49.21,
+      "ema70": 49.2094,
       "ema70_incl": "sobe",
-      "quality": 56.5,
-      "didi_dist": 0.17,
-      "pos_range": 0.615,
-      "dist_max_pct": 2.21,
+      "quality": 57.1,
+      "didi_dist": 0.159,
+      "pos_range": 0.603,
+      "dist_max_pct": 2.18,
       "adx_var_pct": 9.2,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 7.9,
+      "bb_abre_pct": 8.5,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -730,35 +730,35 @@
       "par": "",
       "classe": "",
       "lado": "venda",
-      "close": 41.94,
+      "close": 41.88,
       "stop": 42.58,
-      "r_pct": 1.53,
-      "forming": true,
+      "r_pct": 1.67,
+      "forming": false,
       "date": "2026-11-25",
       "ult_candle": "2026-11-25",
       "timeframe": "1d",
       "didi_ago": 4,
       "adx_ago": null,
-      "vol_fin_mi": 121.7,
+      "vol_fin_mi": 124.2,
       "tv": "https://www.tradingview.com/chart/?symbol=BMFBOVESPA:PSSA3",
-      "vol_qtd": 3706500.0,
-      "var_dia_pct": -0.47,
+      "vol_qtd": 4833500.0,
+      "var_dia_pct": -0.62,
       "mom1": -19.0,
       "mom3": -11.0,
-      "mom6": -12.0,
-      "alvo_2r": 40.66,
+      "mom6": -13.0,
+      "alvo_2r": 40.48,
       "acima_ema70": false,
-      "ema70": 47.9336,
+      "ema70": 47.9319,
       "ema70_incl": "desce",
-      "quality": 42.2,
+      "quality": 43.4,
       "didi_dist": 2.746,
-      "pos_range": 0.48,
-      "dist_max_pct": 1.41,
+      "pos_range": 0.431,
+      "dist_max_pct": 1.27,
       "adx_var_pct": 23.8,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
-      "bb_abre_pct": 11.1,
+      "bb_abre_pct": 11.8,
       "medias_alinhadas": null,
       "figura": null,
       "figura_toques": null,
@@ -850,7 +850,7 @@
         43.96,
         42.91,
         41.93,
-        41.93
+        41.88
       ],
       "o": [
         47.0,
@@ -1018,7 +1018,7 @@
         44.8467,
         43.8433,
         42.9333,
-        42.2567
+        42.24
       ],
       "ma8": [
         47.8754,
@@ -1060,7 +1060,7 @@
         45.635,
         45.165,
         44.6587,
-        44.1575
+        44.1512
       ],
       "ma20": [
         49.1553,
@@ -1102,7 +1102,7 @@
         46.244,
         45.8045,
         45.322,
-        45.0095
+        45.007
       ],
       "didi_curta": [
         -1.738,
@@ -1144,7 +1144,7 @@
         -1.7275,
         -2.9263,
         -3.8636,
-        -4.3047
+        -4.3289
       ],
       "didi_longa": [
         2.6734,
@@ -1186,7 +1186,7 @@
         1.3345,
         1.4159,
         1.4852,
-        1.9295
+        1.9382
       ],
       "adx": [
         24.6921,
@@ -1354,7 +1354,7 @@
         47.4446,
         47.5931,
         47.872,
-        47.692
+        47.7039
       ],
       "bb_mid": [
         47.8754,
@@ -1396,7 +1396,7 @@
         45.635,
         45.165,
         44.6587,
-        44.1575
+        44.1512
       ],
       "bb_inf": [
         46.222,
@@ -1438,7 +1438,7 @@
         43.8254,
         42.7369,
         41.4455,
-        40.623
+        40.5986
       ],
       "atrasado": true
     }
