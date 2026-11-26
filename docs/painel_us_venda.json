@@ -1,6 +1,6 @@
 {
   "gerado": "2026-11-26",
-  "captura": "26/11/2026 10:41",
+  "captura": "26/11/2026 20:41",
   "timeframe": "1d",
   "n": 3,
   "ativos": [
@@ -1458,9 +1458,9 @@
       "timeframe": "1d",
       "didi_ago": 2,
       "adx_ago": 2,
-      "vol_fin_mi": 95.7,
+      "vol_fin_mi": 95.8,
       "tv": "https://www.tradingview.com/chart/?symbol=IBRX",
-      "vol_qtd": 12646700.0,
+      "vol_qtd": 12715600.0,
       "var_dia_pct": -3.5,
       "mom1": -35.0,
       "mom3": -33.0,
