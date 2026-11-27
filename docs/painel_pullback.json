@@ -1,25 +1,25 @@
 {
   "gerado": "2026-11-27",
-  "gerado_utc": "2026-11-27 01:17 UTC",
+  "gerado_utc": "2026-11-27 16:23 UTC",
   "mercado": {
     "EUA": {
       "indice": "QQQ",
       "ok": false,
-      "close": 633.93,
-      "mm200": 682.54,
+      "close": 644.67,
+      "mm200": 682.71,
       "validado": true
     },
     "B3": {
       "indice": "IBOV",
       "ok": false,
-      "close": 176799.84,
-      "mm200": 180849.59,
+      "close": 177030.17,
+      "mm200": 180819.99,
       "validado": false
     }
   },
   "funil": {
-    "total": 1133,
-    "liquidos": 1084,
+    "total": 1132,
+    "liquidos": 1083,
     "sinais": 3
   },
   "n": 3,
@@ -30,12 +30,12 @@
       "stop": 269.3,
       "alvo_3r": 332.46,
       "r_pct": 5.54,
-      "preco": 282.91,
+      "preco": 283.34,
       "ema20": 270.82,
       "mom3": 21.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -43,7 +43,7 @@
       "ticker": "CAH",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=CAH",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-25",
@@ -51,12 +51,12 @@
       "stop": 117.01,
       "alvo_3r": 134.77,
       "r_pct": 3.66,
-      "preco": 120.37,
+      "preco": 119.75,
       "ema20": 117.77,
       "mom3": 14.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -64,7 +64,7 @@
       "ticker": "ED",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=ED",
-      "forming": false
+      "forming": true
     },
     {
       "data_sinal": "2026-11-25",
@@ -72,12 +72,12 @@
       "stop": 25.22,
       "alvo_3r": 29.3,
       "r_pct": 3.89,
-      "preco": 26.05,
+      "preco": 26.04,
       "ema20": 25.22,
       "mom3": 11.0,
       "mom_fraco": true,
       "status": "ORDEM",
-      "ordem_dia": "próximo pregão",
+      "ordem_dia": "hoje",
       "execucao": "aguardando",
       "stop_tocado": false,
       "mercado_ok": false,
@@ -85,7 +85,7 @@
       "ticker": "KIM",
       "market": "EUA",
       "tv": "https://www.tradingview.com/chart/?symbol=KIM",
-      "forming": false
+      "forming": true
     }
   ]
 }
