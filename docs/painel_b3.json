@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-26",
-  "captura": "26/11/2026 20:42",
+  "gerado": "2026-11-27",
+  "captura": "26/11/2026 22:14",
   "timeframe": "1d",
   "n": 19,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 32.14,
       "stop": 30.1,
       "r_pct": 6.35,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -733,7 +733,7 @@
       "close": 32.92,
       "stop": 29.7,
       "r_pct": 9.79,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -1452,7 +1452,7 @@
       "close": 11.29,
       "stop": 10.62,
       "r_pct": 5.93,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -2171,7 +2171,7 @@
       "close": 22.99,
       "stop": 16.7,
       "r_pct": 27.36,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -2188,11 +2188,11 @@
       "acima_ema70": true,
       "ema70": 20.1751,
       "ema70_incl": "sobe",
-      "quality": 68.7,
+      "quality": 69.1,
       "didi_dist": 4.823,
-      "pos_range": 0.962,
-      "dist_max_pct": 0.17,
-      "adx_var_pct": -9.5,
+      "pos_range": 0.99,
+      "dist_max_pct": 0.04,
+      "adx_var_pct": -9.7,
       "confluencia": true,
       "bb_primeira": true,
       "cruz_antigo": false,
@@ -2205,7 +2205,7 @@
       "candle_vermelho": false,
       "radar": false,
       "adx_falta": null,
-      "high": 23.03,
+      "high": 23.0,
       "dates": [
         "2026-09-29",
         "2026-09-30",
@@ -2372,7 +2372,7 @@
         22.44,
         22.34,
         22.15,
-        23.03
+        23.0
       ],
       "l": [
         18.35,
@@ -2666,7 +2666,7 @@
         38.9697,
         38.4707,
         35.1421,
-        35.2818
+        35.2058
       ],
       "dip": [
         13.3054,
@@ -2708,7 +2708,7 @@
         35.8903,
         32.174,
         27.3748,
-        36.7337
+        36.41
       ],
       "dim": [
         24.1403,
@@ -2750,7 +2750,7 @@
         15.792,
         15.4991,
         21.5777,
-        17.1836
+        17.2716
       ],
       "bb_sup": [
         19.4738,
@@ -2890,7 +2890,7 @@
       "close": 4.3,
       "stop": 3.37,
       "r_pct": 21.63,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -3609,7 +3609,7 @@
       "close": 16.94,
       "stop": 14.17,
       "r_pct": 16.35,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -4328,7 +4328,7 @@
       "close": 64.53,
       "stop": 57.13,
       "r_pct": 11.47,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -5047,7 +5047,7 @@
       "close": 24.32,
       "stop": 20.98,
       "r_pct": 13.73,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -5766,7 +5766,7 @@
       "close": 16.09,
       "stop": 13.86,
       "r_pct": 13.86,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -6485,7 +6485,7 @@
       "close": 13.99,
       "stop": 12.87,
       "r_pct": 8.01,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -7204,7 +7204,7 @@
       "close": 24.3,
       "stop": 20.57,
       "r_pct": 15.35,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -7923,7 +7923,7 @@
       "close": 5.26,
       "stop": 4.42,
       "r_pct": 15.97,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -8642,7 +8642,7 @@
       "close": 10.73,
       "stop": 9.12,
       "r_pct": 15.0,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -9361,7 +9361,7 @@
       "close": 11.05,
       "stop": 9.25,
       "r_pct": 16.29,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -10080,7 +10080,7 @@
       "close": 17.46,
       "stop": 13.45,
       "r_pct": 22.97,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -10799,7 +10799,7 @@
       "close": 26.5,
       "stop": 24.3,
       "r_pct": 8.3,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -11518,7 +11518,7 @@
       "close": 35.0,
       "stop": 32.3,
       "r_pct": 7.71,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -11535,11 +11535,11 @@
       "acima_ema70": true,
       "ema70": 33.5621,
       "ema70_incl": "lado",
-      "quality": 82.1,
+      "quality": 82.2,
       "didi_dist": 0.217,
-      "pos_range": 0.595,
-      "dist_max_pct": 1.27,
-      "adx_var_pct": 28.9,
+      "pos_range": 0.6,
+      "dist_max_pct": 1.24,
+      "adx_var_pct": 28.8,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
@@ -11552,7 +11552,7 @@
       "candle_vermelho": false,
       "radar": false,
       "adx_falta": null,
-      "high": 35.45,
+      "high": 35.44,
       "dates": [
         "2026-09-29",
         "2026-09-30",
@@ -11719,7 +11719,7 @@
         33.11,
         33.99,
         34.02,
-        35.45
+        35.44
       ],
       "l": [
         31.161,
@@ -12013,7 +12013,7 @@
         15.8037,
         16.1963,
         16.6331,
-        20.3701
+        20.3544
       ],
       "dip": [
         6.335,
@@ -12055,7 +12055,7 @@
         20.8992,
         29.271,
         25.2585,
-        37.7247
+        37.6497
       ],
       "dim": [
         31.66,
@@ -12097,7 +12097,7 @@
         23.79,
         19.9472,
         16.9478,
-        13.7664
+        13.7829
       ],
       "bb_sup": [
         32.8314,
@@ -12237,7 +12237,7 @@
       "close": 11.94,
       "stop": 10.75,
       "r_pct": 9.97,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
@@ -12254,11 +12254,11 @@
       "acima_ema70": true,
       "ema70": 10.9871,
       "ema70_incl": "sobe",
-      "quality": 48.7,
+      "quality": 47.6,
       "didi_dist": 1.916,
-      "pos_range": 0.946,
-      "dist_max_pct": 0.17,
-      "adx_var_pct": 0.5,
+      "pos_range": 0.875,
+      "dist_max_pct": 0.42,
+      "adx_var_pct": 0.9,
       "confluencia": false,
       "bb_primeira": false,
       "cruz_antigo": false,
@@ -12271,7 +12271,7 @@
       "candle_vermelho": false,
       "radar": false,
       "adx_falta": null,
-      "high": 11.96,
+      "high": 11.99,
       "dates": [
         "2026-09-29",
         "2026-09-30",
@@ -12438,7 +12438,7 @@
         11.48,
         11.48,
         11.79,
-        11.96
+        11.99
       ],
       "l": [
         10.6188,
@@ -12732,7 +12732,7 @@
         33.9946,
         32.2505,
         32.7893,
-        34.1698
+        34.309
       ],
       "dip": [
         11.6907,
@@ -12774,7 +12774,7 @@
         29.0224,
         24.6434,
         29.2765,
-        31.0735
+        31.6708
       ],
       "dim": [
         24.3422,
@@ -12816,7 +12816,7 @@
         12.9344,
         16.4146,
         13.6003,
-        12.1342
+        12.029
       ],
       "bb_sup": [
         11.5179,
@@ -12956,7 +12956,7 @@
       "close": 35.2,
       "stop": 29.47,
       "r_pct": 16.28,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",

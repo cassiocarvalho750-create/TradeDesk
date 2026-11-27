@@ -1,6 +1,6 @@
 {
-  "gerado": "2026-11-26",
-  "captura": "26/11/2026 20:42",
+  "gerado": "2026-11-27",
+  "captura": "26/11/2026 22:14",
   "timeframe": "1d",
   "n": 1,
   "ativos": [
@@ -14,7 +14,7 @@
       "close": 11.41,
       "stop": 11.2,
       "r_pct": 1.84,
-      "forming": true,
+      "forming": false,
       "date": "2026-11-26",
       "ult_candle": "2026-11-26",
       "timeframe": "1d",
